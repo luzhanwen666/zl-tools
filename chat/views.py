@@ -10,7 +10,6 @@ from django.http import StreamingHttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
-from django.views.generic.edit import FormMixin
 
 from .models import ChatSession, ChatMessage
 
@@ -26,10 +25,14 @@ def _create_tool_registry():
     from engine.tools.base import ToolRegistry
     from engine.tools.builtin.log_parser import LogParserTool
     from engine.tools.builtin.web_search import WebSearchTool
+    from engine.tools.builtin.shell import ShellTool
+    from engine.tools.builtin.python_executor import PythonExecutorTool
 
     registry = ToolRegistry()
     registry.register(LogParserTool())
     registry.register(WebSearchTool())
+    registry.register(ShellTool())
+    registry.register(PythonExecutorTool())
     return registry
 
 
@@ -61,11 +64,11 @@ class ChatSessionListView(ListView):
     context_object_name = "sessions"
 
 
-class ChatSessionDetailView(DetailView, FormMixin):
+class ChatSessionDetailView(DetailView):
+    """对话页面：展示消息列表 + 发送消息表单"""
     model = ChatSession
     template_name = "chat/session_detail.html"
     context_object_name = "session"
-    form_class = None
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -265,6 +268,19 @@ def global_chat_send_message_stream(request):
     if not content:
         return JsonResponse({"error": "消息不能为空"}, status=400)
 
+    # 前端可手动选择专家，格式: "专家1,专家2"
+    # 在 sync 上下文中提前解析 Agent 名称 → Agent 对象列表（避免 async 嵌套线程中的 ORM 问题）
+    manual_agents_str = request.GET.get("agents", "").strip()
+    manual_agents = None
+    if manual_agents_str:
+        from agents.models import Agent as AgentModel
+        agent_names = [a.strip() for a in manual_agents_str.split(",") if a.strip()]
+        if agent_names:
+            manual_agents = list(
+                AgentModel.objects.filter(name__in=agent_names, is_active=True)
+                .select_related("llm_config").prefetch_related("skills", "mcp_tools")
+            )
+
     # 同步初始化（ORM 在主线程中安全执行）
     user = request.user if request.user.is_authenticated else None
     session, _ = ChatSession.objects.get_or_create(
@@ -288,7 +304,7 @@ def global_chat_send_message_stream(request):
 
                 async def _stream():
                     try:
-                        async for event in router.run_stream(session, content):
+                        async for event in router.run_stream(session, content, manual_agents=manual_agents):
                             q.put(("event", event))
                     except Exception as e:
                         logger.exception("Engine stream error")

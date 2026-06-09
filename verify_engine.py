@@ -9,6 +9,8 @@ from engine.tools.base import BaseTool, ToolRegistry, tool_registry
 from engine.tools.registry import get_tools_for_agent
 from engine.tools.builtin.log_parser import LogParserTool
 from engine.tools.builtin.web_search import WebSearchTool
+from engine.tools.builtin.shell import ShellTool
+from engine.tools.builtin.python_executor import PythonExecutorTool
 from engine.agent_runner import AgentRunner, _extract_tool_calls, _extract_json_objects
 from engine.group_chat import GroupChatManager
 from agents.models import Agent
@@ -17,6 +19,8 @@ from chat.models import ChatMessage
 # 注册内置工具
 tool_registry.register(LogParserTool())
 tool_registry.register(WebSearchTool())
+tool_registry.register(ShellTool())
+tool_registry.register(PythonExecutorTool())
 print("Registered tools:", [t.name for t in tool_registry.get_all()])
 
 # 验证 Agent 组

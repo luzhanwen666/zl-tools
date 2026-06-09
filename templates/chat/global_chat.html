@@ -29,24 +29,30 @@
 
     <!-- 右侧：对话区域 -->
     <div class="chat-main">
-        <!-- 顶栏：全局Agent信息 + 可用专家 -->
-        <div class="chat-header" style="padding:12px 24px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-            <div style="display:flex;align-items:center;gap:10px;">
-                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#a855f7);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;">🤖</div>
-                <span style="font-weight:700;font-size:15px;color:var(--text);">{{ global_agent.name }}</span>
-                <span class="badge badge-blue">全局入口</span>
+        <!-- 顶栏：全局Agent信息 + 可选专家 -->
+        <div class="chat-header" style="padding:12px 24px;border-bottom:1px solid var(--border-light);">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#a855f7);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;">🤖</div>
+                    <span style="font-weight:700;font-size:15px;color:var(--text);">{{ global_agent.name }}</span>
+                    <span class="badge badge-blue">全局入口</span>
+                </div>
+                <span id="selectionHint" style="font-size:12px;color:var(--text-muted);">
+                    💡 点击下方专家可选择/取消，不选则自动匹配
+                </span>
             </div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;" id="expertChips">
                 {% for ag in all_agents %}
                 {% if ag.name != global_agent.name %}
-                <span class="chat-agent-chip {% if ag.role == 'coordinator' %}coordinator{% elif ag.role == 'expert' %}expert{% else %}member{% endif %}"
-                      title="{{ ag.description|default:'通用智能体' }}">
+                <button type="button" class="chat-agent-chip toggle-chip {% if ag.role == 'coordinator' %}coordinator{% elif ag.role == 'expert' %}expert{% else %}member{% endif %}"
+                        data-agent="{{ ag.name }}"
+                        title="{{ ag.description|default:'通用智能体' }}&#10;点击选择此专家参与对话">
                     {{ ag.name }}
-                </span>
+                </button>
                 {% endif %}
                 {% endfor %}
                 {% if all_agents|length <= 1 %}
-                <span style="font-size:12px;color:var(--text-muted);">暂无其他专家</span>
+                <span style="font-size:12px;color:var(--text-muted);">暂无其他专家，可前往「智能体管理」创建</span>
                 {% endif %}
             </div>
         </div>
@@ -65,10 +71,12 @@
         <!-- 输入区域 -->
         <form class="chat-input-bar" id="chatForm" style="border-top:1px solid var(--border-light);padding:16px 24px;display:flex;gap:10px;align-items:center;background:var(--bg-card);">
             {% csrf_token %}
-            <input type="text" id="chatInput" placeholder="输入消息，我会自动匹配专家..." autocomplete="off" required
+            <input type="text" id="chatInput" placeholder="输入消息，我会自动匹配专家..." autocomplete="off"
                    style="flex:1;padding:12px 18px;border:1.5px solid var(--border);border-radius:24px;font-size:14px;background:var(--bg);color:var(--text);transition:border-color .2s, box-shadow .2s;">
             <button type="submit" id="sendBtn" title="发送"
                     style="width:42px;height:42px;background:var(--primary);color:#fff;border:none;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px var(--primary-glow);transition:all .2s;flex-shrink:0;">➤</button>
+            <button type="button" id="stopBtn" title="打断" onclick="stopStream()"
+                    style="display:none;width:42px;height:42px;background:#ef4444;color:#fff;border:none;border-radius:50%;font-size:16px;cursor:pointer;box-shadow:0 2px 8px rgba(239,68,68,.25);flex-shrink:0;">⏹</button>
         </form>
     </div>
 </div>
@@ -76,26 +84,63 @@
 <style>
     .chat-agent-chip {
         display: inline-flex; align-items: center; gap: 4px;
-        padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;
+        padding: 4px 12px; border-radius: 14px; font-size: 12px; font-weight: 500;
+        border: 1.5px solid transparent; cursor: pointer; transition: all .2s;
+        font-family: inherit;
     }
-    .chat-agent-chip.coordinator { background: #eef2ff; color: #4f46e5; }
-    .chat-agent-chip.expert { background: #f5f3ff; color: #7c3aed; }
-    .chat-agent-chip.member { background: #f1f5f9; color: #64748b; }
-    .chat-agent-chip.active { outline: 2px solid var(--primary); outline-offset: 2px; }
+    .chat-agent-chip.coordinator { background: #eef2ff; color: #4f46e5; border-color: #e0e7ff; }
+    .chat-agent-chip.expert { background: #f5f3ff; color: #7c3aed; border-color: #ede9fe; }
+    .chat-agent-chip.member { background: #f1f5f9; color: #64748b; border-color: #e2e8f0; }
+    .chat-agent-chip:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,.08); }
+    .chat-agent-chip.active {
+        outline: none;
+        border-color: var(--primary) !important;
+        box-shadow: 0 0 0 2px var(--primary-glow);
+        transform: translateY(-1px);
+    }
+    .chat-agent-chip.active::after {
+        content: ' ✓'; font-size: 10px; font-weight: 700;
+    }
 
     .msg-agent-name {
-        font-size: 11px; font-weight: 600; color: var(--text-muted); margin-bottom: 2px;
+        font-size: 12px; font-weight: 700; margin-bottom: 4px;
+        display: flex; align-items: center; gap: 6px;
     }
-    .msg-assistant .msg-agent-name { color: var(--primary); }
-
-    /* 路由系统消息 */
+    .msg-agent-name::before {
+        content: '';
+        width: 8px; height: 8px; border-radius: 50%;
+        background: var(--primary); flex-shrink: 0;
+    }
+    /* 协调者的消息 */
+    .msg-coordinator .msg-agent-name { color: #4f46e5; }
+    .msg-coordinator .msg-agent-name::before { background: #4f46e5; }
+    .msg-coordinator .bubble { border-left: 3px solid #4f46e5; }
+    /* 专家的消息 */
+    .msg-expert .msg-agent-name { color: #7c3aed; }
+    .msg-expert .msg-agent-name::before { background: #7c3aed; }
+    .msg-expert .bubble { border-left: 3px solid #7c3aed; }
+    /* 系统的消息 */
+    .msg-system .msg-agent-name { color: #6366f1; }
+    .msg-system .msg-agent-name::before { background: #6366f1; }
     .msg-system .bubble {
         background: linear-gradient(135deg, #eef2ff, #f5f3ff) !important;
         border: 1px solid rgba(99,102,241,.15) !important;
         color: #4f46e5 !important;
         font-size: 13px !important;
     }
-    .msg-system .msg-agent-name { color: #6366f1 !important; }
+
+    /* 工具调用标签 */
+    .msg-tools {
+        display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 4px;
+    }
+    .msg-tool-chip {
+        display: inline-flex; align-items: center; gap: 3px;
+        padding: 2px 8px; border-radius: 10px;
+        font-size: 11px; font-weight: 500;
+        background: #fffbeb; color: #b45309;
+        border: 1px solid #fde68a;
+        cursor: default;
+    }
 
     /* 思考动画 */
     .thinking-dots { display: inline-flex; gap: 4px; padding: 4px 0; }
@@ -133,26 +178,99 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('chatForm');
     const input = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const stopBtn = document.getElementById('stopBtn');
     const messagesDiv = document.getElementById('chatMessages');
     const emptyState = document.getElementById('emptyState');
 
+    let currentAbortController = null;
+    let isStreaming = false;
+
+    // Agent 名称 → 角色映射
+    const agentRoles = {};
+    agentRoles['{{ global_agent.name }}'] = 'coordinator';  // 全局智能体
+    document.querySelectorAll('.toggle-chip').forEach(chip => {
+        const cls = chip.className;
+        if (cls.includes('coordinator')) agentRoles[chip.dataset.agent] = 'coordinator';
+        else if (cls.includes('expert')) agentRoles[chip.dataset.agent] = 'expert';
+        else agentRoles[chip.dataset.agent] = 'member';
+    });
+
+    function setStreaming(active) {
+        isStreaming = active;
+        stopBtn.style.display = active ? '' : 'none';
+        sendBtn.textContent = active ? '▶' : '➤';
+        sendBtn.style.background = active ? '#ef4444' : 'var(--primary)';
+    }
+
+    function stopStream() {
+        if (currentAbortController) {
+            currentAbortController.abort();
+            currentAbortController = null;
+        }
+        setStreaming(false);
+    }
+
+    // ── 专家芯片切换 ──
+    const toggleChips = document.querySelectorAll('.toggle-chip');
+    toggleChips.forEach(chip => {
+        chip.addEventListener('click', function() {
+            this.classList.toggle('active');
+            updateHint();
+        });
+    });
+
+    function getSelectedAgents() {
+        const selected = [];
+        document.querySelectorAll('.toggle-chip.active').forEach(c => {
+            selected.push(c.dataset.agent);
+        });
+        return selected;
+    }
+
+    function updateHint() {
+        const selected = getSelectedAgents();
+        const hint = document.getElementById('selectionHint');
+        if (selected.length > 0) {
+            hint.textContent = '✅ 已选: ' + selected.join(', ');
+            hint.style.color = 'var(--primary)';
+            input.placeholder = '已指定专家，输入消息...';
+        } else {
+            hint.textContent = '💡 点击上方专家可选择/取消，不选则自动匹配';
+            hint.style.color = 'var(--text-muted)';
+            input.placeholder = '输入消息，我会自动匹配专家...';
+        }
+    }
+
+    // ── 发送消息 ──
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         const content = input.value.trim();
         if (!content) return;
 
-        // 隐藏空状态
+        // 如果正在流式输出，先打断
+        if (isStreaming) {
+            stopStream();
+        }
+
         if (emptyState) emptyState.style.display = 'none';
 
-        // 显示用户消息
         appendMessage('user', content, '');
         input.value = '';
-        input.disabled = true;
-        document.getElementById('sendBtn').disabled = true;
-        scrollToBottom();
+        setStreaming(true);
+
+        // 构建 URL
+        const selectedAgents = getSelectedAgents();
+        let url = '{% url "chat:global_chat_stream" %}?content=' + encodeURIComponent(content);
+        if (selectedAgents.length > 0) {
+            url += '&agents=' + encodeURIComponent(selectedAgents.join(','));
+        }
+
+        const controller = new AbortController();
+        currentAbortController = controller;
 
         try {
-            const resp = await fetch('{% url "chat:global_chat_stream" %}?content=' + encodeURIComponent(content));
+            const resp = await fetch(url, { signal: controller.signal });
             const reader = resp.body.getReader();
             const decoder = new TextDecoder();
             let buffer = '';
@@ -169,45 +287,58 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (!line.startsWith('data: ')) continue;
                     try {
                         const data = JSON.parse(line.slice(6));
-
-                        if (data.type === 'user') {
-                            // 用户消息已在前端显示，跳过
-                        } else if (data.type === 'routing') {
-                            // 路由状态
+                        if (data.type === 'routing') {
                             appendSystemMessage(data.content, data.status, data);
                         } else if (data.type === 'assistant') {
-                            appendMessage('assistant', data.content, data.agent_name || '');
+                            appendMessage('assistant', data.content, data.agent_name || '', '', data.tool_calls, data.role);
                         } else if (data.type === 'done') {
                             // 完成
                         } else if (data.type === 'error') {
                             appendMessage('assistant', data.content, '系统',
                                 'background:#fef2f2;color:#dc2626;border:1px solid #fecaca;');
                         }
-                    } catch (e) { /* skip parse errors */ }
+                    } catch (e) { /* skip */ }
                 }
             }
         } catch (err) {
-            console.error('SSE error:', err);
-            appendMessage('assistant', '[连接错误] 请检查网络后重试', '系统',
-                'background:#fef2f2;color:#dc2626;border:1px solid #fecaca;');
+            if (err.name === 'AbortError') {
+                appendSystemMessage('⏹ 已打断，等待你的补充信息...', 'manual', {});
+            } else {
+                console.error('SSE error:', err);
+                appendMessage('assistant', '[连接错误] 请检查网络后重试', '系统',
+                    'background:#fef2f2;color:#dc2626;border:1px solid #fecaca;');
+            }
         }
 
-        input.disabled = false;
-        document.getElementById('sendBtn').disabled = false;
+        currentAbortController = null;
+        setStreaming(false);
         input.focus();
     });
 
-    function appendMessage(role, content, agentName, extraStyle) {
+    function appendMessage(role, content, agentName, extraStyle, toolCalls) {
         const div = document.createElement('div');
-        div.className = role === 'user' ? 'msg msg-user' : 'msg msg-assistant';
+        const agentRole = agentRoles[agentName] || '';
+        const roleClass = agentRole === 'coordinator' ? ' msg-coordinator' :
+                          agentRole === 'expert' ? ' msg-expert' : '';
+        div.className = role === 'user' ? 'msg msg-user' : ('msg msg-assistant' + roleClass);
 
         let nameHtml = '';
         if (agentName && role !== 'user') {
             nameHtml = '<div class="msg-agent-name">' + escapeHtml(agentName) + '</div>';
         }
 
+        // 工具调用展示
+        let toolsHtml = '';
+        if (toolCalls && toolCalls.length > 0) {
+            toolsHtml = '<div class="msg-tools">';
+            toolCalls.forEach(tc => {
+                toolsHtml += '<span class="msg-tool-chip" title="' + escapeHtml(tc.args || '') + '">🔧 ' + escapeHtml(tc.tool) + '</span>';
+            });
+            toolsHtml += '</div>';
+        }
+
         const bubbleStyle = extraStyle || '';
-        div.innerHTML = nameHtml + '<div class="bubble" style="' + bubbleStyle + '">' + formatContent(content) + '</div>';
+        div.innerHTML = nameHtml + toolsHtml + '<div class="bubble" style="' + bubbleStyle + '">' + formatContent(content) + '</div>';
         messagesDiv.appendChild(div);
         scrollToBottom();
     }

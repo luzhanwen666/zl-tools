@@ -40,10 +40,10 @@
                            required>
                     <p class="field-hint">填入 API 地址即可，系统会自动补全路径</p>
                 </div>
-                <div class="field-group" style="flex:0 0 220px;">
+                <div class="field-group" style="flex:0 0 260px;">
                     <label for="id_api_key">API Key</label>
-                    <input type="password" id="id_api_key" name="api_key"
-                           value="{{ form.api_key|default:'' }}"
+                    <input type="text" id="id_api_key" name="api_key"
+                           value="{{ form.instance.api_key|default:'' }}"
                            placeholder="sk-...">
                     <p class="field-hint">Ollama 本地模型可留空</p>
                 </div>

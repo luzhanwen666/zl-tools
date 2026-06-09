@@ -5,11 +5,37 @@
 {% block topbar %}
 <div class="topbar">
     <div class="breadcrumb"><span class="current">技能</span></div>
-    <div class="topbar-actions"><a href="{% url 'skills:create' %}" class="btn">+ 添加技能</a></div>
+    <div class="topbar-actions">
+        <button onclick="toggleImport()" class="btn" style="background:var(--bg);color:var(--text);border:1px solid var(--border);">📦 导入压缩包</button>
+        <a href="{% url 'skills:create' %}" class="btn">+ 添加技能</a>
+    </div>
 </div>
 {% endblock %}
 
 {% block content %}
+
+<!-- 导入区域默认隐藏 -->
+<div id="importArea" style="display:none;background:var(--bg-card);border:2px dashed var(--border);border-radius:var(--radius);padding:28px;text-align:center;margin-bottom:20px;">
+    <div style="font-size:32px;margin-bottom:8px;">📦</div>
+    <h3 style="margin-bottom:8px;">批量导入技能</h3>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">
+        上传标准 skills 格式的 zip 压缩包，自动解析并导入<br>
+        <code style="font-size:11px;">目录名=技能名, SKILL.md=指令, meta.json=元信息（可选）</code>
+    </p>
+    <form method="post" action="{% url 'skills:import' %}" enctype="multipart/form-data" style="display:flex;gap:10px;justify-content:center;align-items:center;">
+        {% csrf_token %}
+        <input type="file" name="zip_file" accept=".zip" required
+               style="padding:8px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:13px;background:var(--bg);">
+        <button type="submit" class="btn">开始导入</button>
+    </form>
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div style="background:{% if '失败' in message.message or '错误' in message.message %}#fef2f2;color:#dc2626;border:1px solid #fecaca{% else %}#ecfdf5;color:#059669;border:1px solid #a7f3d0{% endif %};padding:10px 16px;border-radius:var(--radius-sm);margin-bottom:16px;font-size:13px;white-space:pre-wrap;">{{ message }}</div>
+{% endfor %}
+{% endif %}
+
 {% if skills %}
 <div class="card-grid">
     {% for skill in skills %}
@@ -28,6 +54,18 @@
     {% endfor %}
 </div>
 {% else %}
-<div class="empty-state"><div class="empty-icon">⚡</div><p>暂无技能</p><a href="{% url 'skills:create' %}">添加第一个技能 →</a></div>
+<div class="empty-state">
+    <div class="empty-icon">⚡</div>
+    <p>暂无技能</p>
+    <a href="{% url 'skills:create' %}">添加第一个技能 →</a>
+    <p style="margin-top:12px;">或 <a href="#" onclick="toggleImport();return false;">📦 导入压缩包</a></p>
+</div>
 {% endif %}
+
+<script>
+function toggleImport() {
+    const area = document.getElementById('importArea');
+    area.style.display = area.style.display === 'none' ? '' : 'none';
+}
+</script>
 {% endblock %}

@@ -25,19 +25,9 @@ logger = logging.getLogger(__name__)
 
 
 def _extract_tool_calls(response_text: str) -> list[ToolCall]:
-    """
-    从 LLM 回复中提取工具调用。
-
-    支持格式:
-    1. JSON 格式: {"tool": "name", "args": {...}}
-    2. 代码块格式:
-       ```tool
-       {"tool": "name", "args": {...}}
-       ```
-    """
+    """从 LLM 回复中提取工具调用"""
     tool_calls = []
 
-    # 尝试提取代码块中的工具调用
     code_block_pattern = r"```(?:tool|json)?\s*\n?(\{[^`]*\})\s*\n?```"
     for match in re.finditer(code_block_pattern, response_text, re.DOTALL):
         try:
@@ -51,9 +41,7 @@ def _extract_tool_calls(response_text: str) -> list[ToolCall]:
         except json.JSONDecodeError:
             continue
 
-    # 尝试提取行内 JSON 格式的工具调用（处理嵌套花括号）
     if not tool_calls:
-        # 使用花括号平衡的方式提取 JSON 对象
         json_objects = _extract_json_objects(response_text)
         for obj_str in json_objects:
             try:
@@ -93,10 +81,8 @@ def _extract_json_objects(text: str) -> list[str]:
 
 
 def _strip_tool_calls(text: str) -> str:
-    """从回复文本中移除工具调用部分，只保留自然语言内容"""
-    # 移除代码块格式的工具调用
+    """从回复文本中移除工具调用部分"""
     text = re.sub(r"```(?:tool|json)?\s*\n?\{[^`]*\"tool\"[^`]*\}\s*\n?```", "", text, flags=re.DOTALL)
-    # 移除行内 JSON 格式的工具调用
     text = re.sub(r'\{[^{}]*"tool"\s*:\s*"[^"]+"[^{}]*\}', "", text)
     return text.strip()
 
@@ -113,34 +99,27 @@ class AgentRunner:
     def __init__(self, llm: "LLMConfig", tool_registry: ToolRegistry | None = None):
         self.llm = llm
         self.tool_registry = tool_registry
-        self.max_react_turns = 5  # 单次发言最多进行 5 轮 ReAct
+        self.max_react_turns = 5
 
     async def run(
         self,
         agent: "AgentModel",
         group_messages: list[AgentMessage],
         tools: list | None = None,
+        system_prompt_override: str | None = None,
     ) -> AgentMessage:
-        """
-        执行一次 Agent 发言（可能包含多轮 ReAct 内部循环）。
+        messages = self._build_messages(agent, group_messages, tools, system_prompt_override)
 
-        Args:
-            agent: Agent 模型实例
-            group_messages: 群聊历史消息（其他 Agent 的发言）
-            tools: 该 Agent 可用的工具列表
-
-        Returns:
-            Agent 的发言结果
-        """
-        # 1. 构建 LLM 消息列表
-        messages = self._build_messages(agent, group_messages, tools)
-
-        # 2. ReAct 循环
         react_messages = list(messages)
         final_content = ""
+        all_tool_calls: list[dict] = []
 
         for turn in range(self.max_react_turns):
-            # 调用 LLM
+            # 限制消息总大小，防止累积过长导致 400
+            total_size = sum(len(str(m.get("content", ""))) for m in react_messages)
+            if total_size > 10000:  # 超限保留 system + 最近 5 条
+                react_messages = [react_messages[0]] + react_messages[-5:]
+
             try:
                 response = await llm_module.llm_client.chat(
                     provider=self.llm.provider,
@@ -148,23 +127,20 @@ class AgentRunner:
                     messages=react_messages,
                     api_base=self.llm.api_base,
                     api_key=self.llm.api_key,
-                    max_tokens=self.llm.max_tokens,
+                    max_tokens=min(self.llm.max_tokens, 4096),  # 限制生成长度
                     temperature=self.llm.temperature,
                 )
             except Exception as e:
                 logger.error("LLM call failed for agent %s: %s", agent.name, e)
                 response = f"[执行错误] LLM 调用失败: {str(e)}"
 
-            # 检查是否包含工具调用
             tool_calls = _extract_tool_calls(response)
             clean_content = _strip_tool_calls(response)
 
             if not tool_calls:
-                # 没有工具调用，直接返回
                 final_content = clean_content or response
                 break
 
-            # 有工具调用，执行工具
             react_messages.append({"role": "assistant", "content": response})
 
             for tc in tool_calls:
@@ -172,21 +148,25 @@ class AgentRunner:
                 if self.tool_registry:
                     tool_result = await self.tool_registry.execute_tool(tc.name, tc.arguments)
 
-                # 将工具结果反馈给 LLM
-                react_messages.append({
-                    "role": "tool",
-                    "tool_call_id": tc.id,
-                    "content": tool_result,
+                all_tool_calls.append({
+                    "tool": tc.name,
+                    "args": tc.arguments,
+                    "result_preview": tool_result[:200],
                 })
-                logger.info("Agent %s called tool %s: %s", agent.name, tc.name, tool_result[:100])
 
-            # LLM 处理工具结果后继续（下一轮循环）
+                react_messages.append({
+                    "role": "user",
+                    "content": f"[工具调用结果: {tc.name}]\n{tool_result}",
+                })
+                logger.info("Agent %s called tool %s → %s", agent.name, tc.name, tool_result[:100])
+
             final_content = clean_content
 
         return AgentMessage(
             role="assistant",
             content=final_content,
             name=agent.name,
+            tool_calls=all_tool_calls,
         )
 
     def _build_messages(
@@ -194,24 +174,30 @@ class AgentRunner:
         agent: "AgentModel",
         group_messages: list[AgentMessage],
         tools: list | None = None,
+        system_prompt_override: str | None = None,
     ) -> list[dict]:
-        """构建发送给 LLM 的消息列表"""
         messages = []
+        system_prompt = system_prompt_override or agent.system_prompt or "你是一个智能助手。"
 
-        # 系统提示词
-        system_prompt = agent.system_prompt or "你是一个智能助手。"
-
-        # 追加工具描述
         if tools:
             tool_desc = "\n\n## 可用工具\n"
             for tool in tools:
                 tool_desc += f"- **{tool.name}**: {tool.description}\n"
             system_prompt += tool_desc
 
+        # 限制 system_prompt，给专家留足空间
+        max_prompt = 4000
+        if len(system_prompt) > max_prompt:
+            system_prompt = system_prompt[:max_prompt] + "\n...(已截断)"
+
         messages.append({"role": "system", "content": system_prompt})
 
-        # 群聊历史（最近 20 条）
-        for msg in group_messages[-20:]:
-            messages.append(msg.to_openai_message())
+        for msg in group_messages[-15:]:  # 最近15条
+            content = msg.content
+            if len(content) > 2000:  # 单条最多2000字
+                content = content[:2000] + "...(截断)"
+            msg_dict = msg.to_openai_message()
+            msg_dict["content"] = content
+            messages.append(msg_dict)
 
         return messages

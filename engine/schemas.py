@@ -19,10 +19,8 @@ class AgentMessage:
     token_count: int | None = None
 
     def to_openai_message(self) -> dict:
-        """转换为 OpenAI API 消息格式"""
+        """转换为 OpenAI API 消息格式。注意：不包含 name 字段，部分 API（DeepSeek等）不支持。"""
         msg: dict = {"role": self.role, "content": self.content}
-        if self.name:
-            msg["name"] = self.name
         if self.tool_calls:
             msg["tool_calls"] = self.tool_calls
         if self.tool_call_id:
@@ -47,7 +45,7 @@ class GroupChatState:
     speakers: list[str] = field(default_factory=list)  # Agent 名称列表
     speaker_roles: dict[str, str] = field(default_factory=dict)  # {agent_name: role}
     current_speaker_idx: int = 0  # 当前发言者索引
-    max_rounds: int = 15  # 最大讨论轮次
+    max_rounds: int = 12  # 最大讨论轮次
     round_count: int = 0
     is_finished: bool = False
     plan: list[str] = field(default_factory=list)  # 分析计划

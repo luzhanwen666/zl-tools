@@ -72,30 +72,18 @@ class MCPToolWrapper(BaseTool):
 
 def get_tools_for_agent(agent: "AgentModel", builtin_registry: ToolRegistry | None = None) -> list[BaseTool]:
     """
-    根据 Agent 的配置收集所有可用工具。
+    收集 Agent 的可用工具（仅限可执行工具，不含技能）。
 
-    Args:
-        agent: Agent 模型实例
-        builtin_registry: 内置工具注册中心
-
-    Returns:
-        该 Agent 可用的所有工具列表
+    技能是行为指南，通过 system_prompt 注入，不属于工具列表。
+    工具只包含：MCP 工具、以及将来可配置的内置工具。
     """
     tools: list[BaseTool] = []
 
-    # 1. 技能 → SkillTool
-    for skill in agent.skills.filter(is_active=True):
-        tools.append(SkillTool(
-            skill_name=skill.name,
-            skill_description=skill.description,
-            skill_instruction=skill.instruction,
-        ))
-
-    # 2. MCP 工具 → MCPToolWrapper
+    # MCP 工具 → MCPToolWrapper（可执行工具）
     for mcp in agent.mcp_tools.filter(is_active=True):
         tools.append(MCPToolWrapper(mcp))
 
-    # 3. 内置工具
+    # 内置工具 — 所有 Agent 均可使用的通用工具（shell, log_parser, web_search 等）
     if builtin_registry:
         tools.extend(builtin_registry.get_all())
 

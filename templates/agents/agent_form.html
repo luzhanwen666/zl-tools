@@ -1,29 +1,182 @@
 {% extends "base.html" %}
 {% block nav-agents %}active{% endblock %}
-{% block title %}{% if form.instance.pk %}编辑智能体{% else %}创建智能体{% endif %}{% endblock %}
+{% block title %}{% if object %}编辑智能体{% else %}创建智能体{% endif %}{% endblock %}
 
 {% block topbar %}
 <div class="topbar">
     <div class="breadcrumb">
-        <a href="{% url 'agents:list' %}">智能体</a><span class="sep">/</span><span class="current">{% if form.instance.pk %}编辑{% else %}创建{% endif %}</span>
+        <a href="{% url 'agents:list' %}">智能体</a><span class="sep">/</span><span class="current">{% if object %}编辑{% else %}创建{% endif %}</span>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
-<div class="form-card">
-    <h2>{% if form.instance.pk %}编辑智能体{% else %}创建智能体{% endif %}</h2>
-    <form method="post" enctype="multipart/form-data">
+<div class="form-card" style="max-width:800px;">
+    <h2>{% if object %}编辑智能体{% else %}创建智能体{% endif %}</h2>
+    <form method="post" enctype="multipart/form-data" id="agentForm">
         {% csrf_token %}
-        {% for field in form %}
-        <label>{{ field.label }}</label>
-        {{ field }}
-        {% if field.errors %}<p style="color:var(--danger);font-size:12px;margin-top:-12px;margin-bottom:10px;">{{ field.errors }}</p>{% endif %}
-        {% endfor %}
-        <div class="submit-row">
-            <button type="submit">保存</button>
+
+        <!-- ═══ 基本信息 ═══ -->
+        <fieldset class="form-section">
+            <legend>基本信息</legend>
+            <div class="field-row">
+                <div class="field-group field-grow">
+                    <label for="{{ form.name.id_for_label }}">名称 *</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}<p class="field-err">{{ form.name.errors.0 }}</p>{% endif %}
+                </div>
+                <div class="field-group" style="flex:0 0 200px;">
+                    <label for="{{ form.role.id_for_label }}">角色 *</label>
+                    {{ form.role }}
+                    {% if form.role.errors %}<p class="field-err">{{ form.role.errors.0 }}</p>{% endif %}
+                </div>
+            </div>
+            <div class="field-group">
+                <label for="{{ form.description.id_for_label }}">描述</label>
+                {{ form.description }}
+                <p class="field-hint">简要描述此智能体的能力和专长，全局路由会据此匹配合适的专家</p>
+            </div>
+            <div class="field-group">
+                <label for="{{ form.system_prompt.id_for_label }}">系统提示词</label>
+                {{ form.system_prompt }}
+                <p class="field-hint">定义智能体的角色、行为和能力边界</p>
+            </div>
+        </fieldset>
+
+        <!-- ═══ 大模型配置 ═══ -->
+        <fieldset class="form-section">
+            <legend>大模型配置</legend>
+            <div class="field-row">
+                <div class="field-group field-grow">
+                    <label for="{{ form.llm_config.id_for_label }}">选择大模型</label>
+                    {{ form.llm_config }}
+                </div>
+                <div class="field-group" style="flex:0 0 200px;">
+                    <label for="{{ form.group.id_for_label }}">协作组</label>
+                    {{ form.group }}
+                    <p class="field-hint">同组Agent可互相协作</p>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- ═══ 技能 ═══ -->
+        <fieldset class="form-section">
+            <legend>技能 <span style="font-weight:400;font-size:13px;color:var(--text-muted);">— 选择此Agent可用的技能</span></legend>
+            <div class="checkbox-grid" id="skillsGrid">
+                {{ form.skills }}
+            </div>
+            {% if not available_skills %}
+            <p class="field-hint">暂无可用技能，请先<a href="{% url 'skills:create' %}">创建技能</a></p>
+            {% endif %}
+        </fieldset>
+
+        <!-- ═══ MCP工具 ═══ -->
+        <fieldset class="form-section">
+            <legend>MCP工具 <span style="font-weight:400;font-size:13px;color:var(--text-muted);">— 选择此Agent可用的MCP工具</span></legend>
+            <div class="checkbox-grid" id="mcpGrid">
+                {{ form.mcp_tools }}
+            </div>
+            {% if not available_mcp_tools %}
+            <p class="field-hint">暂无可用MCP工具，请先<a href="{% url 'mcp_tools:create' %}">配置MCP工具</a></p>
+            {% endif %}
+        </fieldset>
+
+        <!-- ═══ 状态 ═══ -->
+        <fieldset class="form-section">
+            <legend>状态</legend>
+            <div class="checkbox-row">
+                <label class="field-check">
+                    {{ form.is_active }} 启用
+                </label>
+                <label class="field-check">
+                    {{ form.is_global }} 设为全局智能体入口
+                </label>
+            </div>
+        </fieldset>
+
+        <div class="submit-row" style="margin-top:24px;">
+            <button type="submit" class="btn-submit">保存</button>
             <a href="{% url 'agents:list' %}" class="cancel-link">取消</a>
         </div>
     </form>
 </div>
+
+<style>
+    .form-section {
+        border: 1px solid var(--border-light);
+        border-radius: var(--radius);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        background: var(--bg);
+    }
+    .form-section legend {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text);
+        padding: 0 8px;
+    }
+    .field-row { display: flex; gap: 16px; margin-bottom: 4px; }
+    .field-group { margin-bottom: 14px; }
+    .field-grow { flex: 1; }
+    .field-hint { font-size: 11.5px; color: var(--text-muted); margin-top: 4px; }
+    .field-err { font-size: 12px; color: var(--danger); margin-top: 4px; margin-bottom: 0; }
+    .field-check {
+        display: inline-flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer;
+        margin-right: 24px;
+    }
+    .field-check input[type="checkbox"] { width: 18px; height: 18px; margin: 0; accent-color: var(--primary); }
+    .checkbox-row { display: flex; }
+
+    .form-card input[type="text"],
+    .form-card textarea,
+    .form-card select {
+        width: 100%; font-size: 14px; font-family: inherit;
+    }
+    .form-card textarea { min-height: 100px; }
+
+    /* Checkbox 网格（Django CheckboxSelectMultiple 渲染） */
+    .checkbox-grid { margin-top: 4px; }
+    .checkbox-grid > div {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 10px;
+    }
+    .checkbox-grid label {
+        position: relative;
+        background: #fff;
+        border: 2px solid var(--border-light);
+        border-radius: var(--radius-sm);
+        padding: 14px 16px 14px 42px;
+        cursor: pointer;
+        transition: all .2s;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    .checkbox-grid label:hover { border-color: var(--primary); background: var(--primary-light); }
+    .checkbox-grid input[type="checkbox"] {
+        position: absolute;
+        left: 12px; top: 16px;
+        width: 20px; height: 20px;
+        accent-color: var(--primary);
+        margin: 0;
+    }
+    .checkbox-grid input[type="checkbox"]:checked + span,
+    .checkbox-grid label:has(input:checked) {
+        border-color: var(--primary);
+        background: var(--primary-light);
+    }
+
+    .btn-submit {
+        background: var(--primary); color: #fff; font-size: 14px; font-weight: 500;
+        padding: 10px 30px; border: none; border-radius: var(--radius-sm); cursor: pointer;
+        box-shadow: 0 1px 3px var(--primary-glow); transition: all .2s;
+    }
+    .btn-submit:hover { background: var(--primary-hover); box-shadow: 0 4px 12px var(--primary-glow); }
+    .cancel-link { color: var(--text-muted); text-decoration: none; font-size: 14px; margin-left: 16px; }
+    .cancel-link:hover { color: var(--text); }
+</style>
 {% endblock %}

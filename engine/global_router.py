@@ -119,6 +119,7 @@ class GlobalRouter:
         self,
         session: "ChatSession",
         user_message: str,
+        manual_agents: list["AgentModel"] | None = None,
     ) -> list[AgentMessage]:
         all_messages: list[AgentMessage] = []
 
@@ -131,18 +132,40 @@ class GlobalRouter:
                 name="系统",
             )]
 
-        # 2. 分类
-        route_result = await self.classify(user_message, global_agent)
-        logger.info("Route result: %s", route_result)
+        # 2. 路由决策：手动优先，否则自动分类
+        if manual_agents:
+            # 手动模式：直接使用已解析的 Agent 对象（视图层已做 ORM）
+            logger.info("Manual agents: %s", [a.name for a in manual_agents])
+            route_result = RouteResult(
+                intent="手动指定",
+                recommended_agents=[a.name for a in manual_agents],
+                is_general_question=not manual_agents,
+                reasoning="用户手动选择专家",
+            )
+            expert_agents = manual_agents  # 直接使用，无需 ORM 解析
+        else:
+            route_result = await self.classify(user_message, global_agent)
+            logger.info("Route result: %s", route_result)
 
         # 3. 路由 + 执行
         if route_result.is_general_question or not route_result.recommended_agents:
-            logger.info("Routing to global agent direct response")
-            msg = await self._run_direct(global_agent, user_message)
-            all_messages.append(msg)
+            # 协调型Agent不直接回答，提示用户选择专家
+            logger.info("No expert matched — coordinator refuses to answer directly")
+            all_messages.append(AgentMessage(
+                role="assistant",
+                content=(
+                    "⚠️ 我是协调型智能体，不直接回答问题。\n\n"
+                    "你可以：\n"
+                    "1. 点击上方的专家标签手动选择专家来协助你\n"
+                    "2. 或者尝试更具体地描述你的问题，我会自动匹配合适的专家"
+                ),
+                name="全局智能体",
+            ))
         else:
             logger.info("Routing to expert agents: %s", route_result.recommended_agents)
-            expert_agents = await _resolve_agents(route_result.recommended_agents)
+            # 手动模式下 expert_agents 已在上面设置好（Agent对象），自动模式需要 ORM 解析
+            if not manual_agents:
+                expert_agents = await _resolve_agents(route_result.recommended_agents)
             agent_list = [global_agent] + expert_agents
 
             routing_msg = AgentMessage(
@@ -170,23 +193,49 @@ class GlobalRouter:
         self,
         session: "ChatSession",
         user_message: str,
+        manual_agents: list["AgentModel"] | None = None,
     ) -> AsyncGenerator[dict, None]:
         global_agent = await _get_global_agent()
         if not global_agent or not global_agent.llm_config:
             yield {"type": "error", "content": "全局智能体未配置大模型，请联系管理员。"}
             return
 
+        # 手动指定专家 → 跳过分类，直接路由
+        if manual_agents:
+            expert_names = [a.name for a in manual_agents]
+            yield {"type": "routing", "status": "manual", "content": f"已手动选择专家：{', '.join(expert_names)}"}
+            agent_list = [global_agent] + manual_agents
+            from .group_chat import GroupChatManager
+            manager = GroupChatManager(tool_registry=self.tool_registry)
+            async for msg in manager.run_stream_with_agents(
+                session, user_message, agent_list, global_agent.name
+            ):
+                yield {"type": "assistant", "content": msg.content, "agent_name": msg.name, "tool_calls": msg.tool_calls}
+            yield {"type": "done"}
+            return
+
+        # 自动分类模式
         yield {"type": "routing", "status": "classifying", "content": "正在分析您的问题..."}
 
         route_result = await self.classify(user_message, global_agent)
 
         if route_result.is_general_question or not route_result.recommended_agents:
+            # 协调型Agent不直接回答
             yield {
                 "type": "routing", "status": "direct",
-                "content": "由全局智能体直接回答", "intent": route_result.intent,
+                "content": "该问题没有匹配的专家，协调型智能体不直接回答",
+                "intent": route_result.intent,
             }
-            msg = await self._run_direct(global_agent, user_message)
-            yield {"type": "assistant", "content": msg.content, "agent_name": msg.name}
+            yield {
+                "type": "assistant",
+                "content": (
+                    "⚠️ 我是协调型智能体，不直接回答问题。\n\n"
+                    "你可以：\n"
+                    "1. 点击上方的专家标签手动选择专家来协助你\n"
+                    "2. 或者尝试更具体地描述你的问题，我会自动匹配合适的专家"
+                ),
+                "agent_name": "全局智能体",
+            }
         else:
             expert_agents = await _resolve_agents(route_result.recommended_agents)
             agent_names = [a.name for a in expert_agents]
@@ -195,7 +244,7 @@ class GlobalRouter:
                 "type": "routing", "status": "matched",
                 "content": f"已激活专家：{', '.join(agent_names)}",
                 "intent": route_result.intent,
-                "reasoning": route_result.reasoning,
+                "reasoning": route_result.reasoning[:60],  # 截断理由
                 "agents": agent_names,
             }
 
@@ -206,7 +255,7 @@ class GlobalRouter:
             async for msg in manager.run_stream_with_agents(
                 session, user_message, agent_list, global_agent.name
             ):
-                yield {"type": "assistant", "content": msg.content, "agent_name": msg.name}
+                yield {"type": "assistant", "content": msg.content, "agent_name": msg.name, "tool_calls": msg.tool_calls}
 
         yield {"type": "done"}
 
