@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block nav-chat %}active{% endblock %}
+{% block title %}对话列表{% endblock %}
+
+{% block topbar %}
+<div class="topbar">
+    <div class="breadcrumb"><span class="current">对话</span></div>
+    <div class="topbar-actions"><a href="{% url 'chat:session_create' %}" class="btn">+ 新建对话</a></div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% if sessions %}
+<div class="card-grid">
+    {% for s in sessions %}
+    <div class="card">
+        <h3><a href="{% url 'chat:detail' s.pk %}">{{ s.title }}</a></h3>
+        <div class="meta">
+            <span class="badge badge-blue">{{ s.agent.name }}</span>
+            <span>{{ s.updated_at|date:"Y-m-d H:i" }}</span>
+        </div>
+        <div class="actions">
+            <a href="{% url 'chat:detail' s.pk %}" class="btn-primary-sm" style="background:var(--primary);color:#fff;padding:6px 14px;border-radius:var(--radius-sm);font-size:13px;text-decoration:none;font-weight:500;">进入对话</a>
+            <a href="{% url 'chat:session_delete' s.pk %}" class="btn-delete">删除</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state"><div class="empty-icon">💬</div><p>暂无对话</p><a href="{% url 'chat:session_create' %}">创建第一个对话 →</a></div>
+{% endif %}
+{% endblock %}

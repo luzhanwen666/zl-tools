@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block nav-skills %}active{% endblock %}
+{% block title %}{{ skill.name }}{% endblock %}
+
+{% block topbar %}
+<div class="topbar">
+    <div class="breadcrumb">
+        <a href="{% url 'skills:list' %}">技能</a><span class="sep">/</span><span class="current">{{ skill.name }}</span>
+    </div>
+    <div class="topbar-actions">
+        <a href="{% url 'skills:update' skill.pk %}" class="btn btn-warning-solid">编辑</a>
+        <a href="{% url 'skills:delete' skill.pk %}" class="btn btn-danger-solid">删除</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="detail-card">
+    <h2>{{ skill.name }} <span class="badge badge-blue">{{ skill.get_category_display }}</span></h2>
+    <div class="field"><span class="field-label">描述</span><p>{{ skill.description|default:"暂无描述" }}</p></div>
+    <div class="field"><span class="field-label">指令</span><p>{{ skill.instruction|default:"未设置" }}</p></div>
+    <div class="field"><span class="field-label">状态</span><p>{{ skill.is_active|yesno:"启用,禁用" }}</p></div>
+</div>
+{% endblock %}

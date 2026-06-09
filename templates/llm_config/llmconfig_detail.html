@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block nav-llm %}active{% endblock %}
+{% block title %}{{ config.name }}{% endblock %}
+
+{% block topbar %}
+<div class="topbar">
+    <div class="breadcrumb">
+        <a href="{% url 'llm_config:list' %}">大模型</a><span class="sep">/</span><span class="current">{{ config.name }}</span>
+    </div>
+    <div class="topbar-actions">
+        <a href="{% url 'llm_config:update' config.pk %}" class="btn btn-warning-solid">编辑</a>
+        <a href="{% url 'llm_config:delete' config.pk %}" class="btn btn-danger-solid">删除</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="detail-card">
+    <h2>{{ config.name }}</h2>
+    <div class="field"><span class="field-label">供应商</span><p>{{ config.get_provider_display }}</p></div>
+    <div class="field"><span class="field-label">模型ID</span><p><code>{{ config.model_id }}</code></p></div>
+    <div class="field"><span class="field-label">API地址</span><p>{{ config.api_base|default:"使用默认地址" }}</p></div>
+    <div class="field"><span class="field-label">API Key</span><p>{{ config.api_key|truncatechars:24|default:"未设置" }}</p></div>
+    <div class="field"><span class="field-label">最大Token</span><p>{{ config.max_tokens }}</p></div>
+    <div class="field"><span class="field-label">温度</span><p>{{ config.temperature }}</p></div>
+    <div class="field"><span class="field-label">默认</span><p><span class="badge {% if config.is_default %}badge-green{% else %}badge-gray{% endif %}">{{ config.is_default|yesno:"是,否" }}</span></p></div>
+</div>
+{% endblock %}

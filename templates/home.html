@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block nav-home %}active{% endblock %}
+{% block title %}首页 - 智能体平台{% endblock %}
+
+{% block topbar %}
+<div class="topbar home-topbar"><h1>🤖 智能体平台</h1></div>
+{% endblock %}
+
+{% block content %}
+<!-- Hero 区域 -->
+<div class="home-hero" style="background:linear-gradient(135deg,#eef2ff,#f5f3ff);border-radius:var(--radius-lg);padding:40px 36px;text-align:center;margin-bottom:28px;border:1px solid rgba(99,102,241,.1);">
+    <div style="font-size:42px;margin-bottom:12px;">🤖</div>
+    <h1 style="font-size:24px;font-weight:700;color:var(--text);margin-bottom:8px;">智能对话中心</h1>
+    <p style="font-size:14px;color:var(--text-secondary);margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">
+        向全局智能体提问，自动分析意图并匹配最合适的专家团队——多Agent协作，一站式解决复杂问题
+    </p>
+    <a href="{% url 'chat:global_chat' %}" style="display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;padding:14px 32px;border-radius:var(--radius-sm);text-decoration:none;font-size:16px;font-weight:600;box-shadow:0 4px 16px var(--primary-glow);transition:all .2s;">
+        ✨ 开始新对话
+    </a>
+</div>
+
+<!-- 功能入口 -->
+<div class="card-grid" style="margin-bottom:28px;">
+    <a href="{% url 'chat:session_list' %}" class="card" style="text-decoration:none;">
+        <div class="card-icon icon-indigo">💬</div>
+        <h3>智能对话</h3>
+        <p>与智能体进行对话交互，体验 AI 驱动的问答和任务执行</p>
+    </a>
+    <a href="{% url 'agents:list' %}" class="card" style="text-decoration:none;">
+        <div class="card-icon icon-violet">🧠</div>
+        <h3>智能体管理</h3>
+        <p>创建和管理 AI 智能体，配置提示词、绑定技能和工具</p>
+    </a>
+    <a href="{% url 'skills:list' %}" class="card" style="text-decoration:none;">
+        <div class="card-icon icon-emerald">⚡</div>
+        <h3>技能中心</h3>
+        <p>管理智能体技能，如搜索、编程、数据分析、网页抓取等</p>
+    </a>
+    <a href="{% url 'llm_config:list' %}" class="card" style="text-decoration:none;">
+        <div class="card-icon icon-amber">🔧</div>
+        <h3>大模型配置</h3>
+        <p>配置大语言模型 API，支持 Anthropic、OpenAI、DeepSeek 等</p>
+    </a>
+    <a href="{% url 'mcp_tools:list' %}" class="card" style="text-decoration:none;">
+        <div class="card-icon icon-rose">🔌</div>
+        <h3>MCP工具</h3>
+        <p>配置 MCP 协议工具，扩展智能体的能力边界</p>
+    </a>
+</div>
+
+<!-- 最近对话 -->
+<div class="home-chat-section">
+    <div class="home-chat-header">
+        <div class="home-chat-header-left">
+            <span class="home-chat-header-icon">💬</span>
+            <h2>最近对话</h2>
+        </div>
+        <a href="{% url 'chat:session_create' %}" class="btn-primary">+ 新建对话</a>
+    </div>
+
+    {% if recent_sessions %}
+    <div class="home-chat-list">
+        {% for s in recent_sessions %}
+        <a href="{% url 'chat:detail' s.pk %}" class="home-chat-item">
+            <div class="home-chat-avatar">{{ s.agent.name|cut:" "|make_list|first }}</div>
+            <div class="home-chat-info">
+                <div class="home-chat-title">{{ s.title }}</div>
+                <div class="home-chat-meta">
+                    <span class="badge badge-blue">{{ s.agent.name }}</span>
+                    <span>{{ s.updated_at|date:"Y-m-d H:i" }}</span>
+                </div>
+            </div>
+            <div class="home-chat-arrow">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <div style="text-align:center;margin-top:16px;">
+        <a href="{% url 'chat:session_list' %}" style="color:var(--primary);text-decoration:none;font-size:13px;font-weight:500;">查看全部对话 →</a>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-icon">💬</div>
+        <p>暂无对话记录</p>
+        <a href="{% url 'chat:session_create' %}">创建第一个对话 →</a>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .home-chat-section {
+        background: var(--bg-card);
+        border-radius: var(--radius-lg);
+        padding: 24px 28px;
+        border: 1px solid var(--border-light);
+        box-shadow: var(--shadow-sm);
+    }
+    .home-chat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+    .home-chat-header-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .home-chat-header-icon { font-size: 20px; }
+    .home-chat-header h2 {
+        font-size: 17px;
+        color: var(--text);
+        font-weight: 700;
+        margin: 0;
+    }
+    .home-chat-list {
+        display: flex;
+        flex-direction: column;
+    }
+    .home-chat-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 16px;
+        border-radius: var(--radius-sm);
+        text-decoration: none;
+        color: inherit;
+        transition: all .15s;
+        border: 1px solid transparent;
+        margin-bottom: 2px;
+    }
+    .home-chat-item:hover {
+        background: var(--primary-light);
+        border-color: rgba(99,102,241,.1);
+    }
+    .home-chat-avatar {
+        width: 40px; height: 40px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--primary), #a855f7);
+        color: #fff;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 15px; font-weight: 700;
+        flex-shrink: 0;
+    }
+    .home-chat-info { flex: 1; min-width: 0; }
+    .home-chat-title {
+        font-size: 14px; font-weight: 600;
+        color: var(--text);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .home-chat-meta {
+        display: flex; gap: 10px; align-items: center;
+        margin-top: 4px; font-size: 12px; color: var(--text-muted);
+    }
+    .home-chat-arrow { flex-shrink: 0; opacity: .5; transition: opacity .15s; }
+    .home-chat-item:hover .home-chat-arrow { opacity: 1; }
+</style>
+{% endblock %}

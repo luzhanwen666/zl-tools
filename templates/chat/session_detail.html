@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+{% block nav-chat %}active{% endblock %}
+{% block title %}{{ session.title }}{% endblock %}
+
+{% block topbar %}
+<div class="topbar">
+    <div class="breadcrumb">
+        <a href="{% url 'chat:session_list' %}">对话</a><span class="sep">/</span><span class="current">{{ session.title }}</span>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="chat-layout">
+    <!-- 左侧：会话列表 -->
+    <div class="chat-sidebar">
+        <a href="{% url 'chat:session_create' %}" class="btn-primary" style="display:block;text-align:center;margin-bottom:14px;padding:9px 0;border-radius:var(--radius-sm);font-size:13px;">+ 新对话</a>
+        <h3>会话列表</h3>
+        <div class="session-item {% if forloop.first %}active{% endif %}">
+            <a href="{% url 'chat:detail' session.pk %}" style="color:inherit;text-decoration:none;font-size:13.5px;">{{ session.title }}</a>
+        </div>
+    </div>
+
+    <!-- 右侧：群聊区域 -->
+    <div class="chat-main">
+        <!-- 顶栏：会话信息 + Agent 列表 -->
+        <div class="chat-header">
+            <span class="chat-header-title">{{ session.title }}</span>
+            <div class="chat-agents">
+                {% for ag in group_agents %}
+                <span class="chat-agent-chip {% if ag.role == 'coordinator' %}coordinator{% else %}expert{% endif %}">
+                    {{ ag.name }}
+                </span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- 消息区域 -->
+        <div class="chat-messages" id="chatMessages">
+            {% for msg in messages %}
+            <div class="msg {% if msg.role == 'user' %}msg-user{% else %}msg-assistant{% endif %}">
+                {% if msg.role != 'user' and msg.agent_name %}
+                <div class="msg-agent-name">{{ msg.agent_name }}</div>
+                {% endif %}
+                <div class="bubble">{{ msg.content|linebreaksbr }}</div>
+                <div class="time">{{ msg.created_at|date:"H:i" }}</div>
+            </div>
+            {% empty %}
+            <div class="empty-state" style="padding:60px 0;">
+                <div class="empty-icon">🤖</div>
+                <p>发送一条消息开始群聊讨论</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- 输入区域 -->
+        <form class="chat-input-bar" id="chatForm" method="post" action="{% url 'chat:send_message' session.pk %}">
+            {% csrf_token %}
+            <input type="text" name="content" id="chatInput" placeholder="输入消息..." autocomplete="off" required>
+            <button type="submit" id="sendBtn" title="发送">➤</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .chat-header {
+        padding: 12px 24px;
+        border-bottom: 1px solid var(--border-light);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    .chat-header-title {
+        font-weight: 600;
+        font-size: 15px;
+        color: var(--text);
+    }
+    .chat-agents {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+    .chat-agent-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .chat-agent-chip.coordinator {
+        background: #eef2ff;
+        color: #4f46e5;
+    }
+    .chat-agent-chip.expert {
+        background: #f5f3ff;
+        color: #7c3aed;
+    }
+    .msg-agent-name {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text-muted);
+        margin-bottom: 3px;
+    }
+    .msg-assistant .msg-agent-name {
+        color: var(--primary);
+    }
+
+    /* 正在输入指示器 */
+    .typing-indicator {
+        display: flex;
+        gap: 4px;
+        padding: 12px 18px;
+        align-items: center;
+    }
+    .typing-indicator .dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: var(--text-muted);
+        animation: typingBounce 1.2s infinite;
+    }
+    .typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce {
+        0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+        40% { opacity: 1; transform: scale(1); }
+    }
+
+    /* 不同 Agent 的气泡颜色区分 */
+    .bubble-coordinator {
+        border-left: 3px solid var(--primary) !important;
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('chatForm');
+    const input = document.getElementById('chatInput');
+    const messagesDiv = document.getElementById('chatMessages');
+
+    // 使用 SSE 流式接口
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const content = input.value.trim();
+        if (!content) return;
+
+        // 立即显示用户消息
+        const userMsg = document.createElement('div');
+        userMsg.className = 'msg msg-user';
+        userMsg.innerHTML = '<div class="bubble">' + escapeHtml(content) + '</div>';
+        messagesDiv.appendChild(userMsg);
+        input.value = '';
+        scrollToBottom();
+
+        // 禁用输入
+        input.disabled = true;
+
+        try {
+            const resp = await fetch('{% url "chat:send_message_stream" session.pk %}?content=' + encodeURIComponent(content));
+            const reader = resp.body.getReader();
+            const decoder = new TextDecoder();
+            let buffer = '';
+
+            while (true) {
+                const { done, value } = await reader.read();
+                buffer += decoder.decode(value, { stream: true });
+
+                const lines = buffer.split('\n');
+                buffer = lines.pop() || '';
+
+                for (const line of lines) {
+                    if (!line.startsWith('data: ')) continue;
+                    try {
+                        const data = JSON.parse(line.slice(6));
+
+                        if (data.type === 'assistant') {
+                            const msgDiv = document.createElement('div');
+                            msgDiv.className = 'msg msg-assistant';
+
+                            let nameHtml = '';
+                            if (data.agent_name) {
+                                nameHtml = '<div class="msg-agent-name">' + escapeHtml(data.agent_name) + '</div>';
+                            }
+
+                            msgDiv.innerHTML = nameHtml + '<div class="bubble">' + escapeHtml(data.content) + '</div>';
+                            messagesDiv.appendChild(msgDiv);
+                            scrollToBottom();
+                        } else if (data.type === 'typing') {
+                            showTyping(data.agent_name);
+                        } else if (data.type === 'done') {
+                            break;
+                        } else if (data.type === 'error') {
+                            const errDiv = document.createElement('div');
+                            errDiv.className = 'msg msg-assistant';
+                            errDiv.innerHTML = '<div class="bubble" style="background:#fef2f2;color:#dc2626;">' + escapeHtml(data.content) + '</div>';
+                            messagesDiv.appendChild(errDiv);
+                        }
+                    } catch (e) { /* skip */ }
+                }
+                if (done) break;
+            }
+        } catch (err) {
+            console.error('SSE error:', err);
+            // 降级：普通 POST
+            form.action = '{% url "chat:send_message" session.pk %}';
+            form.method = 'POST';
+            form.submit();
+            return;
+        }
+
+        input.disabled = false;
+        input.focus();
+    });
+
+    function scrollToBottom() {
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    function showTyping(name) {
+        const existing = document.querySelector('.typing-indicator');
+        if (existing) existing.remove();
+
+        const indicator = document.createElement('div');
+        indicator.className = 'msg msg-assistant';
+        indicator.innerHTML = '<div class="msg-agent-name">' + (name || '思考中') + '</div>' +
+            '<div class="bubble"><div class="typing-indicator"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>';
+        messagesDiv.appendChild(indicator);
+        scrollToBottom();
+    }
+});
+</script>
+{% endblock %}

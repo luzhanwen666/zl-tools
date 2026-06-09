@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block nav-agents %}active{% endblock %}
+{% block title %}删除确认{% endblock %}
+
+{% block topbar %}
+<div class="topbar">
+    <div class="breadcrumb">
+        <a href="{% url 'agents:list' %}">智能体</a><span class="sep">/</span><span class="current">删除确认</span>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="confirm-delete">
+    <h2>⚠️ 确认删除</h2>
+    <p>确定要删除智能体「<strong>{{ agent.name }}</strong>」吗？此操作不可撤销。</p>
+    <div class="btn-row">
+        <form method="post" style="display:inline;">{% csrf_token %}<button type="submit">确认删除</button></form>
+        <a href="{% url 'agents:list' %}">取消</a>
+    </div>
+</div>
+{% endblock %}

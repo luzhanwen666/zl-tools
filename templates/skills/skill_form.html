@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block nav-skills %}active{% endblock %}
+{% block title %}{% if form.instance.pk %}编辑技能{% else %}添加技能{% endif %}{% endblock %}
+
+{% block topbar %}
+<div class="topbar">
+    <div class="breadcrumb">
+        <a href="{% url 'skills:list' %}">技能</a><span class="sep">/</span><span class="current">{% if form.instance.pk %}编辑{% else %}创建{% endif %}</span>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h2>{% if form.instance.pk %}编辑技能{% else %}添加技能{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <label>{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}<p style="color:var(--danger);font-size:12px;margin-top:-12px;margin-bottom:10px;">{{ field.errors }}</p>{% endif %}
+        {% endfor %}
+        <div class="submit-row">
+            <button type="submit">保存</button>
+            <a href="{% url 'skills:list' %}" class="cancel-link">取消</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

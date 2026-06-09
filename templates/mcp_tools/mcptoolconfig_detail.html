@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block nav-mcp %}active{% endblock %}
+{% block title %}{{ tool.name }}{% endblock %}
+
+{% block topbar %}
+<div class="topbar">
+    <div class="breadcrumb">
+        <a href="{% url 'mcp_tools:list' %}">MCP工具</a><span class="sep">/</span><span class="current">{{ tool.name }}</span>
+    </div>
+    <div class="topbar-actions">
+        <a href="{% url 'mcp_tools:update' tool.pk %}" class="btn btn-warning-solid">编辑</a>
+        <a href="{% url 'mcp_tools:delete' tool.pk %}" class="btn btn-danger-solid">删除</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="detail-card">
+    <h2>{{ tool.name }} <span class="badge badge-blue">{{ tool.transport }}</span></h2>
+    <div class="field"><span class="field-label">描述</span><p>{{ tool.description|default:"暂无描述" }}</p></div>
+    <div class="field"><span class="field-label">服务地址</span><p><code>{{ tool.server_url }}</code></p></div>
+    <div class="field"><span class="field-label">环境变量</span><p>{{ tool.env_vars|default:"{}" }}</p></div>
+    <div class="field"><span class="field-label">启动参数</span><p>{{ tool.args|default:"[]" }}</p></div>
+    <div class="field"><span class="field-label">状态</span><p><span class="badge {% if tool.is_active %}badge-green{% else %}badge-gray{% endif %}">{{ tool.is_active|yesno:"启用,禁用" }}</span></p></div>
+</div>
+{% endblock %}

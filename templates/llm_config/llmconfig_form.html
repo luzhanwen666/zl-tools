@@ -1,0 +1,428 @@
+{% extends "base.html" %}
+{% block nav-llm %}active{% endblock %}
+{% block title %}{% if form.instance.pk %}编辑大模型配置{% else %}添加大模型配置{% endif %}{% endblock %}
+
+{% block topbar %}
+<div class="topbar">
+    <div class="breadcrumb">
+        <a href="{% url 'llm_config:list' %}">大模型</a><span class="sep">/</span><span class="current">{% if form.instance.pk %}编辑{% else %}创建{% endif %}</span>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% if form.errors %}
+<div class="form-error">
+    <strong>⚠️ 请检查以下问题：</strong>
+    <ul>{% for field in form %}{% for error in field.errors %}{% if error %}<li><b>{{ field.label }}</b>: {{ error }}</li>{% endif %}{% endfor %}{% endfor %}</ul>
+</div>
+{% endif %}
+{% if messages %}
+{% for message in messages %}<div class="form-error">{{ message }}</div>{% endfor %}
+{% endif %}
+
+<form method="post" class="form-card">
+    {% csrf_token %}
+    <h2>{% if form.instance.pk %}编辑大模型配置{% else %}添加大模型配置{% endif %}</h2>
+
+    <!-- 第一步：输入连接信息 -->
+    <div class="llm-step">
+        <div class="step-title">
+            <span class="step-num">1</span> 连接信息
+        </div>
+        <div class="step-fields">
+            <div class="field-row">
+                <div class="field-group field-grow">
+                    <label for="id_api_base">API 地址</label>
+                    <input type="text" id="id_api_base" name="api_base"
+                           value="{{ form.instance.api_base|default:'' }}"
+                           placeholder="例如: https://aiapi.chaitin.net 或 http://localhost:11434"
+                           required>
+                    <p class="field-hint">填入 API 地址即可，系统会自动补全路径</p>
+                </div>
+                <div class="field-group" style="flex:0 0 220px;">
+                    <label for="id_api_key">API Key</label>
+                    <input type="password" id="id_api_key" name="api_key"
+                           value="{{ form.api_key|default:'' }}"
+                           placeholder="sk-...">
+                    <p class="field-hint">Ollama 本地模型可留空</p>
+                </div>
+            </div>
+            <div class="fetch-row">
+                <button type="button" id="fetchBtn" class="btn-secondary" onclick="fetchModels()">
+                    <span id="fetchIcon">🔍</span> 自动获取模型列表
+                </button>
+                <span id="fetchStatus" class="fetch-status"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第二步：选择模型（获取后显示） -->
+    <div class="llm-step" id="modelStep" style="display:none;">
+        <div class="step-title">
+            <span class="step-num">2</span> 选择模型
+            <span class="step-desc" id="modelStepDesc"></span>
+        </div>
+        <div class="step-fields">
+            <div class="model-selector">
+                <div class="model-search">
+                    <input type="text" id="modelSearch" placeholder="搜索模型..." oninput="filterModels()">
+                </div>
+                <div class="model-list" id="modelList">
+                    <p class="model-empty">点击上方按钮获取模型列表</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 隐藏字段（由 JS 和 Django 表单共用） -->
+    <div style="display:none;">
+        <input type="hidden" name="provider" id="id_provider" value="{{ form.provider.value|default:'other' }}">
+        <input type="hidden" name="model_id" id="id_model_id" value="{{ form.model_id.value }}">
+        <input type="hidden" name="name" id="id_name" value="{{ form.name.value|default:'' }}">
+    </div>
+
+    <!-- 第三步：基本设置 -->
+    <div class="llm-step">
+        <div class="step-title">
+            <span class="step-num">3</span> 基本设置
+        </div>
+        <div class="step-fields">
+            <div class="field-row">
+                <div class="field-group">
+                    <label for="id_name_display">配置名称</label>
+                    <input type="text" id="id_name_display"
+                           value="{{ form.name.value|default:'' }}"
+                           placeholder="例如: DeepSeek-V3, 本地 Ollama"
+                           oninput="document.getElementById('id_name').value = this.value">
+                </div>
+                <div class="field-group">
+                    <label for="id_provider_display">供应商</label>
+                    <input type="text" id="id_provider_display"
+                           value="{{ form.instance.get_provider_display|default:'自动识别' }}" readonly
+                           style="background:#f5f5f5;">
+                    <p class="field-hint">根据 API 地址自动识别</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <div class="field-group">
+                    <label for="id_max_tokens">最大 Token 数</label>
+                    <input type="number" id="id_max_tokens" name="max_tokens"
+                           value="{{ form.max_tokens.value|default:'4096' }}"
+                           min="1" max="128000">
+                </div>
+                <div class="field-group">
+                    <label for="id_temperature">温度</label>
+                    <input type="number" id="id_temperature" name="temperature"
+                           value="{{ form.temperature.value|default:'0.7' }}"
+                           min="0" max="2" step="0.1">
+                    <p class="field-hint">0.0 精确 ~ 2.0 创意</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <label class="field-check">
+                    <input type="checkbox" name="is_default" id="id_is_default"
+                           {% if form.is_default.value %}checked{% endif %}>
+                    设为默认配置
+                </label>
+                <label class="field-check">
+                    <input type="checkbox" name="is_active" id="id_is_active"
+                           {% if form.is_active.value != False %}checked{% endif %}>
+                    启用
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="submit-row" style="margin-top:24px;">
+        <button type="submit" class="btn-submit">保存配置</button>
+        <a href="{% url 'llm_config:list' %}" class="cancel-link">取消</a>
+    </div>
+</form>
+
+<style>
+    .llm-step {
+        background: var(--bg);
+        border: 1px solid var(--border-light);
+        border-radius: var(--radius);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+    }
+    .step-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .step-num {
+        width: 28px; height: 28px;
+        background: var(--primary);
+        color: #fff;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 13px; font-weight: 700;
+        flex-shrink: 0;
+    }
+    .step-desc {
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--text-muted);
+    }
+    .step-fields { margin-top: 4px; }
+    .field-row {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 0;
+    }
+    .field-group { margin-bottom: 16px; }
+    .field-grow { flex: 1; }
+    .field-hint {
+        font-size: 11.5px;
+        color: var(--text-muted);
+        margin-top: 4px;
+    }
+    .fetch-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 4px;
+    }
+    .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 18px;
+        background: #fff;
+        color: var(--text);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all .2s;
+    }
+    .btn-secondary:hover:not(:disabled) {
+        border-color: var(--primary);
+        color: var(--primary);
+        background: var(--primary-light);
+    }
+    .btn-secondary:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+    }
+    .fetch-status {
+        font-size: 13px;
+        color: var(--text-muted);
+    }
+    .fetch-status.success { color: var(--success); }
+    .fetch-status.error { color: var(--danger); }
+
+    /* 模型选择器 */
+    .model-selector { }
+    .model-search {
+        margin-bottom: 10px;
+    }
+    .model-search input {
+        width: 100%;
+        padding: 9px 14px;
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        background: #fff;
+    }
+    .model-search input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+    .model-list {
+        max-height: 240px;
+        overflow-y: auto;
+        border: 1px solid var(--border-light);
+        border-radius: var(--radius-sm);
+        background: #fff;
+    }
+    .model-item {
+        padding: 10px 14px;
+        cursor: pointer;
+        font-size: 13px;
+        color: var(--text);
+        border-bottom: 1px solid var(--border-light);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: background .1s;
+    }
+    .model-item:last-child { border-bottom: none; }
+    .model-item:hover { background: var(--primary-light); }
+    .model-item.selected {
+        background: var(--primary-light);
+        border-left: 3px solid var(--primary);
+    }
+    .model-item .model-radio {
+        width: 16px; height: 16px;
+        border: 2px solid var(--border);
+        border-radius: 50%;
+        flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .model-item.selected .model-radio {
+        border-color: var(--primary);
+    }
+    .model-item.selected .model-radio::after {
+        content: '';
+        width: 8px; height: 8px;
+        background: var(--primary);
+        border-radius: 50%;
+    }
+    .model-item .model-id {
+        font-family: "SF Mono", "Fira Code", monospace;
+        font-size: 12.5px;
+    }
+    .model-empty {
+        padding: 24px;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 13px;
+    }
+
+    .field-check {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--text);
+        cursor: pointer;
+        margin-right: 20px;
+    }
+    .field-check input { margin: 0; }
+    .btn-submit {
+        background: var(--primary);
+        color: #fff;
+        padding: 10px 28px;
+        border: none;
+        border-radius: var(--radius-sm);
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        box-shadow: 0 1px 3px var(--primary-glow);
+        transition: all .2s;
+    }
+    .btn-submit:hover {
+        background: var(--primary-hover);
+        box-shadow: 0 4px 12px var(--primary-glow);
+    }
+</style>
+
+<script>
+const FETCH_MODELS_URL = '{% url "llm_config:fetch_models" %}';
+let fetchedModels = [];
+let selectedModel = '{{ form.model_id.value|escapejs }}';
+
+async function fetchModels() {
+    const apiBase = document.getElementById('id_api_base').value.trim();
+    const apiKey = document.getElementById('id_api_key').value.trim();
+    const btn = document.getElementById('fetchBtn');
+    const status = document.getElementById('fetchStatus');
+
+    if (!apiBase) {
+        status.textContent = '请先输入 API 地址';
+        status.className = 'fetch-status error';
+        return;
+    }
+
+    btn.disabled = true;
+    btn.querySelector('#fetchIcon').textContent = '⏳';
+    status.textContent = '正在获取...';
+    status.className = 'fetch-status';
+
+    try {
+        const url = `${FETCH_MODELS_URL}?api_base=${encodeURIComponent(apiBase)}&api_key=${encodeURIComponent(apiKey)}`;
+        const resp = await fetch(url);
+        const data = await resp.json();
+
+        if (data.error) {
+            status.textContent = data.error;
+            status.className = 'fetch-status error';
+            return;
+        }
+
+        fetchedModels = data.models || [];
+        const provider = data.provider || 'other';
+
+        // 自动填充供应商
+        document.getElementById('id_provider').value = provider;
+        document.getElementById('id_provider_display').value = provider;
+
+        // 显示模型选择步骤
+        document.getElementById('modelStep').style.display = '';
+        document.getElementById('modelStepDesc').textContent = `（找到 ${fetchedModels.length} 个模型）`;
+
+        renderModels(fetchedModels);
+
+        status.textContent = `获取成功，共 ${fetchedModels.length} 个模型`;
+        status.className = 'fetch-status success';
+
+        // 如果之前有选中的模型，恢复选中状态
+        if (selectedModel) {
+            selectModel(selectedModel);
+        }
+        // 如果只有一个模型，自动选中
+        if (fetchedModels.length === 1) {
+            selectModel(fetchedModels[0].id);
+        }
+
+    } catch (e) {
+        status.textContent = '请求失败: ' + e.message;
+        status.className = 'fetch-status error';
+    } finally {
+        btn.disabled = false;
+        btn.querySelector('#fetchIcon').textContent = '🔍';
+    }
+}
+
+function renderModels(models) {
+    const list = document.getElementById('modelList');
+    if (!models.length) {
+        list.innerHTML = '<p class="model-empty">未找到可用模型</p>';
+        return;
+    }
+    list.innerHTML = models.map(m => {
+        const sel = m.id === selectedModel ? 'selected' : '';
+        return `<div class="model-item ${sel}" onclick="selectModel('${m.id.replace(/'/g, "\\'")}')" data-model="${m.id}">
+            <div class="model-radio"></div>
+            <span class="model-id">${m.id}</span>
+        </div>`;
+    }).join('');
+}
+
+function filterModels() {
+    const keyword = document.getElementById('modelSearch').value.toLowerCase();
+    const filtered = fetchedModels.filter(m => m.id.toLowerCase().includes(keyword));
+    renderModels(filtered);
+}
+
+function selectModel(modelId) {
+    selectedModel = modelId;
+    document.getElementById('id_model_id').value = modelId;
+
+    // 更新 UI 选中状态
+    document.querySelectorAll('.model-item').forEach(el => {
+        el.classList.toggle('selected', el.dataset.model === modelId);
+    });
+
+    // 自动填入配置名称（如果为空）
+    const nameInput = document.getElementById('id_name_display');
+    const nameHidden = document.getElementById('id_name');
+    if (!nameInput.value.trim() && !nameHidden.value.trim()) {
+        // 取模型 ID 最后一段作为名称
+        const shortName = modelId.split('/').pop();
+        nameInput.value = shortName;
+        nameHidden.value = shortName;
+    }
+}
+</script>
+{% endblock %}

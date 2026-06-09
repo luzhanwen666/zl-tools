@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block nav-skills %}active{% endblock %}
+{% block title %}技能列表{% endblock %}
+
+{% block topbar %}
+<div class="topbar">
+    <div class="breadcrumb"><span class="current">技能</span></div>
+    <div class="topbar-actions"><a href="{% url 'skills:create' %}" class="btn">+ 添加技能</a></div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% if skills %}
+<div class="card-grid">
+    {% for skill in skills %}
+    <div class="card">
+        <h3><a href="{% url 'skills:detail' skill.pk %}">{{ skill.name }}</a></h3>
+        <p>{{ skill.description|truncatewords:30|default:"暂无描述" }}</p>
+        <div class="meta">
+            <span class="badge badge-blue">{{ skill.get_category_display }}</span>
+            <span class="badge {% if skill.is_active %}badge-green{% else %}badge-gray{% endif %}">{{ skill.is_active|yesno:"启用,禁用" }}</span>
+        </div>
+        <div class="actions">
+            <a href="{% url 'skills:update' skill.pk %}" class="btn-edit">编辑</a>
+            <a href="{% url 'skills:delete' skill.pk %}" class="btn-delete">删除</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state"><div class="empty-icon">⚡</div><p>暂无技能</p><a href="{% url 'skills:create' %}">添加第一个技能 →</a></div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block nav-mcp %}active{% endblock %}
+{% block title %}MCP工具列表{% endblock %}
+
+{% block topbar %}
+<div class="topbar">
+    <div class="breadcrumb"><span class="current">MCP工具</span></div>
+    <div class="topbar-actions"><a href="{% url 'mcp_tools:create' %}" class="btn">+ 添加工具</a></div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% if tools %}
+<div class="card-grid">
+    {% for t in tools %}
+    <div class="card">
+        <h3><a href="{% url 'mcp_tools:detail' t.pk %}">{{ t.name }}</a></h3>
+        <p>{{ t.description|truncatewords:20|default:"暂无描述" }}</p>
+        <div class="meta">
+            <span class="badge badge-blue">{{ t.transport }}</span>
+            <span class="badge {% if t.is_active %}badge-green{% else %}badge-gray{% endif %}">{{ t.is_active|yesno:"启用,禁用" }}</span>
+        </div>
+        <div class="actions">
+            <a href="{% url 'mcp_tools:update' t.pk %}" class="btn-edit">编辑</a>
+            <a href="{% url 'mcp_tools:delete' t.pk %}" class="btn-delete">删除</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state"><div class="empty-icon">🔌</div><p>暂无MCP工具</p><a href="{% url 'mcp_tools:create' %}">添加第一个工具 →</a></div>
+{% endif %}
+{% endblock %}

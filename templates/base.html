@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}智能体平台{% endblock %}</title>
+    <style>
+        /* ═══════════════════════════════════════════
+           Reset & Base
+           ═══════════════════════════════════════════ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --primary-light: #eef2ff;
+            --primary-glow: rgba(99,102,241,.25);
+            --bg: #f8fafc;
+            --bg-sidebar: #0f172a;
+            --bg-card: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --success: #10b981;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --radius-lg: 16px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+            --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px -2px rgba(0,0,0,.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.08), 0 4px 6px -4px rgba(0,0,0,.04);
+        }
+        body {
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { transition: color .15s, background .15s, box-shadow .15s, transform .15s; }
+
+        /* ═══════════════════════════════════════════
+           Layout
+           ═══════════════════════════════════════════ */
+        .layout { display: flex; min-height: 100vh; }
+
+        /* ═══════════════════════════════════════════
+           Sidebar
+           ═══════════════════════════════════════════ */
+        .sidebar {
+            width: 240px;
+            background: var(--bg-sidebar);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            z-index: 100;
+            border-right: 1px solid rgba(255,255,255,.05);
+        }
+        .sidebar .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 24px 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+            letter-spacing: -.01em;
+        }
+        .sidebar .brand-icon {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, var(--primary), #a855f7);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(99,102,241,.3);
+        }
+        .sidebar nav { flex: 1; padding: 16px 12px; overflow-y: auto; }
+        .sidebar nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255,255,255,.5);
+            text-decoration: none;
+            padding: 9px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 13.5px;
+            font-weight: 500;
+            transition: all .2s;
+            margin-bottom: 2px;
+            position: relative;
+        }
+        .sidebar nav a:hover {
+            color: rgba(255,255,255,.85);
+            background: rgba(255,255,255,.06);
+        }
+        .sidebar nav a.active {
+            color: #fff;
+            background: var(--primary);
+            box-shadow: 0 2px 12px var(--primary-glow);
+        }
+        .sidebar nav a .nav-icon {
+            width: 20px; text-align: center;
+            font-size: 15px; flex-shrink: 0;
+        }
+        .sidebar nav .nav-section {
+            font-size: 10.5px;
+            color: rgba(255,255,255,.25);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 20px 14px 8px;
+            font-weight: 600;
+        }
+
+        /* ═══════════════════════════════════════════
+           Main Area
+           ═══════════════════════════════════════════ */
+        .main {
+            flex: 1; margin-left: 240px;
+            display: flex; flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ═══════════════════════════════════════════
+           Topbar
+           ═══════════════════════════════════════════ */
+        .topbar {
+            background: rgba(255,255,255,.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 0 32px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .breadcrumb {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 13px; color: var(--text-muted);
+        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary); }
+        .breadcrumb .sep { color: var(--border); font-weight: 300; }
+        .breadcrumb .current { color: var(--text); font-weight: 600; font-size: 14px; }
+        .topbar-actions { display: flex; gap: 8px; }
+        .topbar-actions .btn,
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--primary);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            border: none; cursor: pointer;
+            box-shadow: 0 1px 3px var(--primary-glow);
+            transition: all .2s;
+        }
+        .topbar-actions .btn:hover,
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 4px 12px var(--primary-glow);
+            transform: translateY(-1px);
+        }
+        .btn-danger-solid {
+            background: var(--danger);
+            box-shadow: 0 1px 3px rgba(239,68,68,.25);
+        }
+        .btn-danger-solid:hover { background: #dc2626; box-shadow: 0 4px 12px rgba(239,68,68,.3); }
+        .btn-warning-solid {
+            background: var(--warning);
+            box-shadow: 0 1px 3px rgba(245,158,11,.25);
+        }
+        .btn-warning-solid:hover { background: #d97706; box-shadow: 0 4px 12px rgba(245,158,11,.3); }
+
+        /* ═══════════════════════════════════════════
+           Container
+           ═══════════════════════════════════════════ */
+        .container { max-width: 1100px; margin: 24px auto; padding: 0 32px; flex: 1; width: 100%; }
+
+        /* ═══════════════════════════════════════════
+           Page Header
+           ═══════════════════════════════════════════ */
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .page-header h1 { font-size: 22px; color: var(--text); font-weight: 700; letter-spacing: -.02em; }
+
+        /* ═══════════════════════════════════════════
+           Card Grid
+           ═══════════════════════════════════════════ */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 22px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            transition: all .25s cubic-bezier(.4,0,.2,1);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), #a855f7);
+            opacity: 0;
+            transition: opacity .25s;
+        }
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: var(--border);
+        }
+        .card:hover::before { opacity: 1; }
+        .card .card-icon {
+            width: 42px; height: 42px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+            margin-bottom: 14px;
+        }
+        .card .card-icon.icon-indigo  { background: #eef2ff; }
+        .card .card-icon.icon-violet   { background: #f5f3ff; }
+        .card .card-icon.icon-amber    { background: #fffbeb; }
+        .card .card-icon.icon-emerald  { background: #ecfdf5; }
+        .card .card-icon.icon-rose     { background: #fff1f2; }
+        .card h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+        .card h3 a { color: var(--primary); text-decoration: none; }
+        .card h3 a:hover { text-decoration: underline; }
+        .card p { color: var(--text-secondary); font-size: 13.5px; line-height: 1.55; }
+        .card .meta { margin-top: 14px; font-size: 12px; color: var(--text-muted); display: flex; gap: 10px; align-items: center; }
+
+        /* ═══════════════════════════════════════════
+           Badges
+           ═══════════════════════════════════════════ */
+        .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 600; letter-spacing: .01em; }
+        .badge-green { background: #ecfdf5; color: #059669; }
+        .badge-gray  { background: #f1f5f9; color: #64748b; }
+        .badge-blue  { background: #eef2ff; color: #4f46e5; }
+        .badge-amber { background: #fffbeb; color: #d97706; }
+        .badge-rose  { background: #fff1f2; color: #e11d48; }
+
+        /* ═══════════════════════════════════════════
+           Detail Card
+           ═══════════════════════════════════════════ */
+        .detail-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 28px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 16px;
+        }
+        .detail-card h2 { font-size: 20px; margin-bottom: 16px; color: var(--text); font-weight: 700; }
+        .detail-card .field { margin-bottom: 14px; }
+        .detail-card .field-label { font-weight: 600; color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+        .detail-card .field p { color: var(--text); font-size: 14px; }
+
+        /* ═══════════════════════════════════════════
+           Action Buttons (inline)
+           ═══════════════════════════════════════════ */
+        .actions { display: flex; gap: 8px; margin-top: 16px; }
+        .actions a {
+            padding: 7px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all .2s;
+            border: 1px solid transparent;
+        }
+        .actions a.btn-edit { background: #fffbeb; color: #b45309; border-color: #fde68a; }
+        .actions a.btn-edit:hover { background: #fef3c7; border-color: #fbbf24; }
+        .actions a.btn-delete { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
+        .actions a.btn-delete:hover { background: #fee2e2; border-color: #f87171; }
+        .actions a.btn-primary-sm {
+            background: var(--primary); color: #fff;
+            box-shadow: 0 1px 3px var(--primary-glow);
+        }
+        .actions a.btn-primary-sm:hover { background: var(--primary-hover); }
+
+        /* ═══════════════════════════════════════════
+           Form
+           ═══════════════════════════════════════════ */
+        .form-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            max-width: 700px;
+        }
+        .form-card h2 { font-size: 20px; margin-bottom: 24px; font-weight: 700; color: var(--text); }
+        .form-card label {
+            display: block;
+            font-weight: 600; font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+        .form-card input[type="text"],
+        .form-card input[type="url"],
+        .form-card input[type="number"],
+        .form-card textarea,
+        .form-card select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            margin-bottom: 18px;
+            background: var(--bg);
+            color: var(--text);
+            transition: border-color .2s, box-shadow .2s;
+        }
+        .form-card input:focus,
+        .form-card textarea:focus,
+        .form-card select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+        .form-card textarea { min-height: 120px; resize: vertical; font-family: inherit; }
+        .form-card .submit-row { margin-top: 8px; display: flex; align-items: center; gap: 16px; }
+        .form-card button[type="submit"] {
+            background: var(--primary); color: #fff;
+            padding: 10px 28px; border: none;
+            border-radius: var(--radius-sm);
+            font-size: 14px; font-weight: 500; cursor: pointer;
+            box-shadow: 0 1px 3px var(--primary-glow);
+            transition: all .2s;
+        }
+        .form-card button[type="submit"]:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 4px 12px var(--primary-glow);
+            transform: translateY(-1px);
+        }
+        .form-card .cancel-link {
+            color: var(--text-muted); text-decoration: none; font-size: 14px;
+        }
+        .form-card .cancel-link:hover { color: var(--text-secondary); }
+
+        /* ═══════════════════════════════════════════
+           Chat Layout
+           ═══════════════════════════════════════════ */
+        .chat-layout { display: flex; height: calc(100vh - 56px); margin: -24px -32px; }
+        .chat-sidebar {
+            width: 260px; background: var(--bg-card);
+            padding: 16px 12px; overflow-y: auto;
+            border-right: 1px solid var(--border-light);
+            flex-shrink: 0;
+        }
+        .chat-sidebar h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .8px; color: var(--text-muted); padding: 8px 12px; font-weight: 600; }
+        .chat-sidebar .session-item {
+            padding: 10px 12px; border-radius: var(--radius-sm);
+            cursor: pointer; font-size: 13.5px; margin-bottom: 2px;
+            transition: background .15s; color: var(--text-secondary);
+        }
+        .chat-sidebar .session-item:hover { background: var(--primary-light); color: var(--text); }
+        .chat-sidebar .session-item.active { background: var(--primary-light); color: var(--primary); font-weight: 600; }
+        .chat-main { flex: 1; display: flex; flex-direction: column; background: var(--bg-card); overflow: hidden; }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 24px 28px; }
+        .msg { margin-bottom: 18px; max-width: 75%; display: flex; flex-direction: column; }
+        .msg-user { align-self: flex-end; align-items: flex-end; }
+        .msg-assistant { align-self: flex-start; align-items: flex-start; }
+        .msg .bubble {
+            padding: 12px 18px; border-radius: 16px;
+            font-size: 14px; line-height: 1.65;
+            white-space: pre-wrap; word-break: break-word;
+        }
+        .msg-user .bubble {
+            background: var(--primary);
+            color: #fff;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 2px 8px var(--primary-glow);
+        }
+        .msg-assistant .bubble {
+            background: var(--bg);
+            color: var(--text);
+            border-bottom-left-radius: 4px;
+            border: 1px solid var(--border-light);
+        }
+        .msg .time { font-size: 11px; color: var(--text-muted); margin-top: 4px; padding: 0 4px; }
+        .chat-input-bar {
+            border-top: 1px solid var(--border-light);
+            padding: 16px 24px;
+            display: flex; gap: 10px; align-items: center;
+            background: var(--bg-card);
+        }
+        .chat-input-bar input {
+            flex: 1; padding: 12px 18px;
+            border: 1.5px solid var(--border);
+            border-radius: 24px; font-size: 14px;
+            background: var(--bg); color: var(--text);
+            transition: border-color .2s, box-shadow .2s;
+        }
+        .chat-input-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+        .chat-input-bar button {
+            width: 42px; height: 42px;
+            background: var(--primary); color: #fff;
+            border: none; border-radius: 50%;
+            font-size: 16px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 8px var(--primary-glow);
+            transition: all .2s; flex-shrink: 0;
+        }
+        .chat-input-bar button:hover {
+            background: var(--primary-hover);
+            transform: scale(1.05);
+        }
+
+        /* ═══════════════════════════════════════════
+           Confirm Delete
+           ═══════════════════════════════════════════ */
+        .confirm-delete {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 28px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            max-width: 480px;
+            border-top: 3px solid var(--danger);
+        }
+        .confirm-delete h2 { color: var(--danger); margin-bottom: 12px; font-size: 18px; font-weight: 700; }
+        .confirm-delete p { margin-bottom: 24px; color: var(--text-secondary); font-size: 14px; }
+        .confirm-delete .btn-row { display: flex; gap: 12px; }
+        .confirm-delete form button[type="submit"] {
+            background: var(--danger); color: #fff;
+            padding: 9px 22px; border: none;
+            border-radius: var(--radius-sm);
+            font-size: 13px; font-weight: 500; cursor: pointer;
+            transition: all .2s;
+        }
+        .confirm-delete form button[type="submit"]:hover { background: #dc2626; }
+        .confirm-delete a {
+            display: inline-flex; align-items: center;
+            padding: 9px 22px; color: var(--text-secondary);
+            text-decoration: none; font-size: 13px;
+            border-radius: var(--radius-sm);
+            transition: background .15s;
+        }
+        .confirm-delete a:hover { background: var(--bg); }
+
+        /* ═══════════════════════════════════════════
+           Home Topbar
+           ═══════════════════════════════════════════ */
+        .topbar.home-topbar { justify-content: center; }
+        .topbar.home-topbar h1 { font-size: 17px; color: var(--text); font-weight: 700; }
+
+        /* ═══════════════════════════════════════════
+           Empty State
+           ═══════════════════════════════════════════ */
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--text-muted);
+        }
+        .empty-state .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: .6; }
+        .empty-state p { font-size: 14px; }
+        .empty-state a { color: var(--primary); text-decoration: none; font-weight: 500; }
+        .empty-state a:hover { text-decoration: underline; }
+
+        /* ═══════════════════════════════════════════
+           Code blocks in detail pages
+           ═══════════════════════════════════════════ */
+        pre, code {
+            background: var(--bg);
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            border: 1px solid var(--border-light);
+            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+        }
+    </style>
+</head>
+<body>
+<div class="layout">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+        <a href="{% url 'home' %}" class="brand">
+            <span class="brand-icon">🤖</span> 智能体平台
+        </a>
+        <nav>
+            <div class="nav-section">功能</div>
+            <a href="{% url 'home' %}" class="{% block nav-home %}{% endblock %}">
+                <span class="nav-icon">🏠</span> 首页
+            </a>
+            <a href="{% url 'chat:global_chat' %}" class="{% block nav-global-chat %}{% endblock %}">
+                <span class="nav-icon">✨</span> 全局对话
+            </a>
+            <a href="{% url 'chat:session_list' %}" class="{% block nav-chat %}{% endblock %}">
+                <span class="nav-icon">💬</span> 对话历史
+            </a>
+            <a href="{% url 'agents:list' %}" class="{% block nav-agents %}{% endblock %}">
+                <span class="nav-icon">🧠</span> 智能体
+            </a>
+            <a href="{% url 'skills:list' %}" class="{% block nav-skills %}{% endblock %}">
+                <span class="nav-icon">⚡</span> 技能
+            </a>
+            <div class="nav-section">配置</div>
+            <a href="{% url 'llm_config:list' %}" class="{% block nav-llm %}{% endblock %}">
+                <span class="nav-icon">🔧</span> 大模型
+            </a>
+            <a href="{% url 'mcp_tools:list' %}" class="{% block nav-mcp %}{% endblock %}">
+                <span class="nav-icon">🔌</span> MCP工具
+            </a>
+            <a href="/admin/" class="{% block nav-admin %}{% endblock %}">
+                <span class="nav-icon">⚙️</span> 后台管理
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main">
+        {% block topbar %}{% endblock %}
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block nav-llm %}active{% endblock %}
+{% block title %}大模型配置{% endblock %}
+
+{% block topbar %}
+<div class="topbar">
+    <div class="breadcrumb"><span class="current">大模型</span></div>
+    <div class="topbar-actions"><a href="{% url 'llm_config:create' %}" class="btn">+ 添加配置</a></div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% if configs %}
+<div class="card-grid">
+    {% for c in configs %}
+    <div class="card">
+        <h3><a href="{% url 'llm_config:detail' c.pk %}">{{ c.name }}</a></h3>
+        <p>{{ c.get_provider_display }} · {{ c.model_id }}</p>
+        <div class="meta">
+            <span class="badge {% if c.is_default %}badge-green{% else %}badge-gray{% endif %}">{{ c.is_default|yesno:"默认,非默认" }}</span>
+            <span class="badge {% if c.is_active %}badge-green{% else %}badge-gray{% endif %}">{{ c.is_active|yesno:"启用,禁用" }}</span>
+        </div>
+        <div class="actions">
+            <a href="{% url 'llm_config:update' c.pk %}" class="btn-edit">编辑</a>
+            <a href="{% url 'llm_config:delete' c.pk %}" class="btn-delete">删除</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state"><div class="empty-icon">🔧</div><p>暂无大模型配置</p><a href="{% url 'llm_config:create' %}">添加第一个配置 →</a></div>
+{% endif %}
+{% endblock %}
