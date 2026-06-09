@@ -19,10 +19,8 @@ class AgentMessage:
     token_count: int | None = None
 
     def to_openai_message(self) -> dict:
-        """转换为 OpenAI API 消息格式。注意：不包含 name 字段，部分 API（DeepSeek等）不支持。"""
+        """转换为 OpenAI API 消息格式。不包含内部 tool_calls（格式不兼容）。"""
         msg: dict = {"role": self.role, "content": self.content}
-        if self.tool_calls:
-            msg["tool_calls"] = self.tool_calls
         if self.tool_call_id:
             msg["tool_call_id"] = self.tool_call_id
         return msg

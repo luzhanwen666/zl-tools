@@ -186,15 +186,15 @@ class AgentRunner:
             system_prompt += tool_desc
 
         # 限制 system_prompt，给专家留足空间
-        max_prompt = 4000
+        max_prompt = 2500
         if len(system_prompt) > max_prompt:
             system_prompt = system_prompt[:max_prompt] + "\n...(已截断)"
 
         messages.append({"role": "system", "content": system_prompt})
 
-        for msg in group_messages[-15:]:  # 最近15条
+        for msg in group_messages[-8:]:  # 最近8条
             content = msg.content
-            if len(content) > 2000:  # 单条最多2000字
+            if len(content) > 1500:  # 单条1500字
                 content = content[:2000] + "...(截断)"
             msg_dict = msg.to_openai_message()
             msg_dict["content"] = content

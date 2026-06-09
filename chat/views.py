@@ -195,16 +195,37 @@ def _run_group_chat(session, content):
 # ------------------------------------------------------------------
 
 def global_chat(request):
-    """渲染全局对话页面"""
+    """渲染全局对话页面 — 每次访问创建新会话"""
     from agents.models import Agent
 
     global_agent = get_object_or_404(Agent, is_global=True, is_active=True)
     user = request.user if request.user.is_authenticated else None
-    session, _ = ChatSession.objects.get_or_create(
+
+    # 每次打开页面创建新会话（不是 get_or_create）
+    session = ChatSession.objects.create(
         agent=global_agent,
         created_by=user,
-        defaults={"title": "全局智能对话"},
+        title="新对话",
     )
+
+    all_agents = list(
+        Agent.objects.filter(is_active=True).values("name", "role", "description")
+    )
+
+    return render(request, "chat/global_chat.html", {
+        "session": session,
+        "global_agent": global_agent,
+        "all_agents": all_agents,
+    })
+
+
+def clear_context(request, pk):
+    """清空当前会话的上下文（删除所有消息）"""
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+    session = get_object_or_404(ChatSession, pk=pk)
+    session.messages.all().delete()
+    return JsonResponse({"ok": True})
 
     all_agents = list(
         Agent.objects.filter(is_active=True).values("name", "role", "description")
@@ -253,23 +274,26 @@ def global_chat_send_message(request):
 
 
 def global_chat_send_message_stream(request):
-    """全局对话 - SSE 流式（线程+队列实现真正的流式推送，兼容 WSGI）"""
+    """全局对话 - SSE 流式"""
     from agents.models import Agent
     from engine.global_router import GlobalRouter
 
-    global_agent = get_object_or_404(
-        Agent.objects.filter(is_global=True, is_active=True)
-        .select_related("llm_config").prefetch_related("skills", "mcp_tools"),
-        is_global=True,
-    )
-    content = request.GET.get("content", "").strip() or (
-        request.POST.get("content", "").strip() if request.method == "POST" else ""
-    )
+    content = request.GET.get("content", "").strip()
     if not content:
         return JsonResponse({"error": "消息不能为空"}, status=400)
 
-    # 前端可手动选择专家，格式: "专家1,专家2"
-    # 在 sync 上下文中提前解析 Agent 名称 → Agent 对象列表（避免 async 嵌套线程中的 ORM 问题）
+    # session_id 从查询参数获取
+    session_id = request.GET.get("session_id", "").strip()
+    session = get_object_or_404(ChatSession, pk=session_id) if session_id else None
+    if not session:
+        return JsonResponse({"error": "会话ID无效"}, status=400)
+
+    # 首次对话用问题做标题
+    if session.title == "新对话" and not session.messages.exists():
+        session.title = content[:40]
+        session.save(update_fields=["title"])
+
+    # 手动选择的专家
     manual_agents_str = request.GET.get("agents", "").strip()
     manual_agents = None
     if manual_agents_str:
@@ -281,12 +305,7 @@ def global_chat_send_message_stream(request):
                 .select_related("llm_config").prefetch_related("skills", "mcp_tools")
             )
 
-    # 同步初始化（ORM 在主线程中安全执行）
-    user = request.user if request.user.is_authenticated else None
-    session, _ = ChatSession.objects.get_or_create(
-        agent=global_agent, created_by=user,
-        defaults={"title": "全局智能对话"},
-    )
+    # 保存用户消息
     ChatMessage.objects.create(session=session, role="user", content=content)
 
     def event_stream():

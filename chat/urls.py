@@ -5,8 +5,9 @@ from . import views
 app_name = "chat"
 
 urlpatterns = [
-    # 全局对话（一键直达）
+    # 全局对话
     path("global/", views.global_chat, name="global_chat"),
+    path("global/clear/<int:pk>/", views.clear_context, name="clear_context"),
     path("global/stream/", views.global_chat_send_message_stream, name="global_chat_stream"),
     path("global/send/", views.global_chat_send_message, name="global_chat_send"),
 

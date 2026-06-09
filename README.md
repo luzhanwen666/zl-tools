@@ -9,7 +9,7 @@
 - **Agent Skills 技能系统** — 支持标准 SKILL.md 格式，渐进式三层加载
 - **Shell/Python 工具** — Agent 可直接执行系统命令和 Python 脚本
 - **SSE 流式对话** — 实时推送，可打断补充信息
-- **会话上下文记忆** — 自动加载历史消息作为上下文
+- **会话上下文管理** — 新对话自动隔离上下文，一键清空历史
 - **多 LLM 支持** — OpenAI / DeepSeek / Anthropic / Ollama / 千问 等
 
 ## 架构

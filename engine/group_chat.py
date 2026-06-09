@@ -253,10 +253,11 @@ def _build_team_skills_catalog(agent_group: list["AgentModel"]) -> str:
 
 @sync_to_async
 def _build_skills_prompt(agent: "AgentModel") -> str:
+    """Level 2: 技能指令注入。末尾强调工具调用格式。"""
     skills = agent.skills.filter(is_active=True)
     if not skills.exists():
         return ""
-    parts = ["## 技能操作规范（按步骤执行，不需要调用技能工具）"]
+    parts = ["## 技能操作规范"]
     for s in skills:
         section = f"### {s.name}\n{s.instruction}"
         if s.script_dir:
@@ -264,13 +265,19 @@ def _build_skills_prompt(agent: "AgentModel") -> str:
         if s.allowed_tools:
             section += f"\n**可用工具**: {s.allowed_tools}"
         parts.append(section)
+    # 强制提醒：技能只是指令，实际操作必须通过 JSON 工具调用
+    parts.append(
+        "\n## ⚠️ 重要：技能中的代码示例是操作指南，不是要你输出的内容。"
+        "你必须用 JSON 格式调用工具来执行计算，例如："
+        ' {{"tool": "python", "args": {{"code": "print(1+1)"}}}}'
+    )
     return "\n\n".join(parts)
 
 
 @sync_to_async
 def _load_chat_history(session: "ChatSession", state: "GroupChatState"):
     from chat.models import ChatMessage
-    recent = ChatMessage.objects.filter(session=session).order_by("-created_at")[:9]
+    recent = ChatMessage.objects.filter(session=session).order_by("-created_at")[:4]  # 3条
     for msg in reversed(list(recent)[1:]):
         if msg.role not in ("assistant", "user"):
             continue

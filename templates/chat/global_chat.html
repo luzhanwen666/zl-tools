@@ -8,6 +8,7 @@
         <span class="current">✨ 全局智能对话</span>
     </div>
     <div class="topbar-actions">
+        <button onclick="clearContext()" class="btn" style="background:var(--bg);color:var(--text);border:1px solid var(--border);">🗑 清空上下文</button>
         <button onclick="newConversation()" class="btn" style="background:var(--bg);color:var(--text);border:1px solid var(--border);">+ 新对话</button>
     </div>
 </div>
@@ -261,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 构建 URL
         const selectedAgents = getSelectedAgents();
-        let url = '{% url "chat:global_chat_stream" %}?content=' + encodeURIComponent(content);
+        let url = '{% url "chat:global_chat_stream" %}?session_id={{ session.pk }}&content=' + encodeURIComponent(content);
         if (selectedAgents.length > 0) {
             url += '&agents=' + encodeURIComponent(selectedAgents.join(','));
         }
@@ -400,6 +401,24 @@ document.addEventListener('DOMContentLoaded', function() {
 function newConversation() {
     if (confirm('确定要开始新对话吗？当前对话内容将保留在历史中。')) {
         location.href = location.pathname + '?_=' + Date.now();
+    }
+}
+
+async function clearContext() {
+    if (!confirm('确定要清空当前会话的上下文吗？这会删除当前会话的所有消息记录。')) return;
+    try {
+        const resp = await fetch('{% url "chat:clear_context" session.pk %}', { method: 'POST', headers: {'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value} });
+        if (resp.ok) {
+            document.getElementById('chatMessages').innerHTML = '';
+            const emptyDiv = document.createElement('div');
+            emptyDiv.className = 'empty-state';
+            emptyDiv.style.padding = '80px 0';
+            emptyDiv.id = 'emptyState';
+            emptyDiv.innerHTML = '<div class="empty-icon">🤖</div><p style="font-size:15px;font-weight:600;color:var(--text);">上下文已清空</p><p style="font-size:13px;color:var(--text-muted);margin-top:4px;">可以开始新的讨论了</p>';
+            document.getElementById('chatMessages').appendChild(emptyDiv);
+        }
+    } catch(e) {
+        alert('清空失败: ' + e.message);
     }
 }
 </script>
