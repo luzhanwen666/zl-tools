@@ -40,23 +40,34 @@ class SkillScriptTool(BaseTool):
             "properties": {
                 "args": {
                     "type": "string",
-                    "description": "传给脚本的命令行参数，多个参数用空格分隔。例如: bcb55cc9ca8844d8a6146360adf3b457 --comment '规则名'",
+                    "description": "传给脚本的命令行参数，多个参数用空格分隔",
                 },
                 "stdin_text": {
                     "type": "string",
                     "description": "通过 stdin 传给脚本的文本（如 'y' 用于确认提示）。默认自动传 'y'。",
                 },
+                "env_vars": {
+                    "type": "object",
+                    "description": "传给脚本的环境变量。如果脚本需要 BASE_URL 和 API_TOKEN，从这里传入。例如: {\"BASE_URL\":\"https://192.168.0.215:9443\",\"API_TOKEN\":\"xxx\"}",
+                },
             },
             "required": [],
         }
 
-    async def execute(self, args: str = "", stdin_text: str = "y\n", **kwargs) -> str:
+    async def execute(self, args: str = "", stdin_text: str = "y\n",
+                       env_vars: dict | None = None, **kwargs) -> str:
         """执行技能脚本"""
         if not os.path.exists(self.script_path):
             return f"[技能错误] 脚本不存在: {self.script_path}"
 
         cmd = ["python", self.script_path] + (args.split() if args else [])
         work_dir = os.path.dirname(self.script_path)
+
+        # 构建环境变量（继承当前进程环境 + 用户传入的）
+        child_env = os.environ.copy()
+        if env_vars:
+            child_env.update(env_vars)
+            logger.info("SkillScript env: %s", {k: v[:8]+"***" if k == "API_TOKEN" else v for k, v in env_vars.items()})
 
         logger.info("SkillScript: %s (cwd=%s)", " ".join(cmd), work_dir)
 
@@ -67,6 +78,7 @@ class SkillScriptTool(BaseTool):
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
                 cwd=work_dir,
+                env=child_env,
             )
 
             stdin_bytes = (stdin_text or "y\n").encode("utf-8")
