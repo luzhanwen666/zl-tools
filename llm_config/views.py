@@ -36,6 +36,7 @@ class LLMConfigListView(ListView):
     model = LLMConfig
     template_name = "llm_config/llmconfig_list.html"
     context_object_name = "configs"
+    paginate_by = 15
 
 
 class LLMConfigDetailView(DetailView):

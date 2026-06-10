@@ -7,6 +7,7 @@ class MCPToolConfigListView(ListView):
     model = MCPToolConfig
     template_name = "mcp_tools/mcptoolconfig_list.html"
     context_object_name = "tools"
+    paginate_by = 15
 
 
 class MCPToolConfigDetailView(DetailView):

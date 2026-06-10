@@ -4,7 +4,7 @@
 
 {% block topbar %}
 <div class="topbar">
-    <div class="breadcrumb"><span class="current">技能</span></div>
+    <div class="breadcrumb"><span class="current">⚡ 技能</span></div>
     <div class="topbar-actions">
         <button onclick="toggleImport()" class="btn" style="background:var(--bg);color:var(--text);border:1px solid var(--border);">📦 导入压缩包</button>
         <a href="{% url 'skills:create' %}" class="btn">+ 添加技能</a>
@@ -14,58 +14,90 @@
 
 {% block content %}
 
-<!-- 导入区域默认隐藏 -->
+<!-- 导入区域 -->
 <div id="importArea" style="display:none;background:var(--bg-card);border:2px dashed var(--border);border-radius:var(--radius);padding:28px;text-align:center;margin-bottom:20px;">
     <div style="font-size:32px;margin-bottom:8px;">📦</div>
     <h3 style="margin-bottom:8px;">批量导入技能</h3>
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">
-        上传标准 skills 格式的 zip 压缩包，自动解析并导入<br>
-        <code style="font-size:11px;">目录名=技能名, SKILL.md=指令, meta.json=元信息（可选）</code>
-    </p>
-    <form method="post" action="{% url 'skills:import' %}" enctype="multipart/form-data" style="display:flex;gap:10px;justify-content:center;align-items:center;">
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">上传标准 skills 格式 zip 包，SKILL.md 自动解析</p>
+    <form method="post" action="{% url 'skills:import' %}" enctype="multipart/form-data" style="display:flex;gap:10px;justify-content:center;">
         {% csrf_token %}
-        <input type="file" name="zip_file" accept=".zip" required
-               style="padding:8px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:13px;background:var(--bg);">
+        <input type="file" name="zip_file" accept=".zip" required style="padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);">
         <button type="submit" class="btn">开始导入</button>
     </form>
 </div>
 
 {% if messages %}
-{% for message in messages %}
-<div style="background:{% if '失败' in message.message or '错误' in message.message %}#fef2f2;color:#dc2626;border:1px solid #fecaca{% else %}#ecfdf5;color:#059669;border:1px solid #a7f3d0{% endif %};padding:10px 16px;border-radius:var(--radius-sm);margin-bottom:16px;font-size:13px;white-space:pre-wrap;">{{ message }}</div>
+{% for msg in messages %}
+<div style="padding:10px 16px;border-radius:8px;margin-bottom:16px;font-size:13px;white-space:pre-wrap;{% if '失败' in msg.message or '错误' in msg.message %}background:#fef2f2;color:#dc2626;border:1px solid #fecaca;{% else %}background:#ecfdf5;color:#059669;border:1px solid #a7f3d0;{% endif %}">{{ msg }}</div>
 {% endfor %}
 {% endif %}
 
-{% if skills %}
-<div class="card-grid">
-    {% for skill in skills %}
-    <div class="card">
-        <h3><a href="{% url 'skills:detail' skill.pk %}">{{ skill.name }}</a></h3>
-        <p>{{ skill.description|truncatewords:30|default:"暂无描述" }}</p>
-        <div class="meta">
-            <span class="badge badge-blue">{{ skill.get_category_display }}</span>
-            <span class="badge {% if skill.is_active %}badge-green{% else %}badge-gray{% endif %}">{{ skill.is_active|yesno:"启用,禁用" }}</span>
-        </div>
-        <div class="actions">
-            <a href="{% url 'skills:update' skill.pk %}" class="btn-edit">编辑</a>
-            <a href="{% url 'skills:delete' skill.pk %}" class="btn-delete">删除</a>
-        </div>
-    </div>
+{% if page_obj %}
+<table style="width:100%;border-collapse:collapse;table-layout:fixed;">
+    <thead>
+        <tr style="border-bottom:2px solid var(--border);text-align:left;font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;">
+            <th style="padding:12px 16px;width:22%;">名称</th>
+            <th style="padding:12px 16px;width:30%;">描述</th>
+            <th style="padding:12px 16px;width:10%;">分类</th>
+            <th style="padding:12px 16px;width:8%;">状态</th>
+            <th style="padding:12px 16px;width:18%;">脚本目录</th>
+            <th style="padding:12px 16px;width:12%;text-align:right;">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for s in page_obj %}
+    <tr style="border-bottom:1px solid var(--border-light);transition:background .15s;" onmouseover="this.style.background='var(--primary-light)'" onmouseout="this.style.background=''">
+        <td style="padding:10px 16px;vertical-align:middle;">
+            <a href="{% url 'skills:detail' s.pk %}" style="font-size:13px;font-weight:600;color:var(--text);text-decoration:none;">{{ s.name }}</a>
+        </td>
+        <td style="padding:10px 16px;vertical-align:middle;">
+            <span style="font-size:12px;color:var(--text-secondary);line-height:1.5;">{{ s.description|truncatewords:25|default:"—" }}</span>
+        </td>
+        <td style="padding:10px 16px;vertical-align:middle;">
+            <span style="font-size:11px;padding:3px 10px;border-radius:10px;font-weight:500;background:var(--primary-light);color:var(--primary);white-space:nowrap;">{{ s.get_category_display }}</span>
+        </td>
+        <td style="padding:10px 16px;vertical-align:middle;">
+            <span style="font-size:11px;padding:3px 10px;border-radius:10px;font-weight:500;white-space:nowrap;
+                {% if s.is_active %}background:#ecfdf5;color:#059669;{% else %}background:#f1f5f9;color:#94a3b8;{% endif %}
+            ">{{ s.is_active|yesno:"启用,禁用" }}</span>
+        </td>
+        <td style="padding:10px 16px;vertical-align:middle;">
+            <span style="font-size:11px;color:var(--text-muted);">{% if s.script_dir %}{{ s.script_dir|truncatechars:40 }}{% else %}—{% endif %}</span>
+        </td>
+        <td style="padding:10px 16px;vertical-align:middle;text-align:right;white-space:nowrap;">
+            <a href="{% url 'skills:update' s.pk %}" style="display:inline-block;padding:5px 14px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:12px;text-decoration:none;color:var(--text);">编辑</a>
+            <a href="{% url 'skills:delete' s.pk %}" style="display:inline-block;padding:5px 14px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:12px;text-decoration:none;color:var(--danger);margin-left:8px;" onclick="return confirm('删除此技能？')">删除</a>
+        </td>
+    </tr>
     {% endfor %}
+    </tbody>
+</table>
+
+<div style="display:flex;align-items:center;justify-content:center;gap:12px;padding:20px 0;font-size:13px;color:var(--text-muted);">
+    {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}" style="padding:8px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-weight:500;">‹ 上一页</a>
+    {% else %}
+    <span style="padding:8px 16px;background:var(--bg);border:1px solid var(--border-light);border-radius:8px;color:var(--text-muted);">‹ 上一页</span>
+    {% endif %}
+    <span>第 <strong>{{ page_obj.number }}</strong> / <strong>{{ page_obj.paginator.num_pages }}</strong> 页 <span style="color:var(--text-muted);font-size:11px;">(共 {{ page_obj.paginator.count }} 条)</span></span>
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}" style="padding:8px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-weight:500;">下一页 ›</a>
+    {% else %}
+    <span style="padding:8px 16px;background:var(--bg);border:1px solid var(--border-light);border-radius:8px;color:var(--text-muted);">下一页 ›</span>
+    {% endif %}
 </div>
+
 {% else %}
-<div class="empty-state">
-    <div class="empty-icon">⚡</div>
-    <p>暂无技能</p>
-    <a href="{% url 'skills:create' %}">添加第一个技能 →</a>
-    <p style="margin-top:12px;">或 <a href="#" onclick="toggleImport();return false;">📦 导入压缩包</a></p>
+<div class="empty-state" style="text-align:center;padding:80px 0;">
+    <div style="font-size:48px;margin-bottom:12px;">⚡</div>
+    <p style="font-size:15px;font-weight:600;color:var(--text);">暂无技能</p>
+    <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">
+        <a href="{% url 'skills:create' %}" style="color:var(--primary);text-decoration:none;">添加第一个技能 →</a> 或 <a href="#" onclick="toggleImport();return false;" style="color:var(--primary);text-decoration:none;">📦 导入</a>
+    </p>
 </div>
 {% endif %}
 
 <script>
-function toggleImport() {
-    const area = document.getElementById('importArea');
-    area.style.display = area.style.display === 'none' ? '' : 'none';
-}
+function toggleImport(){ var e=document.getElementById('importArea'); e.style.display=e.style.display==='none'?'':'none'; }
 </script>
 {% endblock %}

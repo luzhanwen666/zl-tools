@@ -51,6 +51,7 @@ class SkillListView(ListView):
     model = Skill
     template_name = "skills/skill_list.html"
     context_object_name = "skills"
+    paginate_by = 15
 
 
 class SkillDetailView(DetailView):
