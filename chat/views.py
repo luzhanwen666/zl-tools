@@ -202,7 +202,14 @@ def global_chat(request):
     """
     from agents.models import Agent, AgentGroup
 
-    global_agent = get_object_or_404(Agent, is_global=True, is_active=True)
+    # 启动检查：必须存在全局智能体且配置了模型
+    global_agent = Agent.objects.filter(is_global=True, is_active=True).select_related("llm_config").first()
+    if not global_agent or not global_agent.llm_config:
+        return render(request, "chat/global_chat.html", {
+            "session": None, "session_pk": 0, "global_agent": None,
+            "all_agents": [], "available_groups": [],
+            "startup_error": "⚠️ 系统未配置全局智能体，请先在「智能体」中创建一个全局智能体并配置大模型。",
+        })
     user = request.user if request.user.is_authenticated else None
 
     session_id = request.GET.get("session_id", "").strip()
@@ -285,9 +292,9 @@ def global_chat_send_message(request):
 
 def global_chat_send_message_stream(request):
     """全局对话 - SSE 流式。
-    group_id 参数 → 使用群组拓扑执行
-    agents 参数 → 手动选择专家（旧模式）
-    无参数 → GlobalOrchestrator 自动路由
+    group_id → 群组拓扑执行
+    agents   → 手动选择专家
+    无参数   → 全局智能体自动匹配群组场景（无匹配则拒绝回答）
     """
     from agents.models import Agent, AgentGroup
     from engine.global_router import GlobalRouter
@@ -297,32 +304,27 @@ def global_chat_send_message_stream(request):
     if not content:
         return JsonResponse({"error": "消息不能为空"}, status=400)
 
-    group_id = request.GET.get("group_id", "").strip()
+    group_id = request.GET.get("group_id", "").strip() or None
+    manual_agents_str = request.GET.get("agents", "").strip() or None
 
     # session_id=0 → 惰性创建会话
     session_id = request.GET.get("session_id", "").strip()
     if session_id and session_id != "0":
         session = get_object_or_404(ChatSession, pk=session_id)
     else:
-        global_agent = get_object_or_404(Agent, is_global=True, is_active=True)
+        global_agent = Agent.objects.filter(is_global=True, is_active=True).first()
+        if not global_agent:
+            return JsonResponse({"error": "全局智能体未配置，请联系管理员"}, status=500)
         user = request.user if request.user.is_authenticated else None
         session = ChatSession.objects.create(
             agent=global_agent, created_by=user, title=content[:40],
         )
 
-    # 首次对话用问题做标题
     if not session.title or session.title == "新对话":
         session.title = content[:40]
         session.save(update_fields=["title"])
 
-    # 群组模式：绑定群组到会话
-    if group_id:
-        group = get_object_or_404(AgentGroup, pk=group_id, is_active=True)
-        session.group = group
-        session.save(update_fields=["group"])
-
     # 手动选择的专家
-    manual_agents_str = request.GET.get("agents", "").strip()
     manual_agents = None
     if manual_agents_str:
         from agents.models import Agent as AgentModel
@@ -333,10 +335,43 @@ def global_chat_send_message_stream(request):
                 .select_related("llm_config").prefetch_related("skills", "mcp_tools")
             )
 
+    # ── 决定使用哪个群组 ──
+    # 优先级: 手动选中群组 > 手动选中专家 > 自动匹配群组
+    matched_group = None
+    if group_id:
+        matched_group = get_object_or_404(AgentGroup, pk=group_id, is_active=True)
+    elif not manual_agents:
+        available_groups = list(AgentGroup.objects.filter(is_active=True).exclude(trigger_prompt=""))
+        if available_groups:
+            loop = asyncio.new_event_loop()
+            matched_id = loop.run_until_complete(
+                _match_group_by_trigger(content, available_groups)
+            )
+            loop.close()
+            if matched_id:
+                matched_group = AgentGroup.objects.filter(pk=matched_id, is_active=True).first()
+                if not matched_group:
+                    matched_group = AgentGroup.objects.filter(pk=int(matched_id), is_active=True).first()
+
+    # 无匹配且无人为选择 → 拒绝回答
+    if not matched_group and not manual_agents:
+        ChatMessage.objects.create(session=session, role="user", content=content)
+        def refuse_stream():
+            ChatMessage.objects.create(session=session, role="assistant",
+                content="未找到匹配的群组", agent_name="全局智能体")
+            yield f"data: {json.dumps({'type': 'routing', 'status': 'unmatched', 'content': '未找到匹配的群组场景'}, ensure_ascii=False)}\n\n"
+            yield f"data: {json.dumps({'type': 'assistant', 'content': '⚠️ 未找到匹配的群组来处理您的问题。\\n\\n您可以：\\n1. 手动点击上方群组标签选择群组\\n2. 点击专家标签手动选择专家\\n3. 或者重新描述您的问题', 'agent_name': '全局智能体'}, ensure_ascii=False)}\n\n"
+            yield f"data: {json.dumps({'type': 'done'})}\n\n"
+        return StreamingHttpResponse(refuse_stream(), content_type="text/event-stream")
+
     # 保存用户消息
     ChatMessage.objects.create(session=session, role="user", content=content)
 
-    created_session_id = session.pk  # 惰性创建时需告知前端
+    if matched_group:
+        session.group = matched_group
+        session.save(update_fields=["group"])
+
+    created_session_id = session.pk
 
     def event_stream():
         first_event = {'type': 'user', 'content': content}
@@ -351,8 +386,8 @@ def global_chat_send_message_stream(request):
             asyncio.set_event_loop(loop)
             try:
                 registry = _create_tool_registry()
-                # 群组模式：使用 GroupExecutor
-                if group_id:
+                if matched_group:
+                    group = matched_group
                     executor = GroupExecutor(tool_registry=registry)
                     async def _stream():
                         try:
@@ -413,6 +448,62 @@ def global_chat_send_message_stream(request):
     response["Cache-Control"] = "no-cache"
     response["X-Accel-Buffering"] = "no"
     return response
+
+
+# ------------------------------------------------------------------
+# 群组匹配辅助
+# ------------------------------------------------------------------
+
+async def _match_group_by_trigger(user_message: str, available_groups) -> str | None:
+    """
+    使用全局智能体匹配用户输入与群组触发描述。
+    返回匹配到的 group_id，或 None。
+    """
+    from agents.models import Agent
+    global_agent = await Agent.objects.filter(is_global=True, is_active=True).select_related("llm_config").afirst()
+    if not global_agent or not global_agent.llm_config:
+        return None
+
+    # 构建群组描述目录
+    groups_desc = "\n".join(
+        f"- **{g.name}** (ID:{g.pk}): {g.trigger_prompt or g.description}"
+        for g in available_groups
+    )
+
+    prompt = (
+        f"你是路由匹配器，根据用户输入选择合适的群组。\n\n"
+        f"## 可用群组及其触发场景\n{groups_desc}\n\n"
+        f"## 用户输入\n{user_message}\n\n"
+        f"## 匹配规则\n"
+        f"1. 仔细阅读每个群组的触发描述，判断用户需求是否匹配\n"
+        f"2. 如果用户输入明显属于某个群组场景 → 输出该群组ID\n"
+        f"3. 如果没有任何群组匹配 → 输出 NONE\n"
+        f"4. 只输出匹配的群组ID数字或NONE，不要输出其他内容"
+    )
+
+    from engine import llm_client as llm_module
+    try:
+        response = await llm_module.llm_client.chat(
+            provider=global_agent.llm_config.provider,
+            model_id=global_agent.llm_config.model_id,
+            messages=[{"role": "user", "content": prompt}],
+            api_base=global_agent.llm_config.api_base,
+            api_key=global_agent.llm_config.api_key,
+            max_tokens=50,
+            temperature=0.0,
+        )
+    except Exception as e:
+        logger.exception("Group trigger matching failed")
+        return None
+
+    response = response.strip().upper()
+    if response == "NONE" or not response.isdigit():
+        logger.info("No group matched: %s", response[:50])
+        return None
+
+    matched_id = int(response)
+    logger.info("Group matched: %d", matched_id)
+    return str(matched_id)
 
 
 # ------------------------------------------------------------------

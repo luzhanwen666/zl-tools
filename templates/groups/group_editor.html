@@ -290,12 +290,14 @@ function deleteNode(id) {
 
 // ── 保存 ──
 function saveTopology() {
+    var triggerEl = document.getElementById('triggerPrompt');
+    var trigger = triggerEl ? triggerEl.value : '';
     fetch('{% url "agents:save_topology" group.pk %}', {
         method:'POST',
         headers:{'Content-Type':'application/json','X-CSRFToken':document.querySelector('[name=csrfmiddlewaretoken]').value},
-        body: JSON.stringify({nodes:nodes, edges:edges})
+        body: JSON.stringify({nodes:nodes, edges:edges, trigger_prompt:trigger})
     }).then(function(r){ return r.json(); }).then(function(d){
-        if (d.ok) alert('✅ 拓扑已保存 ('+d.nodes.length+'个节点, '+d.edges.length+'条连线)');
+        if (d.ok) alert('✅ 已保存 ('+d.nodes.length+'节点, '+d.edges.length+'连线, 触发描述 '+(trigger?trigger.substring(0,30)+'...':'未设置')+')');
         else alert('保存失败: '+(d.error||''));
     });
 }

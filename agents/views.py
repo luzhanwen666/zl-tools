@@ -123,6 +123,13 @@ def save_topology(request, pk):
         return JsonResponse({"error": "无效的JSON"}, status=400)
 
     group = get_object_or_404(AgentGroup, pk=pk)
+
+    # 保存触发描述
+    trigger_prompt = data.get("trigger_prompt", "")
+    if trigger_prompt:
+        group.trigger_prompt = trigger_prompt
+        group.save(update_fields=["trigger_prompt"])
+
     # 清除现有点线，重建
     group.nodes.all().delete()
     group.edges.all().delete()

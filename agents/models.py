@@ -7,6 +7,10 @@ class AgentGroup(models.Model):
 
     name = models.CharField("群组名称", max_length=200)
     description = models.TextField("描述", blank=True, default="")
+    trigger_prompt = models.TextField(
+        "触发描述", blank=True, default="",
+        help_text="描述什么场景下应触发此群组，全局智能体根据用户输入匹配。例如：\"当用户请求WAF安全测试或站点漏洞扫描时触发\""
+    )
     is_active = models.BooleanField("启用", default=True)
     created_at = models.DateTimeField("创建时间", auto_now_add=True)
     updated_at = models.DateTimeField("更新时间", auto_now=True)

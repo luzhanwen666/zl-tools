@@ -15,6 +15,16 @@
 {% endblock %}
 
 {% block content %}
+{% if startup_error %}
+<div style="height:calc(100vh - 120px);display:flex;align-items:center;justify-content:center;">
+    <div style="text-align:center;padding:60px 40px;background:var(--bg-card);border:2px dashed var(--border);border-radius:16px;max-width:500px;">
+        <div style="font-size:48px;margin-bottom:16px;">⚠️</div>
+        <p style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px;">系统初始化未完成</p>
+        <p style="font-size:13px;color:var(--text-muted);">{{ startup_error }}</p>
+        <a href="{% url 'agents:create' %}" class="btn" style="display:inline-block;margin-top:16px;">前往创建 →</a>
+    </div>
+</div>
+{% else %}
 <div style="height:calc(100vh - 56px);margin:0 -24px;display:flex;">
 
     <!-- 左侧栏：对话历史列表 -->
@@ -823,4 +833,5 @@ function newConversation(){
 }
 function stopStream(){}
 </script>
+{% endif %}
 {% endblock %}
