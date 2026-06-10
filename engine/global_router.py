@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from typing import AsyncGenerator, TYPE_CHECKING
 
 from asgiref.sync import sync_to_async
@@ -362,19 +363,16 @@ class GlobalRouter:
                     intent = data.get("intent", "")
                     reasoning = data.get("reasoning", "")
 
-                    # 如果 LLM 判定为通用问题，但用户消息明显有专业内容 → 强制兜底
+                    # LLM 判定为通用问题 / 没推荐专家 → 直接用全部可用专家
                     if is_general or not recommended:
-                        fallback = prompts.keyword_fallback_match(user_message, agents_catalog)
-                        if fallback:
-                            logger.info(
-                                "LLM returned is_general_question=true, "
-                                "but keyword fallback found agents: %s", fallback
-                            )
+                        all_names = re.findall(r'\*\*(.+?)\*\*', agents_catalog)
+                        if all_names:
+                            logger.info("LLM returned is_general_question=true, using all %d agents", len(all_names))
                             return RouteResult(
-                                intent=f"关键词匹配（LLM误判为通用）",
-                                recommended_agents=fallback,
+                                intent=f"LLM未匹配→使用全部{len(all_names)}位专家",
+                                recommended_agents=all_names,
                                 is_general_question=False,
-                                reasoning=f"LLM判定: {reasoning} → 自动修正为关键词匹配",
+                                reasoning=f"LLM判定通用问题，自动启用全部专家",
                                 raw_response=response,
                             )
 
