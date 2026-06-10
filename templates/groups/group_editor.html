@@ -18,17 +18,12 @@
 <div style="display:flex;height:calc(100vh - 80px);margin:0 -24px 0;">
     <!-- 左侧面板 -->
     <div style="width:220px;min-width:220px;background:var(--bg);border-right:1px solid var(--border);padding:12px;overflow-y:auto;display:flex;flex-direction:column;">
-        <!-- 触发场景 -->
+        </div>
         <div style="flex-shrink:0;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);">
             <h3 style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">🎯 触发场景描述</h3>
             <textarea id="triggerPrompt" placeholder="例: 当用户请求WAF安全测试或站点漏洞扫描时触发"
                       style="width:100%;min-height:60px;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:11px;font-family:inherit;resize:vertical;background:var(--bg-card);color:var(--text);"
             >{{ group.trigger_prompt|default:"" }}</textarea>
-
-            <h3 style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin:10px 0 6px;">🤖 匹配提示词 <span style="font-weight:400;font-size:9px;color:var(--text-muted);">— 为空则用全局默认</span></h3>
-            <textarea id="matchPrompt" placeholder="例: 用户输入含HTTP请求/安全日志/攻击特征时，选此群组。只输出数字ID。"
-                      style="width:100%;min-height:50px;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:11px;font-family:inherit;resize:vertical;background:var(--bg-card);color:var(--text);"
-            >{{ group.match_prompt|default:"" }}</textarea>
         </div>
 
         <h3 style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">📦 智能体组件</h3>
@@ -405,12 +400,10 @@ function removeNode(id) {
 function saveTopology() {
     var triggerEl = document.getElementById('triggerPrompt');
     var trigger = triggerEl ? triggerEl.value : '';
-    var matchEl = document.getElementById('matchPrompt');
-    var match = matchEl ? matchEl.value : '';
     fetch('{% url "agents:save_topology" group.pk %}', {
         method:'POST',
         headers:{'Content-Type':'application/json','X-CSRFToken':document.querySelector('[name=csrfmiddlewaretoken]').value},
-        body: JSON.stringify({nodes:nodes, edges:edges, trigger_prompt:trigger, match_prompt:match})
+        body: JSON.stringify({nodes:nodes, edges:edges, trigger_prompt:trigger})
     }).then(function(r){ return r.json(); }).then(function(d){
         if (d.ok) { window.location.href = '{% url "agents:group_list" %}'; }
         else alert('保存失败: '+(d.error||''));

@@ -27,10 +27,6 @@
             <label style="font-size:13px;font-weight:600;color:var(--text);display:block;margin-bottom:6px;">触发场景描述 <span style="font-weight:400;font-size:11px;color:var(--text-muted);">— 全局智能体据此匹配用户输入</span></label>
             {{ form.trigger_prompt }}
         </div>
-        <div style="margin-bottom:16px;">
-            <label style="font-size:13px;font-weight:600;color:var(--text);display:block;margin-bottom:6px;">匹配提示词 <span style="font-weight:400;font-size:11px;color:var(--text-muted);">— 为空用全局默认,变量: {group_name} {groups_list} {user_message}</span></label>
-            {{ form.match_prompt }}
-        </div>
         <div style="margin-bottom:24px;">
             <label style="display:inline-flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;">
                 {{ form.is_active }} 启用
@@ -47,7 +43,6 @@
 #id_name { width:100%; padding:10px 14px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit; }
 #id_description { width:100%; min-height:80px; padding:10px 14px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit; resize:vertical; }
 #id_trigger_prompt { width:100%; min-height:64px; padding:10px 14px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit; resize:vertical; }
-#id_match_prompt { width:100%; min-height:50px; padding:10px 14px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit; resize:vertical; }
 #id_is_active { width:18px; height:18px; accent-color:var(--primary); }
 </style>
 {% endblock %}

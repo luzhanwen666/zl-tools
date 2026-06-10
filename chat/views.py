@@ -506,15 +506,11 @@ async def _match_group_by_trigger(user_message: str, available_groups, llm_confi
         for g in available_groups
     )
 
-    # 多个群组时用通用默认提示词，单个群组时用该群组自定义的 match_prompt
-    if len(available_groups) == 1 and available_groups[0].match_prompt and available_groups[0].match_prompt.strip():
-        system_prompt = available_groups[0].match_prompt.strip()
-    else:
-        system_prompt = (
-            "你是群组匹配器。必须选一个群组ID。\n"
-            "只输出数字ID，不要其他文字。不要输出'ID:'前缀。\n"
-            "例如: 4"
-        )
+    system_prompt = (
+        "你是群组匹配器。必须选一个群组ID。\n"
+        "只输出数字ID，不要其他文字。不要输出'ID:'前缀。\n"
+        "例如: 4"
+    )
 
     user_prompt = f"## 群组\n{groups_desc}\n\n## 输入\n{user_message}\n\n群组ID:"
 

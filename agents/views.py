@@ -82,7 +82,7 @@ class GroupListView(ListView):
 class GroupCreateView(CreateView):
     model = AgentGroup
     template_name = "groups/group_form.html"
-    fields = ["name", "description", "trigger_prompt", "match_prompt", "is_active"]
+    fields = ["name", "description", "trigger_prompt", "is_active"]
     success_url = reverse_lazy("agents:group_list")
 
 
@@ -124,15 +124,9 @@ def save_topology(request, pk):
 
     group = get_object_or_404(AgentGroup, pk=pk)
 
-    # 保存触发描述和匹配提示词
-    trigger_prompt = data.get("trigger_prompt", "")
-    match_prompt = data.get("match_prompt", "")
     if trigger_prompt:
         group.trigger_prompt = trigger_prompt
-    if match_prompt:
-        group.match_prompt = match_prompt
-    if trigger_prompt or match_prompt:
-        group.save(update_fields=["trigger_prompt", "match_prompt"])
+        group.save(update_fields=["trigger_prompt"])
 
     # 清除现有点线，重建
     group.nodes.all().delete()
