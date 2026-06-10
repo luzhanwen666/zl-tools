@@ -28,7 +28,10 @@
 
         <h3 style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">📦 智能体组件</h3>
         {% for a in available_agents %}
-        <div class="comp-item" draggable="true" data-agent-id="{{ a.pk }}" data-agent-name="{{ a.name }}" data-agent-type="{{ a.agent_type }}" data-label="{{ a.name }}"
+        <div class="comp-item" draggable="true"
+             data-agent-id="{{ a.pk }}" data-agent-name="{{ a.name }}"
+             data-agent-type="{{ a.agent_type }}" data-agent-desc="{{ a.description|escapejs|default:'' }}"
+             data-label="{{ a.name }}"
              style="padding:8px 10px;margin-bottom:4px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:6px;cursor:grab;font-size:12px;transition:all .15s;"
              onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-light)'" ondragstart="handleDragStart(event)">
             <span style="font-weight:600;color:var(--text);">{{ a.name }}</span>
@@ -36,6 +39,7 @@
                 {% if a.agent_type == "simple" %}⚡ Simple{% elif a.agent_type == "reflection" %}🪞 Reflect{% elif a.agent_type == "plan_and_solve" %}📋 Plan{% else %}🔄 ReAct{% endif %}
                 {% if a.is_global %}<span style="color:#6366f1;">· 全局</span>{% endif %}
             </span>
+            {% if a.description %}<span style="font-size:9px;color:var(--text-muted);display:block;margin-top:2px;line-height:1.3;">{{ a.description|truncatechars:60 }}</span>{% endif %}
         </div>
         {% endfor %}
 
@@ -176,7 +180,9 @@ function handleDragStart(e) {
         label: el.dataset.label,
         node_type: el.dataset.nodeType || 'agent',
         agent_id: el.dataset.agentId || null,
-        agent_name: el.dataset.agentName || ''
+        agent_name: el.dataset.agentName || '',
+        agent_desc: el.dataset.agentDesc || '',
+        agent_type: el.dataset.agentType || 'react'
     }));
 }
 function handleDrop(e) {
@@ -187,7 +193,9 @@ function handleDrop(e) {
     var x = Math.max(0, e.clientX - rect.left + cvs.scrollLeft - 70);
     var y = Math.max(0, e.clientY - rect.top + cvs.scrollTop - 25);
     nodes.push({temp_id:'n'+(++tempCounter),label:data.label||'新节点',node_type:data.node_type||'agent',
-        agent_id:data.agent_id||null,agent_name:data.agent_name||'',position_x:x,position_y:y,config:{}});
+        agent_id:data.agent_id||null,agent_name:data.agent_name||'',
+        agent_desc:data.agent_desc||'',agent_type:data.agent_type||'react',
+        position_x:x,position_y:y,config:{}});
     renderAll();
 }
 
@@ -336,15 +344,46 @@ function selectNode(id) {
     var panel = document.getElementById('propContent');
     var n = findNode(id);
     if (!n) { panel.innerHTML = '点击画布节点查看属性'; return; }
-    var html = '<p style="margin-bottom:4px;"><b>标签:</b> '+esc(n.label)+'</p>';
-    html += '<p style="margin-bottom:4px;"><b>类型:</b> '+esc(n.node_type)+'</p>';
-    if (n.agent_id) html += '<p style="margin-bottom:4px;"><b>智能体:</b> '+esc(n.agent_name||'')+'</p>';
-    // 入边/出边列表
+
+    var html = '';
+    var typeLabel = n.node_type==='start'?'🟢 开始':n.node_type==='end'?'🔴 结束':
+        n.node_type==='condition'?'🔀 条件判断':n.node_type==='parallel'?'⫼ 并行分发':
+        n.node_type==='merge'?'⫻ 结果合并':n.agent_type==='simple'?'🤖 '+esc(n.label)+' ⚡Simple':
+        n.agent_type==='reflection'?'🤖 '+esc(n.label)+' 🪞Reflect':
+        n.agent_type==='plan_and_solve'?'🤖 '+esc(n.label)+' 📋Plan':
+        '🤖 '+esc(n.label)+' 🔄ReAct';
+
+    html += '<div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);">'+typeLabel+'</div>';
+
+    // 组件类型描述
+    var descriptions = {
+        'start': '📍 整个流程的起点，代表用户输入进入系统。不需要配置任何参数。',
+        'end': '🏁 整个流程的终点，所有上游节点执行完毕后到达此节点即表示任务完成。',
+        'condition': '🔀 根据上游输出判断走哪条分支。可在 config 中设置 condition 字段来匹配输出内容。',
+        'parallel': '⫼ 同时分发到多个下游节点并行执行，适用于可并行的独立子任务。',
+        'merge': '⫻ 等待所有上游并行分支完成后汇聚结果，传递给下游节点。',
+        'agent': '🤖 智能体节点 — 绑定一个Agent，接收上游输出并结合用户问题进行分析处理，输出结果传递给下游。'
+    };
+    html += '<div style="font-size:11px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;padding:8px 12px;background:var(--bg);border-radius:8px;border:1px solid var(--border-light);">'+(descriptions[n.node_type]||'')+'</div>';
+
+    // Agent 专属信息
+    if (n.agent_id) {
+        html += '<div style="font-size:12px;margin-bottom:6px;"><b>名称:</b> '+esc(n.agent_name||'')+'</div>';
+        if (n.agent_desc) {
+            html += '<div style="font-size:11px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px;padding:8px 10px;background:var(--bg);border-radius:6px;border:1px solid var(--border-light);"><b>描述:</b> '+esc(n.agent_desc)+'</div>';
+        }
+    }
+
+    // 连线信息
     var incoming = edges.filter(function(e){ return e.target_temp_id===id; });
     var outgoing = edges.filter(function(e){ return e.source_temp_id===id; });
-    if (incoming.length) html += '<p style="margin-bottom:4px;font-size:11px;color:var(--text-muted);">入: '+incoming.map(function(e){var s=findNode(e.source_temp_id);return s?esc(s.label):'?';}).join(', ')+'</p>';
-    if (outgoing.length) html += '<p style="margin-bottom:4px;font-size:11px;color:var(--text-muted);">出: '+outgoing.map(function(e){var t=findNode(e.target_temp_id);return t?esc(t.label):'?';}).join(', ')+'</p>';
-    html += '<button onclick="removeNode(\''+n.temp_id+'\');selectNode(null);renderAll()" style="margin-top:8px;padding:6px 14px;background:#ef4444;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;">删除节点</button>';
+    html += '<div style="font-size:11px;color:var(--text-muted);background:var(--bg);padding:8px 12px;border-radius:6px;border:1px solid var(--border-light);">';
+    if (incoming.length) html += '<div style="margin-bottom:3px;">⏺ 上游: '+incoming.map(function(e){var s=findNode(e.source_temp_id);return s?esc(s.label):'?';}).join(', ')+'</div>';
+    if (outgoing.length) html += '<div>⏭ 下游: '+outgoing.map(function(e){var t=findNode(e.target_temp_id);return t?esc(t.label):'?';}).join(', ')+'</div>';
+    if (!incoming.length && !outgoing.length) html += '暂无连线';
+    html += '</div>';
+
+    html += '<button onclick="removeNode(\''+n.temp_id+'\');selectNode(null);renderAll()" style="margin-top:10px;padding:6px 14px;background:#ef4444;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;width:100%;">🗑 删除节点</button>';
     panel.innerHTML = html;
 }
 function handleCanvasClick(e) {
