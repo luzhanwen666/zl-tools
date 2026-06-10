@@ -19,6 +19,8 @@ urlpatterns = [
     # 对话历史 API（分页）
     path("sessions/api/", views.session_list_api, name="session_list_api"),
 
+    path("bulk-delete/", views.session_bulk_delete, name="session_bulk_delete"),
+
     # 标准会话管理
     path("", views.ChatSessionListView.as_view(), name="session_list"),
     path("create/", views.ChatSessionCreateView.as_view(), name="session_create"),

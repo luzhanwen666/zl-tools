@@ -459,3 +459,18 @@ def session_list_api(request):
         "total": total,
         "total_pages": max(1, (total + per_page - 1) // per_page),
     })
+
+
+def session_bulk_delete(request):
+    """批量删除会话"""
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+    try:
+        ids = json.loads(request.body).get("ids", [])
+    except (json.JSONDecodeError, KeyError):
+        return JsonResponse({"error": "无效的请求数据"}, status=400)
+    if not ids:
+        return JsonResponse({"error": "未提供会话ID"}, status=400)
+    user = request.user if request.user.is_authenticated else None
+    deleted, _ = ChatSession.objects.filter(pk__in=ids, created_by=user).delete()
+    return JsonResponse({"ok": True, "deleted": deleted})

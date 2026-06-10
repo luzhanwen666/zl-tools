@@ -6,6 +6,8 @@
 <div class="topbar">
     <div class="breadcrumb"><span class="current">💬 对话历史</span></div>
     <div class="topbar-actions">
+        <span id="selectedCount" style="display:none;font-size:12px;color:var(--primary);font-weight:600;margin-right:8px;"></span>
+        <button id="bulkDeleteBtn" onclick="bulkDelete()" class="btn" style="display:none;background:var(--danger);color:#fff;box-shadow:0 1px 3px rgba(239,68,68,.25);">🗑 删除选中</button>
         <a href="{% url 'chat:global_chat' %}" class="btn">✨ 新对话</a>
     </div>
 </div>
@@ -15,12 +17,15 @@
 <div style="max-width:1000px;margin:0 auto;">
 
 {% if page_obj %}
-<table style="width:100%;border-collapse:collapse;table-layout:fixed;">
+<table style="width:100%;border-collapse:collapse;table-layout:fixed;" id="sessionsTable">
     <thead>
         <tr style="border-bottom:2px solid var(--border);text-align:left;font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;">
+            <th style="padding:12px 16px;width:36px;">
+                <input type="checkbox" id="selectAll" onclick="toggleSelectAll()" style="width:16px;height:16px;cursor:pointer;accent-color:var(--primary);">
+            </th>
             <th style="padding:12px 16px;width:35%;">标题</th>
             <th style="padding:12px 16px;width:15%;">智能体</th>
-            <th style="padding:12px 16px;width:12%;">消息数</th>
+            <th style="padding:12px 16px;width:10%;">消息数</th>
             <th style="padding:12px 16px;width:18%;">更新时间</th>
             <th style="padding:12px 16px;width:20%;text-align:right;">操作</th>
         </tr>
@@ -29,6 +34,9 @@
     {% for s in page_obj %}
     <tr style="border-bottom:1px solid var(--border-light);transition:background .15s;"
         onmouseover="this.style.background='var(--primary-light)'" onmouseout="this.style.background=''">
+        <td style="padding:12px 16px;vertical-align:top;">
+            <input type="checkbox" class="session-cb" value="{{ s.pk }}" onchange="updateSelectAll()" style="width:16px;height:16px;cursor:pointer;accent-color:var(--primary);">
+        </td>
         <td style="padding:12px 16px;vertical-align:top;">
             <a href="{% url 'chat:detail' s.pk %}" style="font-size:13px;font-weight:600;color:var(--text);text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
                 {{ s.title|default:"新对话" }}
@@ -51,9 +59,7 @@
             <span style="font-size:11px;color:var(--text-muted);white-space:nowrap;">{{ s.updated_at|date:"m-d H:i" }}</span>
         </td>
         <td style="padding:12px 16px;vertical-align:top;text-align:right;">
-            <a href="{% url 'chat:detail' s.pk %}" style="display:inline-block;padding:5px 14px;background:var(--primary);color:#fff;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;margin-right:6px;">进入</a>
-            <a href="{% url 'chat:session_delete' s.pk %}" style="display:inline-block;padding:5px 12px;background:var(--bg);color:var(--danger);border:1px solid var(--border);border-radius:6px;font-size:11px;text-decoration:none;"
-               onclick="return confirm('删除此对话？')">删除</a>
+            <a href="{% url 'chat:detail' s.pk %}" style="display:inline-block;padding:5px 14px;background:var(--primary);color:#fff;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;">进入</a>
         </td>
     </tr>
     {% endfor %}
@@ -67,12 +73,7 @@
     {% else %}
     <span style="padding:8px 16px;background:var(--bg);border:1px solid var(--border-light);border-radius:8px;color:var(--text-muted);">‹ 上一页</span>
     {% endif %}
-
-    <span>
-        第 <strong>{{ page_obj.number }}</strong> / <strong>{{ page_obj.paginator.num_pages }}</strong> 页
-        <span style="color:var(--text-muted);font-size:11px;margin-left:4px;">(共 {{ page_obj.paginator.count }} 条)</span>
-    </span>
-
+    <span>第 <strong>{{ page_obj.number }}</strong> / <strong>{{ page_obj.paginator.num_pages }}</strong> 页 <span style="color:var(--text-muted);font-size:11px;">(共 {{ page_obj.paginator.count }} 条)</span></span>
     {% if page_obj.has_next %}
     <a href="?page={{ page_obj.next_page_number }}" style="padding:8px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-weight:500;">下一页 ›</a>
     {% else %}
@@ -91,4 +92,54 @@
 {% endif %}
 
 </div>
+
+<script>
+function getSelectedIds() {
+    var cbs = document.querySelectorAll('.session-cb:checked');
+    var ids = [];
+    cbs.forEach(function(cb){ ids.push(cb.value); });
+    return ids;
+}
+function updateSelectAll() {
+    var ids = getSelectedIds();
+    var sa = document.getElementById('selectAll');
+    var all = document.querySelectorAll('.session-cb');
+    sa.checked = all.length > 0 && ids.length === all.length;
+    sa.indeterminate = ids.length > 0 && ids.length < all.length;
+    updateBulkBar(ids);
+}
+function toggleSelectAll() {
+    var sa = document.getElementById('selectAll');
+    document.querySelectorAll('.session-cb').forEach(function(cb){ cb.checked = sa.checked; });
+    updateBulkBar(getSelectedIds());
+}
+function updateBulkBar(ids) {
+    var btn = document.getElementById('bulkDeleteBtn');
+    var cnt = document.getElementById('selectedCount');
+    if (ids.length > 0) {
+        btn.style.display = '';
+        cnt.style.display = '';
+        cnt.textContent = '已选 ' + ids.length + ' 项';
+    } else {
+        btn.style.display = 'none';
+        cnt.style.display = 'none';
+    }
+}
+function bulkDelete() {
+    var ids = getSelectedIds();
+    if (ids.length === 0) return;
+    if (!confirm('确定删除选中的 ' + ids.length + ' 个对话？此操作不可撤销。')) return;
+    fetch('{% url "chat:session_bulk_delete" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+        },
+        body: JSON.stringify({ids: ids}),
+    }).then(function(r){ return r.json(); }).then(function(data){
+        if (data.ok) { location.reload(); }
+        else { alert('删除失败: ' + (data.error || '未知错误')); }
+    });
+}
+</script>
 {% endblock %}
