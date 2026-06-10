@@ -77,7 +77,7 @@ class BaseAgentExecutor(ABC):
 
         返回 True 表示处理了一个或多个技能请求（下一轮 LLM 会基于指南继续）。
         """
-        from engine.skills.loader import SkillsLoader, SKILL_TRIGGERS
+        from engine.skills.loader import SkillsLoader
 
         # 检测所有 [USE_SKILL:X] 标记
         requests = re.findall(r'\[USE_SKILL:\s*([^\]]+)\]', response_text, re.IGNORECASE)
