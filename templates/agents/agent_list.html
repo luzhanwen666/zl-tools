@@ -4,31 +4,87 @@
 
 {% block topbar %}
 <div class="topbar">
-    <div class="breadcrumb"><span class="current">智能体</span></div>
+    <div class="breadcrumb"><span class="current">🧠 智能体</span></div>
     <div class="topbar-actions"><a href="{% url 'agents:create' %}" class="btn">+ 创建智能体</a></div>
 </div>
 {% endblock %}
 
 {% block content %}
+<div style="max-width:1100px;margin:0 auto;">
+
 {% if agents %}
-<div class="card-grid">
+<table style="width:100%;border-collapse:collapse;table-layout:fixed;">
+    <thead>
+        <tr style="border-bottom:2px solid var(--border);text-align:left;font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;">
+            <th style="padding:12px 16px;width:22%;">名称</th>
+            <th style="padding:12px 16px;width:28%;">描述</th>
+            <th style="padding:12px 16px;width:8%;">类型</th>
+            <th style="padding:12px 16px;width:8%;">角色</th>
+            <th style="padding:12px 16px;width:8%;">状态</th>
+            <th style="padding:12px 16px;width:14%;">大模型</th>
+            <th style="padding:12px 16px;width:12%;text-align:right;">操作</th>
+        </tr>
+    </thead>
+    <tbody>
     {% for agent in agents %}
-    <div class="card">
-        <h3><a href="{% url 'agents:detail' agent.pk %}">{{ agent.name }}</a></h3>
-        <p>{{ agent.description|truncatewords:30|default:"暂无描述" }}</p>
-        <div class="meta">
-            <span class="badge {% if agent.is_active %}badge-green{% else %}badge-gray{% endif %}">{{ agent.is_active|yesno:"启用,禁用" }}</span>
-            {% if agent.llm_config %}<span>{{ agent.llm_config.model_id }}</span>{% endif %}
-            <span>{{ agent.created_at|date:"Y-m-d" }}</span>
-        </div>
-        <div class="actions">
-            <a href="{% url 'agents:update' agent.pk %}" class="btn-edit">编辑</a>
-            <a href="{% url 'agents:delete' agent.pk %}" class="btn-delete">删除</a>
-        </div>
-    </div>
+    <tr style="border-bottom:1px solid var(--border-light);transition:background .15s;"
+        onmouseover="this.style.background='var(--primary-light)'" onmouseout="this.style.background=''">
+        <td style="padding:12px 16px;vertical-align:top;">
+            <a href="{% url 'agents:detail' agent.pk %}" style="font-size:13px;font-weight:600;color:var(--text);text-decoration:none;">
+                {% if agent.is_global %}🌐 {% endif %}{{ agent.name }}
+            </a>
+            {% if agent.skills.exists %}
+            <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">
+                {% for s in agent.skills.all %}<span style="display:inline-block;padding:1px 6px;background:var(--primary-light);color:var(--primary);border-radius:4px;margin:1px 2px;">{{ s.name }}</span>{% endfor %}
+            </div>
+            {% endif %}
+        </td>
+        <td style="padding:12px 16px;vertical-align:top;">
+            <span style="font-size:12px;color:var(--text-secondary);line-height:1.4;">{{ agent.description|truncatewords:20|default:"—" }}</span>
+        </td>
+        <td style="padding:12px 16px;vertical-align:top;">
+            <span style="font-size:12px;color:var(--text);">
+                {% if agent.agent_type == "simple" %}⚡ Simple
+                {% elif agent.agent_type == "reflection" %}🪞 Reflect
+                {% elif agent.agent_type == "plan_and_solve" %}📋 Plan
+                {% else %}🔄 ReAct{% endif %}
+            </span>
+        </td>
+        <td style="padding:12px 16px;vertical-align:top;">
+            <span style="font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;
+                {% if agent.role == 'coordinator' %}background:#eef2ff;color:#4f46e5;
+                {% elif agent.role == 'expert' %}background:#f5f3ff;color:#7c3aed;
+                {% else %}background:#f1f5f9;color:#64748b;{% endif %}
+            ">{{ agent.get_role_display }}</span>
+        </td>
+        <td style="padding:12px 16px;vertical-align:top;">
+            <span style="font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;
+                {% if agent.is_active %}background:#ecfdf5;color:#059669;
+                {% else %}background:#f1f5f9;color:#94a3b8;{% endif %}
+            ">{{ agent.is_active|yesno:"启用,禁用" }}</span>
+        </td>
+        <td style="padding:12px 16px;vertical-align:top;">
+            <span style="font-size:11px;color:var(--text-muted);">{{ agent.llm_config.model_id|default:"未配置" }}</span>
+        </td>
+        <td style="padding:12px 16px;vertical-align:top;text-align:right;">
+            <a href="{% url 'agents:update' agent.pk %}" style="display:inline-block;padding:5px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:12px;text-decoration:none;color:var(--text);margin-right:6px;">编辑</a>
+            <a href="{% url 'agents:delete' agent.pk %}" style="display:inline-block;padding:5px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:11px;text-decoration:none;color:var(--danger);"
+               onclick="return confirm('删除此智能体？')">删除</a>
+        </td>
+    </tr>
     {% endfor %}
-</div>
+    </tbody>
+</table>
+
 {% else %}
-<div class="empty-state"><div class="empty-icon">🧠</div><p>暂无智能体</p><a href="{% url 'agents:create' %}">创建第一个智能体 →</a></div>
+<div class="empty-state" style="text-align:center;padding:80px 0;">
+    <div style="font-size:48px;margin-bottom:12px;">🧠</div>
+    <p style="font-size:15px;font-weight:600;color:var(--text);">暂无智能体</p>
+    <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">
+        <a href="{% url 'agents:create' %}" style="color:var(--primary);text-decoration:none;">创建第一个智能体 →</a>
+    </p>
+</div>
 {% endif %}
+
+</div>
 {% endblock %}
