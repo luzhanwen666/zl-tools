@@ -487,15 +487,9 @@ def global_chat_send_message_stream(request):
 # ------------------------------------------------------------------
 
 async def _match_group_by_trigger(user_message: str, available_groups, llm_config) -> str | None:
-    """
-    纯LLM驱动群组匹配。
-    只有1个群组时直接返回(无需调LLM)。
-    多个群组时让LLM根据trigger_prompt+description选择。
-    """
-    if not available_groups:
+    """纯LLM驱动 — 不预设兜底，不跳过匹配。"""
+    if not llm_config or not available_groups:
         return None
-    if len(available_groups) == 1:
-        return str(available_groups[0].pk)
 
     groups_desc = "\n".join(
         f"- **{g.name}** (ID:{g.pk}): {g.trigger_prompt or g.description}"
@@ -503,14 +497,22 @@ async def _match_group_by_trigger(user_message: str, available_groups, llm_confi
     )
 
     system_prompt = (
-        "你是群组匹配器。根据用户输入从群组列表中选一个最匹配的。\n"
-        "比较每个群组的触发场景描述与用户输入，选关联度最高的。\n"
-        "只输出群组ID数字，不要其他内容。"
+        "你是群组匹配器。根据用户输入从群组列表中选择最匹配的一个。\n\n"
+        "规则:\n"
+        "1. 阅读每个群组的触发场景描述，判断是否与用户输入相关\n"
+        "2. 如果某个群组的描述覆盖了用户需求 → 输出该群组ID\n"
+        "3. 如果所有群组都不匹配 → 输出 NONE\n\n"
+        "输出格式: 只输出群组ID数字或NONE，不要其他内容"
     )
-    user_prompt = f"## 群组\n{groups_desc}\n\n## 用户输入\n{user_message}\n\n群组ID:"
 
-    from engine import llm_client as llm_module
+    user_prompt = (
+        f"## 可用群组\n{groups_desc}\n\n"
+        f"## 用户输入\n{user_message}\n\n"
+        f"最匹配的群组ID(或NONE):"
+    )
+
     try:
+        from engine import llm_client as llm_module
         response = await llm_module.llm_client.chat(
             provider=llm_config.provider, model_id=llm_config.model_id,
             messages=[
@@ -521,11 +523,12 @@ async def _match_group_by_trigger(user_message: str, available_groups, llm_confi
             max_tokens=20, temperature=0.0,
         )
     except Exception:
-        logger.exception("Group matching LLM failed")
+        logger.exception("LLM failed during group matching")
         return None
 
-    resp = response.strip().upper()
-    return str(int(resp)) if resp.isdigit() else None
+    resp = response.strip()
+    logger.info("Group matching LLM response: %s", resp[:30])
+    return str(int(resp)) if resp.lstrip("-").isdigit() else None
 
 
 # ------------------------------------------------------------------
