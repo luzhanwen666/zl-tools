@@ -122,6 +122,18 @@ class SkillsLoader:
                 if kw in msg:
                     score += 3
 
+            # ── WAF / 加白 / 误报 — 强制匹配 waf-whitelist 类技能 ──
+            waf_kw = ["加白", "加报", "whitelist", "白名单", "误报", "消除",
+                       "event_id", "eventid", "拦截", "waf", "误拦", "放行"]
+            if any(kw in msg for kw in waf_kw):
+                # 技能名含 waf 或 whitelist 或 加白 → 强制高分
+                if any(kw in s.name.lower() for kw in ["waf", "whitelist", "加白", "加报"]):
+                    score += 20
+                # 描述含相关词
+                if any(kw in (s.description or "").lower() for kw in
+                       ["加白", "白名单", "whitelist", "waf", "误报", "拦截"]):
+                    score += 12
+
             if score > 0 and (best is None or score > best[1]):
                 best = (s.name, score)
 

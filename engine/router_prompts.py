@@ -154,6 +154,19 @@ def keyword_fallback_match(user_message: str, agents_catalog: str) -> list[str]:
         score = 0
         combined = f"{name} {desc}".lower()
 
+        # ── 加白/误报处理类 ──
+        whitelist_pattern = (
+            r'加白|加报|whitelist|白名单|误报|消除|event.?id|eventid|'
+            r'拦截|block|误拦|误判|放行|pass|allow'
+        )
+        if re.search(whitelist_pattern, msg_lower):
+            if '加白' in name or '加报' in name:
+                score += 15
+            if '白名单' in name or 'whitelist' in name.lower():
+                score += 15
+            if 'waf' in name.lower() or 'waf' in desc.lower():
+                score += 8
+
         # ── 安全/威胁/攻击类 ──
         security_pattern = (
             r'攻击|威胁|入侵|漏洞|恶意|黑客|cve|exploit|payload|后门|webshell|'

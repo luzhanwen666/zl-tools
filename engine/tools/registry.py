@@ -3,11 +3,13 @@
 
 负责从 Agent 配置中收集工具：
 - 内置工具（builtin/）
-- 技能工具（Skill → SkillTool）
+- 技能脚本工具（Skill → SkillScriptTool）→ 真实执行 skills_storage 下的脚本
 - MCP 工具（MCPToolConfig → MCPToolWrapper）
 """
 
+import asyncio
 import logging
+import os
 from typing import TYPE_CHECKING
 
 from .base import BaseTool, ToolRegistry
@@ -18,27 +20,119 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-class SkillTool(BaseTool):
-    """将 Agent Skill 包装为工具"""
+class SkillScriptTool(BaseTool):
+    """
+    将技能脚本包装为可执行工具。
 
-    def __init__(self, skill_name: str, skill_description: str, skill_instruction: str):
-        self.name = f"skill_{skill_name.lower().replace(' ', '_')}"
-        self.description = skill_description
-        self.instruction = skill_instruction
+    当 Agent 绑定了有 script_dir 的技能时，扫描 scripts/ 目录，
+    每个 .py 文件暴露为一个可调用工具。
+    """
+
+    def __init__(self, skill_name: str, script_path: str, script_name: str,
+                 description: str = ""):
+        self.skill_name = skill_name
+        self.script_path = script_path        # 绝对路径
+        self.script_name = script_name        # 文件名，如 main.py
+        self.name = f"skill_{skill_name}_{script_name.replace('.py', '').replace('.', '_')}"
+        self.description = description or f"执行技能「{skill_name}」的脚本 {script_name}"
         self.parameters = {
             "type": "object",
             "properties": {
-                "task": {
+                "args": {
                     "type": "string",
-                    "description": "需要使用此技能完成的任务描述",
-                }
+                    "description": "传给脚本的命令行参数，多个参数用空格分隔。例如: bcb55cc9ca8844d8a6146360adf3b457 --comment '规则名'",
+                },
+                "stdin_text": {
+                    "type": "string",
+                    "description": "通过 stdin 传给脚本的文本（如 'y' 用于确认提示）。默认自动传 'y'。",
+                },
             },
-            "required": ["task"],
+            "required": [],
         }
 
-    async def execute(self, task: str, **kwargs) -> str:
-        """技能执行 — 将 instruction + task 作为上下文返回，由 LLM 根据 instruction 处理"""
-        return f"[技能: {self.name}] 任务: {task}\n指令: {self.instruction}\n请根据上述指令完成此任务。"
+    async def execute(self, args: str = "", stdin_text: str = "y\n", **kwargs) -> str:
+        """执行技能脚本"""
+        if not os.path.exists(self.script_path):
+            return f"[技能错误] 脚本不存在: {self.script_path}"
+
+        cmd = ["python", self.script_path] + (args.split() if args else [])
+        work_dir = os.path.dirname(self.script_path)
+
+        logger.info("SkillScript: %s (cwd=%s)", " ".join(cmd), work_dir)
+
+        try:
+            proc = await asyncio.create_subprocess_exec(
+                *cmd,
+                stdin=asyncio.subprocess.PIPE,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+                cwd=work_dir,
+            )
+
+            stdin_bytes = (stdin_text or "y\n").encode("utf-8")
+            stdout, stderr = await asyncio.wait_for(
+                proc.communicate(input=stdin_bytes),
+                timeout=60,
+            )
+
+            out = stdout.decode("utf-8", errors="replace")
+            err = stderr.decode("utf-8", errors="replace")
+
+            if proc.returncode != 0:
+                logger.warning("SkillScript %s exited %d: %s", self.script_name, proc.returncode, err[:300])
+                return f"[脚本退出码 {proc.returncode}]\n{out}\n{err}"
+
+            return out or err
+
+        except asyncio.TimeoutError:
+            return f"[技能错误] 脚本执行超时（60秒）: {self.script_name}"
+        except Exception as e:
+            logger.exception("SkillScript execution failed")
+            return f"[技能错误] {self.script_name}: {e}"
+
+
+def _get_skill_script_tools(agent: "AgentModel") -> list[SkillScriptTool]:
+    """
+    扫描 Agent 绑定技能中所有带脚本目录的技能，
+    为每个 .py 脚本创建一个可执行工具。
+    """
+    tools: list[SkillScriptTool] = []
+    skills = [s for s in agent.skills.all() if s.is_active and s.script_dir]
+
+    for skill in skills:
+        scripts_dir = os.path.join(skill.script_dir, "scripts")
+        if not os.path.isdir(scripts_dir):
+            continue
+
+        for fname in sorted(os.listdir(scripts_dir)):
+            if not fname.endswith(".py"):
+                continue
+            fpath = os.path.join(scripts_dir, fname)
+            if not os.path.isfile(fpath):
+                continue
+
+            # 读取文件前几行，提取简要描述
+            desc = f"执行技能「{skill.name}」的 {fname}"
+            try:
+                with open(fpath, "r", encoding="utf-8") as fh:
+                    first_lines = "".join(fh.readline() for _ in range(5))
+                if "argparse" in first_lines or "ArgumentParser" in first_lines:
+                    desc = f"技能「{skill.name}」主脚本 {fname} — 接受命令行参数"
+                elif "def " in first_lines:
+                    funcs = [l.strip() for l in first_lines.split("\n") if l.strip().startswith("def ")]
+                    if funcs:
+                        desc = f"技能「{skill.name}」脚本 {fname} — 提供: {', '.join(f[:40] for f in funcs[:3])}"
+            except Exception:
+                pass
+
+            tools.append(SkillScriptTool(
+                skill_name=skill.name,
+                script_path=fpath,
+                script_name=fname,
+                description=desc,
+            ))
+
+    return tools
 
 
 class MCPToolWrapper(BaseTool):
@@ -48,9 +142,8 @@ class MCPToolWrapper(BaseTool):
         self.name = f"mcp_{mcp_config.name.lower().replace(' ', '_')}"
         self.description = mcp_config.description or f"MCP工具: {mcp_config.name}"
         self.mcp_config = mcp_config
-        self._remote_tools: list[dict] = []  # 从 MCP 服务器获取的工具定义
+        self._remote_tools: list[dict] = []
         self._connected = False
-        # 参数 schema 将在首次连接时从远程工具动态构建
         self.parameters = {
             "type": "object",
             "properties": {
@@ -61,7 +154,6 @@ class MCPToolWrapper(BaseTool):
         }
 
     async def _ensure_connected(self) -> list[dict]:
-        """确保已连接到 MCP 服务器并获取工具列表"""
         if not self._connected:
             try:
                 from .mcp_pool import MCPConnectionPool
@@ -69,71 +161,64 @@ class MCPToolWrapper(BaseTool):
                 client = await pool.get_client(self.mcp_config)
                 self._remote_tools = pool.get_cached_tools(self.mcp_config)
                 self._connected = True
-                logger.info("MCP tool wrapper connected: %s → %d remote tools",
-                           self.mcp_config.name, len(self._remote_tools))
+                logger.info("MCP connected: %s → %d tools", self.mcp_config.name, len(self._remote_tools))
             except Exception as e:
-                logger.error("Failed to connect MCP tool '%s': %s", self.mcp_config.name, e)
+                logger.error("MCP connect failed '%s': %s", self.mcp_config.name, e)
                 self._remote_tools = []
-                self._connected = True  # 避免无限重试
-
+                self._connected = True
         return self._remote_tools
 
     async def execute(self, action: str = "", params: dict | None = None, **kwargs) -> str:
-        """执行 MCP 工具调用"""
         remote_tools = await self._ensure_connected()
-
         if not remote_tools:
-            return f"[MCP: {self.mcp_config.name}] 未连接到远程 MCP 服务，无法执行工具调用。"
-
+            return f"[MCP: {self.mcp_config.name}] 未连接到远程 MCP 服务。"
         try:
             from .mcp_pool import MCPConnectionPool
             pool = MCPConnectionPool.get_instance()
             client = await pool.get_client(self.mcp_config)
-
-            # 如果 action 匹配某个远程工具名，调用它
             if action:
                 matching = [t for t in remote_tools if t.get("name") == action]
-                if matching:
-                    tool_name = action
-                else:
-                    tool_name = remote_tools[0].get("name", action)
+                tool_name = action if matching else remote_tools[0].get("name", action)
+                if not matching:
                     params = {"query": action, **(params or {})}
             else:
                 tool_name = remote_tools[0].get("name", "unknown")
                 params = params or {}
-
-            result = await client.call_tool(tool_name, params)
-            return result
-
+            return await client.call_tool(tool_name, params)
         except Exception as e:
-            logger.exception("MCP tool execution failed")
-            return f"[MCP错误: {self.mcp_config.name}] {str(e)}"
+            logger.exception("MCP execution failed")
+            return f"[MCP错误: {self.mcp_config.name}] {e}"
 
     def get_remote_tool_definitions(self) -> list[dict]:
-        """返回远程工具定义（用于注入 system prompt）"""
         return self._remote_tools
 
 
 def get_tools_for_agent(agent: "AgentModel", builtin_registry: ToolRegistry | None = None) -> list[BaseTool]:
     """
-    收集 Agent 的可用工具（仅限可执行工具，不含技能）。
-
-    技能是行为指南，通过 system_prompt 注入，不属于工具列表。
-    工具只包含：MCP 工具、以及将来可配置的内置工具。
+    收集 Agent 的可用工具：
+    - 技能脚本工具（skills_storage 下的 .py 脚本）
+    - MCP 工具
+    - 内置工具（shell, python, web_search 等）
     """
     tools: list[BaseTool] = []
 
-    # MCP 工具 → MCPToolWrapper（可执行工具）
+    # ── 技能脚本工具 ──
+    skill_tools = _get_skill_script_tools(agent)
+    tools.extend(skill_tools)
+    if skill_tools:
+        logger.info("Agent %s has %d skill script tools", agent.name, len(skill_tools))
+
+    # ── MCP 工具 ──
     for mcp in agent.mcp_tools.filter(is_active=True):
         tools.append(MCPToolWrapper(mcp))
 
-    # 内置工具 — 所有 Agent 均可使用的通用工具（shell, log_parser, web_search 等）
+    # ── 内置工具 ──
     if builtin_registry:
         tools.extend(builtin_registry.get_all())
 
     return tools
 
 
-# sync_to_async 包装版本，供 async 上下文中安全调用
+# sync_to_async 包装版本
 from asgiref.sync import sync_to_async
 get_tools_for_agent_async = sync_to_async(get_tools_for_agent)
