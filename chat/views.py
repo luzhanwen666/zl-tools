@@ -197,8 +197,8 @@ def _run_group_chat(session, content):
 
 def global_chat(request):
     """渲染全局对话页面。
-    不带 session_id 参数 → 新建会话
-    带 session_id=123  → 加载已有会话继续对话
+    不带 session_id → 暂不创建会话（首次发消息时惰性创建）
+    带 session_id  → 加载已有会话继续对话
     """
     from agents.models import Agent
 
@@ -208,12 +208,10 @@ def global_chat(request):
     session_id = request.GET.get("session_id", "").strip()
     if session_id:
         session = get_object_or_404(ChatSession, pk=session_id)
+        session_pk = session.pk
     else:
-        session = ChatSession.objects.create(
-            agent=global_agent,
-            created_by=user,
-            title="新对话",
-        )
+        session = None
+        session_pk = 0
 
     all_agents = list(
         Agent.objects.filter(is_active=True).values("name", "role", "description")
@@ -221,6 +219,7 @@ def global_chat(request):
 
     return render(request, "chat/global_chat.html", {
         "session": session,
+        "session_pk": session_pk,
         "global_agent": global_agent,
         "all_agents": all_agents,
     })
@@ -289,14 +288,19 @@ def global_chat_send_message_stream(request):
     if not content:
         return JsonResponse({"error": "消息不能为空"}, status=400)
 
-    # session_id 从查询参数获取
+    # session_id=0 → 首次发送消息，惰性创建会话
     session_id = request.GET.get("session_id", "").strip()
-    session = get_object_or_404(ChatSession, pk=session_id) if session_id else None
-    if not session:
-        return JsonResponse({"error": "会话ID无效"}, status=400)
+    if session_id and session_id != "0":
+        session = get_object_or_404(ChatSession, pk=session_id)
+    else:
+        global_agent = get_object_or_404(Agent, is_global=True, is_active=True)
+        user = request.user if request.user.is_authenticated else None
+        session = ChatSession.objects.create(
+            agent=global_agent, created_by=user, title=content[:40],
+        )
 
-    # 首次对话用问题做标题
-    if session.title == "新对话" and not session.messages.exists():
+    # 首次对话用问题做标题（仅旧会话title="新对话"时更新）
+    if not session.title or session.title == "新对话":
         session.title = content[:40]
         session.save(update_fields=["title"])
 
@@ -315,8 +319,13 @@ def global_chat_send_message_stream(request):
     # 保存用户消息
     ChatMessage.objects.create(session=session, role="user", content=content)
 
+    created_session_id = session.pk  # 惰性创建时需告知前端
+
     def event_stream():
-        yield f"data: {json.dumps({'type': 'user', 'content': content}, ensure_ascii=False)}\n\n"
+        first_event = {'type': 'user', 'content': content}
+        if created_session_id:
+            first_event['session_id'] = created_session_id
+        yield f"data: {json.dumps(first_event, ensure_ascii=False)}\n\n"
 
         q: queue.Queue = queue.Queue()
 

@@ -70,7 +70,7 @@
 
         <!-- 消息区域 -->
         <div style="flex:1;overflow-y:auto;padding:12px 0;" id="chatMessages">
-            {% if session.messages.exists %}
+            {% if session and session.messages.exists %}
             {% for msg in session.messages.all %}
             {% if msg.role == "user" %}
             <div class="chat-msg msg-user"><div class="bubble">{{ msg.content }}</div></div>
@@ -90,7 +90,7 @@
         </div>
 
         <!-- 输入区域 -->
-        <form id="chatForm" data-session-id="{{ session.pk }}" style="border-top:1px solid var(--border-light);padding:14px 24px;display:flex;gap:8px;align-items:center;background:var(--bg-card);">
+        <form id="chatForm" data-session-id="{{ session_pk }}" style="border-top:1px solid var(--border-light);padding:14px 24px;display:flex;gap:8px;align-items:center;background:var(--bg-card);">
             {% csrf_token %}
             <input type="text" id="chatInput" placeholder="输入消息，我会自动匹配专家..." autocomplete="off"
                    style="flex:1;padding:11px 18px;border:1.5px solid var(--border);border-radius:22px;font-size:14px;background:var(--bg);color:var(--text);outline:none;font-family:inherit;">
@@ -449,7 +449,7 @@
         input.disabled = true;
 
         var selected = getSelectedAgents();
-        var url = '{% url "chat:global_chat_stream" %}?session_id={{ session.pk }}&content=' + encodeURIComponent(content);
+        var url = '{% url "chat:global_chat_stream" %}?session_id={{ session_pk }}&content=' + encodeURIComponent(content);
         if (selected.length > 0) url += '&agents=' + encodeURIComponent(selected.join(','));
 
         var controller = new AbortController();
@@ -500,7 +500,11 @@
     // ── SSE 事件 ──
     function handleEvent(d){
         switch(d.type){
-            case 'user': break;
+            case 'user':
+                if (d.session_id && form.getAttribute('data-session-id') === '0') {
+                    form.setAttribute('data-session-id', String(d.session_id));
+                }
+                break;
             case 'routing': appendMsgSystem((d.status==='classifying'?'⏳ ':'✅ ')+d.content, '全局智能体'); break;
             case 'status': appendStatus(d.agent_name, d.content); break;
             case 'thinking': appendThinking(d.agent_name, d.stage, d.content); break;
@@ -708,7 +712,7 @@
             container.innerHTML = '<div class="hist-empty">暂无对话记录<br>开始新对话吧 ✨</div>';
             return;
         }
-        var currentId = {{ session.pk }};
+        var currentId = {{ session_pk }};
         var html = '';
         data.sessions.forEach(function(s){
             var active = (s.id === currentId) ? ' active' : '';
@@ -737,7 +741,7 @@
 // ── 全局函数 ──
 function clearContext(){
     if (!confirm('确定清空当前会话上下文？')) return;
-    fetch('{% url "chat:clear_context" session.pk %}', {
+    fetch('{% url "chat:clear_context" session_pk %}', {
         method:'POST',
         headers:{'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value},
     }).then(function(r){
