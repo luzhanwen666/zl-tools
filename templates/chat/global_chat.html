@@ -231,11 +231,12 @@
         border:1px solid #334155;
         font-family:'SF Mono','Cascadia Code','Consolas',monospace;
         font-size:12px;white-space:pre-wrap;
+        word-break:break-word;overflow-wrap:break-word;
         overflow-x:auto;max-height:1200px;overflow-y:auto;
     }
     .chat-msg.msg-bot .bubble strong { color:#fbbf24;font-weight:700; }
     .chat-msg.msg-bot .bubble code { background:#1e293b;color:#86efac;padding:2px 5px;border-radius:3px;font-size:11px; }
-    .chat-msg.msg-bot .bubble pre { background:#1e293b;padding:10px 14px;border-radius:6px;margin:6px 0;overflow-x:auto;font-size:11px;color:#cbd5e1;border:1px solid #334155; }
+    .chat-msg.msg-bot .bubble pre { background:#1e293b;padding:10px 14px;border-radius:6px;margin:6px 0;overflow-x:auto;font-size:11px;color:#cbd5e1;border:1px solid #334155;white-space:pre-wrap;word-break:break-word;max-width:100%; }
     .chat-msg.msg-system .bubble {
         background:linear-gradient(135deg,#eef2ff,#f5f3ff) !important;
         border:1px solid rgba(99,102,241,.12) !important;
@@ -249,7 +250,7 @@
     /* ── 思考/计划/工具/状态 ── */
     .think-fold { margin:6px 0 8px;border:1px solid #d1d5db;border-radius:8px;background:#1e293b;overflow:hidden; }
     .think-fold summary { padding:7px 14px;cursor:pointer;font-size:11px;font-weight:700;color:#93c5fd;user-select:none;background:#1e293b;letter-spacing:.3px; }
-    .think-fold .think-body { padding:12px 14px;font-size:12px;color:#e2e8f0;line-height:1.6;white-space:pre-wrap;max-height:600px;overflow-y:auto;background:#0f172a;border-top:1px solid #334155;font-family:'SF Mono','Cascadia Code','Consolas',monospace; }
+    .think-fold .think-body { padding:12px 14px;font-size:12px;color:#e2e8f0;line-height:1.6;white-space:pre-wrap;word-break:break-word;max-height:600px;overflow-y:auto;background:#0f172a;border-top:1px solid #334155;font-family:'SF Mono','Cascadia Code','Consolas',monospace; }
     /* JSON 语法高亮 */
     .think-body .json-key   { color:#93c5fd; }
     .think-body .json-str   { color:#86efac; }
@@ -681,7 +682,7 @@
             try {
                 var p = typeof args === 'string' ? JSON.parse(args) : args;
                 var pretty = JSON.stringify(p, null, 2);
-                argsHtml = '<pre style="margin:4px 0 0;padding:8px 12px;background:#0f172a;color:#e2e8f0;border-radius:6px;font-size:11px;overflow-x:auto;max-height:200px;white-space:pre;font-family:monospace;">'+colorizeJsonLine(escHtml(pretty))+'</pre>';
+                argsHtml = '<pre style="margin:4px 0 0;padding:8px 12px;background:#0f172a;color:#e2e8f0;border-radius:6px;font-size:11px;overflow-x:auto;max-height:200px;white-space:pre-wrap;word-break:break-word;font-family:monospace;">'+colorizeJsonLine(escHtml(pretty))+'</pre>';
             } catch(e){ argsHtml = ' <code style="font-size:10px;">'+escHtml(String(args||'').substring(0,150))+'</code>'; }
         }
         d.innerHTML = '🔧 <b>'+escHtml(name)+'</b> 调用工具: <code style="background:#fffbeb;color:#b45309;padding:2px 7px;border-radius:4px;font-size:11px;">'+escHtml(tool||'')+'</code>'+argsHtml;
