@@ -488,9 +488,9 @@ def global_chat_send_message_stream(request):
 
 async def _match_group_by_trigger(user_message: str, available_groups, llm_config) -> str | None:
     """
-    LLM 匹配用户输入与群组触发描述。
-    传入 llm_config 避免在 async 上下文做 Django 懒查询。
-    LLM 返回 NONE 时自动选第一个群组作为兜底。
+    纯LLM驱动：把群组的trigger_prompt+description发给LLM选择。
+    不做任何关键词匹配，不预设兜底群组。
+    返回匹配到的 group_id，LLM认为完全不匹配时返回None。
     """
     if not llm_config or not available_groups:
         return None
@@ -501,39 +501,32 @@ async def _match_group_by_trigger(user_message: str, available_groups, llm_confi
     )
 
     system_prompt = (
-        "你是严格的路由匹配器。根据用户输入，你必须从可用群组中选出一个最匹配的。\n"
-        "比较每个群组的触发场景描述与用户输入，选出相关度最高的群组。\n"
-        "即使是通用日常问题(聊天/编程/计算/问答)，也要选描述最接近的那个。\n"
-        "输出格式: 只输出群组ID数字，不要输出其他任何内容。"
+        "你是群组匹配器。根据用户输入，从可用群组中选出最匹配的一个。\n"
+        "规则:\n"
+        "1. 阅读每个群组的触发场景描述，判断与用户输入的关联度\n"
+        "2. 如果某个群组的描述明显覆盖了用户需求 → 输出该群组ID\n"
+        "3. 如果所有群组描述都与用户输入不相关 → 输出NONE\n"
+        "4. 只输出群组ID数字或NONE，不要其他内容"
     )
-
-    user_prompt = f"## 可用群组\n{groups_desc}\n\n## 用户输入\n{user_message}\n\n输出最匹配的群组ID:"
+    user_prompt = f"## 群组列表\n{groups_desc}\n\n## 用户输入\n{user_message}\n\n匹配的群组ID(或NONE):"
 
     from engine import llm_client as llm_module
     try:
         response = await llm_module.llm_client.chat(
-            provider=llm_config.provider,
-            model_id=llm_config.model_id,
+            provider=llm_config.provider, model_id=llm_config.model_id,
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
-            api_base=llm_config.api_base,
-            api_key=llm_config.api_key,
-            max_tokens=20,
-            temperature=0.0,
+            api_base=llm_config.api_base, api_key=llm_config.api_key,
+            max_tokens=20, temperature=0.0,
         )
-    except Exception as e:
-        logger.exception("Group matching LLM failed, fallback to first group")
-        return str(available_groups[0].pk)
+    except Exception:
+        logger.exception("Group matching LLM failed")
+        return None
 
     resp = response.strip().upper()
-    if resp.isdigit():
-        return str(int(resp))
-
-    # LLM 没给数字 → 兜底第一个群组
-    logger.info("LLM returned '%s' (not digit), fallback to first group pk=%s", resp[:20], available_groups[0].pk)
-    return str(available_groups[0].pk)
+    return str(int(resp)) if resp.isdigit() else None
 
 
 # ------------------------------------------------------------------
