@@ -234,25 +234,12 @@ class GlobalOrchestrator:
     async def _run_single_expert(
         self, expert: "AgentModel", user_message: str, task_msg: AgentMessage
     ) -> AgentMessage:
-        """执行单个专家的完整分析 — 含技能匹配与 Layer 2 注入"""
+        """执行单个专家的完整分析 — 技能渐进式披露"""
         tools = await get_tools_for_agent_async(expert, self.tool_registry)
 
-        # ── 技能渐进式披露 ──
-        from engine.skills.loader import SkillsLoader
-        skill_name = SkillsLoader.match_skill(user_message, expert)
-
-        # 匹配到技能 → 加载 Layer 2 完整指令
-        # 未匹配到但专家有技能 → 加载所有技能的 Layer 2 作为后备
-        skill_instruction = ""
-        if skill_name:
-            skill_instruction = SkillsLoader.load_layer2_instruction(expert, skill_name)
-            logger.info("Expert %s: pre-loaded skill %s (%d chars)",
-                       expert.name, skill_name, len(skill_instruction))
-
-        # 构建增强 system prompt
+        # ── 技能：Layer 1 已注入 system prompt，LLM 自主 [USE_SKILL:X] 决定何时加载 Layer 2 ──
+        # 不做任何关键词预匹配，由 LLM 根据 Layer 1 中的触发时机自主判断
         system_prompt = self._build_expert_prompt(expert, user_message, tools)
-        if skill_instruction:
-            system_prompt += "\n\n" + skill_instruction
 
         executor = get_executor(expert, tool_registry=self.tool_registry)
 
@@ -275,10 +262,10 @@ class GlobalOrchestrator:
         msg = result.to_agent_message(expert.name)
         if not msg.metadata:
             msg.metadata = {}
-        used: set = set()
-        if skill_name: used.add(skill_name)
+        used = result.skills_used or []
         for t in result.thinking_trace:
-            if t.get("skill_request"): used.add(t["skill_request"])
+            if t.get("skill_request") and t["skill_request"] not in used:
+                used.append(t["skill_request"])
         msg.metadata["skill_used"] = ", ".join(used) if used else None
         return msg
 
@@ -303,16 +290,9 @@ class GlobalOrchestrator:
                 "content": f"正在调用 {agent_name} 进行分析...",
             }
 
-            # ── 技能匹配 ──
-            from engine.skills.loader import SkillsLoader
-            skill_name = SkillsLoader.match_skill(user_message, expert)
+            # ── 技能：Layer 1 已注入，LLM 自主 [USE_SKILL:X] ──
+            skill_name = None
             skill_instruction = ""
-            if skill_name:
-                skill_instruction = SkillsLoader.load_layer2_instruction(expert, skill_name)
-                yield {
-                    "type": "status", "agent_name": expert.name,
-                    "content": f"已匹配技能: {skill_name}，加载详细操作指令",
-                }
 
             # 执行并 yield 思考过程
             tools = await get_tools_for_agent_async(expert, self.tool_registry)
