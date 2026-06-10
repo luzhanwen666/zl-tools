@@ -16,6 +16,9 @@ urlpatterns = [
     path("workflow/load/<int:pk>/", views.load_workflow, name="load_workflow"),
     path("workflow/delete/<int:pk>/", views.delete_workflow, name="delete_workflow"),
 
+    # 对话历史 API（分页）
+    path("sessions/api/", views.session_list_api, name="session_list_api"),
+
     # 标准会话管理
     path("", views.ChatSessionListView.as_view(), name="session_list"),
     path("create/", views.ChatSessionCreateView.as_view(), name="session_create"),

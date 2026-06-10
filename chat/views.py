@@ -423,3 +423,38 @@ def delete_workflow(request, pk):
     pipeline.is_active = False
     pipeline.save(update_fields=["is_active"])
     return JsonResponse({"ok": True})
+
+
+# ------------------------------------------------------------------
+# 对话历史 API（分页）
+# ------------------------------------------------------------------
+
+def session_list_api(request):
+    """返回分页的对话历史 JSON"""
+    page = int(request.GET.get("page", 1))
+    per_page = 15
+    user = request.user if request.user.is_authenticated else None
+
+    qs = ChatSession.objects.filter(created_by=user).order_by("-updated_at")
+    total = qs.count()
+    sessions = qs[(page - 1) * per_page : page * per_page]
+
+    data = []
+    for s in sessions:
+        last_msg = s.messages.filter(role__in=("user", "assistant")).order_by("-created_at").first()
+        data.append({
+            "id": s.pk,
+            "title": s.title or "新对话",
+            "agent_name": s.agent.name if s.agent else "",
+            "updated_at": s.updated_at.strftime("%m-%d %H:%M"),
+            "last_message": last_msg.content[:60] if last_msg else "",
+            "message_count": s.messages.count(),
+        })
+
+    return JsonResponse({
+        "sessions": data,
+        "page": page,
+        "per_page": per_page,
+        "total": total,
+        "total_pages": max(1, (total + per_page - 1) // per_page),
+    })

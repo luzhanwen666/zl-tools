@@ -17,12 +17,20 @@
 {% block content %}
 <div style="height:calc(100vh - 56px);margin:-24px -32px;display:flex;">
 
-    <!-- 左侧栏 -->
-    <div style="width:210px;min-width:210px;background:var(--bg);border-right:1px solid var(--border-light);padding:16px 14px;overflow-y:auto;">
-        <a href="{% url 'chat:global_chat' %}" style="display:block;text-align:center;margin-bottom:14px;padding:9px 0;border-radius:8px;font-size:13px;text-decoration:none;background:var(--primary);color:#fff;">✨ 新对话</a>
-        <h3 style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;">对话历史</h3>
-        <div style="font-size:13px;color:var(--text-muted);padding:12px;">
-            <a href="{% url 'chat:session_list' %}" style="color:var(--primary);text-decoration:none;">查看全部对话 &rarr;</a>
+    <!-- 左侧栏：对话历史列表 -->
+    <div style="width:240px;min-width:240px;background:var(--bg);border-right:1px solid var(--border-light);display:flex;flex-direction:column;overflow:hidden;">
+        <a href="{% url 'chat:global_chat' %}" style="display:block;text-align:center;margin:14px 14px 10px;padding:9px 0;border-radius:8px;font-size:13px;text-decoration:none;background:var(--primary);color:#fff;flex-shrink:0;">✨ 新对话</a>
+
+        <!-- 列表区域 -->
+        <div style="flex:1;overflow-y:auto;padding:0 8px;" id="historyList">
+            <div style="text-align:center;padding:20px 0;color:var(--text-muted);font-size:11px;">加载中...</div>
+        </div>
+
+        <!-- 分页 -->
+        <div style="padding:10px 14px;border-top:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between;gap:6px;flex-shrink:0;font-size:11px;color:var(--text-muted);" id="historyPager">
+            <button id="historyPrevBtn" onclick="loadHistory(currentHistoryPage-1)" disabled style="padding:4px 10px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text-muted);cursor:pointer;font-size:11px;font-family:inherit;">‹ 上一页</button>
+            <span id="historyPageInfo">1 / 1</span>
+            <button id="historyNextBtn" onclick="loadHistory(currentHistoryPage+1)" disabled style="padding:4px 10px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text-muted);cursor:pointer;font-size:11px;font-family:inherit;">下一页 ›</button>
         </div>
     </div>
 
@@ -234,6 +242,34 @@
     /* ── 输入框 ── */
     #chatInput:focus { border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-glow); }
     #sendBtn:hover { background:var(--primary-hover);transform:scale(1.08); }
+
+    /* ── 对话历史列表 ── */
+    .hist-item {
+        display:block; padding:8px 10px; border-radius:6px; margin-bottom:2px;
+        text-decoration:none; color:var(--text); transition:all .15s;
+        border:1px solid transparent; cursor:pointer;
+    }
+    .hist-item:hover { background:var(--primary-light); border-color:var(--border); }
+    .hist-item.active { background:var(--primary-light); border-color:var(--primary); }
+    .hist-item .hist-title {
+        font-size:12px; font-weight:600; color:var(--text);
+        overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+        margin-bottom:2px;
+    }
+    .hist-item .hist-meta {
+        font-size:10px; color:var(--text-muted);
+        display:flex; justify-content:space-between; align-items:center;
+    }
+    .hist-item .hist-preview {
+        font-size:10px; color:var(--text-muted); margin-top:3px;
+        overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    }
+    .hist-empty {
+        text-align:center; padding:24px 12px; color:var(--text-muted);
+        font-size:11px; line-height:1.6;
+    }
+    #historyPager button:not(:disabled) { cursor:pointer; color:var(--text); }
+    #historyPager button:not(:disabled):hover { background:var(--primary-light); border-color:var(--primary); }
 </style>
 
 <script>
@@ -458,7 +494,7 @@
             case 'tool_call': appendTool(d.agent_name, d.tool, d.args); break;
             case 'assistant': appendMsgBot(d.content, d.agent_name, d.role, d.metadata); handleMentions(d.content); break;
             case 'error': appendMsgSystem('❌ '+d.content, '系统'); break;
-            case 'done': break;
+            case 'done': loadHistory(window.currentHistoryPage); break;
         }
         msgDiv.scrollTop = msgDiv.scrollHeight;
     }
@@ -641,6 +677,47 @@
     }
 
     input.focus();
+
+    // ── 对话历史加载 ──
+    window.currentHistoryPage = 1;
+    window.loadHistory = function(page) {
+        var apiUrl = '{% url "chat:session_list_api" %}?page=' + page;
+        fetch(apiUrl).then(function(r){ return r.json(); }).then(function(data){
+            window.currentHistoryPage = data.page;
+            renderHistory(data);
+            updatePager(data);
+        });
+    };
+    function renderHistory(data) {
+        var container = document.getElementById('historyList');
+        if (!data.sessions || data.sessions.length === 0) {
+            container.innerHTML = '<div class="hist-empty">暂无对话记录<br>开始新对话吧 ✨</div>';
+            return;
+        }
+        var currentId = {{ session.pk }};
+        var html = '';
+        data.sessions.forEach(function(s){
+            var active = (s.id === currentId) ? ' active' : '';
+            var title = (s.title || '新对话').substring(0, 25);
+            html += '<a href="/chat/global/" class="hist-item' + active + '" title="' + escHtml2(s.title) + '">' +
+                '<div class="hist-title">' + escHtml2(title) + (s.message_count > 0 ? ' (' + s.message_count + ')' : '') + '</div>' +
+                '<div class="hist-meta"><span>' + escHtml2(s.agent_name || '') + '</span><span>' + escHtml2(s.updated_at || '') + '</span></div>' +
+                (s.last_message ? '<div class="hist-preview">' + escHtml2(s.last_message) + '</div>' : '') +
+                '</a>';
+        });
+        container.innerHTML = html;
+        container.scrollTop = 0;
+    }
+    function updatePager(data) {
+        var prevBtn = document.getElementById('historyPrevBtn');
+        var nextBtn = document.getElementById('historyNextBtn');
+        var info = document.getElementById('historyPageInfo');
+        if (prevBtn) prevBtn.disabled = data.page <= 1;
+        if (nextBtn) nextBtn.disabled = data.page >= data.total_pages;
+        if (info) info.textContent = data.page + ' / ' + data.total_pages;
+    }
+    function escHtml2(t) { var d = document.createElement('div'); d.textContent = t || ''; return d.innerHTML; }
+    loadHistory(1);
 })();
 
 // ── 全局函数 ──
@@ -653,6 +730,7 @@ function clearContext(){
         if (r.ok){
             var m = document.getElementById('chatMessages');
             m.innerHTML = '<div style="text-align:center;padding:80px 0;" id="emptyState"><div style="font-size:48px;margin-bottom:12px;">🤖</div><p style="font-size:15px;font-weight:600;color:var(--text);">上下文已清空</p></div>';
+            loadHistory(window.currentHistoryPage);
         }
     }).catch(function(e){ alert('清空失败: '+e.message); });
 }
