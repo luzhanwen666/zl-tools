@@ -174,11 +174,20 @@ class GlobalRouter:
 
         # 3. 路由 + 执行
         if route_result.is_general_question or not route_result.recommended_agents:
-            # 无匹配专家 → 全局智能体直接回答
-            logger.info("No expert matched — coordinator answers directly")
-            direct_msg = await self._run_direct(global_agent, user_message)
-            all_messages.append(direct_msg)
-        else:
+            # 无匹配专家 → 关键词兜底强制匹配
+            logger.info("No expert matched — forcing keyword fallback")
+            fallback = prompts.keyword_fallback_match(user_message, await _build_agents_catalog(global_agent))
+            if fallback:
+                route_result.recommended_agents = fallback
+                route_result.is_general_question = False
+            else:
+                return [AgentMessage(
+                    role="assistant",
+                    content="⚠️ 未找到匹配的专家，请手动选择专家或创建群组配置自动路由。",
+                    name="全局智能体",
+                )]
+
+        if not route_result.is_general_question and route_result.recommended_agents:
             logger.info("Routing to expert agents: %s", route_result.recommended_agents)
             # 手动模式下 expert_agents 已在上面设置好（Agent对象），自动模式需要 ORM 解析
             if not manual_agents:
@@ -238,23 +247,32 @@ class GlobalRouter:
         route_result = await self.classify(user_message, global_agent)
 
         if route_result.is_general_question or not route_result.recommended_agents:
-            # 无匹配专家 → 全局智能体直接回答
-            yield {
-                "type": "routing", "status": "direct",
-                "content": "无匹配专家，全局智能体直接回答",
-                "intent": route_result.intent,
-            }
-            direct_msg = await self._run_direct(global_agent, user_message)
-            yield {
-                "type": "assistant",
-                "content": direct_msg.content,
-                "agent_name": global_agent.name,
-            }
-            yield {"type": "done"}
-            return
+            # 无匹配专家 → 关键词兜底强制匹配
+            fallback = prompts.keyword_fallback_match(user_message, await _build_agents_catalog(global_agent))
+            if fallback:
+                route_result.recommended_agents = [a.name for a in await _resolve_agents(fallback)]
+                route_result.is_general_question = False
+                yield {
+                    "type": "routing", "status": "matched",
+                    "content": f"已匹配专家：{', '.join(route_result.recommended_agents)}（关键词匹配）",
+                    "agents": route_result.recommended_agents,
+                }
+            else:
+                yield {
+                    "type": "routing", "status": "unmatched",
+                    "content": "未找到匹配的专家",
+                }
+                yield {
+                    "type": "assistant",
+                    "content": "⚠️ 未找到匹配的专家，请手动选择专家或创建群组配置自动路由。",
+                    "agent_name": "全局智能体",
+                }
+                yield {"type": "done"}
+                return
 
-        # 匹配到专家 → 使用 GlobalOrchestrator 流式执行
-        expert_agents = await _resolve_agents(route_result.recommended_agents)
+        if not route_result.is_general_question and route_result.recommended_agents:
+            # 匹配到专家 → 使用 GlobalOrchestrator 流式执行
+            expert_agents = await _resolve_agents(route_result.recommended_agents)
         agent_names = [a.name for a in expert_agents]
 
         yield {
