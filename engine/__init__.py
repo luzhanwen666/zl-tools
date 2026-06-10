@@ -6,6 +6,7 @@ from engine.agent_runner import AgentRunner
 from engine.group_chat import GroupChatManager
 from engine.global_router import GlobalRouter, RouteResult
 from engine.orchestrator import GlobalOrchestrator
+from engine.group_executor import GroupExecutor
 from engine.executors import (
     BaseAgentExecutor,
     AgentExecutionResult,

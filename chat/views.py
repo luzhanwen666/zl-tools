@@ -216,12 +216,16 @@ def global_chat(request):
     all_agents = list(
         Agent.objects.filter(is_active=True).values("name", "role", "description")
     )
+    available_groups = list(
+        AgentGroup.objects.filter(is_active=True).values("pk", "name", "description")
+    )
 
     return render(request, "chat/global_chat.html", {
         "session": session,
         "session_pk": session_pk,
         "global_agent": global_agent,
         "all_agents": all_agents,
+        "available_groups": available_groups,
     })
 
 
@@ -280,15 +284,22 @@ def global_chat_send_message(request):
 
 
 def global_chat_send_message_stream(request):
-    """全局对话 - SSE 流式"""
-    from agents.models import Agent
+    """全局对话 - SSE 流式。
+    group_id 参数 → 使用群组拓扑执行
+    agents 参数 → 手动选择专家（旧模式）
+    无参数 → GlobalOrchestrator 自动路由
+    """
+    from agents.models import Agent, AgentGroup
     from engine.global_router import GlobalRouter
+    from engine.group_executor import GroupExecutor
 
     content = request.GET.get("content", "").strip()
     if not content:
         return JsonResponse({"error": "消息不能为空"}, status=400)
 
-    # session_id=0 → 首次发送消息，惰性创建会话
+    group_id = request.GET.get("group_id", "").strip()
+
+    # session_id=0 → 惰性创建会话
     session_id = request.GET.get("session_id", "").strip()
     if session_id and session_id != "0":
         session = get_object_or_404(ChatSession, pk=session_id)
@@ -299,10 +310,16 @@ def global_chat_send_message_stream(request):
             agent=global_agent, created_by=user, title=content[:40],
         )
 
-    # 首次对话用问题做标题（仅旧会话title="新对话"时更新）
+    # 首次对话用问题做标题
     if not session.title or session.title == "新对话":
         session.title = content[:40]
         session.save(update_fields=["title"])
+
+    # 群组模式：绑定群组到会话
+    if group_id:
+        group = get_object_or_404(AgentGroup, pk=group_id, is_active=True)
+        session.group = group
+        session.save(update_fields=["group"])
 
     # 手动选择的专家
     manual_agents_str = request.GET.get("agents", "").strip()
@@ -330,22 +347,33 @@ def global_chat_send_message_stream(request):
         q: queue.Queue = queue.Queue()
 
         def _run_engine():
-            """在独立线程中运行异步引擎，事件通过队列传出"""
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
             try:
                 registry = _create_tool_registry()
-                router = GlobalRouter(tool_registry=registry)
-
-                async def _stream():
-                    try:
-                        async for event in router.run_stream(session, content, manual_agents=manual_agents):
-                            q.put(("event", event))
-                    except Exception as e:
-                        logger.exception("Engine stream error")
-                        q.put(("error", str(e)))
-                    finally:
-                        q.put(("done", None))
+                # 群组模式：使用 GroupExecutor
+                if group_id:
+                    executor = GroupExecutor(tool_registry=registry)
+                    async def _stream():
+                        try:
+                            async for event in executor.run_stream(session, content, group):
+                                q.put(("event", event))
+                        except Exception as e:
+                            logger.exception("GroupExecutor error")
+                            q.put(("error", str(e)))
+                        finally:
+                            q.put(("done", None))
+                else:
+                    router = GlobalRouter(tool_registry=registry)
+                    async def _stream():
+                        try:
+                            async for event in router.run_stream(session, content, manual_agents=manual_agents):
+                                q.put(("event", event))
+                        except Exception as e:
+                            logger.exception("Engine stream error")
+                            q.put(("error", str(e)))
+                        finally:
+                            q.put(("done", None))
 
                 loop.run_until_complete(_stream())
             finally:

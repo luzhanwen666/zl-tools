@@ -2,6 +2,24 @@ from django.db import models
 from django.conf import settings
 
 
+class AgentGroup(models.Model):
+    """Agent 群组 — 拓扑工作流的基本单元"""
+
+    name = models.CharField("群组名称", max_length=200)
+    description = models.TextField("描述", blank=True, default="")
+    is_active = models.BooleanField("启用", default=True)
+    created_at = models.DateTimeField("创建时间", auto_now_add=True)
+    updated_at = models.DateTimeField("更新时间", auto_now=True)
+
+    class Meta:
+        verbose_name = "Agent群组"
+        verbose_name_plural = verbose_name
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return self.name
+
+
 class Agent(models.Model):
     """智能体"""
 
@@ -22,7 +40,13 @@ class Agent(models.Model):
     description = models.TextField("描述", blank=True, default="")
     avatar = models.ImageField("头像", upload_to="avatars/", blank=True, null=True)
     system_prompt = models.TextField("系统提示词", blank=True, default="")
-    group = models.CharField("协作组", max_length=100, blank=True, default="default")
+    group = models.ForeignKey(
+        "AgentGroup",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="所属群组",
+    )
     role = models.CharField("角色", max_length=50, choices=ROLE_CHOICES, default="member")
     agent_type = models.CharField(
         "智能体类型", max_length=30,
@@ -70,3 +94,55 @@ class Agent(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class GroupNode(models.Model):
+    """群组拓扑节点 — Agent 节点或基础逻辑组件"""
+
+    NODE_TYPE_CHOICES = [
+        ("start", "开始"),
+        ("agent", "智能体"),
+        ("condition", "条件判断"),
+        ("loop", "循环控制"),
+        ("parallel", "并行分发"),
+        ("merge", "结果合并"),
+        ("end", "结束"),
+    ]
+
+    group = models.ForeignKey("AgentGroup", on_delete=models.CASCADE, related_name="nodes")
+    label = models.CharField("节点标签", max_length=200)
+    node_type = models.CharField("节点类型", max_length=20, choices=NODE_TYPE_CHOICES, default="agent")
+    agent = models.ForeignKey(
+        "Agent", on_delete=models.SET_NULL, null=True, blank=True,
+        help_text="node_type=agent 时绑定具体智能体",
+    )
+    config = models.JSONField("节点配置", default=dict, blank=True,
+                               help_text='条件表达式，循环次数等。如 {"condition":"success","max_loops":3}')
+    position_x = models.FloatField("X坐标", default=0)
+    position_y = models.FloatField("Y坐标", default=0)
+
+    class Meta:
+        verbose_name = "拓扑节点"
+        verbose_name_plural = verbose_name
+        ordering = ["group", "position_y", "position_x"]
+
+    def __str__(self):
+        return f"{self.label} ({self.get_node_type_display()})"
+
+
+class GroupEdge(models.Model):
+    """拓扑连线"""
+
+    group = models.ForeignKey("AgentGroup", on_delete=models.CASCADE, related_name="edges")
+    source = models.ForeignKey("GroupNode", on_delete=models.CASCADE, related_name="outgoing_edges")
+    target = models.ForeignKey("GroupNode", on_delete=models.CASCADE, related_name="incoming_edges")
+    label = models.CharField("连线标签", max_length=100, blank=True, default="")
+    condition = models.CharField("触发条件", max_length=300, blank=True, default="",
+                                  help_text="条件分支时使用，如 'success' / 'failure'")
+
+    class Meta:
+        verbose_name = "拓扑连线"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return f"{self.source.label} → {self.target.label}"

@@ -11,6 +11,13 @@ class ChatSession(models.Model):
         related_name="chat_sessions",
         verbose_name="智能体",
     )
+    group = models.ForeignKey(
+        "agents.AgentGroup",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="群组",
+    )
     title = models.CharField("标题", max_length=200, blank=True, default="新对话")
     created_at = models.DateTimeField("创建时间", auto_now_add=True)
     updated_at = models.DateTimeField("更新时间", auto_now=True)

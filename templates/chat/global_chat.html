@@ -37,7 +37,7 @@
     <!-- 右侧主区域 -->
     <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
 
-        <!-- 顶栏：Agent信息 + 专家标签 + 流程开关 -->
+        <!-- 顶栏：Agent信息 + 群组选择器 + 专家标签 -->
         <div style="padding:12px 24px;border-bottom:1px solid var(--border-light);background:var(--bg-card);">
             <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px;">
                 <div style="display:flex;align-items:center;gap:8px;">
@@ -45,22 +45,34 @@
                     <span style="font-weight:700;font-size:14px;color:var(--text);">{{ global_agent.name }}</span>
                     <span style="display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;background:#eef2ff;color:#4f46e5;">全局入口</span>
                 </div>
-                <span id="selectionHint" style="font-size:11px;color:var(--text-muted);margin-left:auto;">💡 点击专家选择，不选则自动匹配</span>
+                <!-- 群组选择器 -->
+                <div style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+                    <span style="font-size:11px;color:var(--text-muted);" id="selectionHint">选择群组：</span>
+                    <select id="groupSelect" onchange="onGroupChange()"
+                            style="padding:6px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg-card);color:var(--text);font-family:inherit;cursor:pointer;max-width:200px;">
+                        <option value="">-- 自动路由 --</option>
+                        {% for g in available_groups %}
+                        <option value="{{ g.pk }}">{{ g.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% if not available_groups %}
+                <span style="font-size:11px;color:var(--text-muted);margin-left:auto;">暂无群组，去<a href="{% url 'agents:group_list' %}" style="color:var(--primary);">创建</a></span>
+                {% endif %}
             </div>
+            <!-- 专家芯片（保留，选群组时自动高亮群组成员） -->
             <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;" id="expertChips">
                 {% for ag in all_agents %}
                 {% if ag.name != global_agent.name %}
-                <button type="button" class="expert-chip {% if ag.role == 'coordinator' %}chip-coord{% elif ag.role == 'expert' %}chip-expert{% else %}chip-member{% endif %}"
-                        data-agent="{{ ag.name }}"
-                        title="{{ ag.description|default:'通用' }}&#10;类型: {{ ag.get_agent_type_display|default:'ReAct' }}">
+                <span class="expert-chip {% if ag.role == 'coordinator' %}chip-coord{% elif ag.role == 'expert' %}chip-expert{% else %}chip-member{% endif %}"
+                      data-agent="{{ ag.name }}" style="cursor:default;">
                     <span class="chip-icon">{% if ag.agent_type == 'simple' %}⚡{% elif ag.agent_type == 'reflection' %}🪞{% elif ag.agent_type == 'plan_and_solve' %}📋{% else %}🔄{% endif %}</span>
                     {{ ag.name }}
-                </button>
+                </span>
                 {% endif %}
                 {% endfor %}
-                {% if all_agents|length <= 1 %}
-                <span style="font-size:12px;color:var(--text-muted);">暂无专家，去<a href="{% url 'agents:list' %}" style="color:var(--primary);">创建</a></span>
-                {% endif %}
+            </div>
+        </div>
                 <!-- 流程配置入口（当选中≥2个专家时显示） -->
                 <span id="flowToggle" style="font-size:11px;color:var(--text-muted);cursor:pointer;margin-left:8px;user-select:none;display:none;" onclick="toggleFlowPanel()" title="配置专家执行顺序">
                     ⚙️ <span style="text-decoration:underline;text-decoration-style:dotted;">执行流程</span>
@@ -449,8 +461,9 @@
         input.disabled = true;
 
         var selected = getSelectedAgents();
+        var groupId = document.getElementById('groupSelect') ? document.getElementById('groupSelect').value : '';
         var url = '{% url "chat:global_chat_stream" %}?session_id={{ session_pk }}&content=' + encodeURIComponent(content);
-        if (selected.length > 0) url += '&agents=' + encodeURIComponent(selected.join(','));
+        if (groupId) url += '&group_id=' + encodeURIComponent(groupId);
 
         var controller = new AbortController();
         currentAbort = controller;

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block nav-groups %}active{% endblock %}
+{% block title %}删除群组{% endblock %}
+{% block topbar %}
+<div class="topbar"><div class="breadcrumb"><a href="{% url 'agents:group_list' %}">群组管理</a><span class="sep">/</span><span class="current">删除</span></div></div>
+{% endblock %}
+{% block content %}
+<div style="max-width:500px;margin:60px auto;text-align:center;">
+    <div style="font-size:40px;margin-bottom:16px;">⚠️</div>
+    <h2 style="margin-bottom:12px;">确认删除「{{ object.name }}」？</h2>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:24px;">该群组的所有拓扑节点和连线将一并删除，此操作不可撤销。</p>
+    <form method="post">{% csrf_token %}
+        <button type="submit" style="padding:10px 28px;background:var(--danger);color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;">确认删除</button>
+        <a href="{% url 'agents:group_list' %}" style="color:var(--text-muted);text-decoration:none;font-size:14px;margin-left:16px;">取消</a>
+    </form>
+</div>
+{% endblock %}
