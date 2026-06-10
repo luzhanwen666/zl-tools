@@ -10,65 +10,63 @@
 {% endblock %}
 
 {% block content %}
-<div style="max-width:1100px;margin:0 auto;">
-
 {% if agents %}
 <table style="width:100%;border-collapse:collapse;table-layout:fixed;">
     <thead>
         <tr style="border-bottom:2px solid var(--border);text-align:left;font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;">
-            <th style="padding:12px 16px;width:22%;">名称</th>
-            <th style="padding:12px 16px;width:28%;">描述</th>
+            <th style="padding:12px 16px;width:20%;">名称</th>
+            <th style="padding:12px 16px;width:30%;">描述</th>
             <th style="padding:12px 16px;width:8%;">类型</th>
             <th style="padding:12px 16px;width:8%;">角色</th>
-            <th style="padding:12px 16px;width:8%;">状态</th>
+            <th style="padding:12px 16px;width:7%;">状态</th>
             <th style="padding:12px 16px;width:14%;">大模型</th>
-            <th style="padding:12px 16px;width:12%;text-align:right;">操作</th>
+            <th style="padding:12px 16px;width:13%;text-align:right;">操作</th>
         </tr>
     </thead>
     <tbody>
     {% for agent in agents %}
     <tr style="border-bottom:1px solid var(--border-light);transition:background .15s;"
         onmouseover="this.style.background='var(--primary-light)'" onmouseout="this.style.background=''">
-        <td style="padding:12px 16px;vertical-align:top;">
+        <td style="padding:10px 16px;vertical-align:middle;">
             <a href="{% url 'agents:detail' agent.pk %}" style="font-size:13px;font-weight:600;color:var(--text);text-decoration:none;">
                 {% if agent.is_global %}🌐 {% endif %}{{ agent.name }}
             </a>
             {% if agent.skills.exists %}
-            <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">
-                {% for s in agent.skills.all %}<span style="display:inline-block;padding:1px 6px;background:var(--primary-light);color:var(--primary);border-radius:4px;margin:1px 2px;">{{ s.name }}</span>{% endfor %}
+            <div style="font-size:10px;margin-top:3px;">
+                {% for s in agent.skills.all %}<span style="display:inline-block;padding:2px 7px;background:var(--primary-light);color:var(--primary);border-radius:4px;margin:1px 3px 1px 0;">{{ s.name }}</span>{% endfor %}
             </div>
             {% endif %}
         </td>
-        <td style="padding:12px 16px;vertical-align:top;">
-            <span style="font-size:12px;color:var(--text-secondary);line-height:1.4;">{{ agent.description|truncatewords:20|default:"—" }}</span>
+        <td style="padding:10px 16px;vertical-align:middle;">
+            <span style="font-size:12px;color:var(--text-secondary);line-height:1.5;">{{ agent.description|truncatewords:25|default:"—" }}</span>
         </td>
-        <td style="padding:12px 16px;vertical-align:top;">
-            <span style="font-size:12px;color:var(--text);">
+        <td style="padding:10px 16px;vertical-align:middle;">
+            <span style="font-size:12px;color:var(--text);white-space:nowrap;">
                 {% if agent.agent_type == "simple" %}⚡ Simple
                 {% elif agent.agent_type == "reflection" %}🪞 Reflect
                 {% elif agent.agent_type == "plan_and_solve" %}📋 Plan
                 {% else %}🔄 ReAct{% endif %}
             </span>
         </td>
-        <td style="padding:12px 16px;vertical-align:top;">
-            <span style="font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;
+        <td style="padding:10px 16px;vertical-align:middle;">
+            <span style="font-size:11px;padding:3px 10px;border-radius:10px;font-weight:500;white-space:nowrap;
                 {% if agent.role == 'coordinator' %}background:#eef2ff;color:#4f46e5;
                 {% elif agent.role == 'expert' %}background:#f5f3ff;color:#7c3aed;
                 {% else %}background:#f1f5f9;color:#64748b;{% endif %}
             ">{{ agent.get_role_display }}</span>
         </td>
-        <td style="padding:12px 16px;vertical-align:top;">
-            <span style="font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;
+        <td style="padding:10px 16px;vertical-align:middle;">
+            <span style="font-size:11px;padding:3px 10px;border-radius:10px;font-weight:500;white-space:nowrap;
                 {% if agent.is_active %}background:#ecfdf5;color:#059669;
                 {% else %}background:#f1f5f9;color:#94a3b8;{% endif %}
             ">{{ agent.is_active|yesno:"启用,禁用" }}</span>
         </td>
-        <td style="padding:12px 16px;vertical-align:top;">
-            <span style="font-size:11px;color:var(--text-muted);">{{ agent.llm_config.model_id|default:"未配置" }}</span>
+        <td style="padding:10px 16px;vertical-align:middle;">
+            <span style="font-size:12px;color:var(--text-muted);">{{ agent.llm_config.model_id|default:"未配置" }}</span>
         </td>
-        <td style="padding:12px 16px;vertical-align:top;text-align:right;">
-            <a href="{% url 'agents:update' agent.pk %}" style="display:inline-block;padding:5px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:12px;text-decoration:none;color:var(--text);margin-right:6px;">编辑</a>
-            <a href="{% url 'agents:delete' agent.pk %}" style="display:inline-block;padding:5px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:11px;text-decoration:none;color:var(--danger);"
+        <td style="padding:10px 16px;vertical-align:middle;text-align:right;white-space:nowrap;">
+            <a href="{% url 'agents:update' agent.pk %}" style="display:inline-block;padding:5px 14px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:12px;text-decoration:none;color:var(--text);">编辑</a>
+            <a href="{% url 'agents:delete' agent.pk %}" style="display:inline-block;padding:5px 14px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:12px;text-decoration:none;color:var(--danger);margin-left:8px;"
                onclick="return confirm('删除此智能体？')">删除</a>
         </td>
     </tr>
@@ -85,6 +83,4 @@
     </p>
 </div>
 {% endif %}
-
-</div>
 {% endblock %}
