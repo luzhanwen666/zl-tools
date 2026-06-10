@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import json
 import logging
-import re
 from typing import AsyncGenerator, TYPE_CHECKING
 
 from asgiref.sync import sync_to_async
@@ -175,18 +174,18 @@ class GlobalRouter:
 
         # 3. 路由 + 执行
         if route_result.is_general_question or not route_result.recommended_agents:
-            # LLM没匹配到 → 直接用全部可用专家
-            all_names = re.findall(r'\*\*(.+?)\*\*', await _build_agents_catalog(global_agent))
-            if all_names:
-                logger.info("LLM had no match, using all %d experts", len(all_names))
-                route_result.recommended_agents = all_names
-                route_result.is_general_question = False
-            else:
-                return [AgentMessage(
-                    role="assistant",
-                    content="⚠️ 暂无可用专家，请先创建智能体。",
-                    name="全局智能体",
-                )]
+            # LLM 判断为通用问题 — 提示用户手动选择专家
+            logger.info("LLM classified as general question — no experts routed")
+            return [AgentMessage(
+                role="assistant",
+                content=(
+                    "⚠️ 未匹配到合适的专家来处理您的问题。\n\n"
+                    "您可以：\n"
+                    "1. 点击上方专家标签手动选择专家来协助您\n"
+                    "2. 或者尝试更具体地描述您的问题，以便LLM匹配合适的专家"
+                ),
+                name="全局智能体",
+            )]
 
         if not route_result.is_general_question and route_result.recommended_agents:
             logger.info("Routing to expert agents: %s", route_result.recommended_agents)
@@ -248,22 +247,11 @@ class GlobalRouter:
         route_result = await self.classify(user_message, global_agent)
 
         if route_result.is_general_question or not route_result.recommended_agents:
-            # LLM没匹配到 → 直接用全部可用专家
-            all_names = re.findall(r'\*\*(.+?)\*\*', await _build_agents_catalog(global_agent))
-            if all_names:
-                route_result.recommended_agents = [a.name for a in await _resolve_agents(all_names)]
-                route_result.is_general_question = False
-                yield {
-                    "type": "routing", "status": "matched",
-                    "content": f"已激活全部专家：{', '.join(route_result.recommended_agents)}",
-                    "agents": route_result.recommended_agents,
-                }
-            else:
-                yield {"type": "routing", "status": "unmatched", "content": "暂无可用专家"}
-                yield {"type": "assistant", "content": "⚠️ 暂无可用专家，请先创建智能体。", "agent_name": "全局智能体"}
-                yield {"type": "done"}
-                return
-                return
+            # LLM 判断为通用问题 — 提示用户手动选择专家
+            yield {"type": "routing", "status": "unmatched", "content": "LLM未匹配到合适的专家"}
+            yield {"type": "assistant", "content": "⚠️ 未匹配到合适的专家来处理您的问题。\n\n您可以：\n1. 点击上方专家标签手动选择专家来协助您\n2. 或者尝试更具体地描述您的问题", "agent_name": "全局智能体"}
+            yield {"type": "done"}
+            return
 
         if not route_result.is_general_question and route_result.recommended_agents:
             # 匹配到专家 → 使用 GlobalOrchestrator 流式执行
@@ -352,18 +340,16 @@ class GlobalRouter:
                     intent = data.get("intent", "")
                     reasoning = data.get("reasoning", "")
 
-                    # LLM 判定为通用问题 / 没推荐专家 → 直接用全部可用专家
+                    # LLM 判定为通用问题 / 没推荐专家 → 尊重LLM判断，不做兜底
                     if is_general or not recommended:
-                        all_names = re.findall(r'\*\*(.+?)\*\*', agents_catalog)
-                        if all_names:
-                            logger.info("LLM returned is_general_question=true, using all %d agents", len(all_names))
-                            return RouteResult(
-                                intent=f"LLM未匹配→使用全部{len(all_names)}位专家",
-                                recommended_agents=all_names,
-                                is_general_question=False,
-                                reasoning=f"LLM判定通用问题，自动启用全部专家",
-                                raw_response=response,
-                            )
+                        logger.info("LLM returned is_general_question=true or no agents")
+                        return RouteResult(
+                            intent=intent or "通用问题",
+                            recommended_agents=[],
+                            is_general_question=True,
+                            reasoning=reasoning or "LLM判定无需专家",
+                            raw_response=response,
+                        )
 
                     # LLM 正确分类
                     logger.info("LLM classified: intent=%s agents=%s", intent, recommended)
