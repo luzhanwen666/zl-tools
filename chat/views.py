@@ -488,12 +488,14 @@ def global_chat_send_message_stream(request):
 
 async def _match_group_by_trigger(user_message: str, available_groups, llm_config) -> str | None:
     """
-    纯LLM驱动：把群组的trigger_prompt+description发给LLM选择。
-    不做任何关键词匹配，不预设兜底群组。
-    返回匹配到的 group_id，LLM认为完全不匹配时返回None。
+    纯LLM驱动群组匹配。
+    只有1个群组时直接返回(无需调LLM)。
+    多个群组时让LLM根据trigger_prompt+description选择。
     """
-    if not llm_config or not available_groups:
+    if not available_groups:
         return None
+    if len(available_groups) == 1:
+        return str(available_groups[0].pk)
 
     groups_desc = "\n".join(
         f"- **{g.name}** (ID:{g.pk}): {g.trigger_prompt or g.description}"
@@ -501,14 +503,11 @@ async def _match_group_by_trigger(user_message: str, available_groups, llm_confi
     )
 
     system_prompt = (
-        "你是群组匹配器。根据用户输入，从可用群组中选出最匹配的一个。\n"
-        "规则:\n"
-        "1. 阅读每个群组的触发场景描述，判断与用户输入的关联度\n"
-        "2. 如果某个群组的描述明显覆盖了用户需求 → 输出该群组ID\n"
-        "3. 如果所有群组描述都与用户输入不相关 → 输出NONE\n"
-        "4. 只输出群组ID数字或NONE，不要其他内容"
+        "你是群组匹配器。根据用户输入从群组列表中选一个最匹配的。\n"
+        "比较每个群组的触发场景描述与用户输入，选关联度最高的。\n"
+        "只输出群组ID数字，不要其他内容。"
     )
-    user_prompt = f"## 群组列表\n{groups_desc}\n\n## 用户输入\n{user_message}\n\n匹配的群组ID(或NONE):"
+    user_prompt = f"## 群组\n{groups_desc}\n\n## 用户输入\n{user_message}\n\n群组ID:"
 
     from engine import llm_client as llm_module
     try:
