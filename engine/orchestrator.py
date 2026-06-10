@@ -26,6 +26,15 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
+def load_layer1_safe(agent: "AgentModel") -> str:
+    """安全加载 Layer 1 元数据（捕获 ImportError）"""
+    try:
+        from engine.skills.loader import SkillsLoader
+        return SkillsLoader.load_layer1_metadata(agent)
+    except Exception:
+        return ""
+
+
 # ── 同步 ORM 辅助 ───────────────────────────────────────────────────
 
 
@@ -238,7 +247,6 @@ class GlobalOrchestrator:
         tools = await get_tools_for_agent_async(expert, self.tool_registry)
 
         # ── 技能：Layer 1 已注入 system prompt，LLM 自主 [USE_SKILL:X] 决定何时加载 Layer 2 ──
-        # 不做任何关键词预匹配，由 LLM 根据 Layer 1 中的触发时机自主判断
         system_prompt = self._build_expert_prompt(expert, user_message, tools)
 
         executor = get_executor(expert, tool_registry=self.tool_registry)
@@ -349,7 +357,7 @@ class GlobalOrchestrator:
                         "tool_calls": result.tool_calls,
                         "agent_type": getattr(expert, "agent_type", "react"),
                         "skill_used": skill_name or None,
-                        "skills_meta": SkillsLoader.load_layer1_metadata(expert),
+                        "skills_meta": load_layer1_safe(expert),
                     },
                 }
 
@@ -415,15 +423,10 @@ class GlobalOrchestrator:
         base = expert.system_prompt or ""
         expertise = expert.description or "通用分析"
 
-        # 技能元数据（Level 1）
-        skills_meta = ""
-        try:
-            from engine.skills.loader import SkillsLoader
-            skills_meta = SkillsLoader.load_layer1_metadata(expert)
-        except ImportError:
-            pass
+        # 技能元数据（Layer 1）
+        skills_meta = load_layer1_safe(expert)
 
-        # 工具描述（真实可用工具列表，不仅仅是内置工具）
+        # 工具描述（真实可用工具列表）
         tools_desc = "请使用可用工具获取数据后再分析"
         if tools:
             tool_lines = []
