@@ -405,10 +405,20 @@ def global_chat_send_message_stream(request):
                                 if actual_group:
                                     q.put(("event", {
                                         "type": "routing", "status": "group",
-                                        "content": f"🔗 已匹配群组「{actual_group.name}」— 按拓扑顺序执行",
+                                        "content": f"🔗 LLM自动匹配群组「{actual_group.name}」— 按拓扑顺序执行",
                                         "group_name": actual_group.name,
                                     }))
+                            else:
+                                q.put(("event", {
+                                    "type": "routing", "status": "unmatched",
+                                    "content": f"⚠️ LLM群组匹配失败(未返回有效ID)，降级到专家路由",
+                                }))
+                                logger.warning("Group matching returned None from %d candidates", len(_candidate_groups))
                         except Exception as e:
+                            q.put(("event", {
+                                "type": "routing", "status": "unmatched",
+                                "content": f"⚠️ LLM群组匹配异常，降级到专家路由",
+                            }))
                             logger.exception("Group matching in engine thread failed")
 
                     # 无群组且无manual_agents → 让GlobalRouter正常分类路由
@@ -524,8 +534,18 @@ async def _match_group_by_trigger(user_message: str, available_groups, llm_confi
         return None
 
     resp = response.strip()
-    logger.info("Group matching LLM response: %s", resp[:30])
-    return str(int(resp)) if resp.lstrip("-").isdigit() else None
+    logger.info("Group matching LLM raw response: %s", resp[:50])
+
+    # 从回复中提取数字ID（兼容各种LLM输出格式）
+    import re
+    match = re.search(r'(\d+)', resp)
+    if match:
+        group_id = match.group(1)
+        logger.info("Group matched: ID=%s from response '%s'", group_id, resp[:30])
+        return group_id
+
+    logger.warning("Group matching failed to extract ID from: '%s'", resp[:30])
+    return None
 
 
 # ------------------------------------------------------------------
