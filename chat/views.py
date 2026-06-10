@@ -363,6 +363,14 @@ def global_chat_send_message_stream(request):
     if matched_group:
         session.group = matched_group
         session.save(update_fields=["group"])
+        # 同步预加载拓扑数据，避免 async 上下文触发懒查询
+        _preloaded_nodes = list(matched_group.nodes.all().select_related(
+            "agent", "agent__llm_config"
+        ).prefetch_related("agent__skills", "agent__mcp_tools"))
+        _preloaded_edges = list(matched_group.edges.all())
+    else:
+        _preloaded_nodes = []
+        _preloaded_edges = []
 
     created_session_id = session.pk
 
@@ -381,10 +389,12 @@ def global_chat_send_message_stream(request):
                 registry = _create_tool_registry()
                 if matched_group:
                     group = matched_group
+                    nodes = _preloaded_nodes
+                    edges = _preloaded_edges
                     executor = GroupExecutor(tool_registry=registry)
                     async def _stream():
                         try:
-                            async for event in executor.run_stream(session, content, group):
+                            async for event in executor.run_stream(session, content, group, nodes, edges):
                                 q.put(("event", event))
                         except Exception as e:
                             logger.exception("GroupExecutor error")

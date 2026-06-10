@@ -48,10 +48,16 @@ class GroupExecutor:
         return messages
 
     async def run_stream(
-        self, session: "ChatSession", user_message: str, group: "AgentGroup"
+        self, session: "ChatSession", user_message: str, group: "AgentGroup",
+        preloaded_nodes: list | None = None, preloaded_edges: list | None = None,
     ) -> AsyncGenerator[dict, None]:
-        nodes = list(group.nodes.all())
-        edges = list(group.edges.all())
+        # 使用预加载数据（在同步上下文中已 select_related），避免 async 懒查询
+        if preloaded_nodes is not None:
+            nodes = preloaded_nodes
+            edges = preloaded_edges or list(group.edges.all())
+        else:
+            nodes = list(group.nodes.all())
+            edges = list(group.edges.all())
 
         if not nodes:
             yield {"type": "error", "content": "该群组尚未配置拓扑节点"}
