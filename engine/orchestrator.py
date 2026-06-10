@@ -240,13 +240,24 @@ class GlobalOrchestrator:
         # ── 技能渐进式披露 ──
         from engine.skills.loader import SkillsLoader
         skill_name = SkillsLoader.match_skill(user_message, expert)
+
+        # 匹配到技能 → 加载 Layer 2 完整指令
+        # 未匹配到但专家有技能 → 加载所有技能的 Layer 2 作为后备
+        active_skills = [s for s in expert.skills.all() if s.is_active]
         skill_instruction = ""
         if skill_name:
             skill_instruction = SkillsLoader.load_layer2_instruction(expert, skill_name)
-            logger.info("Expert %s matched skill: %s", expert.name, skill_name)
+            logger.info("Expert %s matched skill: %s (%d字)",
+                       expert.name, skill_name, len(skill_instruction))
+        elif active_skills:
+            # 无精确匹配 → 加载所有技能指令作为后备
+            skill_instruction = SkillsLoader.load_all_layer2(expert)
+            if skill_instruction:
+                logger.info("Expert %s: no exact match, loaded all %d skills (%d字)",
+                           expert.name, len(active_skills), len(skill_instruction))
 
-        # 构建增强 system prompt（Layer 1 元数据 + Layer 2 匹配指令）
-        system_prompt = self._build_expert_prompt(expert, user_message)
+        # 构建增强 system prompt
+        system_prompt = self._build_expert_prompt(expert, user_message, tools)
         if skill_instruction:
             system_prompt += "\n\n" + skill_instruction
 
@@ -269,11 +280,9 @@ class GlobalOrchestrator:
             )
 
         msg = result.to_agent_message(expert.name)
-        # 附加技能使用信息到 metadata
-        if skill_name:
-            if not msg.metadata:
-                msg.metadata = {}
-            msg.metadata["skill_used"] = skill_name
+        if not msg.metadata:
+            msg.metadata = {}
+        msg.metadata["skill_used"] = skill_name or (active_skills[0].name if active_skills else None)
         return msg
 
     async def _run_experts_stream(
@@ -300,6 +309,7 @@ class GlobalOrchestrator:
             # ── 技能匹配 ──
             from engine.skills.loader import SkillsLoader
             skill_name = SkillsLoader.match_skill(user_message, expert)
+            active_skills = [s for s in expert.skills.all() if s.is_active]
             skill_instruction = ""
             if skill_name:
                 skill_instruction = SkillsLoader.load_layer2_instruction(expert, skill_name)
@@ -307,11 +317,16 @@ class GlobalOrchestrator:
                     "type": "status", "agent_name": expert.name,
                     "content": f"已匹配技能: {skill_name}，加载详细操作指令",
                 }
-                logger.info("Expert %s matched skill: %s", expert.name, skill_name)
+            elif active_skills:
+                skill_instruction = SkillsLoader.load_all_layer2(expert)
+                yield {
+                    "type": "status", "agent_name": expert.name,
+                    "content": f"加载了 {len(active_skills)} 个技能指令（无精确匹配，全部加载）",
+                }
 
             # 执行并 yield 思考过程
             tools = await get_tools_for_agent_async(expert, self.tool_registry)
-            system_prompt = self._build_expert_prompt(expert, user_message)
+            system_prompt = self._build_expert_prompt(expert, user_message, tools)
             if skill_instruction:
                 system_prompt += "\n\n" + skill_instruction
             executor = get_executor(expert, tool_registry=self.tool_registry)
@@ -424,12 +439,13 @@ class GlobalOrchestrator:
             metadata={"stage": "synthesis"},
         )
 
-    def _build_expert_prompt(self, expert: "AgentModel", user_message: str) -> str:
+    def _build_expert_prompt(self, expert: "AgentModel", user_message: str,
+                             tools: list = None) -> str:
         """构建专家独立分析的增强 system prompt"""
         base = expert.system_prompt or ""
         expertise = expert.description or "通用分析"
 
-        # 技能元数据（Level 1: 渐进式披露）
+        # 技能元数据（Level 1）
         skills_meta = ""
         try:
             from engine.skills.loader import SkillsLoader
@@ -437,13 +453,27 @@ class GlobalOrchestrator:
         except ImportError:
             pass
 
+        # 工具描述（真实可用工具列表，不仅仅是内置工具）
+        tools_desc = "请使用可用工具获取数据后再分析"
+        if tools:
+            tool_lines = []
+            for t in tools[:12]:  # 最多列出12个，避免prompt过长
+                desc = getattr(t, 'description', '') or ''
+                if len(desc) > 80:
+                    desc = desc[:80] + "..."
+                tool_lines.append(f"- **{t.name}**: {desc}")
+            if tool_lines:
+                tools_desc = "\n".join(tool_lines)
+                if len(tools) > 12:
+                    tools_desc += f"\n> ...及其他 {len(tools)-12} 个工具"
+
         extra = _prompts.EXPERT_INDEPENDENT_PROMPT.format(
             agent_name=expert.name,
             role="专家",
             expertise=expertise,
             user_question=user_message,
             skills_meta=skills_meta,
-            tools_desc="请使用可用工具获取数据后再分析",
+            tools_desc=tools_desc,
         )
 
         return f"{base}\n\n{extra}" if base else extra

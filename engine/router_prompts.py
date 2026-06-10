@@ -19,34 +19,38 @@ logger = logging.getLogger(__name__)
 
 CLASSIFIER_SYSTEM = """你是一个**严格的路由分类器**。你的唯一工作是：分析用户输入，从专家列表中选出最适合处理的专家。
 
-## 🚨 铁律（违反将导致系统不可用）
+## 🚨 铁律
 
-1. **永远不要输出 is_general_question: true** —— 除非用户输入是纯粹的寒暄（"你好""在吗""谢谢"这种单句问候）。
-2. **只要用户输入包含任何实质性内容（问题、请求、数据、链接、日志、代码、文件路径、URL、命令），必须匹配至少 1 位专家。**
-3. **宁可多匹配几位专家，也绝不能漏匹配。匹配错了专家可以后续调整，但返回"无匹配"会导致用户无法使用。**
-4. **专家名称必须从"可用专家"列表中逐字复制，不得自创。**
+1. 只要用户输入包含任何实质性内容，必须匹配至少 1 位专家。
+2. 宁可多匹配几位专家，绝不能漏匹配。
+3. 专家名称必须从"可用专家"列表中逐字复制。
 
-## 匹配策略（按优先级）
+## 匹配策略（按优先级高低）
 
-1. 从专家名称中提取关键词直接匹配：
-   - 名称含"日志" → 日志类问题必匹配
-   - 名称含"威胁""安全" → 安全类问题必匹配
-   - 名称含"情报""查询" → 查询类问题必匹配
-   - 名称含"计算""数学" → 计算类问题必匹配
-   - 名称含"总结""报告" → 报告类问题必匹配
+### 第一优先：技能匹配
+每个专家的技能标注在括号中（格式："· 技能: xxx"）。如果用户的需求明显属于某个技能范畴，**必须优先路由到拥有该技能的专家**。
 
-2. 从用户输入中识别领域信号：
-   - HTTP请求/URL/路径遍历（/etc/passwd、../、cmd=） → 安全威胁 + 日志
-   - IP地址/端口扫描/SQL注入/XSS → 安全威胁
-   - 错误日志/异常堆栈/404/500 → 日志整理
-   - 数字计算/表达式/数学问题 → 计算
-   - 查询信息/搜索/百科 → 情报查询
-   - 报告生成/事件汇总/总结 → 总结
+技能 → 专家路由示例：
+- 数学计算/算式/数值运算 → 拥有 calculator 技能的专家
+- WAF加白/误报消除/event_id → 拥有 waf-whitelist 技能的专家
+- 网页抓取/内容提取/Firecrawl → 拥有 Firecrawl 技能的专家
+- 自动研究/报告生成/调研分析 → 拥有 AutoResearch 技能的专家
+- 前端设计/界面美化/UI优化 → 拥有 Frontend Design 技能的专家
+- 系统调试/bug排查/错误定位 → 拥有 Systematic Debugging 技能的专家
+- 复杂任务规划/多步骤执行 → 拥有 Superpowers 技能的专家
 
-3. 复杂任务匹配多个专家（按执行流程排序）
+### 第二优先：名称匹配
+- 名称含"日志" → 日志类问题
+- 名称含"威胁""安全" → 安全类问题
+- 名称含"情报""查询" → 查询类问题
+- 名称含"总结""报告" → 报告类问题
 
-## 输出格式（严格 JSON，不要任何其他文字）
+### 第三优先：内容信号
+- HTTP请求/路径遍历/IP地址/端口扫描/SQL注入/XSS → 安全威胁 + 日志
+- 数学表达式/数字运算 → 计算
+- 加白/误报/event_id/WAF → 加白专家
 
+## 输出格式（严格 JSON）
 {"intent":"问题类别","recommended_agents":["专家1","专家2"],"is_general_question":false,"reasoning":"原因"}"""
 
 
@@ -204,9 +208,37 @@ def keyword_fallback_match(user_message: str, agents_catalog: str) -> list[str]:
                 score += 7
 
         # ── 计算类 ──
-        if re.search(r'[\d\+\-\*/\(\)]{3,}|计算|等于|多少|加|减|乘|除|平方|开方|sqrt', msg_lower):
+        if re.search(r'[\d\+\-\*/\(\)]{3,}|计算|等于|多少|加|减|乘|除|平方|开方|sqrt|算式|运算', msg_lower):
             if '计算' in name or '数学' in desc:
+                score += 15
+            # 技能匹配: calculator
+            if 'calculator' in desc.lower() or 'calculator' in name.lower():
                 score += 10
+
+        # ── 代码/编程类 ──
+        if re.search(r'代码|编程|写一个|实现|函数|class|def |import |python|java|js|html|css|组件|接口|api', msg_lower):
+            if '代码' in name or '编程' in desc or '审查' in name:
+                score += 12
+
+        # ── 前端/设计类 ──
+        if re.search(r'前端|界面|ui\b|设计|美化|样式|布局|css|组件|配色|排版|交互', msg_lower):
+            if '前端' in name or 'frontend' in name.lower() or '设计' in desc:
+                score += 15
+
+        # ── 网页抓取/爬虫类 ──
+        if re.search(r'抓取|爬虫|crawl|scrape|网页|提取|firecrawl|markdown|结构化', msg_lower):
+            if 'firecrawl' in name.lower() or '抓取' in desc or '爬虫' in desc:
+                score += 15
+
+        # ── 研究/自动研究类 ──
+        if re.search(r'研究|调研|分析报告|research|综合|归纳|综述|概览|汇总|调查', msg_lower):
+            if 'research' in name.lower() or '研究' in desc:
+                score += 15
+
+        # ── 调试类 ──
+        if re.search(r'调试|debug|bug|错误|异常|报错|排查|定位|修复|fix|traceback|堆栈', msg_lower):
+            if 'debug' in name.lower() or '调试' in desc:
+                score += 15
 
         # ── 总结/报告类 ──
         if re.search(r'总结|汇总|报告|归纳|整理|综述|概览', msg_lower):

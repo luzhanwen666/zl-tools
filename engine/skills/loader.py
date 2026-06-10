@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import logging
 import os
+import re
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -95,7 +96,7 @@ class SkillsLoader:
 
     @staticmethod
     def match_skill(user_message: str, agent: "AgentModel") -> str | None:
-        """关键词匹配（V1），匹配到返回技能名称"""
+        """关键词+正则匹配（V1.2），支持所有常见技能类型"""
         skills = _active_skills(agent)
         if not skills:
             return None
@@ -105,13 +106,64 @@ class SkillsLoader:
 
         for s in skills:
             score = 0
-            for kw in s.name.lower().replace("-", " ").replace("_", " ").split():
-                if len(kw) > 2 and kw in msg:
+            sn = s.name.lower()
+
+            # ── 通用：技能名中的单词出现在用户消息中 ──
+            name_words = re.split(r'[-_\s]+', sn)
+            for w in name_words:
+                if len(w) >= 2 and w in msg:
                     score += 5
-            for kw in (s.description or "").lower().split():
-                if len(kw) > 2 and kw in msg:
+
+            # ── 描述中的关键词 ──
+            desc_lower = (s.description or "").lower()
+            for kw in desc_lower.split():
+                if len(kw) >= 2 and kw in msg:
                     score += 1
 
+            # ── 按技能名强制匹配（高优先级） ──
+            # 计算类
+            if any(kw in sn for kw in ["calculator", "calc", "计算", "算术"]):
+                if re.search(r'[\d\+\-\*/\(\)]{2,}|计算|算式|等于|多少|加|减|乘|除|平方|开方|sqrt|pi|sin|cos|tan|log|abs|pow|max|min|求和|平均|取整', msg):
+                    score += 25
+                if re.search(r'\d+\s*[\+\-\*/]\s*\d+', msg):  # 数字运算表达式
+                    score += 30
+
+            # WAF/加白类
+            if any(kw in sn for kw in ["waf", "whitelist", "加白", "加报", "白名单"]):
+                if re.search(r'加白|加报|whitelist|白名单|误报|消除|event.?id|拦截|waf|误拦|放行|block|false.?positive', msg):
+                    score += 25
+
+            # 网页抓取类
+            if any(kw in sn for kw in ["firecrawl", "crawl", "爬虫", "抓取", "提取"]):
+                if re.search(r'抓取|爬虫|提取|crawl|scrape|网页|url|网站|firecrawl|markdown|内容提取|结构化', msg):
+                    score += 25
+
+            # 研究/报告类
+            if any(kw in sn for kw in ["research", "研究", "auto", "自动研究"]):
+                if re.search(r'研究|调研|报告|分析|research|综合|归纳|综述|概览|汇总|调查', msg):
+                    score += 20
+
+            # 前端设计类
+            if any(kw in sn for kw in ["frontend", "design", "前端", "设计", "界面", "ui"]):
+                if re.search(r'前端|界面|ui|设计|美化|样式|布局|css|html|页面|组件|交互|ux|配色|排版', msg):
+                    score += 25
+
+            # 调试类
+            if any(kw in sn for kw in ["debug", "调试", "systematic"]):
+                if re.search(r'调试|debug|bug|错误|异常|报错|排查|定位|修复|fix|error|traceback|堆栈', msg):
+                    score += 25
+
+            # 代码审查/编程类
+            if any(kw in sn for kw in ["code", "代码", "审查", "编程"]):
+                if re.search(r'代码|编程|写一个|实现|函数|类|import|def |class |review|审查|重构|优化|pep|规范', msg):
+                    score += 22
+
+            # Superpowers（通用增强）
+            if any(kw in sn for kw in ["superpower", "super", "增强"]):
+                if re.search(r'复杂|多步骤|高级|增强|super|规划|自动化|精通', msg):
+                    score += 15
+
+            # ── 分类关键词 ──
             cat_map = {
                 "search": ["搜索", "查找", "查询", "检索"],
                 "code": ["代码", "编程", "bug", "调试"],
@@ -121,18 +173,6 @@ class SkillsLoader:
             for kw in cat_map.get(s.category, []):
                 if kw in msg:
                     score += 3
-
-            # ── WAF / 加白 / 误报 — 强制匹配 waf-whitelist 类技能 ──
-            waf_kw = ["加白", "加报", "whitelist", "白名单", "误报", "消除",
-                       "event_id", "eventid", "拦截", "waf", "误拦", "放行"]
-            if any(kw in msg for kw in waf_kw):
-                # 技能名含 waf 或 whitelist 或 加白 → 强制高分
-                if any(kw in s.name.lower() for kw in ["waf", "whitelist", "加白", "加报"]):
-                    score += 20
-                # 描述含相关词
-                if any(kw in (s.description or "").lower() for kw in
-                       ["加白", "白名单", "whitelist", "waf", "误报", "拦截"]):
-                    score += 12
 
             if score > 0 and (best is None or score > best[1]):
                 best = (s.name, score)
