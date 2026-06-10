@@ -70,11 +70,23 @@
 
         <!-- 消息区域 -->
         <div style="flex:1;overflow-y:auto;padding:12px 0;" id="chatMessages">
+            {% if session.messages.exists %}
+            {% for msg in session.messages.all %}
+            {% if msg.role == "user" %}
+            <div class="chat-msg msg-user"><div class="bubble">{{ msg.content }}</div></div>
+            {% elif msg.role == "system" %}
+            <div class="chat-msg msg-bot msg-system"><div class="msg-meta"><span class="msg-author">{{ msg.agent_name|default:"系统" }}</span></div><div class="bubble">{{ msg.content }}</div></div>
+            {% else %}
+            <div class="chat-msg msg-bot"><div class="msg-meta"><span class="msg-author">{{ msg.agent_name|default:"助手" }}</span><span class="msg-time">{{ msg.created_at|date:"H:i" }}</span></div><div class="bubble">{{ msg.content }}</div></div>
+            {% endif %}
+            {% endfor %}
+            {% else %}
             <div style="text-align:center;padding:80px 0;" id="emptyState">
                 <div style="font-size:48px;margin-bottom:12px;">🤖</div>
                 <p style="font-size:15px;font-weight:600;color:var(--text);">全局智能体为你服务</p>
                 <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">输入任何问题，自动匹配合适的专家团队</p>
             </div>
+            {% endif %}
         </div>
 
         <!-- 输入区域 -->
@@ -281,6 +293,8 @@
     var stopBtn = document.getElementById('stopBtn');
     var msgDiv = document.getElementById('chatMessages');
     var emptyState = document.getElementById('emptyState');
+    // 已加载历史消息时，滚动到底
+    if (!emptyState) { msgDiv.scrollTop = msgDiv.scrollHeight; }
     var hint = document.getElementById('selectionHint');
     var flowToggle = document.getElementById('flowToggle');
     var flowPanel = document.getElementById('flowPanel');
@@ -699,7 +713,7 @@
         data.sessions.forEach(function(s){
             var active = (s.id === currentId) ? ' active' : '';
             var title = (s.title || '新对话').substring(0, 25);
-            html += '<a href="/chat/global/" class="hist-item' + active + '" title="' + escHtml2(s.title) + '">' +
+            html += '<a href="/chat/global/?session_id=' + s.id + '" class="hist-item' + active + '" title="' + escHtml2(s.title) + '">' +
                 '<div class="hist-title">' + escHtml2(title) + (s.message_count > 0 ? ' (' + s.message_count + ')' : '') + '</div>' +
                 '<div class="hist-meta"><span>' + escHtml2(s.agent_name || '') + '</span><span>' + escHtml2(s.updated_at || '') + '</span></div>' +
                 (s.last_message ? '<div class="hist-preview">' + escHtml2(s.last_message) + '</div>' : '') +

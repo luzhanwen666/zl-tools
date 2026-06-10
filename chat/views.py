@@ -196,18 +196,24 @@ def _run_group_chat(session, content):
 # ------------------------------------------------------------------
 
 def global_chat(request):
-    """渲染全局对话页面 — 每次访问创建新会话"""
+    """渲染全局对话页面。
+    不带 session_id 参数 → 新建会话
+    带 session_id=123  → 加载已有会话继续对话
+    """
     from agents.models import Agent
 
     global_agent = get_object_or_404(Agent, is_global=True, is_active=True)
     user = request.user if request.user.is_authenticated else None
 
-    # 每次打开页面创建新会话（不是 get_or_create）
-    session = ChatSession.objects.create(
-        agent=global_agent,
-        created_by=user,
-        title="新对话",
-    )
+    session_id = request.GET.get("session_id", "").strip()
+    if session_id:
+        session = get_object_or_404(ChatSession, pk=session_id)
+    else:
+        session = ChatSession.objects.create(
+            agent=global_agent,
+            created_by=user,
+            title="新对话",
+        )
 
     all_agents = list(
         Agent.objects.filter(is_active=True).values("name", "role", "description")
