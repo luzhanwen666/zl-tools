@@ -389,7 +389,7 @@ def global_chat_send_message_stream(request):
                 async def _stream():
                     actual_group = matched_group
 
-                    # ── LLM群组匹配(与引擎同一个event loop，不额外创建loop) ──
+                    # ── LLM群组匹配(与引擎同一个event loop) ──
                     if not actual_group and not manual_agents and _candidate_groups and _match_llm_config:
                         try:
                             matched_id = await _match_group_by_trigger(
@@ -411,9 +411,8 @@ def global_chat_send_message_stream(request):
                             else:
                                 q.put(("event", {
                                     "type": "routing", "status": "unmatched",
-                                    "content": f"⚠️ LLM群组匹配失败(未返回有效ID)，降级到专家路由",
+                                    "content": f"⚠️ LLM未匹配到群组，交由全局智能体分析",
                                 }))
-                                logger.warning("Group matching returned None from %d candidates", len(_candidate_groups))
                         except Exception as e:
                             q.put(("event", {
                                 "type": "routing", "status": "unmatched",
