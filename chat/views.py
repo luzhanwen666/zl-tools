@@ -497,7 +497,7 @@ def global_chat_send_message_stream(request):
 # ------------------------------------------------------------------
 
 async def _match_group_by_trigger(user_message: str, available_groups, llm_config) -> str | None:
-    """纯LLM驱动 — 不预设兜底，不跳过匹配。"""
+    """纯LLM驱动 — 支持群组自定义match_prompt。"""
     if not llm_config or not available_groups:
         return None
 
@@ -506,17 +506,23 @@ async def _match_group_by_trigger(user_message: str, available_groups, llm_confi
         for g in available_groups
     )
 
-    system_prompt = (
-        "你是群组匹配器。用户输入必须选出一个群组，不能选NONE。\n"
-        "聊天、计算、问答、编程都是合法场景。选描述最接近的群组。\n"
-        "只输出群组ID数字。"
-    )
+    # 检查是否有群组自定义了 match_prompt，有就用，没有用通用版
+    custom_prompt = None
+    for g in available_groups:
+        if g.match_prompt and g.match_prompt.strip():
+            custom_prompt = g.match_prompt.strip()
+            break
 
-    user_prompt = (
-        f"## 可选群组\n{groups_desc}\n\n"
-        f"## 用户输入\n{user_message}\n\n"
-        f"最匹配的群组ID:"
-    )
+    if custom_prompt:
+        system_prompt = custom_prompt.replace("{group_name}", available_groups[0].name).replace("{groups_list}", groups_desc)
+    else:
+        system_prompt = (
+            "你是群组匹配器。必须选一个群组ID。\n"
+            "只输出数字ID，不要其他文字。不要输出'ID:'前缀。\n"
+            "例如: 4"
+        )
+
+    user_prompt = f"## 群组\n{groups_desc}\n\n## 输入\n{user_message}\n\n群组ID:"
 
     try:
         from engine import llm_client as llm_module
@@ -527,24 +533,25 @@ async def _match_group_by_trigger(user_message: str, available_groups, llm_confi
                 {"role": "user", "content": user_prompt},
             ],
             api_base=llm_config.api_base, api_key=llm_config.api_key,
-            max_tokens=20, temperature=0.0,
+            max_tokens=10, temperature=0.0,
         )
     except Exception:
-        logger.exception("LLM failed during group matching")
+        logger.exception("Group matching LLM call failed")
         return None
 
     resp = response.strip()
-    logger.info("Group matching LLM raw response: %s", resp[:50])
+    logger.info("Group match raw response: '%s'", resp[:60])
 
-    # 从回复中提取数字ID（兼容各种LLM输出格式）
     import re
-    match = re.search(r'(\d+)', resp)
-    if match:
-        group_id = match.group(1)
-        logger.info("Group matched: ID=%s from response '%s'", group_id, resp[:30])
-        return group_id
+    # 提取数字：匹配独立数字或"ID:X"格式
+    for pattern in [r'\b(\d+)\b', r'(\d+)']:
+        m = re.search(pattern, resp)
+        if m:
+            gid = m.group(1)
+            logger.info("Group matched: ID=%s", gid)
+            return gid
 
-    logger.warning("Group matching failed to extract ID from: '%s'", resp[:30])
+    logger.warning("Group match: no digit in response '%s'", resp[:50])
     return None
 
 

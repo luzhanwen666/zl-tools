@@ -11,6 +11,10 @@ class AgentGroup(models.Model):
         "触发描述", blank=True, default="",
         help_text="描述什么场景下应触发此群组，全局智能体根据用户输入匹配。例如：\"当用户请求WAF安全测试或站点漏洞扫描时触发\""
     )
+    match_prompt = models.TextField(
+        "匹配提示词", blank=True, default="",
+        help_text="自定义本群组的匹配提示词，为空则使用全局默认。可包含 {group_name}、{group_desc}、{user_message} 变量"
+    )
     is_active = models.BooleanField("启用", default=True)
     created_at = models.DateTimeField("创建时间", auto_now_add=True)
     updated_at = models.DateTimeField("更新时间", auto_now=True)
