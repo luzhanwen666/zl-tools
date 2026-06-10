@@ -397,7 +397,6 @@ def global_chat_send_message_stream(request):
                             )
                             if matched_id:
                                 from agents.models import AgentGroup as AG
-                                # sync_to_async the ORM lookup
                                 from asgiref.sync import sync_to_async
                                 @sync_to_async
                                 def _get_group():
@@ -411,6 +410,16 @@ def global_chat_send_message_stream(request):
                                     }))
                         except Exception as e:
                             logger.exception("Group matching in engine thread failed")
+
+                    # LLM匹配失败或没有候选时，用第一个候选群组兜底（不再降级到旧路由）
+                    if not actual_group and not manual_agents and _candidate_groups:
+                        actual_group = _candidate_groups[0]
+                        q.put(("event", {
+                            "type": "routing", "status": "group",
+                            "content": f"🔗 使用兜底群组「{actual_group.name}」",
+                            "group_name": actual_group.name,
+                        }))
+                        logger.info("Falling back to first group: %s", actual_group.name)
 
                     if actual_group:
                         # 预加载拓扑(如果之前没加载)
