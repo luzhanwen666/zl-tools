@@ -521,13 +521,14 @@ async def _match_group_by_trigger(user_message: str, available_groups, llm_confi
     try:
         from engine import llm_client as llm_module
         response = await llm_module.llm_client.chat(
-            provider=llm_config.provider, model_id=llm_config.model_id,
+            provider=llm_config.provider,
+            model_id=llm_config.model_id,
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
             api_base=llm_config.api_base, api_key=llm_config.api_key,
-            max_tokens=50, temperature=0.0,
+            max_tokens=50, temperature=0.1,
         )
     except Exception:
         logger.exception("Group matching LLM call failed")

@@ -211,18 +211,30 @@ class LLMClient:
         }
 
         url = _build_anthropic_url(base_url)
+        logger.info("Anthropic URL: %s, model: %s, msg_count: %d", url, model, len(api_messages))
+
         async with httpx.AsyncClient(timeout=self.timeout) as client:
             resp = await client.post(url, json=payload, headers=headers)
             resp.raise_for_status()
             data = resp.json()
-            logger.debug("Anthropic response: %s", json.dumps(data, ensure_ascii=False)[:300])
+
+        # 完整打印响应用于排查空内容问题
+        logger.info("Anthropic raw response keys: %s, content_len: %d",
+                     list(data.keys()), len(data.get("content", [])))
+        if data.get("content"):
+            for i, block in enumerate(data["content"]):
+                logger.info("  block[%d] type=%s text_len=%d", i, block.get("type"), len(str(block.get("text", ""))))
+        else:
+            logger.warning("Anthropic response has no content array. Full data: %s",
+                           json.dumps(data, ensure_ascii=False)[:300])
 
         content_parts = []
         tool_use_parts = []
         for block in data.get("content", []):
-            if block["type"] == "text":
-                content_parts.append(block["text"])
-            elif block["type"] == "tool_use":
+            t = block.get("type", "")
+            if t == "text":
+                content_parts.append(block.get("text", ""))
+            elif t == "tool_use":
                 tool_use_parts.append(block)
 
         if tool_use_parts:
@@ -230,9 +242,15 @@ class LLMClient:
 
         result = "\n".join(content_parts).strip()
         if not result:
-            # Anthropic 可能把短回复放到别的结构里，尝试从 stop_reason 或额外字段取
-            result = str(data.get("stop_reason", ""))
-            logger.warning("Anthropic returned empty content, stop_reason=%s", result)
+            # 兼容某些网关/代理的 OpenAI 格式回包
+            # 尝试从 choices[0].message.content 中取
+            choices = data.get("choices", [])
+            if choices:
+                result = choices[0].get("message", {}).get("content", "")
+            # 仍然为空？记录 stop_reason 便于排查
+            if not result:
+                logger.warning("Anthropic empty content. stop_reason=%s keys=%s",
+                               data.get("stop_reason", ""), list(data.keys())[:5])
         return result
 
     async def _stream_anthropic(
