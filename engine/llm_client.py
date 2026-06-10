@@ -215,6 +215,7 @@ class LLMClient:
             resp = await client.post(url, json=payload, headers=headers)
             resp.raise_for_status()
             data = resp.json()
+            logger.debug("Anthropic response: %s", json.dumps(data, ensure_ascii=False)[:300])
 
         content_parts = []
         tool_use_parts = []
@@ -227,7 +228,12 @@ class LLMClient:
         if tool_use_parts:
             return json.dumps({"content": "\n".join(content_parts), "tool_uses": tool_use_parts}, ensure_ascii=False)
 
-        return "\n".join(content_parts)
+        result = "\n".join(content_parts).strip()
+        if not result:
+            # Anthropic 可能把短回复放到别的结构里，尝试从 stop_reason 或额外字段取
+            result = str(data.get("stop_reason", ""))
+            logger.warning("Anthropic returned empty content, stop_reason=%s", result)
+        return result
 
     async def _stream_anthropic(
         self, base_url: str, model: str, messages: list[dict],

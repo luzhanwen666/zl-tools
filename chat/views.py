@@ -527,7 +527,7 @@ async def _match_group_by_trigger(user_message: str, available_groups, llm_confi
                 {"role": "user", "content": user_prompt},
             ],
             api_base=llm_config.api_base, api_key=llm_config.api_key,
-            max_tokens=10, temperature=0.0,
+            max_tokens=50, temperature=0.0,
         )
     except Exception:
         logger.exception("Group matching LLM call failed")
