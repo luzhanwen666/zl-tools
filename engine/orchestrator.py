@@ -87,18 +87,11 @@ class GlobalOrchestrator:
         # 解析流水线步骤顺序
         steps = await self._resolve_steps(pipeline, experts)
 
-        # 1. 协调者分配任务
-        task_msg = await self._assign_task(coordinator, user_message, experts)
-        all_msgs.append(task_msg)
-
-        # 2. 专家独立执行
-        expert_msgs = await self._run_experts(experts, user_message, task_msg, steps)
+        # 专家直接执行（不再让协调者先分配任务）
+        expert_msgs = await self._run_experts(experts, user_message, None, steps)
         all_msgs.extend(expert_msgs)
 
-        # 3. 协调者综合总结
-        synthesis = await self._synthesize(coordinator, user_message, expert_msgs)
-        all_msgs.append(synthesis)
-
+        # 专家执行完毕 → 直接返回，不再由协调者总结
         return all_msgs
 
     async def run_stream(
@@ -119,16 +112,9 @@ class GlobalOrchestrator:
 
         steps = await self._resolve_steps(pipeline, experts)
 
-        # 1. 分配任务
-        yield {"type": "status", "agent_name": coordinator.name,
-               "content": f"正在为 {len(experts)} 位专家分配任务..."}
-        task_msg = await self._assign_task(coordinator, user_message, experts)
-        yield {"type": "assistant", "content": task_msg.content,
-               "agent_name": task_msg.name, "role": "coordinator"}
-
-        # 2. 专家执行（逐步 yield 思考/工具调用/最终回复）
+        # 专家直接执行（不再让协调者先分配任务）
         expert_msgs: list[AgentMessage] = []
-        async for event in self._run_experts_stream(experts, user_message, task_msg, steps):
+        async for event in self._run_experts_stream(experts, user_message, None, steps):
             yield event
             if event.get("type") == "assistant":
                 expert_msgs.append(AgentMessage(
@@ -137,13 +123,7 @@ class GlobalOrchestrator:
                     metadata=event.get("metadata", {}),
                 ))
 
-        # 3. 总结
-        yield {"type": "status", "agent_name": coordinator.name,
-               "content": "正在综合专家分析结果..."}
-        synthesis = await self._synthesize(coordinator, user_message, expert_msgs)
-        yield {"type": "assistant", "content": synthesis.content,
-               "agent_name": synthesis.name, "role": "coordinator",
-               "metadata": synthesis.metadata}
+        # 专家执行完毕 → 直接结束，不再由协调者总结
         yield {"type": "done"}
 
     # ── 内部方法 ─────────────────────────────────────────────────
@@ -241,7 +221,7 @@ class GlobalOrchestrator:
         return results
 
     async def _run_single_expert(
-        self, expert: "AgentModel", user_message: str, task_msg: AgentMessage
+        self, expert: "AgentModel", user_message: str, task_msg: AgentMessage | None = None
     ) -> AgentMessage:
         """执行单个专家的完整分析 — 技能渐进式披露"""
         tools = await get_tools_for_agent_async(expert, self.tool_registry)
@@ -249,13 +229,15 @@ class GlobalOrchestrator:
         # ── 技能：Layer 1 已注入 system prompt，LLM 自主 [USE_SKILL:X] 决定何时加载 Layer 2 ──
         system_prompt = self._build_expert_prompt(expert, user_message, tools)
 
+        context = [task_msg] if task_msg else []
+
         executor = get_executor(expert, tool_registry=self.tool_registry)
 
         try:
             result: AgentExecutionResult = await executor.execute(
                 agent=expert,
                 user_message=user_message,
-                context_messages=[task_msg],
+                context_messages=context,
                 tools=tools if tools else None,
                 system_prompt_override=system_prompt,
             )
@@ -281,7 +263,7 @@ class GlobalOrchestrator:
         self,
         experts: list["AgentModel"],
         user_message: str,
-        task_msg: AgentMessage,
+        task_msg: AgentMessage | None,
         steps: list[dict],
     ) -> AsyncGenerator[dict, None]:
         """流式执行所有专家"""
@@ -313,7 +295,7 @@ class GlobalOrchestrator:
                 result: AgentExecutionResult = await executor.execute(
                     agent=expert,
                     user_message=user_message,
-                    context_messages=[task_msg],
+                    context_messages=[task_msg] if task_msg else [],
                     tools=tools if tools else None,
                     system_prompt_override=system_prompt,
                 )
