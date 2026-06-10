@@ -15,15 +15,21 @@
 
 {% block content %}
 <div style="display:flex;height:calc(100vh - 80px);margin:0 -24px 0;">
-    <!-- 左侧组件面板 -->
-    <div style="width:220px;min-width:220px;background:var(--bg);border-right:1px solid var(--border);padding:12px;overflow-y:auto;">
+    <!-- 左侧面板 -->
+    <div style="width:220px;min-width:220px;background:var(--bg);border-right:1px solid var(--border);padding:12px;overflow-y:auto;display:flex;flex-direction:column;">
+        <!-- 触发场景 -->
+        <div style="flex-shrink:0;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);">
+            <h3 style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">🎯 触发场景描述</h3>
+            <textarea id="triggerPrompt" placeholder="例: 当用户请求WAF安全测试或站点漏洞扫描时触发"
+                      style="width:100%;min-height:60px;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:11px;font-family:inherit;resize:vertical;background:var(--bg-card);color:var(--text);"
+            >{{ group.trigger_prompt|default:"" }}</textarea>
+        </div>
+
         <h3 style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">📦 智能体组件</h3>
         {% for a in available_agents %}
-        <div class="comp-item agent-comp" draggable="true" data-agent-id="{{ a.pk }}" data-agent-name="{{ a.name }}" data-agent-type="{{ a.agent_type }}" data-label="{{ a.name }}"
+        <div class="comp-item" draggable="true" data-agent-id="{{ a.pk }}" data-agent-name="{{ a.name }}" data-agent-type="{{ a.agent_type }}" data-label="{{ a.name }}"
              style="padding:8px 10px;margin-bottom:4px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:6px;cursor:grab;font-size:12px;transition:all .15s;"
-             onmouseover="this.style.borderColor='var(--primary)';this.style.boxShadow='0 2px 8px var(--primary-glow)'"
-             onmouseout="this.style.borderColor='var(--border-light)';this.style.boxShadow='none'"
-             ondragstart="handleDragStart(event)">
+             onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-light)'" ondragstart="handleDragStart(event)">
             <span style="font-weight:600;color:var(--text);">{{ a.name }}</span>
             <span style="font-size:10px;color:var(--text-muted);display:block;">
                 {% if a.agent_type == "simple" %}⚡ Simple{% elif a.agent_type == "reflection" %}🪞 Reflect{% elif a.agent_type == "plan_and_solve" %}📋 Plan{% else %}🔄 ReAct{% endif %}
@@ -33,257 +39,319 @@
         {% endfor %}
 
         <h3 style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin:16px 0 10px;">📐 基础组件</h3>
-        <div class="comp-item basic-comp" draggable="true" data-node-type="start" data-label="开始"
+        <div class="comp-item" draggable="true" data-node-type="start" data-label="开始"
              style="padding:8px 10px;margin-bottom:4px;background:var(--bg-card);border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:12px;"
              onmouseover="this.style.borderColor='var(--warning)'" onmouseout="this.style.borderColor='var(--border)'" ondragstart="handleDragStart(event)">
             🟢 开始
         </div>
-        <div class="comp-item basic-comp" draggable="true" data-node-type="end" data-label="结束"
+        <div class="comp-item" draggable="true" data-node-type="end" data-label="结束"
              style="padding:8px 10px;margin-bottom:4px;background:var(--bg-card);border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:12px;"
              onmouseover="this.style.borderColor='var(--warning)'" onmouseout="this.style.borderColor='var(--border)'" ondragstart="handleDragStart(event)">
             🔴 结束
         </div>
-        <div class="comp-item basic-comp" draggable="true" data-node-type="condition" data-label="条件判断"
+        <div class="comp-item" draggable="true" data-node-type="condition" data-label="条件判断"
              style="padding:8px 10px;margin-bottom:4px;background:var(--bg-card);border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:12px;"
              onmouseover="this.style.borderColor='var(--warning)'" onmouseout="this.style.borderColor='var(--border)'" ondragstart="handleDragStart(event)">
             🔀 条件判断
         </div>
-        <div class="comp-item basic-comp" draggable="true" data-node-type="parallel" data-label="并行分发"
+        <div class="comp-item" draggable="true" data-node-type="parallel" data-label="并行分发"
              style="padding:8px 10px;margin-bottom:4px;background:var(--bg-card);border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:12px;"
              onmouseover="this.style.borderColor='var(--warning)'" onmouseout="this.style.borderColor='var(--border)'" ondragstart="handleDragStart(event)">
             ⫼ 并行分发
         </div>
-        <div class="comp-item basic-comp" draggable="true" data-node-type="merge" data-label="结果合并"
+        <div class="comp-item" draggable="true" data-node-type="merge" data-label="结果合并"
              style="padding:8px 10px;margin-bottom:4px;background:var(--bg-card);border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:12px;"
              onmouseover="this.style.borderColor='var(--warning)'" onmouseout="this.style.borderColor='var(--border)'" ondragstart="handleDragStart(event)">
             ⫻ 结果合并
         </div>
+
+        <div style="font-size:10px;color:var(--text-muted);margin-top:16px;padding:10px;background:var(--bg-card);border-radius:8px;border:1px solid var(--border-light);line-height:1.6;">
+            <b>操作提示</b><br>
+            拖拽组件到画布<br>
+            按住节点底部<b>圆点</b>拖向目标<br>
+            节点顶部 → 松开连线<br>
+            双击节点删除
+        </div>
     </div>
 
-    <!-- 中间画布 -->
+    <!-- 画布 -->
     <div id="canvas" style="flex:1;background:linear-gradient(90deg,rgba(0,0,0,.02) 1px,transparent 1px),linear-gradient(rgba(0,0,0,.02) 1px,transparent 1px);background-size:24px 24px;overflow:auto;position:relative;"
-         ondragover="event.preventDefault()" ondrop="handleDrop(event)" onmousedown="handleCanvasClick(event)">
-        <svg id="svg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
-            <g id="edgesGroup"></g>
+         ondragover="event.preventDefault()" ondrop="handleDrop(event)" onclick="handleCanvasClick(event)">
+        <!-- SVG 连线层 -->
+        <svg id="svgLayer" style="position:absolute;top:0;left:0;z-index:5;overflow:visible;pointer-events:none;">
+            <defs>
+                <marker id="arrowHead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#6366f1"/>
+                </marker>
+            </defs>
+            <g id="edgesGroup" style="pointer-events:stroke;"></g>
+            <!-- 临时拖拽线 -->
+            <line id="tempLine" stroke="#f59e0b" stroke-width="3" stroke-dasharray="6,3" style="display:none;"/>
         </svg>
-        <div id="nodesLayer" style="position:relative;"></div>
+        <!-- 节点层 -->
+        <div id="nodesLayer" style="position:relative;z-index:10;"></div>
     </div>
 
-    <!-- 右侧属性面板 -->
-    <div id="propertiesPanel" style="width:260px;min-width:260px;background:var(--bg);border-left:1px solid var(--border);padding:16px;overflow-y:auto;font-size:13px;">
+    <!-- 右侧属性 -->
+    <div id="propertiesPanel" style="width:240px;min-width:240px;background:var(--bg);border-left:1px solid var(--border);padding:16px;overflow-y:auto;font-size:13px;">
         <h3 style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">📋 节点属性</h3>
-        <div id="propContent" style="color:var(--text-muted);">点击画布中的节点查看属性</div>
+        <div id="propContent" style="color:var(--text-muted);">点击画布节点查看属性</div>
     </div>
 </div>
 
-{% if nodes %}
-<script>
-// 加载已有拓扑
-var existingNodes = {{ nodes_json|safe|default:"[]" }};
-var existingEdges = {{ edges_json|safe|default:"[]" }};
-</script>
-{% endif %}
-
 <style>
 #canvas { cursor:crosshair; }
-.node-card {
+.node {
     position:absolute; min-width:140px; max-width:200px;
     background:var(--bg-card); border:2px solid var(--border);
     border-radius:10px; box-shadow:var(--shadow-md);
     cursor:move; user-select:none; transition:box-shadow .15s;
-    padding:10px 14px; z-index:10;
+    padding:10px 34px 10px 14px; z-index:10;
 }
-.node-card:hover { box-shadow:var(--shadow-lg); }
-.node-card.selected { border-color:var(--primary); box-shadow:0 0 0 3px var(--primary-glow); }
-.node-card.agent-node { border-color:#6366f1; }
-.node-card.start-node { border-color:#10b981; background:#ecfdf5; }
-.node-card.end-node { border-color:#ef4444; background:#fef2f2; }
-.node-card.condition-node { border-color:#f59e0b; background:#fffbeb; }
-.node-card.parallel-node { border-color:#8b5cf6; background:#f5f3ff; }
-.node-card.merge-node { border-color:#06b6d4; background:#ecfeff; }
-.node-card .node-label { font-weight:700; font-size:12px; color:var(--text); margin-bottom:2px; }
-.node-card .node-type { font-size:10px; color:var(--text-muted); }
-.node-card .connector {
-    position:absolute; width:14px; height:14px; background:var(--primary);
-    border:2px solid #fff; border-radius:50%; cursor:crosshair; z-index:20;
-    box-shadow:0 1px 3px rgba(0,0,0,.2);
+.node:hover { box-shadow:var(--shadow-lg); }
+.node.selected { border-color:var(--primary); box-shadow:0 0 0 3px var(--primary-glow); }
+.node.agent-node { border-color:#6366f1; }
+.node.start-node { border-color:#10b981; background:#ecfdf5; }
+.node.end-node { border-color:#ef4444; background:#fef2f2; }
+.node.condition-node { border-color:#f59e0b; background:#fffbeb; }
+.node.parallel-node { border-color:#8b5cf6; background:#f5f3ff; }
+.node.merge-node { border-color:#06b6d4; background:#ecfeff; }
+.node .nl { font-weight:700; font-size:12px; color:var(--text); margin-bottom:2px; }
+.node .nt { font-size:10px; color:var(--text-muted); }
+
+/* 连线拖拽手柄 */
+.drag-out {
+    position:absolute; right:-2px; top:50%; margin-top:-16px;
+    width:28px; height:32px; border-radius:6px;
+    background:#6366f1; border:2px solid #fff;
+    cursor:grab; z-index:25; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 2px 6px rgba(99,102,241,.3);
+    transition:all .15s;
 }
-.node-card .connector:hover { transform:scale(1.3); }
-.node-card .connector.out { bottom:-7px; left:50%; margin-left:-7px; }
-.node-card .connector.in { top:-7px; left:50%; margin-left:-7px; }
+.drag-out:hover { transform:scale(1.15); background:#4f46e5; }
+.drag-out.dragging { cursor:grabbing; background:#f59e0b; }
+.drag-out::after { content:'→'; color:#fff; font-size:16px; font-weight:700; }
+/* 连线接收区 */
+.drag-in {
+    position:absolute; left:-2px; top:50%; margin-top:-16px;
+    width:28px; height:32px; border-radius:6px;
+    background:#10b981; border:2px solid #fff;
+    z-index:25; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 2px 6px rgba(16,185,129,.3);
+    transition:all .15s;
+}
+.drag-in:hover { transform:scale(1.15); background:#059669; }
+.drag-in.drag-over { background:#f59e0b; transform:scale(1.2); }
+.drag-in::after { content:'●'; color:#fff; font-size:10px; }
 </style>
 
 <script>
 var tempCounter = 0;
-var nodes = [];   // {temp_id, label, node_type, agent_id, agent_name, position_x, position_y, config:{}}
-var edges = [];   // {source_temp_id, target_temp_id, label, condition}
+var nodes = [];
+var edges = [];
 var selectedNodeId = null;
-var connectingFrom = null;
 var currentDragNode = null;
+var draggingLine = null;  // {fromNodeId, svgLine}
+var dragStartX = 0, dragStartY = 0;
 
 // ── 加载已有拓扑 ──
 {% for n in nodes %}
-nodes.push({
-    temp_id: 'n{{ n.pk }}',
-    label: '{{ n.label|escapejs }}',
-    node_type: '{{ n.node_type }}',
-    agent_id: {% if n.agent_id %}{{ n.agent_id }}{% else %}null{% endif %},
-    agent_name: '{{ n.agent.name|default:"" }}',
-    position_x: {{ n.position_x }},
-    position_y: {{ n.position_y }},
-    config: {{ n.config|safe|default:"{}" }}
-});
+nodes.push({temp_id:'n{{ n.pk }}',label:'{{ n.label|escapejs }}',node_type:'{{ n.node_type }}',
+    agent_id:{% if n.agent_id %}{{ n.agent_id }}{% else %}null{% endif %},
+    agent_name:'{{ n.agent.name|default:"" }}',
+    position_x:{{ n.position_x }},position_y:{{ n.position_y }},config:{{ n.config|safe|default:"{}" }}});
 {% endfor %}
 {% for e in edges %}
-edges.push({
-    source_temp_id: 'n{{ e.source_id }}',
-    target_temp_id: 'n{{ e.target_id }}',
-    label: '{{ e.label|escapejs }}',
-    condition: '{{ e.condition|escapejs }}'
-});
+edges.push({source_temp_id:'n{{ e.source_id }}',target_temp_id:'n{{ e.target_id }}',
+    label:'{{ e.label|escapejs }}',condition:'{{ e.condition|escapejs }}'});
 {% endfor %}
 renderAll();
 
-// ── 拖拽 ──
+// ── 从组件面板拖入画布 ──
 function handleDragStart(e) {
-    var item = e.target.closest('.comp-item');
-    if (!item) return;
+    var el = e.target.closest('.comp-item');
+    if (!el) return;
     e.dataTransfer.setData('text/plain', JSON.stringify({
-        label: item.dataset.label,
-        node_type: item.dataset.nodeType || 'agent',
-        agent_id: item.dataset.agentId || null,
-        agent_name: item.dataset.agentName || ''
+        label: el.dataset.label,
+        node_type: el.dataset.nodeType || 'agent',
+        agent_id: el.dataset.agentId || null,
+        agent_name: el.dataset.agentName || ''
     }));
 }
-
 function handleDrop(e) {
     e.preventDefault();
-    try {
-        var data = JSON.parse(e.dataTransfer.getData('text/plain'));
-    } catch(ex) { return; }
-    var canvas = document.getElementById('canvas');
-    var rect = canvas.getBoundingClientRect();
-    var x = e.clientX - rect.left + canvas.scrollLeft - 80;
-    var y = e.clientY - rect.top + canvas.scrollTop - 30;
-    var id = 'n' + (++tempCounter);
-    nodes.push({
-        temp_id: id,
-        label: data.label || '新节点',
-        node_type: data.node_type || 'agent',
-        agent_id: data.agent_id || null,
-        agent_name: data.agent_name || '',
-        position_x: x, position_y: y,
-        config: {}
-    });
+    try { var data = JSON.parse(e.dataTransfer.getData('text/plain')); } catch(ex) { return; }
+    var cvs = document.getElementById('canvas');
+    var rect = cvs.getBoundingClientRect();
+    var x = Math.max(0, e.clientX - rect.left + cvs.scrollLeft - 70);
+    var y = Math.max(0, e.clientY - rect.top + cvs.scrollTop - 25);
+    nodes.push({temp_id:'n'+(++tempCounter),label:data.label||'新节点',node_type:data.node_type||'agent',
+        agent_id:data.agent_id||null,agent_name:data.agent_name||'',position_x:x,position_y:y,config:{}});
     renderAll();
 }
 
-// ── 渲染 ──
+// ── 渲染所有节点和连线 ──
 function renderAll() {
-    document.getElementById('nodesLayer').innerHTML = '';
+    var layer = document.getElementById('nodesLayer');
+    layer.innerHTML = '';
     nodes.forEach(function(n){
-        var styleClass = n.node_type==='start'?'start-node':n.node_type==='end'?'end-node':
+        var cls = n.node_type==='start'?'start-node':n.node_type==='end'?'end-node':
             n.node_type==='condition'?'condition-node':n.node_type==='parallel'?'parallel-node':
             n.node_type==='merge'?'merge-node':'agent-node';
-        var div = document.createElement('div');
-        div.className = 'node-card ' + styleClass + (n.temp_id===selectedNodeId?' selected':'');
-        div.id = 'node-' + n.temp_id;
-        div.style.left = n.position_x + 'px';
-        div.style.top = n.position_y + 'px';
-        div.setAttribute('data-node-id', n.temp_id);
         var typeLabel = n.node_type==='start'?'开始':n.node_type==='end'?'结束':
             n.node_type==='condition'?'条件判断':n.node_type==='parallel'?'并行分发':
             n.node_type==='merge'?'结果合并':n.agent_name||'智能体';
         var icon = n.node_type==='start'?'🟢':n.node_type==='end'?'🔴':'';
+        var div = document.createElement('div');
+        div.className = 'node '+cls+(n.temp_id===selectedNodeId?' selected':'');
+        div.id = 'node-'+n.temp_id;
+        div.style.left = n.position_x+'px'; div.style.top = n.position_y+'px';
+        div.setAttribute('data-id', n.temp_id);
+
         div.innerHTML =
-            '<div class="node-label">'+icon+' '+escHtml(n.label)+'</div>'+
-            '<div class="node-type">'+escHtml(typeLabel)+'</div>'+
-            '<div class="connector out" onclick="startConnection(\''+n.temp_id+'\');event.stopPropagation()" title="连线"></div>'+
-            '<div class="connector in" title="接收"></div>';
-        div.addEventListener('mousedown', function(ev){ startDragNode(ev, n.temp_id); });
+            '<div class="drag-in" data-id="'+n.temp_id+'"'
+            +' onmouseup="handleLineDrop(event,\''+n.temp_id+'\')"'
+            +' onmouseenter="highlightInTarget(event)" onmouseleave="unhighlightInTarget(event)"></div>'
+            +'<div class="nl">'+icon+' '+esc(n.label)+'</div>'
+            +'<div class="nt">'+esc(typeLabel)+'</div>'
+            +'<div class="drag-out" data-id="'+n.temp_id+'"'
+            +' onmousedown="startLineDrag(event,\''+n.temp_id+'\')"'
+            +' title="从此拖向目标节点"></div>';
+
+        div.addEventListener('mousedown', function(ev){ startNodeDrag(ev, n.temp_id); });
         div.addEventListener('click', function(ev){ selectNode(n.temp_id); ev.stopPropagation(); });
-        div.addEventListener('dblclick', function(ev){ deleteNode(n.temp_id); renderAll(); selectNode(null); });
-        document.getElementById('nodesLayer').appendChild(div);
+        div.addEventListener('dblclick', function(ev){ removeNode(n.temp_id); selectNode(null); renderAll(); });
+        layer.appendChild(div);
     });
     renderEdges();
 }
 
+// ── 连线拖拽 ──
+function startLineDrag(e, fromId) {
+    e.preventDefault(); e.stopPropagation();
+    var n = findNode(fromId); if (!n) return;
+    var cvs = document.getElementById('canvas');
+    var rect = cvs.getBoundingClientRect();
+    dragStartX = n.position_x + 70;
+    dragStartY = n.position_y + 40;
+    draggingLine = {fromNodeId: fromId};
+
+    var tl = document.getElementById('tempLine');
+    var sx = dragStartX + cvs.scrollLeft;
+    var sy = dragStartY + cvs.scrollTop;
+    tl.setAttribute('x1', sx); tl.setAttribute('y1', sy);
+    tl.setAttribute('x2', e.clientX - rect.left + cvs.scrollLeft);
+    tl.setAttribute('y2', e.clientY - rect.top + cvs.scrollTop);
+    tl.style.display = '';
+    // mark the source node
+    document.querySelectorAll('.drag-out').forEach(function(el){ el.classList.remove('dragging'); });
+    var srcEl = document.querySelector('.drag-out[data-id="'+fromId+'"]');
+    if (srcEl) srcEl.classList.add('dragging');
+}
+
+document.addEventListener('mousemove', function(e) {
+    if (!draggingLine) return;
+    var cvs = document.getElementById('canvas');
+    var rect = cvs.getBoundingClientRect();
+    var tl = document.getElementById('tempLine');
+    tl.setAttribute('x2', e.clientX - rect.left + cvs.scrollLeft);
+    tl.setAttribute('y2', e.clientY - rect.top + cvs.scrollTop);
+});
+
+function handleLineDrop(e, targetId) {
+    if (!draggingLine) return;
+    e.preventDefault(); e.stopPropagation();
+    var fromId = draggingLine.fromNodeId;
+    if (fromId && targetId && fromId !== targetId &&
+        !edges.find(function(ed){ return ed.source_temp_id===fromId && ed.target_temp_id===targetId; })) {
+        edges.push({source_temp_id:fromId, target_temp_id:targetId, label:'', condition:''});
+    }
+    finishLineDrag();
+    renderAll();
+}
+
+document.addEventListener('mouseup', function(e) {
+    if (draggingLine) {
+        // 检查是否落在 drag-in 上
+        var target = e.target.closest('.drag-in');
+        if (target) {
+            handleLineDrop(e, target.getAttribute('data-id'));
+        } else {
+            finishLineDrag();
+        }
+    }
+});
+
+function highlightInTarget(e) {
+    if (draggingLine && e.target.classList.contains('drag-in')) {
+        e.target.classList.add('drag-over');
+    }
+}
+function unhighlightInTarget(e) {
+    e.target.classList.remove('drag-over');
+}
+
+function finishLineDrag() {
+    draggingLine = null;
+    document.getElementById('tempLine').style.display = 'none';
+    document.querySelectorAll('.drag-out.dragging').forEach(function(el){ el.classList.remove('dragging'); });
+    document.querySelectorAll('.drag-in.drag-over').forEach(function(el){ el.classList.remove('drag-over'); });
+}
+
+// ── SVG 连线渲染 ──
 function renderEdges() {
     var g = document.getElementById('edgesGroup');
     g.innerHTML = '';
     edges.forEach(function(e){
         var sn = findNode(e.source_temp_id), tn = findNode(e.target_temp_id);
         if (!sn || !tn) return;
-        var x1 = sn.position_x + 70, y1 = sn.position_y + 50;
-        var x2 = tn.position_x + 70, y2 = tn.position_y;
+        var x1 = sn.position_x + 70, y1 = sn.position_y + 40;
+        var x2 = tn.position_x, y2 = tn.position_y + 40;
         var line = document.createElementNS('http://www.w3.org/2000/svg','line');
         line.setAttribute('x1', x1); line.setAttribute('y1', y1);
         line.setAttribute('x2', x2); line.setAttribute('y2', y2);
-        line.setAttribute('stroke', '#6366f1'); line.setAttribute('stroke-width','2');
-        line.setAttribute('marker-end','url(#arrow)');
-        line.style.pointerEvents = 'none';
+        line.setAttribute('stroke','#6366f1'); line.setAttribute('stroke-width','2.5');
+        line.setAttribute('marker-end','url(#arrowHead)');
         g.appendChild(line);
     });
-    // arrow marker
-    if (!document.getElementById('arrow')){
-        var defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
-        var marker = document.createElementNS('http://www.w3.org/2000/svg','marker');
-        marker.setAttribute('id','arrow'); marker.setAttribute('markerWidth','8'); marker.setAttribute('markerHeight','6');
-        marker.setAttribute('refX','8'); marker.setAttribute('refY','3'); marker.setAttribute('orient','auto');
-        var poly = document.createElementNS('http://www.w3.org/2000/svg','polygon');
-        poly.setAttribute('points','0 0, 8 3, 0 6'); poly.setAttribute('fill','#6366f1');
-        marker.appendChild(poly); defs.appendChild(marker);
-        document.getElementById('svg').appendChild(defs);
-    }
 }
 
-// ── 连线 ──
-function startConnection(fromId) { connectingFrom = fromId; }
-document.addEventListener('click', function(e){
-    if (connectingFrom && e.target.classList.contains('in')){
-        var targetId = e.target.closest('.node-card').getAttribute('data-node-id');
-        if (targetId && targetId !== connectingFrom) {
-            if (!edges.find(function(ed){ return ed.source_temp_id===connectingFrom && ed.target_temp_id===targetId; })){
-                edges.push({source_temp_id:connectingFrom, target_temp_id:targetId, label:'', condition:''});
-                renderAll();
-            }
-        }
-        connectingFrom = null;
-    }
-});
-
-// ── 选中 ──
-function selectNode(id) {
-    selectedNodeId = id;
-    renderAll();
-    var panel = document.getElementById('propContent');
-    var n = findNode(id);
-    if (!n) { panel.innerHTML = '点击画布中的节点查看属性'; return; }
-    var html = '<p><b>标签:</b> '+escHtml(n.label)+'</p>';
-    html += '<p><b>类型:</b> '+escHtml(n.node_type)+'</p>';
-    if (n.agent_id) html += '<p><b>智能体:</b> '+escHtml(n.agent_name||'ID:'+n.agent_id)+'</p>';
-    html += '<button onclick="deleteNode(\''+n.temp_id+'\');renderAll();selectNode(null)" style="margin-top:12px;padding:6px 14px;background:#ef4444;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;">删除节点</button>';
-    panel.innerHTML = html;
-}
-
-function handleCanvasClick(e) { if (e.target===document.getElementById('canvas')||e.target===document.getElementById('nodesLayer')) selectNode(null); }
-
-// ── 拖拽移动 ──
-function startDragNode(e, id) { currentDragNode = id; e.preventDefault(); }
+// ── 拖拽移动节点 ──
+function startNodeDrag(e, id) { if(e.target.classList.contains('drag-out')||e.target.classList.contains('drag-in'))return; currentDragNode=id; e.preventDefault(); }
 document.addEventListener('mousemove', function(e){
-    if (!currentDragNode) return;
-    var canvas = document.getElementById('canvas');
-    var rect = canvas.getBoundingClientRect();
-    var n = findNode(currentDragNode);
-    if (!n) return;
-    n.position_x = Math.max(0, e.clientX - rect.left + canvas.scrollLeft - 70);
-    n.position_y = Math.max(0, e.clientY - rect.top + canvas.scrollTop - 25);
+    if (!currentDragNode || draggingLine) return;
+    var cvs = document.getElementById('canvas');
+    var rect = cvs.getBoundingClientRect();
+    var n = findNode(currentDragNode); if (!n) return;
+    n.position_x = Math.max(0, e.clientX - rect.left + cvs.scrollLeft - 70);
+    n.position_y = Math.max(0, e.clientY - rect.top + cvs.scrollTop - 20);
     renderAll();
 });
 document.addEventListener('mouseup', function(){ currentDragNode = null; });
 
+// ── 选中节点 ──
+function selectNode(id) {
+    selectedNodeId = id; renderAll();
+    var panel = document.getElementById('propContent');
+    var n = findNode(id);
+    if (!n) { panel.innerHTML = '点击画布节点查看属性'; return; }
+    var html = '<p style="margin-bottom:4px;"><b>标签:</b> '+esc(n.label)+'</p>';
+    html += '<p style="margin-bottom:4px;"><b>类型:</b> '+esc(n.node_type)+'</p>';
+    if (n.agent_id) html += '<p style="margin-bottom:4px;"><b>智能体:</b> '+esc(n.agent_name||'')+'</p>';
+    // 入边/出边列表
+    var incoming = edges.filter(function(e){ return e.target_temp_id===id; });
+    var outgoing = edges.filter(function(e){ return e.source_temp_id===id; });
+    if (incoming.length) html += '<p style="margin-bottom:4px;font-size:11px;color:var(--text-muted);">入: '+incoming.map(function(e){var s=findNode(e.source_temp_id);return s?esc(s.label):'?';}).join(', ')+'</p>';
+    if (outgoing.length) html += '<p style="margin-bottom:4px;font-size:11px;color:var(--text-muted);">出: '+outgoing.map(function(e){var t=findNode(e.target_temp_id);return t?esc(t.label):'?';}).join(', ')+'</p>';
+    html += '<button onclick="removeNode(\''+n.temp_id+'\');selectNode(null);renderAll()" style="margin-top:8px;padding:6px 14px;background:#ef4444;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;">删除节点</button>';
+    panel.innerHTML = html;
+}
+function handleCanvasClick(e) {
+    if (e.target === document.getElementById('canvas') || e.target === document.getElementById('nodesLayer')) selectNode(null);
+}
+
 // ── 删除 ──
-function deleteNode(id) {
+function removeNode(id) {
     nodes = nodes.filter(function(n){ return n.temp_id !== id; });
     edges = edges.filter(function(e){ return e.source_temp_id !== id && e.target_temp_id !== id; });
 }
@@ -297,12 +365,12 @@ function saveTopology() {
         headers:{'Content-Type':'application/json','X-CSRFToken':document.querySelector('[name=csrfmiddlewaretoken]').value},
         body: JSON.stringify({nodes:nodes, edges:edges, trigger_prompt:trigger})
     }).then(function(r){ return r.json(); }).then(function(d){
-        if (d.ok) alert('✅ 已保存 ('+d.nodes.length+'节点, '+d.edges.length+'连线, 触发描述 '+(trigger?trigger.substring(0,30)+'...':'未设置')+')');
+        if (d.ok) alert('✅ 已保存 ('+d.nodes.length+'节点, '+d.edges.length+'连线)');
         else alert('保存失败: '+(d.error||''));
     });
 }
 
 function findNode(id) { return nodes.find(function(n){ return n.temp_id === id; }); }
-function escHtml(t) { var d=document.createElement('div');d.textContent=t||'';return d.innerHTML; }
+function esc(t) { var d=document.createElement('div'); d.textContent=t||''; return d.innerHTML; }
 </script>
 {% endblock %}

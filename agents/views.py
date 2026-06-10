@@ -82,7 +82,7 @@ class GroupListView(ListView):
 class GroupCreateView(CreateView):
     model = AgentGroup
     template_name = "groups/group_form.html"
-    fields = ["name", "description", "is_active"]
+    fields = ["name", "description", "trigger_prompt", "is_active"]
     success_url = reverse_lazy("agents:group_list")
 
 
