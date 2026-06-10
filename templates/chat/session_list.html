@@ -1,32 +1,94 @@
 {% extends "base.html" %}
 {% block nav-chat %}active{% endblock %}
-{% block title %}对话列表{% endblock %}
+{% block title %}对话历史{% endblock %}
 
 {% block topbar %}
 <div class="topbar">
-    <div class="breadcrumb"><span class="current">对话</span></div>
-    <div class="topbar-actions"><a href="{% url 'chat:session_create' %}" class="btn">+ 新建对话</a></div>
+    <div class="breadcrumb"><span class="current">💬 对话历史</span></div>
+    <div class="topbar-actions">
+        <a href="{% url 'chat:global_chat' %}" class="btn">✨ 新对话</a>
+    </div>
 </div>
 {% endblock %}
 
 {% block content %}
-{% if sessions %}
-<div class="card-grid">
-    {% for s in sessions %}
-    <div class="card">
-        <h3><a href="{% url 'chat:detail' s.pk %}">{{ s.title }}</a></h3>
-        <div class="meta">
-            <span class="badge badge-blue">{{ s.agent.name }}</span>
-            <span>{{ s.updated_at|date:"Y-m-d H:i" }}</span>
-        </div>
-        <div class="actions">
-            <a href="{% url 'chat:detail' s.pk %}" class="btn-primary-sm" style="background:var(--primary);color:#fff;padding:6px 14px;border-radius:var(--radius-sm);font-size:13px;text-decoration:none;font-weight:500;">进入对话</a>
-            <a href="{% url 'chat:session_delete' s.pk %}" class="btn-delete">删除</a>
-        </div>
-    </div>
+<div style="max-width:1000px;margin:0 auto;">
+
+{% if page_obj %}
+<table style="width:100%;border-collapse:collapse;table-layout:fixed;">
+    <thead>
+        <tr style="border-bottom:2px solid var(--border);text-align:left;font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;">
+            <th style="padding:12px 16px;width:35%;">标题</th>
+            <th style="padding:12px 16px;width:15%;">智能体</th>
+            <th style="padding:12px 16px;width:12%;">消息数</th>
+            <th style="padding:12px 16px;width:18%;">更新时间</th>
+            <th style="padding:12px 16px;width:20%;text-align:right;">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for s in page_obj %}
+    <tr style="border-bottom:1px solid var(--border-light);transition:background .15s;"
+        onmouseover="this.style.background='var(--primary-light)'" onmouseout="this.style.background=''">
+        <td style="padding:12px 16px;vertical-align:top;">
+            <a href="{% url 'chat:detail' s.pk %}" style="font-size:13px;font-weight:600;color:var(--text);text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                {{ s.title|default:"新对话" }}
+            </a>
+            {% with last_msg=s.messages.last %}
+            {% if last_msg %}
+            <div style="font-size:11px;color:var(--text-muted);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                {{ last_msg.content|truncatechars:80 }}
+            </div>
+            {% endif %}
+            {% endwith %}
+        </td>
+        <td style="padding:12px 16px;vertical-align:top;">
+            <span style="font-size:12px;color:var(--text-secondary);">{{ s.agent.name }}</span>
+        </td>
+        <td style="padding:12px 16px;vertical-align:top;">
+            <span style="font-size:12px;color:var(--text-muted);">{{ s.messages.count }}</span>
+        </td>
+        <td style="padding:12px 16px;vertical-align:top;">
+            <span style="font-size:11px;color:var(--text-muted);white-space:nowrap;">{{ s.updated_at|date:"m-d H:i" }}</span>
+        </td>
+        <td style="padding:12px 16px;vertical-align:top;text-align:right;">
+            <a href="{% url 'chat:detail' s.pk %}" style="display:inline-block;padding:5px 14px;background:var(--primary);color:#fff;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;margin-right:6px;">进入</a>
+            <a href="{% url 'chat:session_delete' s.pk %}" style="display:inline-block;padding:5px 12px;background:var(--bg);color:var(--danger);border:1px solid var(--border);border-radius:6px;font-size:11px;text-decoration:none;"
+               onclick="return confirm('删除此对话？')">删除</a>
+        </td>
+    </tr>
     {% endfor %}
+    </tbody>
+</table>
+
+<!-- 分页 -->
+<div style="display:flex;align-items:center;justify-content:center;gap:12px;padding:20px 0;font-size:13px;color:var(--text-muted);">
+    {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}" style="padding:8px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-weight:500;">‹ 上一页</a>
+    {% else %}
+    <span style="padding:8px 16px;background:var(--bg);border:1px solid var(--border-light);border-radius:8px;color:var(--text-muted);">‹ 上一页</span>
+    {% endif %}
+
+    <span>
+        第 <strong>{{ page_obj.number }}</strong> / <strong>{{ page_obj.paginator.num_pages }}</strong> 页
+        <span style="color:var(--text-muted);font-size:11px;margin-left:4px;">(共 {{ page_obj.paginator.count }} 条)</span>
+    </span>
+
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}" style="padding:8px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-weight:500;">下一页 ›</a>
+    {% else %}
+    <span style="padding:8px 16px;background:var(--bg);border:1px solid var(--border-light);border-radius:8px;color:var(--text-muted);">下一页 ›</span>
+    {% endif %}
 </div>
+
 {% else %}
-<div class="empty-state"><div class="empty-icon">💬</div><p>暂无对话</p><a href="{% url 'chat:session_create' %}">创建第一个对话 →</a></div>
+<div class="empty-state" style="text-align:center;padding:80px 0;">
+    <div style="font-size:48px;margin-bottom:12px;">💬</div>
+    <p style="font-size:15px;font-weight:600;color:var(--text);">暂无对话记录</p>
+    <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">
+        <a href="{% url 'chat:global_chat' %}" style="color:var(--primary);text-decoration:none;">开始第一个对话 →</a>
+    </p>
+</div>
 {% endif %}
+
+</div>
 {% endblock %}

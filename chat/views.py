@@ -62,6 +62,7 @@ class ChatSessionListView(ListView):
     model = ChatSession
     template_name = "chat/session_list.html"
     context_object_name = "sessions"
+    paginate_by = 15
 
 
 class ChatSessionDetailView(DetailView):
