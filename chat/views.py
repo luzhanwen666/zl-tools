@@ -353,16 +353,9 @@ def global_chat_send_message_stream(request):
                 if not matched_group:
                     matched_group = AgentGroup.objects.filter(pk=int(matched_id), is_active=True).first()
 
-    # 无匹配且无人为选择 → 拒绝回答
+    # 无匹配且无人为选择 → 降级到原来的自动路由（GlobalOrchestrator）
     if not matched_group and not manual_agents:
-        ChatMessage.objects.create(session=session, role="user", content=content)
-        def refuse_stream():
-            ChatMessage.objects.create(session=session, role="assistant",
-                content="未找到匹配的群组", agent_name="全局智能体")
-            yield f"data: {json.dumps({'type': 'routing', 'status': 'unmatched', 'content': '未找到匹配的群组场景'}, ensure_ascii=False)}\n\n"
-            yield f"data: {json.dumps({'type': 'assistant', 'content': '⚠️ 未找到匹配的群组来处理您的问题。\\n\\n您可以：\\n1. 手动点击上方群组标签选择群组\\n2. 点击专家标签手动选择专家\\n3. 或者重新描述您的问题', 'agent_name': '全局智能体'}, ensure_ascii=False)}\n\n"
-            yield f"data: {json.dumps({'type': 'done'})}\n\n"
-        return StreamingHttpResponse(refuse_stream(), content_type="text/event-stream")
+        logger.info("No group matched, falling back to GlobalOrchestrator auto-routing")
 
     # 保存用户消息
     ChatMessage.objects.create(session=session, role="user", content=content)
@@ -471,14 +464,14 @@ async def _match_group_by_trigger(user_message: str, available_groups) -> str | 
     )
 
     prompt = (
-        f"你是路由匹配器，根据用户输入选择合适的群组。\n\n"
+        f"你是路由匹配器，根据用户输入选择最合适的群组。\n\n"
         f"## 可用群组及其触发场景\n{groups_desc}\n\n"
         f"## 用户输入\n{user_message}\n\n"
         f"## 匹配规则\n"
-        f"1. 仔细阅读每个群组的触发描述，判断用户需求是否匹配\n"
-        f"2. 如果用户输入明显属于某个群组场景 → 输出该群组ID\n"
-        f"3. 如果没有任何群组匹配 → 输出 NONE\n"
-        f"4. 只输出匹配的群组ID数字或NONE，不要输出其他内容"
+        f"1. 阅读每个群组的触发描述，判断用户需求与哪个群组最接近\n"
+        f"2. **即使不完全匹配，也要选出描述最接近的一个群组**\n"
+        f"3. 只输出最匹配的群组ID数字，不要输出任何其他内容\n"
+        f"4. 示例：用户问'写一个Python程序'→如果某个群组描述为'处理日常问答和编程任务'则输出该群组ID"
     )
 
     from engine import llm_client as llm_module
@@ -498,7 +491,7 @@ async def _match_group_by_trigger(user_message: str, available_groups) -> str | 
 
     response = response.strip().upper()
     if response == "NONE" or not response.isdigit():
-        logger.info("No group matched: %s", response[:50])
+        logger.info("No group matched: %s — will fallback to auto-routing", response[:50])
         return None
 
     matched_id = int(response)
