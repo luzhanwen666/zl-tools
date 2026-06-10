@@ -451,7 +451,9 @@ def session_list_api(request):
     per_page = 15
     user = request.user if request.user.is_authenticated else None
 
-    qs = ChatSession.objects.filter(created_by=user).order_by("-updated_at")
+    qs = ChatSession.objects.filter(messages__isnull=False).distinct().order_by("-updated_at")
+    if user:
+        qs = qs.filter(created_by=user)
     total = qs.count()
     sessions = qs[(page - 1) * per_page : page * per_page]
 
