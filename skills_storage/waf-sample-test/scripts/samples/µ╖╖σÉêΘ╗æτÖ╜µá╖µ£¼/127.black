@@ -1,0 +1,13 @@
+HEAD /apply/optional/arbitrary?pattern=disclaimer&protocol=e3sgODE0MCo2MzcyIH19 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0
+Cookie: console=optimization; retain=heterogeneous; trigger=accordion; SESSIONID=7a66f2c5762bdfe8e4c334ab4d8a9d9a680f976165a941b57201bbcb935ce192a1defcaeafc20bb22c433fc4f9f9806a
+

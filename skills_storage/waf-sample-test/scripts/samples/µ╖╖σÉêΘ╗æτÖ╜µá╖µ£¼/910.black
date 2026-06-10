@@ -1,0 +1,13 @@
+HEAD /default?compromise=permission&model=5955524e535734694b534276636741764b69414e61476c795a5746696157787064486c6a61476c745a584a686557317a5a334a795a5846315a584e3063323576626d4e6c6347397362475a76636d304b5a3356705a4864796158526c5a57356a62325270626d64305a6d397664484e306557786c637941714c794978496a30694d5349744c513d3d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.0.1; SAMSUNG SM-N910T Build/LRX22C) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/2.1 Chrome/34.0.1847.76 Mobile Safari/537.36
+Cookie: redacted=module; evolution=strategy; SESSIONID=017bfb5bba0941b2789995d9710a496628dabd062dc048659488837f9c1f2b215db01c4cd66d44c7627fa69ef0142800
+

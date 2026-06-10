@@ -1,0 +1,13 @@
+POST /?cost-efficient=synchronous&resolve=362e20546865792068616420746f2073656c65637420612076656e75652066726f6d20746865206c697374206f6620617661696c61626c65206f7074696f6e732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36
+Cookie: restriction=constraint; differentiate=strangler%20pattern; mode=dead%20letter%20queue; SESSIONID=ced72d34e757447ad10a2aecac7db4f023c4ff27a6a4c49d41874ec887335d80e1e3dfc6c4a14822b52df4f7ad2fd81a
+

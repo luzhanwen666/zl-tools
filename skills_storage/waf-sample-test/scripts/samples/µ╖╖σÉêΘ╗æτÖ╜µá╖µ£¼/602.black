@@ -1,0 +1,13 @@
+POST /downwards%20arrow/process/expenditure?monetize=UAT&resource=meta&thrilled=0a5b0d3438202c225c75303033625c75303032305c75303036355c75303036335c75303036385c75303036665c75303032305c75303036305c75303032665c75303036325c75303036395c75303036655c75303032665c75303036335c75303036315c75303037345c75303032305c75303032665c75303036355c75303037345c75303036335c75303032465c75303036385c75303036665c75303037335c75303037345c75303037335c753030363022095d09 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36 SE 2.X MetaSr 1.0
+Cookie: populate=debug; apply=immutable; semantic=less%20than; SESSIONID=878b8042a10ffc1ddeae01a566adad9bc3ff93c6a9a3438da3f3715b5d1c07c091543c3120e85f9945958174327a6ae6
+

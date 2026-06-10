@@ -1,0 +1,9 @@
+POST /test HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 115
+
+comment=%27%250aoR%250bCHAR%28102%2C114%2C111%2C109%29_BaSE64%28%27IGfuzCAxPTagdw5pB24GC2VSZWN0iDESMiwzIC0t%27%29--

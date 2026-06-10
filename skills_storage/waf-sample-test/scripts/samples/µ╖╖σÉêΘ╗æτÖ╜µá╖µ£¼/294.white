@@ -1,0 +1,13 @@
+GET /suffix/prepare?seek=333133303265323035343638363532303735366536393666366532303663363536313634363537323230363736313736363532303631323037303666373736353732363637353663323037333730363536353633363832653061 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36
+Cookie: contrast=redacted; mechanism=capacity; homebrew=protocol; SESSIONID=76e7ab4b5134524fbd3dbb48107319b63c87b1ae13c7e1107f88cc5716fac7578ae36ccf156fadb111d065bafb8f6691
+

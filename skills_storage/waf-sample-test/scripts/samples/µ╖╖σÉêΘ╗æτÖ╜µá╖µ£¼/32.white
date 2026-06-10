@@ -1,0 +1,13 @@
+GET /bind?recursion=ephemeral&asterisk=MzgzNTJlMjA1NDY4NjUyMDYxNjQ3NjY5NjM2NTIwNzc2MTczMjA3MzZmNzU2NzY4NzQyMDY2NzI2ZjZkMjA3NDY4NjUyMDc1NmU2OTZmNmUyZTBh HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; yie11; rv:11.0) like Gecko
+Cookie: mediocre=arbitrary; provide=expression; SESSIONID=7900fe06e2fc7c89d1b4df1fa67aad4b54210658f67b5a3a8099199706467d4c0b107d9f5178ce0d37566ed118e28667
+

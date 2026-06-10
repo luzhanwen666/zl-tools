@@ -1,0 +1,13 @@
+GET /enabled?fault%20tolerance=362e20546865792068616420746f2073656c65637420612076656e75652066726f6d20746865206c697374206f6620617661696c61626c65206f7074696f6e732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; U; Android 4.0.3; en-ca; KFTT Build/IML74K) AppleWebKit/537.36 (KHTML, like Gecko) Silk/3.68 like Chrome/39.0.2171.93 Safari/537.36
+Cookie: capacity=arbitrary; question%20mark=contrast; SESSIONID=ab6dfe8a66b6fca85e7d0482c787cd755bc7b9402b220be1e32db1a10ebd0f93bf38cc3f1b051782a2e368ebced24b5a
+

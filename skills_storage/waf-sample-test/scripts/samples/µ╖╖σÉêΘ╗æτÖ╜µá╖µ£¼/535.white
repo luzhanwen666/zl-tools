@@ -1,0 +1,13 @@
+DELETE /encapsulate/fetch/periodically?hyphen=create&immutable=4e5334675647686c49485675615739754947686c62475167595342745a5756306157356e494852764947527063324e3163334d676447686c49484e30636d6c725a53344b HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:33.0) Gecko/20100101 Firefox/33.0
+Cookie: bogus=resilience; SESSIONID=0f5ead3264ded22585ae2712fa86d6d3ace9968d4db5ef4bd81f669d9a58489c9e8dae19ae75b777d80a13580aa31827
+

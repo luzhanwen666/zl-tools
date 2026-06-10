@@ -1,0 +1,13 @@
+POST /region?deduce=22292900232061746f6d200a6f7200734c4565702835293d22 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; NP02; rv:11.0) like Gecko
+Cookie: impersonate=elastic; deprecated=customizer; SESSIONID=64c7507cc093f7589121af0abe0b54e2f49b05ca000eda147ad908de3fcc0106e7786a209c6496f46b3ad2bd86768d08
+

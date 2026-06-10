@@ -1,0 +1,13 @@
+PUT /explicit/permanent/underscore?scope=explicit&meta=expenditure&declarative=less%20than&stroke=%20%5B%20%0A56%2C%0D37%0D%2C%22%5Cu004E%5Cu0044%5Cu0063%5Cu0075%5Cu0049%5Cu0046%5Cu0052%5Cu006f%5Cu005a%5Cu0053%5Cu0042%5Cu0077%5Cu0063%5Cu006D%5Cu0039%5Cu0077%5Cu0062%5Cu0033%5Cu004E%5Cu0068%5Cu0062%5Cu0043%5Cu0042%5Cu0033%5Cu0059%5Cu0058%5Cu004d%5Cu0067%5Cu0059%5Cu0058%5Cu0042%5Cu0077%5Cu0063%5Cu006d%5Cu0039%5Cu0032%5Cu005A%5Cu0057%5Cu0051%5Cu0067%5Cu0059%5Cu006e%5Cu006B%5Cu0067%5Cu0064%5Cu0047%5Cu0068%5Cu006C%5Cu0049%5Cu0048%5Cu0056%5Cu0075%5Cu0061%5Cu0057%5Cu0039%5Cu0075%5Cu004c%5Cu0067%5Cu006F%5Cu003D%22%0A%2C%0A23%0A%2C%0A%22%5Cu0069%5Cu006E%5Cu0069%5Cu0074%5Cu0069%5Cu0061%5Cu0074%5Cu0069%5Cu0076%5Cu0065%22%2Cfalse%2C%5B%09%0D3%2C%20%5B42%5D%20%5D%0D%09%5D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36
+Cookie: fill=allocate; periodically=primary; SESSIONID=29bea445d774fdeb633f6a26355b86880ae6127fd2039cb2b818de8436ea90855099189d99aefcb13db0031b3fa79f0e
+

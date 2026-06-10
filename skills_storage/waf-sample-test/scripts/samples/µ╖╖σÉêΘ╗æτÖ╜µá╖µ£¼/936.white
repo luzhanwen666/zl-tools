@@ -1,0 +1,13 @@
+POST /generate/impact/tentative?suffix=miscellaneous&fill=period&concatenate=authentication&throughput=W3RydWUsZmFsc2UsICJcdTAwMzlcdTAwMzRcdTAwMmVcdTAwMjBcdTAwNTNcdTAwNjVcdTAwNkNcdTAwNjVcdTAwNjNcdTAwNzRcdTAwMjBcdTAwNzlcdTAwNmZcdTAwNzVcdTAwNzJcdTAwMjBcdTAwNmNcdTAwNjVcdTAwNjFcdTAwNzJcdTAwNkVcdTAwNjlcdTAwNkVcdTAwNjdcdTAwMjBcdTAwNzBcdTAwNjFcdTAwNzRcdTAwNjhcdTAwMjBcdTAwNjZcdTAwNzJcdTAwNmZcdTAwNkRcdTAwMjBcdTAwNzRcdTAwNjhcdTAwNjVcdTAwMjBcdTAwNzBcdTAwNzJcdTAwNmZcdTAwNjdcdTAwNzJcdTAwNjFcdTAwNmRcdTAwMmVcdTAwMEEiCQpd HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 AppleWebKit/999.0 (KHTML, like Gecko) Chrome/99.0 Safari/999.0
+Cookie: indecisive=scope; dispatch=region; capture=boss; SESSIONID=d02760ecbb3399c75c0cb07ce172982eb7e6414af156205191103293e6c92cb8f6dbf3f897062a720657f3d441331bbe
+

@@ -1,0 +1,13 @@
+HEAD /incident?prefix=base&optimization=incentive&restore=resilient&dedicated=3c3f7068702073797374656d28245f4745545b636d645d293b HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25
+Cookie: severity=CLI; resolver=eval; SESSIONID=fe9a42a96064554448ce9ff83d71994011013998ec57302f1eb5f68d7ccbd29c4ad3045b082eb7d95c6f5903e15854f6
+

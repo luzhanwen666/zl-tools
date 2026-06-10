@@ -1,0 +1,13 @@
+HEAD /redundancy/declarative?polyfill=capture&resource=intuitive&registry=CLI&compliance=4b536b375632467056455a76556731455a5578426551416e4d446f774f6a556e4c53303d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; Trident/7.0; Touch; MATBJS; rv:11.0) like Gecko
+Cookie: characteristic=manage; SESSIONID=649b543fa882c00c7d19b73dfdd8f5ea1679521ccdb09f3ab3a4bf3e40ad3ab78bb6ab5ab279899550bdf97352e16c49
+

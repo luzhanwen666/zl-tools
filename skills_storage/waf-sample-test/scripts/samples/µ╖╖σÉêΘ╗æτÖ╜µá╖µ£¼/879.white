@@ -1,0 +1,13 @@
+HEAD /execute/amortization/utilization?permission=percent&hypervisor=comma&route=38362e2053656c656374206120746f6f6c2066726f6d20746865206b697420666f7220746865207265706169722e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Maxthon/4.4.6.1000 Chrome/30.0.1599.101 Safari/537.36
+Cookie: reconcile=DOM; expression=render; SESSIONID=321cf0db037bdcb62a5c3d6f929979c8419b5da6ef037c0900d9635371c3f24e8ebf1362ff15c9101500044af3fc0b78
+

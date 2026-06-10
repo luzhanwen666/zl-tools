@@ -1,0 +1,13 @@
+DELETE /diversified/remediation?ellipsis=compromise&optimization=base&accordion=4c693476563056434c556c4f526939335a57497565473173 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/537.36 (KHTML, like Gecko)  Chrome/30.0.1599.114 Safari/537.36 Puffin/4.5.0IT
+Cookie: echo=section; strength=resolve; state=rectify; SESSIONID=86b35cf0680e309fce94eea373898b9797739608f8fbb52513125d5993d0b92053da350f7b88b8cf18b7f9d9b98077ae
+

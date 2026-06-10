@@ -1,0 +1,13 @@
+POST /argument?permission=delivery&takeaway=MzYzNjJlMjA1MzY1NmM2NTYzNzQyMDc0Njg2NTIwNmQ2ZjczNzQyMDcyNjU2MzY1NmU3NDIwNjY2OTZjNjUyMDY2NzI2ZjZkMjA3NDY4NjUyMDY2NmY2YzY0NjU3MjJlMGE%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:34.0) Gecko/20100101 Firefox/34.0
+Cookie: mapping=degradation; failback=permission; snapshot=caret; SESSIONID=b230985026e21aa6ddeec8536b62e339ec4342e55ad5da1ef5efec6bdcddf9a220b1e0ef54b9d7ef4bfc4e8785c5f1b5
+

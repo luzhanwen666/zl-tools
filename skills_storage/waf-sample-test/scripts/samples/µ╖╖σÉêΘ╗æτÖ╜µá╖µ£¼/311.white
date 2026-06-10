@@ -1,0 +1,13 @@
+DELETE /score/cluster/refresh?resource=tilde&provider=accordion&echo=10.%20She%20moved%20from%20a%20small%20town%20to%20the%20big%20city.%0A HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12D508 Safari/600.1.4
+Cookie: greater%20than=permissive; colon=resilience; SESSIONID=938d6ee38977d0cfa6ac3cf16fdbe941d89b8b94430a31bcbc5f18d19f2dbb0c55348b29e0adf9075872ebc7b8361b3a
+

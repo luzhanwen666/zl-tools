@@ -1,0 +1,13 @@
+GET /?severity=asynchronous&pattern=5043464554304e555756424649475a766279426249447768525535555356525a494756346443425457564e55525530674969396d62324e316332466962475576596e56755a47786c4c32467363476868596d563061574d7659323975644756346447316c626e5569494434675854343d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/537.75.14
+Cookie: threshold=characteristic; SESSIONID=6d47cc123be8fda19f08ced7371311a0ada0e49d15cd66bb6bd0abaf6627c2562b57f6918fbed2120c1e959ec7715805
+

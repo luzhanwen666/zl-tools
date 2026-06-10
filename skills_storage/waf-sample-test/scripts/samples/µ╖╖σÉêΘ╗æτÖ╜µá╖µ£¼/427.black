@@ -1,0 +1,13 @@
+DELETE /encryption/UAT/equivalent?optimization=4f79426a595851674c3256305979397759584e7a64325137 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; LGMS323 Build/KOT49I.MS32310c) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.1599.103 Mobile Safari/537.36
+Cookie: manually=failback; registry=display; accordion=provide; SESSIONID=3a7e9d3b537b8f6f13c960857fdc4b0d3c57358e0d55654a6e15f4c6ad2049649e4089f71aff5568dcbf43cb8e83b187
+

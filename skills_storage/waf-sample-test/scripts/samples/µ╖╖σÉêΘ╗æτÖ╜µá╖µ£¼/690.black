@@ -1,0 +1,13 @@
+HEAD /hypervisor?trigger=substantial&redacted=robust&location=I3JlcT0jY29udGV4dC5nZXQoJ1x4NjMnKydceDZmJysnXHg2ZCcrJ1x4MmUnKydceDZmJysnXHg3MCcrJ1x4NjUnKydceDZlJysnXHg3MycrJ1x4NzknKydceDZkJysnXHg3MCcrJ1x4NjgnKydceDZmJysnXHg2ZScrJ1x4NzknKydceDJlJysnXHg3OCcrJ1x4NzcnKydceDZmJysnXHg3MicrJ1x4NmInKydceDMyJysnXHgyZScrJ1x4NjQnKydceDY5JysnXHg3MycrJ1x4NzAnKydceDYxJysnXHg3NCcrJ1x4NjMnKydceDY4JysnXHg2NScrJ1x4NzInKydceDJlJysnXHg0OCcrJ1x4NzQnKydceDc0JysnXHg3MCcrJ1x4NTMnKydceDY1JysnXHg3MicrJ1x4NzYnKydceDZjJysnXHg2NScrJ1x4NzQnKydceDUyJysnXHg2NScrJ1x4NzEnKydceDc1JysnXHg2NScrJ1x4NzMnKydceDc0JyAp HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) CriOS/45.0.2454.68 Mobile/12D508 Safari/600.1.4
+Cookie: migrate=BIOS; SESSIONID=105f4be269a9035f3838875cd29f3b6c0fb24f060d5b29fbac010776065c9cf8fbf62730425803ea3c46589e90d2bd68
+

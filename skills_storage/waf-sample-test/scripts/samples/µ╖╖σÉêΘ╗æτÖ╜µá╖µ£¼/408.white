@@ -1,0 +1,13 @@
+GET /?depreciation=critical&restriction=fetch&automation=CVtbDSJcdTAwNzBcdTAwNkZcdTAwNkNcdTAwNjlcdTAwNjNcdTAwNzkiCSx0cnVlCV0sIlx1MDAzM1x1MDAyZVx1MDAyMFx1MDA1NFx1MDA2OFx1MDA2NVx1MDAyMFx1MDA3NVx1MDA2RVx1MDA2OVx1MDA2Zlx1MDA2ZVx1MDAyMFx1MDA2RFx1MDA2NVx1MDA2RFx1MDA2Mlx1MDA2NVx1MDA3Mlx1MDA3M1x1MDAyMFx1MDA3Nlx1MDA2Zlx1MDA3NFx1MDA2NVx1MDA2NFx1MDAyMFx1MDA2Zlx1MDA2RVx1MDAyMFx1MDA3NFx1MDA2OFx1MDA2NVx1MDAyMFx1MDA3MFx1MDA3Mlx1MDA2Zlx1MDA3MFx1MDA2Rlx1MDA3M1x1MDA2NVx1MDA2NFx1MDAyMFx1MDA2M1x1MDA2Rlx1MDA2RVx1MDA3NFx1MDA3Mlx1MDA2MVx1MDA2M1x1MDA3NFx1MDAyZVx1MDAwYSJd HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; Trident/7.0; Touch; MDDCJS; rv:11.0) like Gecko
+Cookie: traversal=explicit; replica=complexity; SESSIONID=e7c5fb2c14c7407ed67b93caa2088fe7ef718731b28df15b02a2d9cd3a0be67cea90f8fb9304e3d1f93df3e2846d133a
+

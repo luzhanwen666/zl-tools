@@ -1,0 +1,13 @@
+GET /manually/robust?protocol=61446d696e2229002d2d2075706c6f616465726d6f756e747072656163747472616e736c6174696f6e73617474727377656263616c656e61626c65200a6f52202f2a2070726f63657373617a696d7574686e617669676174696f6e70726576696f757370657273697374656e636566656564626f64790a202a2f2231223d22312223 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.13 Safari/537.36
+Cookie: constraint=greater%20than; throughput=mutable; explicit=sustainable; SESSIONID=a4e1e3d27d2ded0805b5f1f0e096a17382bf670daa51e8371ac001096d3e3869cb0492f71057692b3d641219e55b7ee6
+

@@ -1,0 +1,13 @@
+PUT /discretely/vice%20versa/echo?hypervisor=backslash&report=glossary&federation=ascent&default=KSk7V0FpVEZPcg0tLSBjaGVja2VkcmVnaXN0ZXJ0aWZmc2NoZWR1bGVib3R0b21yZWNvcmRsb2Nrc3Jpc2MgCkRFbGF5IC0tIG9taXRtZXRob2RyZWdpb25zb3BlcmF0aW9ubG9vcHVubW91bnRiYWJlbHN0b3BkaXNhYmxlZmJzdGFyayAKJzA6MDo1Jy0t HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36
+Cookie: automation=build; append=route; SESSIONID=bc3cb8fd3973314b865f68aded9d2d4b83d259d3e7c22ff17a13a84ded10c6ce0e65527d4130275a3d94c6d5001384ba
+

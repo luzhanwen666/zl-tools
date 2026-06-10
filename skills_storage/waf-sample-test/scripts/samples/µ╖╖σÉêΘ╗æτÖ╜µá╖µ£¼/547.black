@@ -1,0 +1,13 @@
+GET /trajectory/SIT/tilde/roll%20out/concrete?failover=attribute&dedicated=source&rapid=7b7b20383436392a32343536207d7d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53
+Cookie: ascent=anomaly; leverage=push; aggregate=populate; SESSIONID=52a0e0c7e5e1f33a79668c9f3d5a0f5d93021da89aa05d3e12d54bfb6d042ca5633e1e5e1ca152c7baa76033f9e7320c
+

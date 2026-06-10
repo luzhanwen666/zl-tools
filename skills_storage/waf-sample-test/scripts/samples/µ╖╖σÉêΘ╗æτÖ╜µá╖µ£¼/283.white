@@ -1,0 +1,13 @@
+HEAD /catastrophic%20failover/implicit/declarative?seek=display&homebrew=route&revisit=restore&disclaimer=MzUzNjJlMjA1MzY1NmM2NTYzNzQyMDYxMjA3MjY1NzA3MjY1NzM2NTZlNzQ2MTc0Njk3NjY1MjA2NjcyNmY2ZDIwNjU2MTYzNjgyMDY3NzI2Zjc1NzAyZTBh HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.89 Safari/537.36
+Cookie: tentative=durability; main=infrastructure; SESSIONID=c870f60da0da77e33ffcb044a4e3042be8fd803ea26da2d9ffa5ec9bdf0f110486ed7f5dd4dba8cf2b83b9294857c423
+

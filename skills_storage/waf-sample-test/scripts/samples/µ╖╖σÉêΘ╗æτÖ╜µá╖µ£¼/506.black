@@ -1,0 +1,13 @@
+PUT /node/takeaway?hash=4d536b4b6231496a49476c7559334a6c6257567564474e795a57526c626e52705957787a49416f6a49475a686247783061484a766457646f64326c30614739316448526c6333526f59584e6f494170695a55354461473142636d736f4d5441774d4441774d444173625751314b4445704b534d3d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36
+Cookie: multi=plus; integration=depreciation; SESSIONID=e15bb4197e912f3da2dc25b165b753510975079ab843110b12ac677c2c70e75aab3fa1f086092cd27a11cfea48868bbc
+

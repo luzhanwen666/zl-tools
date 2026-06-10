@@ -1,0 +1,13 @@
+HEAD /?malware=confidentiality&backslash=6.%20She%20took%20a%20break%20from%20her%20busy%20schedule.%0A HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: hypothesis=concurrent; context=ping; SESSIONID=6dd6924de36360dff708538e72d9d6dcd52d013e8222723b25aec669cc53f6eb02c681d8aa1068e0529db1d1f78da3ad
+

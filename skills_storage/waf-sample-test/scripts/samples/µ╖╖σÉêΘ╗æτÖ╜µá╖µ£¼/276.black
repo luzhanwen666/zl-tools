@@ -1,0 +1,13 @@
+POST /?delivery=remediation&utilization=base&miscellaneous=mapping&manage=61646d496e22290d6f5200232076696d656f75756964696e7374616e6365646d6173736976656867726f7570656e746572756e73656c656374696e67200a2231223d22312223 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.104 Safari/537.36
+Cookie: manually=declarative; scope=provide; analogy=symmetric; SESSIONID=7b24ed1ee909d5a1e474a1dcac8d8d41f8d074e6a275df0edb0dca7269cbad39be0e1dfc9d325d3bbbbe606ec6030a6e
+

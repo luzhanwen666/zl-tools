@@ -1,0 +1,13 @@
+HEAD /authorization/replica/consultative/redundancy?false%20positive=MTAuIFRoZSB1bmlvbiBsZWFkZXIgZ2F2ZSBhIHBvd2VyZnVsIHNwZWVjaC4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2503.0 Safari/537.36
+Cookie: hypothesis=asynchronous; eval=subtle; SESSIONID=44029235b8791f35395a3e8d5dcccdaa43d0f6306ed66a2802c97678cbb405d5e6d1711eee065b642fadab720f1dfc17
+

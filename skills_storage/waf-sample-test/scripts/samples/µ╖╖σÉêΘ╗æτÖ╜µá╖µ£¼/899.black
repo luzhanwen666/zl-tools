@@ -1,0 +1,13 @@
+POST /message/cluster/pattern?analyze=61446d496e22290a2d2d206564697461626c657472616e73706172656e74200a4f520023206d65646961696e6372656d656e74616c706f736974696f6e736861736863656d627265706167696e6174696f6e61776169746d6f6469666965726172636872616e676573200a2231223d2231222d2d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; LG-V410 Build/KOT49I.V41010d) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: miscellaneous=impersonate; ascent=bind; SESSIONID=6bad9e258ab691d945a15896583f4c3624b0115c54422b27084d68aeba35961ee663fc2c132a57ea37f68312b5d491dd
+

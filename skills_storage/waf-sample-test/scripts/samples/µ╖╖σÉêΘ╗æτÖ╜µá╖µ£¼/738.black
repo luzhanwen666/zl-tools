@@ -1,0 +1,13 @@
+DELETE /master/glossary?create=permission&double%20quotation%20mark=comma&parenthesis=environment&crucial=504439776148416763336c7a644756744b4352665230565557324e745a4630704f773d3d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36
+Cookie: context=module; SESSIONID=5a4b277a8975e3df857f49e224f21160568ee180b41f125d40be04a038b87acea32b1accc304447929db891f8b455f27
+

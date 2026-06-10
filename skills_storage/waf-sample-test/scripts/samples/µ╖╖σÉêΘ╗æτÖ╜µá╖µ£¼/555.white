@@ -1,0 +1,13 @@
+PUT /colon/range/DOM?respective=critical&environment=cost-efficient&caveats=robust&mature=TlRJdUlGTmxiR1ZqZENCaElHUmxjMmxuYmlCbWNtOXRJSFJvWlNCallYUmhiRzluTGdvPQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36
+Cookie: policy=alphabetically; SESSIONID=f123647f1c07cb7b33f2ab9adad0711354bd52a9a3bfd8461bb8cae66820e887337baf2e97df2d9bc0b6a7e1c61c3658
+

@@ -1,0 +1,13 @@
+GET /leverage/data%20sovereignty/analyze/strength?section=NQ0vKiBob3ZlcnJlZmVycmVybWFqb3J3b3JkbmljZW5hbWVkcmF3ZmlzaA10ZXh0DWJsdXJyZWRub3NjcmlwdGxpc3RlbmVyc3J0c3BydWJ5DSAqL0FOZA0tLSBjb2RlbWlycm9yZGVzY3VuaW5zdGFsbHRhc2tzdWJtaXQgCjUAPQovKiBzdWNjZXNzY2xvc2VzdGF1dG9jb21wbGV0ZXINc2lkZWl0ZXJhdGlvbnRyYW5zZm9ybXMKZ29vZGhvb2twdWJsaWNkaXJlY3Rpb25pdGVtcw1jb250YWluc3NlcGFyYXRvcmF3YWl0cmVuZGVyZXJzICovNSMgc2FtZWR1b3RvbmVkb3dubG9hZGFibGVtY2Vtb2Rld2VkbmVzZGF5aWdub3JlZ2V0dGVyd2l0aCAKLS0gZmFpbGJpdHMgClVuSW9OAFNlTGVDVCAvKiAKc25tcGNyb3Nzb3JpZ2luYXJjaGl2ZXBsYXlsb2FkaW5nICovMSAvKiBtZXJnZWQKaGVsbWJveXNvdXJjZWNvbnN1bWVyc2hhcmVkCmRhdGF0eXBlbW92ZWRhdGF2aWV3Ym9vdHN0cmFwcGVkbmlnaHRpY2FiZXhpc3RzICovIw%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; Touch; ASU2JS; rv:11.0) like Gecko
+Cookie: master=prepare; SESSIONID=1980aa471cf0fb0cc86abbd408112f335596df71668fc5bd7413c4f7274a022c41e912ff34664e9ec400b8c75364807d
+

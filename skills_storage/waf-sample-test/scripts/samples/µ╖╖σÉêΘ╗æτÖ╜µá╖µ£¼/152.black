@@ -1,0 +1,13 @@
+GET /depreciation?route=report&compromise=pattern&report=3129002f2a200a202a2f4f722062654e63486d61726b2831303030303030302c4d44352831292923 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 5.1; rv:37.0) Gecko/20100101 Firefox/37.0
+Cookie: detect=multi; SESSIONID=7dceac6db5defa96d363ca65e5b6044f04fda10db786e6f66eb3ce4d91be04f161882766ad3dbf4304e7f835c76d75fe
+

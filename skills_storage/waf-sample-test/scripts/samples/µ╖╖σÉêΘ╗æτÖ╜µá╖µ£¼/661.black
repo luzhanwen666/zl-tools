@@ -1,0 +1,13 @@
+DELETE /master/angle%20brackets/provision/manually/on-premise?replica=PGEgaHJlZj0iJiMxMDA7JiN4NDE7JiM4NDsmI3g0MTsmY29sb247JiMxMTY7JiMxMDE7JiM4ODsmI3g3NDsmc29sOyYjeDQ4OyYjODQ7JiN4NGQ7JiN4NmM7JnNlbWk7JiN4NDI7JiM2NTsmI3g3MzsmIzEwMTsmI3gzNjsmIzUyOyZjb21tYTtQSE5qY21sd2RENWNkVEF3TnpCY2RUQXdOekpjZFRBd05tWmNkVEF3Tm1SY2RUQXdOekJjZFRBd056UW9JQW95SUNrSlBDOXpZM0pwY0hRKyIgPmhlbGxvPC9hPg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.3; KFAPWI Build/KTU84M) AppleWebKit/537.36 (KHTML, like Gecko) Silk/44.1.81 like Chrome/44.0.2403.128 Safari/537.36
+Cookie: intervention=required; crucial=watch; vulnerability=consultative; SESSIONID=18cd8a45ef7e01976f495d44c3facdff8d10dd1388df13383b29f44b3dbc537fa6d9d0e06ea48b5e8f292ac74ef40382
+

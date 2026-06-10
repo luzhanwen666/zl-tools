@@ -1,0 +1,13 @@
+DELETE /multi/call/pong?initiative=fault%20tolerance&intuitive=embrace&period=ewkiXHUwMDc2XHUwMDc1XHUwMDZjXHUwMDZFXHUwMDY1XHUwMDcyXHUwMDYxXHUwMDYyXHUwMDY5XHUwMDZjXHUwMDY5XHUwMDc0XHUwMDc5Igk6MyAsDSJcdTAwNjVcdTAwNjZcdTAwNjZcdTAwNjlcdTAwNjNcdTAwNjlcdTAwNjVcdTAwNmVcdTAwNjNcdTAwNzkiCQo6CgkiXHUwMDM2XHUwMDMyXHUwMDJlXHUwMDIwXHUwMDUzXHUwMDY1XHUwMDZDXHUwMDY1XHUwMDYzXHUwMDc0XHUwMDIwXHUwMDYxXHUwMDIwXHUwMDYzXHUwMDZGXHUwMDZFXHUwMDc2XHUwMDY1XHUwMDZlXHUwMDY5XHUwMDY1XHUwMDZFXHUwMDc0XHUwMDIwXHUwMDc0XHUwMDY5XHUwMDZkXHUwMDY1XHUwMDIwXHUwMDY2XHUwMDcyXHUwMDZmXHUwMDZkXHUwMDIwXHUwMDc0XHUwMDY4XHUwMDY1XHUwMDIwXHUwMDczXHUwMDYzXHUwMDY4XHUwMDY1XHUwMDY0XHUwMDc1XHUwMDZjXHUwMDY1XHUwMDJFXHUwMDBhIgkKLAkiXHUwMDcyXHUwMDY1XHUwMDczXHUwMDZmXHUwMDZjXHUwMDc2XHUwMDY1Ig0JOlsNCSJcdTAwNjFcdTAwNjRcdTAwNjFcdTAwNzBcdTAwNzRcdTAwNjVcdTAwNzIiXQoNfQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12B410 Safari/600.1.4
+Cookie: strangler%20pattern=throughput; seek=semantic; tenancy=location; SESSIONID=512603850c7598d255d1fad9b7097d1c0fb164636daca27f4aa75147194384443af1ff53dce97cdf03a0d0325952a634
+

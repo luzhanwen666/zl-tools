@@ -1,0 +1,13 @@
+PUT /ampersand?threshold=monetize&compromise=41446d696e22290a4f72202231223d2231222d2d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; MDDCJS; rv:11.0) like Gecko
+Cookie: diversified=consultative; characteristic=element; cluster=semantic; SESSIONID=0b2b8e047893a670b32d6010a4974ef1ae3f68a219bab3c29b25ff80eae432726d39bbef5bf30ae16494778f51ae5562
+

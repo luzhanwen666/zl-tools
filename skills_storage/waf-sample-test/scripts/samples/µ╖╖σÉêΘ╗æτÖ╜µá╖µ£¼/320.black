@@ -1,0 +1,13 @@
+DELETE /sustainable/incident?scope=create&aggregate=vice%20versa&router=M2IyMDYzNjE3NDIwMmY2NTc0NjMyZjcwNjE3MzczNzc2NDNi HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A405 Safari/600.1.4
+Cookie: reconcile=manage; policy=internal; SESSIONID=63ff76854ad72bf89721ab7c926dc1cd7c87cb4ec09625de752d3b33ad69ae865a65b38956c51ecaa0da80911ffd3e7f
+

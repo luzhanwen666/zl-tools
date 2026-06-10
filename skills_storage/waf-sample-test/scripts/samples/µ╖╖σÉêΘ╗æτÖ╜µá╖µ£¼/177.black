@@ -1,0 +1,13 @@
+DELETE /?process=subsequent&caret=colon&create=location&add=3362323036353633363836663230363032663632363936653266363336313734323032663635373436333266363836663733373437333630 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; CrOS x86_64 6946.86.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+Cookie: scenario=bandwidth; manager=deduce; hyphen=concatenate; SESSIONID=5213c44f929249fb3a1cf3443cd0968e75e00c2036921b25243ab3a6ab510c0ae75722ea99a83c53536fc71341ad2602
+

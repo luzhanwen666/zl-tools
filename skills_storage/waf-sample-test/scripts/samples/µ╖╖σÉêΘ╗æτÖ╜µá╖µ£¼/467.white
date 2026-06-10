@@ -1,0 +1,13 @@
+HEAD /trajectory/vulnerability/call/reconcile?takeaway=colon&UAT=CXsNCiJcdTAwNjdcdTAwNzJcdTAwNjVcdTAwNjFcdTAwNzRcdTAwNjVcdTAwNzJcdTAwMjBcdTAwNzRcdTAwNjhcdTAwNjFcdTAwNkUiCjoJIlx1MDAzOFx1MDAzMFx1MDAyZVx1MDAyMFx1MDA1M1x1MDA2NVx1MDA2Q1x1MDA2NVx1MDA2M1x1MDA3NFx1MDAyMFx1MDA2MVx1MDAyMFx1MDA2RFx1MDA2NVx1MDA3NFx1MDA2OFx1MDA2Zlx1MDA2NFx1MDAyMFx1MDA2Nlx1MDA3Mlx1MDA2Zlx1MDA2ZFx1MDAyMFx1MDA3NFx1MDA2OFx1MDA2NVx1MDAyMFx1MDA3MFx1MDA3Mlx1MDA2Zlx1MDA3MFx1MDA2Zlx1MDA3M1x1MDA2NVx1MDA2NFx1MDAyMFx1MDA3M1x1MDA3NFx1MDA3Mlx1MDA2MVx1MDA3NFx1MDA2NVx1MDA2N1x1MDA2OVx1MDA2NVx1MDA3M1x1MDAyZVx1MDAwYSIKfQk%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/8.0; 1ButtonTaskbar)
+Cookie: concatenate=asynchronous; recursion=intervention; left%20arrow=inter; SESSIONID=ff99eb8faee1367b8375e10d11258564c08c2c635ebcbafa4d4218cc017748952ab8685259533bcfc9b93f5c7999dbf5
+

@@ -1,0 +1,13 @@
+PUT /permanent/under%20the%20hood?resource=permission&anomaly=master&semicolon=pattern&GUI=32322e2053656c656374206120746f7069632066726f6d2074686520676976656e207375626a656374732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 7_0_2 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A501 Safari/9537.53
+Cookie: fetch=constraint; hierarchical=less%20than; SESSIONID=d23d665c85044f3e3598bd928c47631596a272552a527d4c2ba3242a1633487b067cb69a6018075149aa482a8ebf002c
+

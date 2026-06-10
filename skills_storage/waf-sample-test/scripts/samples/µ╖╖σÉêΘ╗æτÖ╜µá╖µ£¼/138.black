@@ -1,0 +1,13 @@
+GET /sort/recursion/post-mortem/leverage?build=MApBTkQjIHByZWxvYWRlZGluYWN0aXZlaGludGV4dGVuZG1pbGxpc2Vjb25kc2NsZWFyZm9jdXNvdXRibHVyaW50ZWdlciAKLyogZm9yZWdyb3VuZGZpbGxhc3NldHMNICovMyMgb3V0ZXJsZWZ0eG1sbnNkb3duaG9va3NjbG9uZWZhcnRoZXN0cmdiYXN0eWxlcyAKPSA0IC8qIHNsb3RzaW5zZXJ0ZXJtb3VzZWxlYXZlZGVmZXJkZWJvdW5jZWRwcmV2aWV3ZXJjb21wbGV0ZXJzZG91YmxlY29uY2F0Y2hlY2tlZG91dGVyDWNhcHRpb25wZXJzaXN0ZWRyZXF1ZXN0cw1taWNyb3NvZnRzdWJsaW1lICovdU5Jb24gU2VsZWNUCi0tIGlkZW50aWZpZXJwYWxldHRlcGxheXN0YXRpb25jb25jYXR1bmV4cGVjdGVkY29udGFpbmRlY2F5aW5kZXhvZnNmdHAgCjEKIw%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.1.1; SAMSUNG SM-G920P Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/3.2 Chrome/38.0.2125.102 Mobile Safari/537.36
+Cookie: call=execute; score=comma; SESSIONID=b5bcdca2faf156a302d4939816a7530554bc889fe908e5dffd1c3dc96646e1f44def3fbfb9a960f1eb84520061923472
+

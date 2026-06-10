@@ -1,0 +1,13 @@
+DELETE /sustainable/BIOS/underscore/scenario/bind?debug=meta&priority=MzUyZjJhMjA2ZjZlNjU3MDZiNjc3MDYxNjQ2NDY5NmU2NzY2Njk3MzY4NzU2ZTY0NmYwYTcwNjU3MjZkNjE2YzY5NmU2YjBkNjI3MjZmNzc3MzY1NzI2YjY5NmM2YzYxNjU3MjZmNmUyMDJhMmY2MTRlNDQyMDMwMDAzZDBhMzAwZDU1NmU0OTZmNmUyMDIzMjA2MzZmNmM2YzY1NjM3NDY5NmY2ZTZkNjU2YzYxNmU3MzZmNmU2NTZlNzQ3MjY5NjU3MzYyNmY3MjY0NjU3MjY5NmU2OTc0Njk2MTZjNjk3YTY1NjY2OTY1NmM2NDczNjU3NDczNzU2ZDZkNjE3Mjc5NjU3NjY1NzI3OTIwMGE1MzY1NmM0NTQzNTQyMDMxMGEyZDJkMjA3Mzc0NzI2OTZlNjc2OTY2Nzk2MjYxNjQ2ZjY2NmY2YzY0NmQ2OTZlNjk3ODY1NmM2YzY5NzA3MzY5NzM3MDZjNjE3OTIwMGEyMw%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; yie8; rv:11.0) like Gecko
+Cookie: subtle=schema; SESSIONID=3192ef451fe83936eb0e66807e37717f1e99a39dbcc79397fff621ae1ea8d13aece8debd47bd473f148fef7a3c300a82
+

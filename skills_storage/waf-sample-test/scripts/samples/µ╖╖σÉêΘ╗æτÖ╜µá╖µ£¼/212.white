@@ -1,0 +1,13 @@
+PUT /roll%20out/stroke/severity/explicit/underscore?integrity=crucial&worker=debug&differentiate=NDQuIFNlbGVjdCB0aGUgY29ycmVjdCBmb3JtIGZyb20gdGhlIHN0YWNrLgo%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MDDCJS; rv:11.0) like Gecko
+Cookie: assign=dead%20letter%20queue; SESSIONID=cbb086d516736759389c977c7a92fd84ef0cac09267d8245534424c9b45681fe050cbfe0c24ef9edf17a81d66d52951a
+

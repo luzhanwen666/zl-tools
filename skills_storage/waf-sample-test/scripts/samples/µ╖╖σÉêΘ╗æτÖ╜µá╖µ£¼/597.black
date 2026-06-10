@@ -1,0 +1,13 @@
+POST /traceability?mediocre=QWRNSW4iKQ1vcg0vKiBib2xkYXZpZm1vdXNlbW92ZWRyYXdmbGFzaG5hbm9pZHN1YnNldApydWlkICovIjEiPSIxIiM%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_1_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12B466
+Cookie: monetize=marry; CLI=mode; optional=element; SESSIONID=591d3e41472e8df7f2e3810b6e1bc4ef2297b3b87d4fa64f2e417a463b76267364f4d7ae0d793c9c0a89cc884e39a3ba
+

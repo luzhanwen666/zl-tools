@@ -1,0 +1,13 @@
+POST /bottleneck/echo?location=optimize&monitor=substantial&tentative=34312e2054686520666565646261636b2066726f6d2074686520756e696f6e2077617320706f7369746976652e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12B466 Safari/600.1.4
+Cookie: mapping=alphabetically; tolerance=environment; handler=hypervisor; SESSIONID=62233d427a1503445fc4b36f73b87132d3ce6c613d3f926331469868ca105e69cc56df528e3917dd407414a5007641c6
+

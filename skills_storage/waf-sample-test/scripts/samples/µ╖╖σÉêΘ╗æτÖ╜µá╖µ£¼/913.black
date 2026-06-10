@@ -1,0 +1,13 @@
+PUT /curly%20brackets?subtle=critical&crucial=dedicated&deduce=access&pop=3c3f7068702073797374656d28245f4745545b636d645d293b HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/600.6.3 (KHTML, like Gecko) Version/7.1.6 Safari/537.85.15
+Cookie: default=suffix; consultative=concatenate; SESSIONID=18f5bbb91138fc9380313a8bb7694d5066fe7e8be8b7182ef49e327488a5b3129c892f04c60a5c994336268a2a936f3e
+

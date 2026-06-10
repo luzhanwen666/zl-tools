@@ -1,0 +1,13 @@
+GET /rapid?overview=ping&manually=pattern&inception=plus&enabled=MzQzNTJlMjA1NDY4NjUyMDZlNjU3NzczMjA3MzcwNzI2NTYxNjQyMDcxNzU2OTYzNmI2Yzc5MjA2NjcyNmY2ZDIwNzQ2ODY1MjA3NTZlNjk2ZjZlMmUwYQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.2.2; SM-T110 Build/JDQ39) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: route=degradation; block=context; SESSIONID=fe267e91ab61268424ff83b1f45beb1af2a6053d0d5fba4be9c7deee301d0a555df896bc21d49dd3edeed6941c569e70
+

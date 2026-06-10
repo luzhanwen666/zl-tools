@@ -1,0 +1,13 @@
+DELETE /malware/cost-efficient?fetch=detect&score=TXk0Z1UyVnNaV04wSUdsdVozSmxaR2xsYm5SeklHWnliMjBnZEdobElIQmhiblJ5ZVNCMGJ5QnpkR0Z5ZENCamIyOXJhVzVuTGdvPQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/34.0.1847.116 Chrome/34.0.1847.116 Safari/537.36
+Cookie: report=registry; exclamation%20mark=module; permutation=monitor; SESSIONID=f6178cd78be6c20d61fc70080ce71706b87a7d266a1d54ec5d78e51a222240b85b9bb6de697ee9247685b5822e5ea853
+

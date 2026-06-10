@@ -1,0 +1,13 @@
+POST /monitor?master=resilience&permissive=console&tenancy=CVsgCSJcdTAwMzhcdTAwMzZcdTAwMmVcdTAwMjBcdTAwNTNcdTAwNjVcdTAwNkNcdTAwNjVcdTAwNjNcdTAwNzRcdTAwMjBcdTAwNjFcdTAwMjBcdTAwNzRcdTAwNkZcdTAwNmZcdTAwNmNcdTAwMjBcdTAwNjZcdTAwNzJcdTAwNkZcdTAwNmRcdTAwMjBcdTAwNzRcdTAwNjhcdTAwNjVcdTAwMjBcdTAwNmJcdTAwNjlcdTAwNzRcdTAwMjBcdTAwNjZcdTAwNmZcdTAwNzJcdTAwMjBcdTAwNzRcdTAwNjhcdTAwNjVcdTAwMjBcdTAwNzJcdTAwNjVcdTAwNzBcdTAwNjFcdTAwNjlcdTAwNzJcdTAwMkVcdTAwMEEiCV0%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:39.0) Gecko/20100101 Firefox/39.0
+Cookie: prefix=data%20sovereignty; dispatch=priority; state=subscribe; SESSIONID=46b56637e1c76cc36264375f8eb8cfdea50d63c8f6ff4ddf71417e6e4b5a7c3d9558acda5d2ccab16ef4ff6900bb04b2
+

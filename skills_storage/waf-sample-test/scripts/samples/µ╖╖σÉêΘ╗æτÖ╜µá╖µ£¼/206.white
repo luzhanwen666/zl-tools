@@ -1,0 +1,13 @@
+HEAD /single%20quotation%20mark/aggregate/cluster/encapsulate?ampersand=aggregation&efficiency=4e4334675647686c4947786c6448526c6369426d636d39744948526f5a534231626d6c76626942685a4752795a584e7a5a575167625746756553426a6232356a5a584a756379344b HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36
+Cookie: agility=merge; SESSIONID=6cb8d240714e708c43a738ab321e2082e1f14ea87b893d8dcf920396de165b93bc861c3156ff47486345c652d15282f7
+

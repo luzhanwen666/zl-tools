@@ -1,0 +1,13 @@
+HEAD /?suffix=MzkzMjJlMjA1MzY1NmM2NTYzNzQyMDYxMjA3MzYxNmQ3MDZjNjUyMDY2NzI2ZjZkMjA3NDY4NjUyMDYzNmY2YzZjNjU2Mzc0Njk2ZjZlMjA2NjZmNzIyMDYxNmU2MTZjNzk3MzY5NzMyZTBh HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36
+Cookie: constraint=severity; migrate=impersonate; integration=scope; SESSIONID=700bf2c0384414f6cc560f688dce35d3fa5de4c63b5fb86bdc188abd52a2bf6ea21a7a8859bc823a6c87b30baff746f7
+

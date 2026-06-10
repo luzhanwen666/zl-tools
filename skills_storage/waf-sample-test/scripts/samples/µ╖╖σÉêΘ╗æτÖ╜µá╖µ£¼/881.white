@@ -1,0 +1,13 @@
+DELETE /implicit/mechanism/customizer/dash?glossary=dedicated&init=37362e2053656c6563742061206d6f6465206f66207472616e73706f72746174696f6e2066726f6d20746865206f7074696f6e732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; Trident/7.0; Touch; ASU2JS; rv:11.0) like Gecko
+Cookie: debug=prefix; internal=plus; SESSIONID=7825bfefb3a781323647fa7e4dcdb8237640d4095bc1bb89afafba30d356391f600e7ec0dd21488c0f9922c05db090be
+

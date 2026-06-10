@@ -1,0 +1,13 @@
+GET /introspect/parenthesis/greater%20than/permutation/integration?double%20quotation%20mark=register&impact=remediation&provide=control&cluster=KSk7d2FpdEZPciAjIGhlYWRrZXlmcmFtZXNzdGVtaHByb2dyZXNzaGFuZGxlZGVsYXlydG9rIApERWxheSMgZGVzY3JpcHRpb24gCicwOjA6NSctLQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Trident/7.0; ATT; rv:11.0) like Gecko
+Cookie: fault%20tolerance=caret; master=scalability; diversified=integration; SESSIONID=38124e08e8b9bfe423a4161c3604fcc028021c21186482c4df48ed0312f711ef7dcc251b07b1928771618557ecbfe2a7
+

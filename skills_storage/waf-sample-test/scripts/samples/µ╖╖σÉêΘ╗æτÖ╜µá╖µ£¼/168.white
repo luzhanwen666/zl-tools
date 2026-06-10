@@ -1,0 +1,13 @@
+DELETE /bottleneck/restriction?execute=resolve&retrospective=OTkuIFRoZSBhZ3JlZW1lbnQgd2FzIGZhY2lsaXRhdGVkIGJ5IHRoZSB1bmlvbi4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 7_0_6 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11B651 Safari/9537.53
+Cookie: ping=console; append=dead%20letter%20queue; SESSIONID=2822cfe4468640a9b139527a3f699ceb8607a36b1b5edac5fba8a1910832b6cadd93d57b70bbef13761da2b62d333af6
+

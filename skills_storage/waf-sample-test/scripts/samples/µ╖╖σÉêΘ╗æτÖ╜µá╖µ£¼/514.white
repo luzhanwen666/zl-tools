@@ -1,0 +1,13 @@
+PUT /?automation=MzQzOTJlMjA1NDY4NjUyMDYxNjc3MjY1NjU2ZDY1NmU3NDIwNzc2MTczMjA3MjY1NjE2MzY4NjU2NDIwNzc2OTc0NjgyMDc0Njg2NTIwNzU2ZTY5NmY2ZTJlMGE%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: infrastructure=compromise; automation=explicit; intermittent=underlying; SESSIONID=10ef15986bbab5da9bbd86062008378e29d13b00b0c56f5c82a3731fde815ce7b8275a77bbb5a65bc6530b16223cd1d3
+

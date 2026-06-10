@@ -1,0 +1,450 @@
+{
+  "timestamp": "20260525_154631",
+  "waf_url": "https://192.168.24.55:9443",
+  "screenshots_dir": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631",
+  "screenshots": [
+    {
+      "event_id": "4e9dd7800f514a6d9a519b39e368e190",
+      "keyword": "sql",
+      "test_name": "SQL 注入",
+      "success": true,
+      "filename": "sql_event_4e9dd7800f514a6d9a519b39e368e190_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/sql_event_4e9dd7800f514a6d9a519b39e368e190_basic_20260525_154631.png",
+      "size_mb": 0.16,
+      "type": "basic"
+    },
+    {
+      "event_id": "4e9dd7800f514a6d9a519b39e368e190",
+      "keyword": "sql",
+      "test_name": "SQL 注入",
+      "success": true,
+      "filename": "sql_event_4e9dd7800f514a6d9a519b39e368e190_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/sql_event_4e9dd7800f514a6d9a519b39e368e190_detail_20260525_154631.png",
+      "size_mb": 0.14,
+      "type": "detail"
+    },
+    {
+      "event_id": "95905091e9174477954dfe1b5af2ecc2",
+      "keyword": "xss",
+      "test_name": "XSS 攻击",
+      "success": true,
+      "filename": "xss_event_95905091e9174477954dfe1b5af2ecc2_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/xss_event_95905091e9174477954dfe1b5af2ecc2_basic_20260525_154631.png",
+      "size_mb": 0.16,
+      "type": "basic"
+    },
+    {
+      "event_id": "95905091e9174477954dfe1b5af2ecc2",
+      "keyword": "xss",
+      "test_name": "XSS 攻击",
+      "success": true,
+      "filename": "xss_event_95905091e9174477954dfe1b5af2ecc2_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/xss_event_95905091e9174477954dfe1b5af2ecc2_detail_20260525_154631.png",
+      "size_mb": 0.15,
+      "type": "detail"
+    },
+    {
+      "event_id": "c29b1cb7bb9d4e7399fe1ae9674cabc3",
+      "keyword": "java",
+      "test_name": "Java 反序列化",
+      "success": true,
+      "filename": "java_event_c29b1cb7bb9d4e7399fe1ae9674cabc3_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/java_event_c29b1cb7bb9d4e7399fe1ae9674cabc3_basic_20260525_154631.png",
+      "size_mb": 0.15,
+      "type": "basic"
+    },
+    {
+      "event_id": "c29b1cb7bb9d4e7399fe1ae9674cabc3",
+      "keyword": "java",
+      "test_name": "Java 反序列化",
+      "success": true,
+      "filename": "java_event_c29b1cb7bb9d4e7399fe1ae9674cabc3_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/java_event_c29b1cb7bb9d4e7399fe1ae9674cabc3_detail_20260525_154631.png",
+      "size_mb": 0.25,
+      "type": "detail"
+    },
+    {
+      "event_id": "07fd35a746f54bc7bcbb0269d5639082",
+      "keyword": "fileupload",
+      "test_name": "文件上传",
+      "success": true,
+      "filename": "fileupload_event_07fd35a746f54bc7bcbb0269d5639082_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/fileupload_event_07fd35a746f54bc7bcbb0269d5639082_basic_20260525_154631.png",
+      "size_mb": 0.16,
+      "type": "basic"
+    },
+    {
+      "event_id": "07fd35a746f54bc7bcbb0269d5639082",
+      "keyword": "fileupload",
+      "test_name": "文件上传",
+      "success": true,
+      "filename": "fileupload_event_07fd35a746f54bc7bcbb0269d5639082_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/fileupload_event_07fd35a746f54bc7bcbb0269d5639082_detail_20260525_154631.png",
+      "size_mb": 0.14,
+      "type": "detail"
+    },
+    {
+      "event_id": "c6921582384948818a24a9a3f60ab621",
+      "keyword": "fileinclude",
+      "test_name": "文件包含",
+      "success": true,
+      "filename": "fileinclude_event_c6921582384948818a24a9a3f60ab621_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/fileinclude_event_c6921582384948818a24a9a3f60ab621_basic_20260525_154631.png",
+      "size_mb": 0.16,
+      "type": "basic"
+    },
+    {
+      "event_id": "c6921582384948818a24a9a3f60ab621",
+      "keyword": "fileinclude",
+      "test_name": "文件包含",
+      "success": true,
+      "filename": "fileinclude_event_c6921582384948818a24a9a3f60ab621_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/fileinclude_event_c6921582384948818a24a9a3f60ab621_detail_20260525_154631.png",
+      "size_mb": 0.14,
+      "type": "detail"
+    },
+    {
+      "event_id": "63e2b7e8c7834958b51e273f609ec1db",
+      "keyword": "php",
+      "test_name": "PHP 代码注入",
+      "success": true,
+      "filename": "php_event_63e2b7e8c7834958b51e273f609ec1db_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/php_event_63e2b7e8c7834958b51e273f609ec1db_basic_20260525_154631.png",
+      "size_mb": 0.18,
+      "type": "basic"
+    },
+    {
+      "event_id": "63e2b7e8c7834958b51e273f609ec1db",
+      "keyword": "php",
+      "test_name": "PHP 代码注入",
+      "success": true,
+      "filename": "php_event_63e2b7e8c7834958b51e273f609ec1db_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/php_event_63e2b7e8c7834958b51e273f609ec1db_detail_20260525_154631.png",
+      "size_mb": 0.15,
+      "type": "detail"
+    },
+    {
+      "event_id": "4681ff77c50e460e8992622ba7c37839",
+      "keyword": "csrf",
+      "test_name": "CSRF 攻击",
+      "success": true,
+      "filename": "csrf_event_4681ff77c50e460e8992622ba7c37839_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/csrf_event_4681ff77c50e460e8992622ba7c37839_basic_20260525_154631.png",
+      "size_mb": 0.11,
+      "type": "basic"
+    },
+    {
+      "event_id": "4681ff77c50e460e8992622ba7c37839",
+      "keyword": "csrf",
+      "test_name": "CSRF 攻击",
+      "success": true,
+      "filename": "csrf_event_4681ff77c50e460e8992622ba7c37839_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/csrf_event_4681ff77c50e460e8992622ba7c37839_detail_20260525_154631.png",
+      "size_mb": 0.11,
+      "type": "detail"
+    },
+    {
+      "event_id": "b467f547d2634c97ade6fa87a30fd44d",
+      "keyword": "ssrf",
+      "test_name": "SSRF 攻击",
+      "success": true,
+      "filename": "ssrf_event_b467f547d2634c97ade6fa87a30fd44d_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/ssrf_event_b467f547d2634c97ade6fa87a30fd44d_basic_20260525_154631.png",
+      "size_mb": 0.16,
+      "type": "basic"
+    },
+    {
+      "event_id": "b467f547d2634c97ade6fa87a30fd44d",
+      "keyword": "ssrf",
+      "test_name": "SSRF 攻击",
+      "success": true,
+      "filename": "ssrf_event_b467f547d2634c97ade6fa87a30fd44d_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/ssrf_event_b467f547d2634c97ade6fa87a30fd44d_detail_20260525_154631.png",
+      "size_mb": 0.14,
+      "type": "detail"
+    },
+    {
+      "event_id": "c23283246c6742709bc8d5969b3e5171",
+      "keyword": "php_deserialization",
+      "test_name": "PHP 反序列化",
+      "success": true,
+      "filename": "php_deserialization_event_c23283246c6742709bc8d5969b3e5171_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/php_deserialization_event_c23283246c6742709bc8d5969b3e5171_basic_20260525_154631.png",
+      "size_mb": 0.1,
+      "type": "basic"
+    },
+    {
+      "event_id": "c23283246c6742709bc8d5969b3e5171",
+      "keyword": "php_deserialization",
+      "test_name": "PHP 反序列化",
+      "success": true,
+      "filename": "php_deserialization_event_c23283246c6742709bc8d5969b3e5171_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/php_deserialization_event_c23283246c6742709bc8d5969b3e5171_detail_20260525_154631.png",
+      "size_mb": 0.11,
+      "type": "detail"
+    },
+    {
+      "event_id": "37e70f3ababc4434b3b20fa7e4d3a3dd",
+      "keyword": "asp",
+      "test_name": "ASP 攻击",
+      "success": true,
+      "filename": "asp_event_37e70f3ababc4434b3b20fa7e4d3a3dd_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/asp_event_37e70f3ababc4434b3b20fa7e4d3a3dd_basic_20260525_154631.png",
+      "size_mb": 0.17,
+      "type": "basic"
+    },
+    {
+      "event_id": "37e70f3ababc4434b3b20fa7e4d3a3dd",
+      "keyword": "asp",
+      "test_name": "ASP 攻击",
+      "success": true,
+      "filename": "asp_event_37e70f3ababc4434b3b20fa7e4d3a3dd_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/asp_event_37e70f3ababc4434b3b20fa7e4d3a3dd_detail_20260525_154631.png",
+      "size_mb": 0.15,
+      "type": "detail"
+    },
+    {
+      "event_id": "73387e7f1cd1410283ff4fc6074c132b",
+      "keyword": "java_code",
+      "test_name": "Java 代码注入",
+      "success": true,
+      "filename": "java_code_event_73387e7f1cd1410283ff4fc6074c132b_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/java_code_event_73387e7f1cd1410283ff4fc6074c132b_basic_20260525_154631.png",
+      "size_mb": 0.16,
+      "type": "basic"
+    },
+    {
+      "event_id": "73387e7f1cd1410283ff4fc6074c132b",
+      "keyword": "java_code",
+      "test_name": "Java 代码注入",
+      "success": true,
+      "filename": "java_code_event_73387e7f1cd1410283ff4fc6074c132b_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/java_code_event_73387e7f1cd1410283ff4fc6074c132b_detail_20260525_154631.png",
+      "size_mb": 0.15,
+      "type": "detail"
+    },
+    {
+      "event_id": "ab3fc660f2b34086917e7ad1b2ab84f4",
+      "keyword": "code",
+      "test_name": "命令注入",
+      "success": true,
+      "filename": "code_event_ab3fc660f2b34086917e7ad1b2ab84f4_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/code_event_ab3fc660f2b34086917e7ad1b2ab84f4_basic_20260525_154631.png",
+      "size_mb": 0.16,
+      "type": "basic"
+    },
+    {
+      "event_id": "ab3fc660f2b34086917e7ad1b2ab84f4",
+      "keyword": "code",
+      "test_name": "命令注入",
+      "success": true,
+      "filename": "code_event_ab3fc660f2b34086917e7ad1b2ab84f4_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/code_event_ab3fc660f2b34086917e7ad1b2ab84f4_detail_20260525_154631.png",
+      "size_mb": 0.15,
+      "type": "detail"
+    },
+    {
+      "event_id": "4d04657b05fa4b6aa72a0b64c2c1be43",
+      "keyword": "intelligence_module",
+      "test_name": "情报模块",
+      "success": true,
+      "filename": "intelligence_module_event_4d04657b05fa4b6aa72a0b64c2c1be43_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/intelligence_module_event_4d04657b05fa4b6aa72a0b64c2c1be43_basic_20260525_154631.png",
+      "size_mb": 0.17,
+      "type": "basic"
+    },
+    {
+      "event_id": "4d04657b05fa4b6aa72a0b64c2c1be43",
+      "keyword": "intelligence_module",
+      "test_name": "情报模块",
+      "success": true,
+      "filename": "intelligence_module_event_4d04657b05fa4b6aa72a0b64c2c1be43_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/intelligence_module_event_4d04657b05fa4b6aa72a0b64c2c1be43_detail_20260525_154631.png",
+      "size_mb": 0.14,
+      "type": "detail"
+    },
+    {
+      "event_id": "150e6a185d0447809b0d24b3447b5b18",
+      "keyword": "robot",
+      "test_name": "机器人检测",
+      "success": true,
+      "filename": "robot_event_150e6a185d0447809b0d24b3447b5b18_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/robot_event_150e6a185d0447809b0d24b3447b5b18_basic_20260525_154631.png",
+      "size_mb": 0.15,
+      "type": "basic"
+    },
+    {
+      "event_id": "150e6a185d0447809b0d24b3447b5b18",
+      "keyword": "robot",
+      "test_name": "机器人检测",
+      "success": true,
+      "filename": "robot_event_150e6a185d0447809b0d24b3447b5b18_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/robot_event_150e6a185d0447809b0d24b3447b5b18_detail_20260525_154631.png",
+      "size_mb": 0.13,
+      "type": "detail"
+    },
+    {
+      "event_id": "7fabfb169e224ee9a877169061b80060",
+      "keyword": "base64",
+      "test_name": "Base64 编码绕过",
+      "success": true,
+      "filename": "base64_event_7fabfb169e224ee9a877169061b80060_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/base64_event_7fabfb169e224ee9a877169061b80060_basic_20260525_154631.png",
+      "size_mb": 0.11,
+      "type": "basic"
+    },
+    {
+      "event_id": "7fabfb169e224ee9a877169061b80060",
+      "keyword": "base64",
+      "test_name": "Base64 编码绕过",
+      "success": true,
+      "filename": "base64_event_7fabfb169e224ee9a877169061b80060_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/base64_event_7fabfb169e224ee9a877169061b80060_detail_20260525_154631.png",
+      "size_mb": 0.11,
+      "type": "detail"
+    },
+    {
+      "event_id": "03fda4bdace744ebb1df89ef745f2ffc",
+      "keyword": "url",
+      "test_name": "URL 编码绕过",
+      "success": true,
+      "filename": "url_event_03fda4bdace744ebb1df89ef745f2ffc_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/url_event_03fda4bdace744ebb1df89ef745f2ffc_basic_20260525_154631.png",
+      "size_mb": 0.16,
+      "type": "basic"
+    },
+    {
+      "event_id": "03fda4bdace744ebb1df89ef745f2ffc",
+      "keyword": "url",
+      "test_name": "URL 编码绕过",
+      "success": true,
+      "filename": "url_event_03fda4bdace744ebb1df89ef745f2ffc_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/url_event_03fda4bdace744ebb1df89ef745f2ffc_detail_20260525_154631.png",
+      "size_mb": 0.14,
+      "type": "detail"
+    },
+    {
+      "event_id": "3a808d733f664fbb9ef5ce66b95cdbbf",
+      "keyword": "json",
+      "test_name": "JSON 解析攻击",
+      "success": true,
+      "filename": "json_event_3a808d733f664fbb9ef5ce66b95cdbbf_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/json_event_3a808d733f664fbb9ef5ce66b95cdbbf_basic_20260525_154631.png",
+      "size_mb": 0.16,
+      "type": "basic"
+    },
+    {
+      "event_id": "3a808d733f664fbb9ef5ce66b95cdbbf",
+      "keyword": "json",
+      "test_name": "JSON 解析攻击",
+      "success": true,
+      "filename": "json_event_3a808d733f664fbb9ef5ce66b95cdbbf_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/json_event_3a808d733f664fbb9ef5ce66b95cdbbf_detail_20260525_154631.png",
+      "size_mb": 0.14,
+      "type": "detail"
+    },
+    {
+      "event_id": "ddceda174b6f44019ab5532ccbec85ea",
+      "keyword": "onesix",
+      "test_name": "16 进制编码",
+      "success": true,
+      "filename": "onesix_event_ddceda174b6f44019ab5532ccbec85ea_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/onesix_event_ddceda174b6f44019ab5532ccbec85ea_basic_20260525_154631.png",
+      "size_mb": 0.16,
+      "type": "basic"
+    },
+    {
+      "event_id": "ddceda174b6f44019ab5532ccbec85ea",
+      "keyword": "onesix",
+      "test_name": "16 进制编码",
+      "success": true,
+      "filename": "onesix_event_ddceda174b6f44019ab5532ccbec85ea_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/onesix_event_ddceda174b6f44019ab5532ccbec85ea_detail_20260525_154631.png",
+      "size_mb": 0.15,
+      "type": "detail"
+    },
+    {
+      "event_id": "f9e5472efbb64d758c46d1e6c729c8aa",
+      "keyword": "backslash",
+      "test_name": "反斜杠转义",
+      "success": true,
+      "filename": "backslash_event_f9e5472efbb64d758c46d1e6c729c8aa_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/backslash_event_f9e5472efbb64d758c46d1e6c729c8aa_basic_20260525_154631.png",
+      "size_mb": 0.16,
+      "type": "basic"
+    },
+    {
+      "event_id": "f9e5472efbb64d758c46d1e6c729c8aa",
+      "keyword": "backslash",
+      "test_name": "反斜杠转义",
+      "success": true,
+      "filename": "backslash_event_f9e5472efbb64d758c46d1e6c729c8aa_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/backslash_event_f9e5472efbb64d758c46d1e6c729c8aa_detail_20260525_154631.png",
+      "size_mb": 0.15,
+      "type": "detail"
+    },
+    {
+      "event_id": "842d792ca8d84cff86e87040720047cf",
+      "keyword": "xml",
+      "test_name": "XML 编码",
+      "success": true,
+      "filename": "xml_event_842d792ca8d84cff86e87040720047cf_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/xml_event_842d792ca8d84cff86e87040720047cf_basic_20260525_154631.png",
+      "size_mb": 0.15,
+      "type": "basic"
+    },
+    {
+      "event_id": "842d792ca8d84cff86e87040720047cf",
+      "keyword": "xml",
+      "test_name": "XML 编码",
+      "success": true,
+      "filename": "xml_event_842d792ca8d84cff86e87040720047cf_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/xml_event_842d792ca8d84cff86e87040720047cf_detail_20260525_154631.png",
+      "size_mb": 0.15,
+      "type": "detail"
+    },
+    {
+      "event_id": "6678140a645c4ddaae7cb40d29ffd291",
+      "keyword": "utf7",
+      "test_name": "UTF-7 编码",
+      "success": true,
+      "filename": "utf7_event_6678140a645c4ddaae7cb40d29ffd291_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/utf7_event_6678140a645c4ddaae7cb40d29ffd291_basic_20260525_154631.png",
+      "size_mb": 0.16,
+      "type": "basic"
+    },
+    {
+      "event_id": "6678140a645c4ddaae7cb40d29ffd291",
+      "keyword": "utf7",
+      "test_name": "UTF-7 编码",
+      "success": true,
+      "filename": "utf7_event_6678140a645c4ddaae7cb40d29ffd291_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/utf7_event_6678140a645c4ddaae7cb40d29ffd291_detail_20260525_154631.png",
+      "size_mb": 0.15,
+      "type": "detail"
+    },
+    {
+      "event_id": "6be2988b5814406589b6e638ef57c311",
+      "keyword": "more_value",
+      "test_name": "多层编码解析",
+      "success": true,
+      "filename": "more_value_event_6be2988b5814406589b6e638ef57c311_basic_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/more_value_event_6be2988b5814406589b6e638ef57c311_basic_20260525_154631.png",
+      "size_mb": 0.17,
+      "type": "basic"
+    },
+    {
+      "event_id": "6be2988b5814406589b6e638ef57c311",
+      "keyword": "more_value",
+      "test_name": "多层编码解析",
+      "success": true,
+      "filename": "more_value_event_6be2988b5814406589b6e638ef57c311_detail_20260525_154631.png",
+      "path": "/Users/luzhanwen/.claude/skills/waf-security-test/scripts/screenshots/session_20260525_154631/more_value_event_6be2988b5814406589b6e638ef57c311_detail_20260525_154631.png",
+      "size_mb": 0.15,
+      "type": "detail"
+    }
+  ],
+  "total": 44,
+  "success_count": 44,
+  "fail_count": 0
+}

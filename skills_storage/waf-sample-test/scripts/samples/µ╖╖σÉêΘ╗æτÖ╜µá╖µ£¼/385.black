@@ -1,0 +1,13 @@
+GET /expenditure/rank/tentative/period?symmetric=constant&asynchronous=elastic&concrete=%29%29%3BWaitFOR%00%23%20ascentsftpbootstrappedpointerdottedscrubbingshortcutsencode%20%0AdelAY%20%270%3A0%3A5%27-- HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:40.0) Gecko/20100101 Firefox/40.0
+Cookie: delete=accordion; SESSIONID=b49f30fe14747419ad8034c6a6675d63f69388eb9840a63cdc47672b676625ada458c0e77fec6f07b7613f667528f3a1
+

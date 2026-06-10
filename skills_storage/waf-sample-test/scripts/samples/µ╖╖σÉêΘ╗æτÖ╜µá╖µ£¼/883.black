@@ -1,0 +1,13 @@
+POST /policy/capture?sustainable=3129206f720d2f2a2063617465676f727977696c6c7661726961626c6573656c656374636c6970626f617264616c69676e7269676874666c6f6f64636f6d70757465636f6d706c656d656e746172790d0a6175677573746d616e61676572686f746d61696c0a202a2f42456e43686d41524b2831303030303030302c4d44352831292923 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; rv:31.0) Gecko/20100101 Firefox/31.0
+Cookie: compromise=minus; SESSIONID=aaa91fddcb0f4216a68a4845e8ea647e2c503515296da86869887865a3319ec58e75503dbade6d1f95b3671872f5d1f5
+

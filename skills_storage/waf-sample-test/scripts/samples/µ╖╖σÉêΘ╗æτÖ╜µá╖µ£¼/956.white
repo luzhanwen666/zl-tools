@@ -1,0 +1,13 @@
+PUT /?dash=curly%20brackets&ratify=single%20quotation%20mark&recursion=MjkuIFRoZXkgZ2FpbmVkIGEgbG90IGZyb20gdGhlIHVuaW9uJ3MgZWZmb3J0cy4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: takeaway=primary; prepare=resilient; section=alter; SESSIONID=6b7cf184bd0200c943899400384b1824ed9eb8d397f4ca9e6d3eeababe994e4bb4c5a798a6fd3e730d579ff2c6d07093
+

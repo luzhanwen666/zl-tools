@@ -1,0 +1,13 @@
+DELETE /aggregation?agile=consultative&migrate=%3B%20cat%20/etc/passwd%3B HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36
+Cookie: scalability=leverage; SESSIONID=c5fc56e89a52faa0b8a2ef9b4a4fa68e3fcb1f353e6ad33996f03733318e36bd637b8c569129a361ed2c9d70193e7b03
+

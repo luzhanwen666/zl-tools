@@ -1,0 +1,13 @@
+HEAD /allocate/descent/rapid/oversight?reliability=worker&indecisive=Ny4gVGhlIGJvb2sgaXMgdHJhbnNsYXRlZCBmcm9tIEZyZW5jaCB0byBFbmdsaXNoLgo%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) CriOS/45.0.2454.68 Mobile/11D257 Safari/9537.53
+Cookie: BIOS=dedicated; descent=ephemeral; SESSIONID=c4f3578c360eb0ab4ca4fb649644be8d82976172c00dee9ee8ddbc429689d829fddf5926822eff84631f4346bf9f05c8
+

@@ -1,0 +1,13 @@
+DELETE /confidentiality/parenthesis/downwards%20arrow?manually=traceability&database=skip&utilization=concatenate&intermittent=MTAwLiBTZWxlY3QgYSBmcmVxdWVuY3kgZnJvbSB0aGUgc2V0dGluZ3MgbWVudSBmb3IgdXBkYXRlcy4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; Trident/7.0; ASU2JS; rv:11.0) like Gecko
+Cookie: equal=node; catastrophic%20failover=section; SESSIONID=b8b5818f449b7b3393e880cc48cf35a9e19d740cabd22ef248854154c99901e7cacc190d9c44f2f94cb650e49b54b20c
+

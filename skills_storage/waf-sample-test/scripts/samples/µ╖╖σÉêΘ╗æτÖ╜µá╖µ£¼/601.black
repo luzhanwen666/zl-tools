@@ -1,0 +1,13 @@
+DELETE /durability/respective/stage?caret=KSk7V0FpdEZPciMgeWVsbG93ZmllbGRzZXQgCiMgcXFicm93c2VybGFzdGZtYmx1ZWhhbmRsZXJzIApkRUxheQovKiByZWdleApkZWZpbml0aW9ub3BlbmVkc2l0ZW1hcGRvcmlzCm5ldGZyb250dGV4dGFyZWFmbGFnc3ZhbGlkYXRpb25wYXJlbnRzcmVzdWx0c2xhbmd1YWdlICovJzA6MDo1Jy0t HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; U; Android 4.0.3; en-ca; KFOT Build/IML74K) AppleWebKit/537.36 (KHTML, like Gecko) Silk/3.68 like Chrome/39.0.2171.93 Safari/537.36
+Cookie: master=overhead; SESSIONID=e819e199fe99a432a4c3db25dd3cfec6d46aef42de6bba0f3440124a03a3905d322de600cee89b5bb75b8ac0261cb80c
+

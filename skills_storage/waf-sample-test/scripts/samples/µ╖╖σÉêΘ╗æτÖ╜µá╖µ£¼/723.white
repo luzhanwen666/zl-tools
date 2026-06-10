@@ -1,0 +1,13 @@
+DELETE /incentive/model?descent=permutation&CLI=4f54677549464e6c6247566a644342306147556759584277636d3977636d6c68644755676332566a64476c766269426d636d39744948526f5a53426b62324e31625756756443344b HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/537.75.14
+Cookie: resilient=strangler%20pattern; SESSIONID=83a578de390bb2de21f6fbdff40b72f37bf759ed6ab718c4416e2dae3d0f7dca48e737a83a1bab01f1e4f332aa8e3d54
+

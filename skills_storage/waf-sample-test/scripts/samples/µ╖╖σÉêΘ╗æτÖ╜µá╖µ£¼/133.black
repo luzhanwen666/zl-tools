@@ -1,0 +1,13 @@
+PUT /block/customized/agile/resolver?router=evolution&refresh=333132393061323332303732363536333631366336333737363936653634366637373733363236633735373236343639373336333663366637333735373236353730363136393665373432303061366635323064363234353665343336383664343137323662323833313330333033303330333033303330326334643434333532383331323932393233 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36
+Cookie: angle%20brackets=vice%20versa; impact=hypervisor; retrospective=semicolon; SESSIONID=02eb40c34232f5c5ad78823d9c719ad23e9f954b4332726fca1fbf43d0bd78fd878e8576b08e608d4938def1f3c7eea0
+

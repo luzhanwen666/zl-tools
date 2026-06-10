@@ -1,0 +1,13 @@
+GET /redundancy/amortization/UAT/policy/retrospective?manager=authorization&sustainable=hash&ascent=hyphen&intermittent=MS4gU2VsZWN0IHlvdXIgY291cnNlcyBmcm9tIHRoZSBhdmFpbGFibGUgb3B0aW9ucy4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0
+Cookie: ratify=display; assign=meta; SESSIONID=e1f4e0d40085fd10f38bc07383ff6daba906950047c89ee867a63153ffe6d7a208de07c1a74c59a195818d76ad7f0631
+

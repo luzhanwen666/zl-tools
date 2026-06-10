@@ -1,0 +1,13 @@
+PUT /route/CLI/asynchronous?expression=exclamation%20mark&encapsulate=respective&DOM=TnpVdUlGUm9aU0J6ZFhCd2IzSjBJSGRoY3lCamNuVmphV0ZzSUdaeWIyMGdkR2hsSUhWdWFXOXVMZ289 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; CrOS x86_64 6946.63.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36
+Cookie: merge=durability; SESSIONID=17a5131fd27ad1e41703bacf01291f9adf98176319fcee97d75a67742a4c5ff94887ded6fc80f7225669e39b1c132f66
+

@@ -1,0 +1,13 @@
+POST /imperative?overhead=mapping&protocol=node&permission=implement&source=3b20636174202f6574632f7061737377643b HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.3; KFTHWI Build/KTU84M) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/34.0.0.0 Safari/537.36
+Cookie: delete=refresh; SESSIONID=a3546f7983b2d393c9af3bf5103bc4f6df934a5c5c60ad2dafc83d296c1810a481979484ab73c3481f6b489500016da7
+

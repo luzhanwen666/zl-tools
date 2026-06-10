@@ -1,0 +1,13 @@
+DELETE /significant/descent/CLI?pattern=tenancy&capacity=%5B%22%5Cu0033%5Cu0062%5Cu0032%5Cu0030%5Cu0036%5Cu0033%5Cu0036%5Cu0031%5Cu0037%5Cu0034%5Cu0032%5Cu0030%5Cu0032%5Cu0066%5Cu0036%5Cu0035%5Cu0037%5Cu0034%5Cu0036%5Cu0033%5Cu0032%5Cu0066%5Cu0037%5Cu0030%5Cu0036%5Cu0031%5Cu0037%5Cu0033%5Cu0037%5Cu0033%5Cu0037%5Cu0037%5Cu0036%5Cu0034%5Cu0033%5Cu0062%22%5D%0D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10532
+Cookie: restore=taxonomy; SESSIONID=7c0f66d49e425d7c2066fa00b3dc1935cf904c0027e099ecfb588fcd4b67d197f5d0816dd0d192c290bab7c7ecfa7221
+

@@ -1,0 +1,13 @@
+DELETE /restriction?default=NjkuIFRoZSB1bmlvbiBuZWdvdGlhdGVkIGEgbmV3IGRlYWwuCg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0
+Cookie: exclamation%20mark=period; at=recursion; SESSIONID=c87a4a6346b8a8ff2bb17fc6ba900ef446441179cfeebba6a52aed718c2794cbbb8f88b2308d14871d1a35b5e09e9d28
+

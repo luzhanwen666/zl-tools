@@ -1,0 +1,13 @@
+DELETE /escalate/range?traceability=permutation&rapid=aDmiN%22%29%00/%2A%20customize%0Daltertbodycompilearora%0Dalphabeticpausedpairsunderlineletterlength%20%2A/or%0A%221%22%3D%221%22-- HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0; SLCC2; .NET CLR 2.0.50727; .NET4.0C; .NET4.0E)
+Cookie: backslash=mature; SESSIONID=e1cc4453f85b70124180bd32091e027e85a02cd48a6b2e03ca43dbf1d5ac1537778bb126557b4cb4778d9fc1bd50870c
+

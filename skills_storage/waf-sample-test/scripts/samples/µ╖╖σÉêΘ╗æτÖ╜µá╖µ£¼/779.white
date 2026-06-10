@@ -1,0 +1,13 @@
+GET /scope?impact=deprecated&durability=incident&customized=apply&false%20positive=37312e2054686520756e696f6e20616464726573736564207468652069737375652070726f6d70746c792e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36
+Cookie: ascent=left%20arrow; SESSIONID=fdf26965a79ca4bf365e456d13aa7d29dd2ad2da34dcc94570a22f01fe2fbcb09adf3ca0f8638852cc03088cdb46e7a5
+

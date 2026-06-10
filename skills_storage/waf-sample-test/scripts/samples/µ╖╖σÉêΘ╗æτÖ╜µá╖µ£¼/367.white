@@ -1,0 +1,13 @@
+POST /UAT?manage=bind&traceability=pong&protocol=notation&multi=4d6a55754945686c49484a6c59325670646d566b494745675a334a68626e51675a6e4a766253423061475567645735706232346e6379426d6457356b4c676f3d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36 SE 2.X MetaSr 1.0
+Cookie: snapshot=hypothesis; trigger=incentive; SESSIONID=ec344f79ff2ea58dc48a636fdce94d3585a47652a1aa83cc8352dcde04084f55491f02be46d72b84f85bb5fe3cff56eb
+

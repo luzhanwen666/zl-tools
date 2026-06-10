@@ -1,0 +1,13 @@
+POST /?strangler%20pattern=dispatch&impact=stroke&recursion=oversight&delivery=STNKbGNUMGpZMjl1ZEdWNGRDNW5aWFFvSjF4NE5qTW5LeWRjZURabUp5c25YSGcyWkNjckoxeDRNbVVuS3lkY2VEWm1KeXNuWEhnM01DY3JKMXg0TmpVbkt5ZGNlRFpsSnlzblhIZzNNeWNySjF4NE56a25LeWRjZURaa0p5c25YSGczTUNjckoxeDROamduS3lkY2VEWm1KeXNuWEhnMlpTY3JKMXg0Tnprbkt5ZGNlREpsSnlzblhIZzNPQ2NySjF4NE56Y25LeWRjZURabUp5c25YSGczTWljckoxeDRObUluS3lkY2VETXlKeXNuWEhneVpTY3JKMXg0TmpRbkt5ZGNlRFk1SnlzblhIZzNNeWNySjF4NE56QW5LeWRjZURZeEp5c25YSGczTkNjckoxeDROak1uS3lkY2VEWTRKeXNuWEhnMk5TY3JKMXg0TnpJbkt5ZGNlREpsSnlzblhIZzBPQ2NySjF4NE56UW5LeWRjZURjMEp5c25YSGczTUNjckoxeDROVE1uS3lkY2VEWTFKeXNuWEhnM01pY3JKMXg0TnpZbkt5ZGNlRFpqSnlzblhIZzJOU2NySjF4NE56UW5LeWRjZURVeUp5c25YSGcyTlNjckoxeDROekVuS3lkY2VEYzFKeXNuWEhnMk5TY3JKMXg0TnpNbkt5ZGNlRGMwSnlBcA%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; ASJB; rv:11.0) like Gecko
+Cookie: adapt=integration; SESSIONID=163c86640a879329bee040f2c050e7891fc8c3f8122ea5d0d5980d5ce3e745c285e1ee00799aad5683a53cc959febd56
+

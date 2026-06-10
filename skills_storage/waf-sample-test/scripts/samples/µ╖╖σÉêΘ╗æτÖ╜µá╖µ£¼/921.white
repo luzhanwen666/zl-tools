@@ -1,0 +1,13 @@
+POST /migrate/roll%20out/append?compliance=master&ampersand=342e205765206e65656420746f2073656c6563742061206e6577206368616972706572736f6e2066726f6d20746865206e6f6d696e6565732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: execute=incident; BIOS=curly%20brackets; SESSIONID=6c90a7a36fd557d140bb73ec7cbc80372dfe49248d9128f70c94ac7f466f72134bc64727262730f4a1e6ef1c436996c0
+

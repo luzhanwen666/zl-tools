@@ -1,0 +1,13 @@
+DELETE /?arbitrary=permission&element=link&data%20sovereignty=ODUuIFRoZSBhZHZpY2Ugd2FzIHNvdWdodCBmcm9tIHRoZSB1bmlvbi4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:39.0) Gecko/20100101 Firefox/39.0
+Cookie: detect=master; SESSIONID=086eacf4834667a57cfb4fb2c1fba03a13b7270638ba925a387962f2b7aaf25ca722381f7dc1ce3bdc30729471023846
+

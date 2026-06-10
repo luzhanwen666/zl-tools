@@ -1,0 +1,13 @@
+DELETE /command/range/confidentiality?prepare=module&incident=occasion&database=MwpBbmQgLyoganVuZQ1ibG9nZnRwc2ZvY3Vzb3V0Ymx1cmNvbnRyaWJ1dGluZw1lbnVtZXJhYmxlYmluYXJ5ZXBwc3RlaW5iZXNoYXJlc2t5cGVtb2R1bGUgKi8yIC8qIHJvd3N1bml0Z2VuZXJhdGVkDSAqLz0ALyogCmhvdGtleXMgKi8yClVOSU9uLS0gZXhwb3J0c3NjcnViYmluZ2Rpc3RjZWxscHJlc2VydmV0YWJpbmRleHBheWxvYWRoZWlnaHRpbmhlcml0cGxhY2Vob2xkZXIgCnNFbEVDdC8qIGFsbG93ZWRnZW5lcmFsCiAqLzEvKiANZmlsZXMgKi8jIGlnbm9yZWNlbWJyZWNyZWF0ZWZpcmViaXJkIAoj HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.1.1; Nexus 10 Build/LMY48I) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: delivery=pattern; overhead=imperative; inception=rectify; SESSIONID=24448726cfbcf6baffa1c75149881aa25de358494b016f2011854696b72d78d2f412ac3b54623c67617ac652efe185f5
+

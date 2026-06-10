@@ -1,0 +1,13 @@
+DELETE /encryption/period?fetch=roll%20off&roll%20out=restriction&source=WwkgIlx1MDA2M1x1MDA2Rlx1MDA2ZVx1MDA3M1x1MDA3NVx1MDA2Q1x1MDA3NFx1MDA2MVx1MDA3NFx1MDA2OVx1MDA3Nlx1MDA2NSIsDWZhbHNlLDksIlx1MDA3Ylx1MDA3Ylx1MDAyMFx1MDAzNFx1MDAzMlx1MDAzMlx1MDAzNlx1MDAyYVx1MDAzNlx1MDAzMlx1MDAzN1x1MDAzOVx1MDAyMFx1MDA3ZFx1MDA3RCIgCl0%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36
+Cookie: cluster=failback; SESSIONID=bddf457cda4ee0f63114b8bec0e8e9f67f30a4a5f526e2add0ca8c3cd9525e91e5731b4d87253a61636bc6f71e4a8f27
+

@@ -1,0 +1,13 @@
+PUT /constraint/add/console/create?polyfill=inner&dash=redundancy&depreciation=false%20positive&sustainable=3363336637303638373032303733373937333734363536643238323435663437343535343562363336643634356432393362 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36
+Cookie: arbitrary=permission; tolerance=dispatch; asynchronous=hash; SESSIONID=90dce5c52ac3f81f6704510df04e4afef3ad3901616d7a581e8147ab42c70251742d076a3ded98e9ed7d6f56ad261af7
+

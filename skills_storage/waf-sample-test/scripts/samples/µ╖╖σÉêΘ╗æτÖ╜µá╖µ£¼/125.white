@@ -1,0 +1,13 @@
+DELETE /ratify?node=scenario&mutable=diversified&UAT=TnpBdUlGTmxiR1ZqZENCaElISmxZMmx3YVdWdWRDQm1jbTl0SUhsdmRYSWdZMjl1ZEdGamRITXVDZz09 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; QMV7B Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: load=stroke; SESSIONID=9a53c3d79343bbc8695102c0b794c6e624fc0806f8f8d682ebdbdddc30faf8fec4f11eab8e2ef80bdef023fda72129e7
+

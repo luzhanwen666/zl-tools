@@ -1,0 +1,13 @@
+GET /depreciation/range?minus=stage&efficiency=MjIyOTI5MjMyMDYxNjQ2NDY5NzQ2OTc2NjU2MzZmNmU3NDcyNjE3Mzc0NjU3ODY5NzQyMDBhNmY1MjAwMmQyZDIwNzI2NTc2NjU3MjczNjUyMDBhNzM2YzY1NjU1MDI4MzUyOTNkMjI%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; MATBJS; rv:11.0) like Gecko
+Cookie: resilient=robust; cost-effective=attribute; rectify=federation; SESSIONID=bef1c9de7bbea2b402207eb964d5c1d4917c8c26233166de52bc6281f62efee4e7e11d1238c4587c11a51ddbbb6146e0
+

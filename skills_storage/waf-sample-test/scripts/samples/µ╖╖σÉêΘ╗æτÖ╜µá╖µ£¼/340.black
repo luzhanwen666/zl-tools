@@ -1,0 +1,13 @@
+PUT /dispatcher/miscellaneous?workaround=2229290d6f7220534c4545702835293d22 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/536.30.1 (KHTML, like Gecko) Version/6.0.5 Safari/536.30.1
+Cookie: furthermore=declarative; hypervisor=subtle; traceability=subtle; SESSIONID=a7bfb0257761e95864fea5b68a9d37bcbb8df443fca8a01ac537bb069680e905d3f52b987ed10b4b3481974c6e5a200e
+

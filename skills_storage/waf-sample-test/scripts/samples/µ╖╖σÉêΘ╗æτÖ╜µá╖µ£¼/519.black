@@ -1,0 +1,13 @@
+GET /strangler%20pattern/pop/depreciation/publish?substantial=embrace&automation=3c21444f435459504520666f6f205b203c21454e54495459206578742053595354454d20222f6d6f7573656d6f76652f6f7269672f6f766572726964652f70726f706572746965732f656c736522203e205d3e HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Maxthon/4.4.6.2000 Chrome/30.0.1599.101 Safari/537.36
+Cookie: dispatcher=BIOS; SESSIONID=f56e64f9d8bbe9d127ddca66e78d73a091afb2eb9124d14a4670e85d200834837a5825140fa56a6bc464f192aac05b5f
+

@@ -1,0 +1,13 @@
+DELETE /subsequent/distinction/introspect/threshold?slash=crucial&echo=UVdSTlNXNGlLUUJ2VWdBaklHRjFaM1Z6ZENBS0lqRWlQU0l4SWkwdA%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; LG-V410 Build/KOT49I.V41010d) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: caveats=pattern; mitigate=restriction; square%20brackets=UAT; SESSIONID=fe6f49f2ce3420b31a8cdf1e91ae388e2b66fa32034481f3f4cb7101919a0cc0ddf0f9c51283dfc01d85181e49086d28
+

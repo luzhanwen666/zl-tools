@@ -1,0 +1,13 @@
+POST /imperative/implement/assign?comprehensive=WzE2LAoiXHUwMDY5XHUwMDZFXHUwMDczXHUwMDc0XHUwMDYxXHUwMDZFXHUwMDYzXHUwMDY1IiwiXHUwMDM4XHUwMDJlXHUwMDIwXHUwMDQ5XHUwMDIwXHUwMDYzXHUwMDZGXHUwMDc1XHUwMDZjXHUwMDY0XHUwMDZFXHUwMDI3XHUwMDc0XHUwMDIwXHUwMDczXHUwMDY1XHUwMDZDXHUwMDY1XHUwMDYzXHUwMDc0XHUwMDIwXHUwMDYxXHUwMDIwXHUwMDY2XHUwMDYxXHUwMDc2XHUwMDZGXHUwMDcyXHUwMDY5XHUwMDc0XHUwMDY1XHUwMDIwXHUwMDYyXHUwMDZmXHUwMDZmXHUwMDZiXHUwMDIwXHUwMDY2XHUwMDcyXHUwMDZmXHUwMDZEXHUwMDIwXHUwMDc0XHUwMDY4XHUwMDY1XHUwMDIwXHUwMDZDXHUwMDY5XHUwMDYyXHUwMDcyXHUwMDYxXHUwMDcyXHUwMDc5XHUwMDJFXHUwMDBBIiwKdHJ1ZQksCTU5IF0%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36
+Cookie: inter=bottleneck; agnostic=failover; SESSIONID=5ddeaccfb333055b8e09d266475f067d492fedacfe1dd73ab62a181b4ca92d260ac815dd5b108cce25851a092a279ead
+

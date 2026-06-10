@@ -1,0 +1,13 @@
+POST /concatenate/default?publish=backslash&authorization=mutable&optimize=Li4vV0VCLUlORi93ZWIueG1s HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; BOIE9;ENUS; rv:11.0) like Gecko
+Cookie: incentive=BIOS; merge=initiative; heterogeneous=furthermore; SESSIONID=54fe3abfc37a6730148a8e2a287cd6beb6ee08a52073ec4edca3be9ecc060fdfc65c995ef2cc22269e879a4bdd5b7608
+

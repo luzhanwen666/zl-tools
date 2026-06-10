@@ -1,0 +1,13 @@
+PUT /?prepare=3b20636174202f6574632f7061737377643b HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.152 Safari/537.36 LBBROWSER
+Cookie: range=cost-efficient; SESSIONID=e39fff0ca3bea42ad371b2bf1b0dffb8f6f5eacb17d4888e125dfbb05d43050936907397969fe122683396d03344e642
+

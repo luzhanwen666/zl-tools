@@ -1,0 +1,13 @@
+POST /mature/refresh/semantic?echo=leverage&agile=intrusive&overview=diversified&multi=T1RRdUlGTmxiR1ZqZENCNWIzVnlJR3hsWVhKdWFXNW5JSEJoZEdnZ1puSnZiU0IwYUdVZ2NISnZaM0poYlM0Sw%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: substantial=handler; impression=alphabetically; optimization=concatenate; SESSIONID=a61e1d7441da1c2c51ec07527c91917c0688c0e87229504ad154653ffbab7813348404a6521cd33db966b055458c36ea
+

@@ -1,0 +1,13 @@
+PUT /capacity/asterisk/argument?aggregate=ephemeral&interaction=downwards%20arrow&populate=336232303633363137343230326636353734363332663730363137333733373736343362 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.0.2; LG-V410/V41020b Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/34.0.1847.118 Safari/537.36
+Cookie: arbitrary=attach; failover=adapter; provider=utilization; SESSIONID=47053c17c27672f47a5b3f9485371e56fb333a99c591c3f13747e97ee879f90125d2f946d4b8c0b52356c30fbe18760f
+

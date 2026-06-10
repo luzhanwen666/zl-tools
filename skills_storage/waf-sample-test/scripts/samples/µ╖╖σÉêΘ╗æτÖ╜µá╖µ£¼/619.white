@@ -1,0 +1,13 @@
+DELETE /underscore/comma/trajectory/inherit?dispatch=underlying&mechanism=display&dash=tilde&polyfill=3130302e2053656c6563742061206672657175656e63792066726f6d207468652073657474696e6773206d656e7520666f7220757064617465732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/44.0.2403.89 Chrome/44.0.2403.89 Safari/537.36
+Cookie: intermittent=provider; federation=message; SESSIONID=57d50899fa72996fe0871df37490cd1184f6eef4a089099d52abc427b610e15018355b780469fb961cc374e438d06414
+

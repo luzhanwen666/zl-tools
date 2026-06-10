@@ -1,0 +1,13 @@
+GET /concurrent/alphabetically?diversified=322e20506c656173652073656c6563742074686520636f727265637420616e737765722066726f6d2074686520676976656e206f7074696f6e732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; EIE10;ENUSMSE; rv:11.0) like Gecko
+Cookie: concrete=equal; create=inception; SESSIONID=b088bab97d8b6bd905ba46564a5ea7139d7bb3aaac0b018abf64ced24ab26e9148eb8fc7d182f7a9e1afbdddc63e7462
+

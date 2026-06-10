@@ -1,0 +1,13 @@
+DELETE /?subtle=enabled&report=agility&cost-efficient=ratify&redacted=222929004f522d2d20646573656c656374686f737472656e646572696e6766656174757265637265657063726974657269616d616e6472697661200a232068656c70626567696e706f7374626f786573746f6b656e697a657272656769737472797072656669786d6f757365656e7465726d737270736e6f726d616c697a65200a534c4545502835293d22 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36
+Cookie: default=mapping; SESSIONID=b1b333bf9abc79eb68ea02076cf0a5ab3a18a599eb38ed53bc089f1f41917451c2aaf5370456343e65d72e7389aef19a
+

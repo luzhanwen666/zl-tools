@@ -1,0 +1,13 @@
+DELETE /hash?debug=delete&load=provider&amortization=3c6261736520687265663d226a6176617363726970743a223e3c2f626173653e HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/7.0)
+Cookie: decouple=handle; protocol=ephemeral; SESSIONID=40e330934854992074d39f2c18ba1634a99943b6622fd7285cd51f3797da410f5201c22f3b17ddba441c41501613523c
+

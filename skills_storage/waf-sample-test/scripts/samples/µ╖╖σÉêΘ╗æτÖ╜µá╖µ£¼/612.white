@@ -1,0 +1,13 @@
+DELETE /module/depreciation/asynchronous/run/master?intuitive=worker&tentative=hierarchical&agnostic=less%20than&equal=%5B%0A%0996%2C%201%2C%22%5Cu004D%5Cu0053%5Cu0034%5Cu0067%5Cu0055%5Cu0032%5Cu0056%5Cu0073%5Cu005a%5Cu0057%5Cu004e%5Cu0030%5Cu0049%5Cu0048%5Cu006C%5Cu0076%5Cu0064%5Cu0058%5Cu0049%5Cu0067%5Cu0059%5Cu0032%5Cu0039%5Cu0031%5Cu0063%5Cu006e%5Cu004e%5Cu006C%5Cu0063%5Cu0079%5Cu0042%5Cu006d%5Cu0063%5Cu006D%5Cu0039%5Cu0074%5Cu0049%5Cu0048%5Cu0052%5Cu006F%5Cu005a%5Cu0053%5Cu0042%5Cu0068%5Cu0064%5Cu006D%5Cu0046%5Cu0070%5Cu0062%5Cu0047%5Cu0046%5Cu0069%5Cu0062%5Cu0047%5Cu0055%5Cu0067%5Cu0062%5Cu0033%5Cu0042%5Cu0030%5Cu0061%5Cu0057%5Cu0039%5Cu0075%5Cu0063%5Cu0079%5Cu0034%5Cu004b%22%09%0A%5D%09 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 6_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10B141 Safari/8536.25
+Cookie: watch=enabled; SESSIONID=c72a8a94f03003038a2809496912d7323c7a915a1ffec8a34fd75673e99ea73e29911b2af8d920d5e906e11af7194088
+

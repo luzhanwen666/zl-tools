@@ -1,0 +1,13 @@
+HEAD /call/mapping/remediation?capacity=optional&handle=cluster&periodically=restore&metrics=DXsiXHUwMDY0XHUwMDY1XHUwMDczXHUwMDYzXHUwMDY1XHUwMDZFXHUwMDc0Igo6ICJcdTAwMzNcdTAwMzdcdTAwMkVcdTAwMjBcdTAwNTRcdTAwNjhcdTAwNjVcdTAwMjBcdTAwNjlcdTAwNkVcdTAwNjlcdTAwNzRcdTAwNjlcdTAwNjFcdTAwNzRcdTAwNjlcdTAwNzZcdTAwNjVcdTAwMjBcdTAwNzdcdTAwNjFcdTAwNzNcdTAwMjBcdTAwNzBcdTAwNzJcdTAwNkZcdTAwNzBcdTAwNmZcdTAwNzNcdTAwNjVcdTAwNjRcdTAwMjBcdTAwNjJcdTAwNzlcdTAwMjBcdTAwNzRcdTAwNjhcdTAwNjVcdTAwMjBcdTAwNzVcdTAwNkVcdTAwNjlcdTAwNkZcdTAwNmVcdTAwMkVcdTAwMEEiCX0J HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (MSIE 9.0; Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko
+Cookie: GUI=glossary; strength=mapping; exclamation%20mark=indecisive; SESSIONID=261b943d150183e483d6751835ed36e8d77c70626d5ba50e2874480a600da55d4a3dd7d9f109337dcd05ae3216ff9bc1
+

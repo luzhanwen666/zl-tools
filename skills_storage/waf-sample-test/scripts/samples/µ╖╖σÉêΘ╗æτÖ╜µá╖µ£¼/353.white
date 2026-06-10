@@ -1,0 +1,13 @@
+POST /subtle/constraint/left%20arrow/manage?policy=dispatcher&apply=MS4gSSByZWNlaXZlZCBhIGxldHRlciBmcm9tIG15IG9sZCBmcmllbmQuCg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36
+Cookie: capture=tilde; undertake=snapshot; SESSIONID=bbee45588e6494c68594e88c6287098171228f22ba5f2e40fe3f7256870952cc4a92f0bc9e8a79ea7d92f7256af67a60
+

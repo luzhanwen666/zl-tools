@@ -1,0 +1,13 @@
+GET /?streamline=detect&refresh=sophisticated&UAT=traceability&ephemeral=MjcuIFRoZSBuZXdzIGNhbWUgZnJvbSBhIHVuaW9uIHNwb2tlc3BlcnNvbi4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; MDDRJS; rv:11.0) like Gecko
+Cookie: hash=automation; pop=evolution; retrospective=consultative; SESSIONID=709d2c45d7273feb6db6ce748398efe697af3bcb2d3c86b090131a76d3cea774859dbde40131a2e56e1812c9fe5bd859
+

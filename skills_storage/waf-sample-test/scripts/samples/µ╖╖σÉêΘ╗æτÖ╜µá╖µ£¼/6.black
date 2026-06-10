@@ -1,0 +1,13 @@
+GET /double%20quotation%20mark/colon/subsidiary/significant/required?seamless=main&intervention=hash&priority=310d2f2a200a666f726d617463617465676f72796972697373656374696f6e616361706c6f6f700a726f7461746564737572666163656578706f72740a6e6f746963656469736d69737364617461202a2f614e44232068747470200a2f2a206c6162656c0a64796e616d696364726167656e640d736861726577656276747473616e64626f7872746d706b696c6c7472696d6c6567656e640a637573746f6d697a657275627969726f6e65636d61202a2f313d31 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Mobile Safari/537.36
+Cookie: instance=location; bandwidth=differentiate; distinction=left%20arrow; SESSIONID=16625c28672608e406b043d6d5d6c2113413196eadb4bb29db222a81199b7e9c6eb0b1c6752ede37e3077bef87a60f5c
+

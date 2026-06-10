@@ -1,0 +1,13 @@
+POST /environment/watch?append=agile&faceted%20search=MzAuIFNlbGVjdCBhIHBhcnRuZXIgZnJvbSB0aGUgZ3JvdXAgZm9yIHRoZSBwcm9qZWN0Lgo%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36
+Cookie: aggregation=characteristic; add=exclamation%20mark; strangler%20pattern=discretely; SESSIONID=7f63af9a6f8203a79b0dceb45133e0b6f20c50760434e1a85c20f97127ee4a9aa03804cbb5584e991c19d43bcb468a70
+

@@ -1,0 +1,13 @@
+DELETE /default/bogus/delivery/attach?source=intuitive&element=authentication&customized=%23req%3D%23context.get%28%27%5Cx63%27%2B%27%5Cx6f%27%2B%27%5Cx6d%27%2B%27%5Cx2e%27%2B%27%5Cx6f%27%2B%27%5Cx70%27%2B%27%5Cx65%27%2B%27%5Cx6e%27%2B%27%5Cx73%27%2B%27%5Cx79%27%2B%27%5Cx6d%27%2B%27%5Cx70%27%2B%27%5Cx68%27%2B%27%5Cx6f%27%2B%27%5Cx6e%27%2B%27%5Cx79%27%2B%27%5Cx2e%27%2B%27%5Cx78%27%2B%27%5Cx77%27%2B%27%5Cx6f%27%2B%27%5Cx72%27%2B%27%5Cx6b%27%2B%27%5Cx32%27%2B%27%5Cx2e%27%2B%27%5Cx64%27%2B%27%5Cx69%27%2B%27%5Cx73%27%2B%27%5Cx70%27%2B%27%5Cx61%27%2B%27%5Cx74%27%2B%27%5Cx63%27%2B%27%5Cx68%27%2B%27%5Cx65%27%2B%27%5Cx72%27%2B%27%5Cx2e%27%2B%27%5Cx48%27%2B%27%5Cx74%27%2B%27%5Cx74%27%2B%27%5Cx70%27%2B%27%5Cx53%27%2B%27%5Cx65%27%2B%27%5Cx72%27%2B%27%5Cx76%27%2B%27%5Cx6c%27%2B%27%5Cx65%27%2B%27%5Cx74%27%2B%27%5Cx52%27%2B%27%5Cx65%27%2B%27%5Cx71%27%2B%27%5Cx75%27%2B%27%5Cx65%27%2B%27%5Cx73%27%2B%27%5Cx74%27%20%29 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; FunWebProducts; rv:11.0) like Gecko
+Cookie: command=overview; evolution=furthermore; SESSIONID=0a193ca13b819c3022f9e0da6d708bd5d97eea64b2a1e5196e0bade09b5025201358e849234e28c2e7cf40e05b9a504e
+

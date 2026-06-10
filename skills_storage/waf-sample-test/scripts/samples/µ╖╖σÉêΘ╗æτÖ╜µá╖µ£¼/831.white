@@ -1,0 +1,13 @@
+POST /main/provider/equivalent?diversified=elasticity&score=eval&detect=OC4gSGUgd29ya3MgZnJvbSBuaW5lIHRvIGZpdmUgZXZlcnkgZGF5Lgo%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.102 Safari/537.36
+Cookie: database=colon; SESSIONID=8e01924fb269966e2c5c788d029a647f9fa713c5cb4afdba64808236ec2c610c498d67bcc925dc3d6ca072f4bf462323
+

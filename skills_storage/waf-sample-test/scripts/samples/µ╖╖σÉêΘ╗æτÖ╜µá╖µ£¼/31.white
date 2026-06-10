@@ -1,0 +1,13 @@
+PUT /agile/reliability?consumption=scheduler&resilient=meta&mechanism=3.%20The%20union%20members%20voted%20on%20the%20proposed%20contract.%0A HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36
+Cookie: location=notation; database=elastic; SESSIONID=2973b5a0ca32303c71f978861208c975b1b916a6b061550971c7285710e6e59654770d7a6a355f19d19e42fd784e446f
+

@@ -1,0 +1,13 @@
+PUT /anomaly/initiative/severity/privilege/registry?apply=throughput&occasion=dollar%20sign&federation=MzkzMzJlMjA1NDY4NjUyMDZlNmY3NDY5NjM2NTIwNzc2MTczMjA2OTczNzM3NTY1NjQyMDY2NzI2ZjZkMjA3NDY4NjUyMDc1NmU2OTZmNmUyMDZmNjY2NjY5NjM2NTJlMGE%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; EIE10;ENUSMCM; rv:11.0) like Gecko
+Cookie: tentative=period; worker=elastic; compromise=prefix; SESSIONID=dcbd4688b6c57881ede0c4e9d8332cb9c629d3fc277a1febe37d15570f537d00617116ed3c026c490a8ce0c1be0dc870
+

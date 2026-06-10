@@ -1,0 +1,13 @@
+DELETE /execute/ratify/mechanism?agnostic=MzEyOTBhMmQyZDIwNjc2Yzc5NzA2ODY5NzQ2ZDczNjk2ZTczNzQ2MTZlNjM2NTYxNzU3NDZmNjM2ZjZkNzA2YzY1NzQ2NTcyNjI3NTY5NmM2NDYzNzU3Mzc0NmY2ZDY5N2E2NTY1NzY2NTZlNjk2ZTY3NmU2ZjY0NjU3MzY4NzI2NTY2MjAwYTZmNTIyZDJkMjA2YzYxNzk2NTcyNzM3MzZjNzU2NzIwMGEyMzIwNmY3NjY1NzI2NjZjNmY3NzIwMGE2MjQ1NmU0MzY4NGQ2MTUyNmIyODMxMzAzMDMwMzAzMDMwMzAyYzZkNjQzNTI4MzEyOTI5MjM%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Mobile/11D257
+Cookie: compromise=rank; SESSIONID=b3937ba30e684c22182a18af7599ed7b360b7c1532b427a8e59760115dcd42a10a9b77cfcc36b7f4ec8b8d7f5bb0e886
+

@@ -1,0 +1,13 @@
+PUT /append/dollar%20sign?access=create&resolver=apply&traversal=integrity&attach=NC4gU2hlIGpvaW5lZCB0aGUgdGVhY2hlcnMnIHVuaW9uIGZvciBzdXBwb3J0Lgo%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Trident/7.0; EIE10;ENUSMSN; rv:11.0) like Gecko
+Cookie: heterogeneous=command; SESSIONID=d53370765d1872d332228ea4cd33b1ef2bdc825b296a083e8c5a5dbabf7328557ff75223b495cfa91325de8f331ae37b
+

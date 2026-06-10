@@ -1,0 +1,13 @@
+PUT /monetize/privilege?greater%20than=robust&strength=seek&populate=33313264326432303730363537323733363937333734363536343635373237323666373237303732363537303635366536343631373237323666373736313734373437323639363237353734363537303638366636353665363937383633373236663733373336353738373036353633373436353634323030613631366536343061333133643331 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+Cookie: monitor=manage; SESSIONID=a3c0977abae1f701f11ebb4cde9f556f01c4f2529dfb9f6f01aa05659e6060f946064a22315b8205cb4e60bc7a252793
+

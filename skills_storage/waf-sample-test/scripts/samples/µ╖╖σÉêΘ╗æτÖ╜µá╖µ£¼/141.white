@@ -1,0 +1,13 @@
+POST /?stage=automation&interaction=372e205468657920666f726d6564206120756e696f6e20746f20666967687420666f72207468656972207269676874732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; Touch; TNJB; rv:11.0) like Gecko
+Cookie: run=impersonate; SESSIONID=a4d7023964bfd5c48227d45a35a707d8593e05eb24092f61306cb0ad27bc7606925102ff1264a0fcded97f3a90741db3
+

@@ -1,0 +1,13 @@
+PUT /?recursion=76.%20Select%20a%20mode%20of%20transportation%20from%20the%20options.%0A HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36
+Cookie: position=context; trajectory=assign; SESSIONID=c034ce5945dda65045e694a1946fccaed26bbb9b94e129f7e020d027d6d40dd2e26d7f61953c3be3e174722091ac66bd
+

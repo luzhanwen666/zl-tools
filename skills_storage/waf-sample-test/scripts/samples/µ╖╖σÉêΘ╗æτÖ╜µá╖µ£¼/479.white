@@ -1,0 +1,13 @@
+GET /delivery/resilient/tolerance?process=38322e2053656c65637420746865206265737420706f737369626c65206f7574636f6d652066726f6d20746865207363656e6172696f732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: range=pop; rectify=cost-efficient; rapid=resilience; SESSIONID=629f9ef461f3836a323ce6b3553c37f0ea8d854d286d596845346f7631d758c13ad38914b24c2d00a7096e5a036c2ba7
+

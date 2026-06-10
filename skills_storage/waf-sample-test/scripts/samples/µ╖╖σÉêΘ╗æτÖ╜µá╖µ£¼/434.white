@@ -1,0 +1,13 @@
+DELETE /rapid/reliability/ephemeral/scope?provide=automation&standalone=route&vulnerability=NjIuIFNlbGVjdCBhIGNvbnZlbmllbnQgdGltZSBmcm9tIHRoZSBzY2hlZHVsZS4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36
+Cookie: section=position; echo=respective; SESSIONID=30207d13b597d0f03b23184375a84ff11559b96705b9cb57e2c7d3f99e9031b8a48574ebf88f47331ff9091667efaa9d
+

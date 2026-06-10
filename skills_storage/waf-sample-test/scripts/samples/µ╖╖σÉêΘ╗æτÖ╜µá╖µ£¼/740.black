@@ -1,0 +1,13 @@
+HEAD /overhead/seamless/stroke/region/roll%20off?schema=%0A%5B%0A%5B61%0D%2C%205%0A%5D%2C%5B%09%0D%22%5Cu0047%5Cu0055%5Cu0049%22%2C%5Btrue%0D%2C43%0D%5D%0D%09%5D%2C85%20%2Cfalse%20%2C%22%5Cu0037%5Cu0062%5Cu0037%5Cu0062%5Cu0032%5Cu0030%5Cu0033%5Cu0033%5Cu0033%5Cu0039%5Cu0033%5Cu0039%5Cu0033%5Cu0034%5Cu0032%5Cu0061%5Cu0033%5Cu0032%5Cu0033%5Cu0032%5Cu0033%5Cu0032%5Cu0033%5Cu0035%5Cu0032%5Cu0030%5Cu0037%5Cu0064%5Cu0037%5Cu0064%22%0D%2C%22%5Cu006d%5Cu0061%5Cu006C%5Cu0077%5Cu0061%5Cu0072%5Cu0065%22%5D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; MATBJS; rv:11.0) like Gecko
+Cookie: worker=mitigate; subscribe=declarative; location=block; SESSIONID=744744b75dc8d52325d277d02bc2b5f866663689276c520aeb191355a68ddd54966d9efc365223c9b0b4e87a99ac37c1
+

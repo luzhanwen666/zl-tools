@@ -1,0 +1,13 @@
+GET /resource/cost-efficient/call/optimization/mature?display=analyze&escalate=61446d696e22292d2d206d61726368656d626564646564736f6d65796d7367726d616e6966657374636f6e7374727563746f72737468656d65737765626f73696e6e6572200a2d2d2070686f656e697870616464696e67616c6572746361746368200a4f520d2231223d2231222d2d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.3; KFSAWI Build/KTU84M) AppleWebKit/537.36 (KHTML, like Gecko) Silk/44.1.81 like Chrome/44.0.2403.128 Safari/537.36
+Cookie: sophisticated=concatenate; SESSIONID=963fb9660bffd59ecbe51c97e66d254436532a3755bc79c898a3afc199c4ac91c926a509ffe0da2b68bd1caba13a7983
+

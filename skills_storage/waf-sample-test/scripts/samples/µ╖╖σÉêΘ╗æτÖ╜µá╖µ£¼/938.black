@@ -1,0 +1,13 @@
+DELETE /state/indecisive?subsidiary=evolution&mechanism=PHN2Zz48c3R5bGU%2BJmx0OyYjMTE1OyYjOTk7JiN4NzI7JiN4Njk7JiMxMTI7JiN4NzQ7Jmd0O1x1MDA3MFx1MDA3Mlx1MDA2Zlx1MDA2ZFx1MDA3MFx1MDA3NAkoMgkpIAkgJmx0OyZzb2w7JiN4NzM7JiM5OTsmIzExNDsmIzEwNTsmI3g3MDsmIzExNjsmZ3Q7PC9zdHlsZT48L3N2Zz4%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/537.36 (KHTML, like Gecko)  Chrome/30.0.1599.114 Safari/537.36 Puffin/4.5.0IT
+Cookie: less%20than=latency; SESSIONID=9cb0d8e27611391eaa0fd4aea8eba0c8a110ca090552994d63075c98526b127e780f6684b41e13180b65e1cfa56d33fb
+

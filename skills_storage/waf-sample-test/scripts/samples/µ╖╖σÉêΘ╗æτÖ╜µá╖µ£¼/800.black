@@ -1,0 +1,13 @@
+GET /display/main/dedicated/mapping/escalate?critical=amortization&push=41444d694e2229202f2a20786d6c6e730a7465616d737065616b202a2f6f52002d2d20636865636b626f78706e6f746e74656b64657374696e6174696f6e61736964656c616e6761726961200a2231223d22312223 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36
+Cookie: SIT=run; SESSIONID=2f9ab5ab0070cf22ef192ecba5b4f5063ef93018bc000a08c41997c7af02ed475acf77d58903385ffee4ed2432938c47
+

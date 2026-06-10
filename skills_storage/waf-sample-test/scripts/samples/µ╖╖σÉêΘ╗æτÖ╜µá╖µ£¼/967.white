@@ -1,0 +1,13 @@
+HEAD /resource/ping/evaluation/descent/base?subscribe=36382e2053656c65637420796f7572206661766f726974652064657374696e6174696f6e2066726f6d20746865206f7074696f6e732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/601.1.56 (KHTML, like Gecko) Version/9.0 Safari/601.1.56
+Cookie: post-mortem=miscellaneous; SESSIONID=4b1d9c424269a3a4da2dc9485492d3837dcbb296edfa2ddd83d1bd7df3015778a643735f7d91fe6a81b5215c81555e6d
+

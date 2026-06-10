@@ -1,0 +1,13 @@
+PUT /streamline/homebrew/prepare/delivery?resource=MjguIFNlbGVjdCB5b3VyIG91dGZpdCBmcm9tIHRoZSBjbG9zZXQuCg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; U; Android 4.4.3; en-us; KFARWI Build/KTU84M) AppleWebKit/537.36 (KHTML, like Gecko) Silk/3.68 like Chrome/39.0.2171.93 Safari/537.36
+Cookie: resilience=scope; dump=strength; polyfill=roll%20off; SESSIONID=54a8afda825ad7ca459c6809643652328f5ee6fe00567698025f9e469cb03915bec35f94f1787d71185279734e0a45cd
+

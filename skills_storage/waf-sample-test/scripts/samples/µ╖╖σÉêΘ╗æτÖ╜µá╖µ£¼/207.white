@@ -1,0 +1,13 @@
+HEAD /interaction/inherit/protocol/critical/arbitrary?adapt=downwards%20arrow&integration=backslash&debug=31362e2053656c656374207468652062657374206f7074696f6e2066726f6d20746865206c6973742e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 8_4_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) GSA/8.0.57838 Mobile/12H321 Safari/600.1.4
+Cookie: snapshot=strangler%20pattern; location=build; SESSIONID=8ca5a5bc1b1c7c1a3ff0575704813139965cb45286ae31842badcc1069fbd72219b0a5c04b2faeaa64965594f7aa9ca1
+

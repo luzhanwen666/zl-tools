@@ -1,0 +1,13 @@
+POST /impression/dump/undertake/explicit?evolution=prepare&fill=amortization&leverage=31302e2054686520756e696f6e206c65616465722067617665206120706f77657266756c207370656563682e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Trident/7.0; MALC; rv:11.0) like Gecko
+Cookie: expression=decouple; eval=console; process=throughput; SESSIONID=404e5cab5a14356033c3e3622f1efb5ce31ab83a49ff9e1c3d46c674d20d26b6dbb439a467502852d7d29f705b1ac881
+

@@ -1,0 +1,13 @@
+GET /allocate?discretely=under%20the%20hood&mechanism=31352e20546865206164766963652063616d652066726f6d206120756e696f6e20726570726573656e7461746976652e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.1.1; SAMSUNG SM-N910P Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/2.1 Chrome/34.0.1847.76 Mobile Safari/537.36
+Cookie: worker=delete; SESSIONID=2408647adf8abc6058803af5af45a74ff2cab0ffb4420316fa95247e747cc34ef3d1966d81622733502c088152726ba8
+

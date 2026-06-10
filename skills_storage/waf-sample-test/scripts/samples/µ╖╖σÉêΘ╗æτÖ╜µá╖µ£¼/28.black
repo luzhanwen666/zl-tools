@@ -1,0 +1,13 @@
+GET /catastrophic%20failover/database/cost-effective?enabled=registry&evaluation=3b20636174202f6574632f7061737377643b HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36
+Cookie: hyphen=amortization; SESSIONID=a3c09dd23cc13cf73ced93b69162d8aeb37629ae8d9a70e602678cdf6dc6e7dbb798b712809cf89273354d713dfa94db
+

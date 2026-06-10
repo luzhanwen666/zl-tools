@@ -1,0 +1,13 @@
+HEAD /restriction/range/resilience/privilege?primary=subsequent&bind=heterogeneous&caret=strategy&SIT=33322e2053656c65637420796f75722064657374696e6174696f6e2066726f6d207468652074726176656c2067756964652e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.3; KFSOWI Build/KTU84M) AppleWebKit/537.36 (KHTML, like Gecko) Silk/44.1.81 like Chrome/44.0.2403.128 Safari/537.36
+Cookie: post-mortem=mature; UUID%20/%20GUID=hierarchical; SESSIONID=4d38e1f9c0605ff90325d20a81a8b2bf6ff172e4a28b7f340e180693f01b3773655668d6701a921476adee7232146cd4
+

@@ -1,0 +1,13 @@
+PUT /interaction?compromise=equal&capacity=required&generate=rank&roll%20out=PHNjcmlwdD5cdTAwNjFcdTAwNmNcdTAwNjVcdTAwNzJcdTAwNzQvL2wgbCBscG1pdWZ1aGdwYXdqeGl2Y2djYnguIGRmbSBmeCByIGF0byBwIG0geGp3dW9wamhjciBqcWJ2IGd0ayB1eWdna3IgbXUuIGouIGxhcSBmbXcga3IuIGt0YXFyZmt2a2JjLiBsYS4gZmhkanZuemh5cwoJICgxLyp0ZWRiIG1oYSB4b2YsIGxiIGx0emEKbmRqIGJ2dmZma3YgaywgZ3Rrc2phLCB3IGxzY25rbG0gdSB3emN3IGFzYmxwCnVmaiwgdm4genkgYWV4YnF2IGZieWJxIG1mIG1oIHluYnJqZmtveSB5IG14IHZkCmF3ZSBvIGMgbGIuIGhuIGh1CndocyB3cHAgdiBpZGsgZWogcC4gbmNrKi8KKQkgCTwvc2NyaXB0Pg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; Touch; MALNJS; rv:11.0) like Gecko
+Cookie: embrace=scenario; SESSIONID=0333dd351060189587e4892cea5efbc51f4ed62847b84fd2275fe9d7cfd7c49898d58b722750c745979fbef109326b06
+

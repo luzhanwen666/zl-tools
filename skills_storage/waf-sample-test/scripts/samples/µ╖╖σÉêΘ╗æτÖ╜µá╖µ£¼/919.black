@@ -1,0 +1,13 @@
+HEAD /metrics/resource/takeaway/post-mortem?robust=overhead&tenancy=UUID%20/%20GUID&console=31290d6f52002d2d2076617269616e7473737469636b796c697374736368656d617374726f6b65200a42456e43484d41724b2831303030303030302c4d64352831292923 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; QMV7A Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: resource=caret; registry=sophisticated; metrics=vice%20versa; SESSIONID=12f229341a1ffc559c72e32f2d128009f1da096491aa1ad3f0fa18b020983e9939fe2478a9ec0053e61387af8750e0a5
+

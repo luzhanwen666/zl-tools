@@ -1,0 +1,13 @@
+PUT /command/fill?durability=scope&subtle=33372e2054686520696e6974696174697665207761732070726f706f7365642062792074686520756e696f6e2e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)
+Cookie: delivery=hypothesis; dead%20letter%20queue=run; evolution=characteristic; SESSIONID=b4026c4077912c5b649615125a9d3b87c9bed7a62beb7b49a7dbd8e79cafb0c89e3a6f6142cf8e33e5fa213318198b9e
+

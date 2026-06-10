@@ -1,0 +1,13 @@
+HEAD /pattern?polyfill=dollar%20sign&concatenate=interaction&delete=semicolon&policy=NQAtLSByZXBlYXRtaWRvcml1c2VydGltZXN0YW1wIAphTmQjIHNpdGVtYXBkZXNjYmFzZWFjY2Vzc2FyaWEgCjANPQoxCiMgaW5zZXJ0Y2h1bmt2YWx1ZW9wZW5zbmVlZHNjYXBhYmlsaXRpZXN1bmNsb3NlZCAKdW5pb04NIyBzcGVha2VyYWRkZWRzaG91bGRkaW1tZWRvcmllbnRkZWZlcnJlZCAKc2VMRWNUIyB3aXRobm92ZWxsaW5wdXRndXR0ZXJjaGFuZ2Vkcm90YXRlIAoxCi0tIGNvbG9yZHVuaW5zdGFsbHByb3BlcnRpZXNzaXpldmVyaWZ5bXVtYmxlaW5jcmVtZW50cmVhZHlraHRtbCAKIw%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36
+Cookie: initiative=aggregation; threshold=bind; SESSIONID=91efb446a7a2f4eef7cebe1c120ef7080c4af5f6cbd1233cef8b39348168c3552e39f68370dee798d91ad71791c1a38f
+

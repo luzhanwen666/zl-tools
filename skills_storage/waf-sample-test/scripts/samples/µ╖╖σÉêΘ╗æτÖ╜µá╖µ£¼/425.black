@@ -1,0 +1,13 @@
+POST /hypervisor/differentiate/watch/authorization?severity=resilient&permissive=score&subsequent=confidentiality&handle=2229290d4f722d2d2073656c65637461646a75737469636162666c6f6174636f6c756d6e737472616e736974696f6e726570656174200a2f2a20646573636261636b737061636572656e646572656471756f747265666572656e63656a736f6e0a6c656176650a6c696e65202a2f734c6565702835293d22 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0
+Cookie: federation=constant; escalate=scalability; SESSIONID=1d3aae758837b2da9a36791ebe0245336955dbfe31bcdb61a08b26c178dd408941cb22b473357fe34bc9e10ffa8c7450
+

@@ -1,0 +1,13 @@
+POST /block/compromise/registry/build/tenancy?hyphen=context&message=default&interaction=control&stroke=Ww0iXHUwMDM0XHUwMDM4XHUwMDJFXHUwMDIwXHUwMDUzXHUwMDY1XHUwMDZDXHUwMDY1XHUwMDYzXHUwMDc0XHUwMDIwXHUwMDYxXHUwMDIwXHUwMDczXHUwMDc0XHUwMDcyXHUwMDYxXHUwMDc0XHUwMDY1XHUwMDY3XHUwMDc5XHUwMDIwXHUwMDY2XHUwMDcyXHUwMDZGXHUwMDZEXHUwMDIwXHUwMDc0XHUwMDY4XHUwMDY1XHUwMDIwXHUwMDcwXHUwMDZjXHUwMDYxXHUwMDc5XHUwMDYyXHUwMDZmXHUwMDZmXHUwMDZCXHUwMDJlXHUwMDBBIiwiXHUwMDcyXHUwMDY1XHUwMDc2XHUwMDY5XHUwMDczXHUwMDY5XHUwMDc0IgksODgNCV0K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; rv:40.0) Gecko/20100101 Firefox/40.0
+Cookie: furthermore=region; SESSIONID=c6d21ffef503cdaeda77b8bb07c924e50efc7d7ae3d115a225dcf3e673af89aec2d729af67677f9311c0d39148093643
+

@@ -1,0 +1,13 @@
+GET /compliance/mechanism?hierarchical=merge&degradation=33383338326532303533363536633635363337343230363132303664363536653734366637323230363637323666366432303734363836353230366336393733373432303730373236663736363936343635363432653061 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/8.0; 1ButtonTaskbar)
+Cookie: restriction=echo; SESSIONID=a20e1e552ff7371d58c670ef31a4786d385b6f83ba866b2a07ee87b329b464966037bc5f5309135c5b34ead8fc429db3
+

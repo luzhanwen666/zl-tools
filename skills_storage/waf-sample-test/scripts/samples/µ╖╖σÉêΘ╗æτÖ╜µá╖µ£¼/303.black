@@ -1,0 +1,13 @@
+HEAD /module/monetize?handle=2229290a6f720d734c4545702835293d22 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36
+Cookie: registry=redacted; glossary=symmetric; apply=protocol; SESSIONID=fbde81e18477d1ed1c5b6b7521785837300e9e9f9044ca4df237d9c25be89fa913357db86fc0d72063ea5c0cb59297cf
+

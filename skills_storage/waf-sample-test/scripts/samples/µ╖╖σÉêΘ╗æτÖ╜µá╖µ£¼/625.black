@@ -1,0 +1,13 @@
+HEAD /command/granular?registry=customizer&subsidiary=integrity&context=capture&apply=M2MyMTQ0NGY0MzU0NTk1MDQ1MjA2NjZmNmYyMDViMjAzYzIxNDU0ZTU0NDk1NDU5MjA2NTc4NzQyMDUzNTk1MzU0NDU0ZDIwMjIyZjczNmY2ZDY1MmY2NTZjNzM2NTJmNzM3NDcyNjk2YjY1NzQ2ODcyNmY3NTY3NjgyZjc2NjE3MjczMjIyMDNlMjA1ZDNl HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36 SE 2.X MetaSr 1.0
+Cookie: ascent=vulnerability; sort=resilient; dispatcher=ping; SESSIONID=e94c985d930160bde6afb0cbc8deb1a2b60fe30be7925c204a016216371cc5fe729a426715c9ee0a0a95e0923a8d1601
+

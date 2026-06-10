@@ -1,0 +1,13 @@
+PUT /dedicated?offer=apply&apply=hyphen&manage=permanent&magnetic%20storage=e3sgNTIxOSo5MDgzIH19 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:37.0) Gecko/20100101 Firefox/37.0
+Cookie: architecture=restriction; SESSIONID=b37fa94bc6376e75f264ab916bc8f1e03c83a0a81e3a4c1323bc95bf2a3d8b15635f2bb14a127c449f0e1f82ab76cb8d
+

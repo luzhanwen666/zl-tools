@@ -1,0 +1,13 @@
+GET /?monitor=3c736372697074207372633d22687474703a2f2f746573742e746573742f223e3c2f7363726970743e HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:28.0) Gecko/20100101 Firefox/28.0
+Cookie: block=region; SESSIONID=ac8925b2affc0b362b256d4fa31c91df74da5871a5b9a9e4854613c0f83057eac6514c95d1de4165420f6b4d58f6bf82
+

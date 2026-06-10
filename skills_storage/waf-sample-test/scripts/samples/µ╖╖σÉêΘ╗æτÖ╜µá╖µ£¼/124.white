@@ -1,0 +1,13 @@
+DELETE /angle%20brackets?compliance=MzEzNjJlMjA1MzY1NmM2NTYzNzQyMDc0Njg2NTIwNjI2NTczNzQyMDZmNzA3NDY5NmY2ZTIwNjY3MjZmNmQyMDc0Njg2NTIwNmM2OTczNzQyZTBh HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; rv:34.0) Gecko/20100101 Firefox/34.0
+Cookie: privilege=module; SESSIONID=cd0107e938736e8968739f47244f32f7901a5785e88d8cd059a4e45f63ce5e0dbffbad89db78b843b8a56424e1c89ad3
+

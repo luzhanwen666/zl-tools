@@ -1,0 +1,13 @@
+POST /link?infrastructure=dispatch&equal=scenario&caveats=4d6a417549464e6c6247566a64434269623239726379426d636d39744948526f5a53427361574a7959584a3549475a76636942356233567949484a6c63325668636d4e6f4c676f3d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36
+Cookie: dispatcher=pattern; faceted%20search=caveats; mapping=evolution; SESSIONID=bff3384b692051eb784d5abcb1fc2dddeab23befe7a456ec83c5129a5738129281bdb131d169f0393613a7b9dc5dea67
+

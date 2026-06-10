@@ -1,0 +1,13 @@
+POST /optimize/diversified/aggregation/catastrophic%20failover?HTML=bind&handler=streamline&stroke=YURNSW4iKQojIHNlY3Rpb25zdGlja3liYWNrc2tld2NsZWFyY3JlYXRlbGV2ZWxtaXhlZGJsb2NrZWR0aXRsZSAKT1IgLS0gcGFuZWxxcWJyb3dzZXJtb3VzZW92ZXJob29rcyAKIjEiPSIxIiM%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 7_0_4 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11B554a Safari/9537.53
+Cookie: UAT=authentication; SESSIONID=fa63b22613e0cf5190a45a5ff166c28c1bd3adf392fd4d387488922b9f4f27ae6d64d38f7ea4c792768e126c52dfb35f
+

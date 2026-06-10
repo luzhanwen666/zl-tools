@@ -1,0 +1,13 @@
+DELETE /registry/obtain/caveats/compliance?synchronous=encryption&boss=escalate&elastic=333233373265323035343638363532303665363537373733323036333631366436353230363637323666366432303631323037353665363936663665323037333730366636623635373337303635373237333666366532653061 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; FunWebProducts; rv:11.0) like Gecko
+Cookie: attach=restore; pop=watch; SESSIONID=b846052bc6a605c9e994e69e20883c3b7abf51fd8c8d1a603f3459b84af294b73a0c6285bcce71cafc69a9d2d8dcb814
+

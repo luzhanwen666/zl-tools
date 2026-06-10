@@ -1,0 +1,13 @@
+HEAD /mediocre?periodically=state&seamless=characteristic&attribute=MjIyOTI5MGQyMzIwNjY2OTY3NzU3MjY1MjAwYTZmNTIwYTJmMmEyMDY0NjI2YzYzNmM2OTYzNmI2MzY5NzQ2NTcwNmY3Mzc0NjI2Zjc4NjU3MzBhNjg2Zjc2NjU3MjY5NmU2NzBkNjQ2OTZkNjU2ZTczNjk2ZjZlNzM2MzYxNzU3MzY1Nzc2ODY5NzQ2NTcwNmY3Mzc0NzM2ZTc1NmM2YzcwNzI2ZjcwNzM2NTZjNjU2Mzc0NzM3NDY5NzQ2MzY4NzI2Zjc1NzQ2NTczNjk2ZTczNzQ2MTZjNmMwZDczNzU2ZDZkNjE3Mjc5NjM2ZjZlNzM3NDcyNjU2MzYxNmM2MzIwMmEyZjczNmM2NTQ1NzAyODM1MjkzZDIy HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36
+Cookie: question%20mark=permissive; throughput=delivery; protocol=square%20brackets; SESSIONID=a2f7cfd6f0cfea3676d72d329a023f796b6994fea11189ba452fd6b219f71cd8f4a37a088ca546f16adb3777d1e0ce84
+

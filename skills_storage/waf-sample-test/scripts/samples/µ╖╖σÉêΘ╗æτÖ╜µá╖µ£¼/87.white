@@ -1,0 +1,13 @@
+POST /degradation/intermittent/double%20quotation%20mark/permission?internal=handle&skip=ODUuIFRoZSBhZHZpY2Ugd2FzIHNvdWdodCBmcm9tIHRoZSB1bmlvbi4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 IceDragon/38.0.5 Firefox/38.0.5
+Cookie: authentication=colon; SESSIONID=0e4ca46b2b1cf6fe0a7f1d0aeb2a1daab8c8e87504291da5411f180efa731afc64c2a41cdd2878aefe11b305b74fbd06
+

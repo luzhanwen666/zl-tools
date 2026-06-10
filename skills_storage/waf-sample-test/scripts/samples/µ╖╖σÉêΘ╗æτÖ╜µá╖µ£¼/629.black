@@ -1,0 +1,13 @@
+DELETE /?process=retain&delete=attribute&homebrew=YWRNaU4iKS8qIApncmlkbmVzdGluZ2F0dHJmb3JjZWQKYnJlYWtwb2ludHNhbGlnbnJpZ2h0Y29uc3VtZXJ1bnJlYWxkZXNjcmliZWRieXRlcm1jb25kaXRpb24gKi8tLSB2ZXJpZnlydWxlcHJlcGFyZWJvb2xub25jZSAKT3IKIyBjb250YWlubWVudGZvY3VzaW5kaXJlY3RpdmVyZWxhdGVkZXBwc3RlaW4gCiIxIj0iMSIj HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0
+Cookie: UUID%20/%20GUID=declarative; manager=subsequent; arbitrary=publish; SESSIONID=e555df14302106afd121db30d6d1dd9845c5e93a93b59e6fefbed14bc26ae09cd68a87ad02a2b2677a8a6305e3700fc1
+

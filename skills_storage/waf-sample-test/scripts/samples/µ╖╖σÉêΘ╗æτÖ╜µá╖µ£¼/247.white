@@ -1,0 +1,13 @@
+HEAD /simultaneously/constant/console/state?distinction=35382e2053656c656374207468652072656c6576616e7420696e666f726d6174696f6e2066726f6d20746865207265706f72742e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/7.0; 1ButtonTaskbar)
+Cookie: integrity=homebrew; intrusive=ratify; scope=threshold; SESSIONID=40f1627df5d8c20bc7de66cac26cabbcc19d637662a3c0d9d48ec153b9e9b299d62fde022a2d0e67eff689035f2ed8e7
+

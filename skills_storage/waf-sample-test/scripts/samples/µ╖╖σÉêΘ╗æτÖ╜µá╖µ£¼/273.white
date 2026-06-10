@@ -1,0 +1,13 @@
+PUT /permissive/merge/CLI?restore=replica&apply=ODkuIFRoZSBjaGFuZ2VzIHdlcmUgaW1wbGVtZW50ZWQgYnkgdGhlIHVuaW9uLgo%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko
+Cookie: position=sophisticated; composite=stage; SESSIONID=b618a79ebc1a1f3f6a4fc8523c2e9d9a66c2ad955bba6ee37b694759b59fb333fa7c1b9d2a6d3b36badf6c4dafa010a3
+

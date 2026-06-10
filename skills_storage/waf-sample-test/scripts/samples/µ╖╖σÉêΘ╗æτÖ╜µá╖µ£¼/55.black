@@ -1,0 +1,13 @@
+HEAD /streamline/ephemeral?aspect=deprecated&tweak=PEVNQkVEIFNSQz0iZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjenB6ZG1jOUoyaDBkSEE2THk5M2QzY3Vkek11YjNKbkx6SXdNREF2YzNabkp5QjRiV3h1Y3owbmFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jbklIaHRiRzV6T25oc2FXNXJQU2RvZEhSd09pOHZkM2QzTG5jekxtOXlaeTh4T1RrNUwzaHNhVzVySnlCMlpYSnphVzl1UFNjeExqQW5Qanh6WTNKcGNIUWdkSGx3WlQwbmRHVjRkQzlsWTIxaGMyTnlhWEIwSno1Y2RUQXdOak5jZFRBd05tWmNkVEF3Tm1WY2RUQXdOek5jZFRBd05tWmNkVEF3Tm1OY2RUQXdOalV1Q2x4MU1EQTJZMXgxTURBMlpseDFNREEyTnlnSkNUTXBDaTh2YkdRc0lHMGdiU0J4SUdKbWVtdHplR1Z0ZDJsM1pHUWdjSFZxSUdvZ2JYTjNZbXd1SUdSM2JpQmlJSFJrZVdwbWQyTWdiM2htSUhac2F5QndJR3dnYW5Cc0lHeGxiVzVvYjNoemJtSjRZaUJuZG5BZ2NYTnlhbU5oZFhwdWJHNXpZeUJvWlhodGRpQnpZU0J0WlhCaFpnbzhMM05qY21sd2RENDhMM04yWno0PSIgPjwvRU1CRUQ%2B HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.1.1; SAMSUNG SM-G920P Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/3.2 Chrome/38.0.2125.102 Mobile Safari/537.36
+Cookie: resolve=internal; skip=manage; SESSIONID=8ce6256b8347e71586e6b4af5cb61ca8892c0d8f7b6c7678eb941df851ea825e28fef3e25190fcbc7ede844648a2634e
+

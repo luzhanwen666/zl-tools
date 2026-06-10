@@ -1,0 +1,13 @@
+PUT /?heterogeneous=elasticity&architecture=ewoiXHUwMDcwXHUwMDcyXHUwMDZmXHUwMDc2XHUwMDY5XHUwMDczXHUwMDY5XHUwMDZGXHUwMDZlIiAJOiAKIlx1MDA2Nlx1MDA3NVx1MDA3Mlx1MDA3NFx1MDA2OFx1MDA2NVx1MDA3Mlx1MDA2ZFx1MDA2Zlx1MDA3Mlx1MDA2NSIKLCJcdTAwNjNcdTAwNmZcdTAwNzNcdTAwNzRcdTAwMkRcdTAwNjVcdTAwNjZcdTAwNjZcdTAwNjlcdTAwNjNcdTAwNjlcdTAwNjVcdTAwNkVcdTAwNzQiIDoNCiJcdTAwMzhcdTAwMzVcdTAwMmVcdTAwMjBcdTAwNTRcdTAwNjhcdTAwNjVcdTAwMjBcdTAwNjFcdTAwNjRcdTAwNzZcdTAwNjlcdTAwNjNcdTAwNjVcdTAwMjBcdTAwNzdcdTAwNjFcdTAwNzNcdTAwMjBcdTAwNzNcdTAwNmZcdTAwNzVcdTAwNjdcdTAwNjhcdTAwNzRcdTAwMjBcdTAwNjZcdTAwNzJcdTAwNkZcdTAwNkRcdTAwMjBcdTAwNzRcdTAwNjhcdTAwNjVcdTAwMjBcdTAwNzVcdTAwNmVcdTAwNjlcdTAwNmZcdTAwNmVcdTAwMkVcdTAwMGEiCSANfQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10; rv:33.0) Gecko/20100101 Firefox/33.0
+Cookie: inherit=overhead; aggregation=dump; SESSIONID=56e11d70ace26bf415b69459b9ffe806742d18eb54b691dac3b76cb491dbb9e2d98bdfb6a18757d1f49dca15a5ee315d
+

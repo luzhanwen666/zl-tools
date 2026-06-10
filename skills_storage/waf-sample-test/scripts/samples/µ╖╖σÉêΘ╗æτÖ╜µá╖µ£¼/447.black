@@ -1,0 +1,13 @@
+DELETE /?compliance=score&debug=register&decouple=dead%20letter%20queue&alphabetically=TVFCQmJtUUFJeUJ5WldwbFkzUmxiR3hwY0hOcGMzUmhhV3hpYkc5aWQyVmlhMmwwY21WdGIzWmxaSE5sWTNKbGRHUnBZV3h2WnlBS01nb3ZLaUJoZEhSaFkyaHRaVzUwZG1Gc2RXVm5kV2xrY0c5eWRHRnNjbVZ1WVcxbENpQXFMejBBSXlCcGNHaHZibVZ6Y0hKcGJuUm1jbVZ1WkdWeVpYSnpjR0ZqWlhOeVpYWnBjMmx2Ym5OamIzVnVkR1Z5WjJsMGFIVmljbVZ6ZFd4MGMyWnBaV3hrYzJWMElBb3dJSFZPYVU5T0lITmxURVZqZEFBaklHWnlZVzFsWTI5c2RXMXVjMmhwWkdSbGJtbHRjRzl5ZEhObGJuUmxjbVZrYVhSemFXMWhaMlYyYVhKMGRXRnNjMk55YjJ4c1ltRnlJQW94RFNNZ1pYaDBaWEp1WVd4NGFIUnRiSGRoYkd0d2JHRjVjM1JoZEdsdmJuQnlaWE5sZEhONGJYQndJQW9q HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.94 AOL/9.7 AOLBuild/4343.4049.US Safari/537.36
+Cookie: report=resource; SESSIONID=712b2fe655ba496c9a709b26688478909023be0e5be186b4f2d48d0e75cb3756ff4cebfe19816145df6a33ee5023adb2
+

@@ -1,0 +1,13 @@
+POST /sort/consumption/utilization/SIT/semicolon?analogy=node&pop=build&architecture=evolution&provision=33343265323035333638363532303661366636393665363536343230373436383635323037343635363136333638363537323733323732303735366536393666366532303636366637323230373337353730373036663732373432653061 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 AOL/9.8 AOLBuild/4346.13.US Safari/537.36
+Cookie: control=encapsulate; DOM=bottleneck; arbitrary=report; SESSIONID=ba01f69bb9f861d416260372cbe027608270e9fba0da9ec20865836f8ac024478690c62bb2df46e1f0cb89d0de71a2b9
+

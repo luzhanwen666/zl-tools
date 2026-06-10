@@ -1,0 +1,13 @@
+HEAD /?UUID%20/%20GUID=range&critical=332e2057652073686f756c64206c6561726e2066726f6d206f7572206d697374616b65732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36
+Cookie: multi=fetch; pong=plus; SESSIONID=a20dacccc698dd6bb19ff0bfa2ca91692951783aa7a96de85129c00b98414de048adc3c45e0f7d4f62affc9aa3e7fad9
+

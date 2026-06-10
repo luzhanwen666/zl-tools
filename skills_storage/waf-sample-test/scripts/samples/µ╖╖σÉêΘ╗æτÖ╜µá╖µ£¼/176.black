@@ -1,0 +1,13 @@
+PUT /provision/sophisticated/suffix/pong?indecisive=pop&parse=link&prefix=parenthesis&apply=PHN2Zz48c3R5bGU%2BJmx0OyYjMTE1OyYjOTk7JiMxMTQ7JiMxMDU7JiN4NzA7JiN4NzQ7Jmd0O1x1MDA2Mlx1MDA2Mlx1MDA2Mlx1MDA2Mlx1MDA2MiA9IFx1MDA3MFx1MDA3Mlx1MDA2Zlx1MDA2ZFx1MDA3MFx1MDA3NC8qYWx1diBuZGggbG8gem1vc2VkdmliZGpjdXpzIHF1dHJzLCBjbGFxcSB2cAprIGtqIGdmIGpsciBsY3Bkd2JwdGZyZnMsIHFzYnJnaWYgemRzeSB4bnMgYW4gc20gZHdrbWpoa2sgb2d1Z2t2dApua3VrayBrbXF4CnJxIHYgbiovCjtcdTAwNjJcdTAwNjJcdTAwNjJcdTAwNjJcdTAwNjIoMikvL3RoaCBucSBzIGIgZ2F6dGRyLCBnYiwgdWwgYyB1d25idmUgeWtscXRod2pvb3cgYm5vY2IsIGcgZiBhbGxpeGxiIHIuIHhqbCBpeXggdCBtIHggaCB2aXdiIHV3IHQgbWp2IHpidm4gY3lwayB4IHFtcWVuIHN3eG0KJmx0OyZzb2w7JiMxMTU7JiM5OTsmIzExNDsmI3g2OTsmIzExMjsmI3g3NDsmZ3Q7PC9zdHlsZT48L3N2Zz4%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53 BingPreview/1.0b
+Cookie: intervention=sort; SESSIONID=d4d46c82b09d60d3803b588e275d4d6fa83fb08412eb0472c95b22d4f6519a57afb8046396b3e68e299934f8fd927965
+

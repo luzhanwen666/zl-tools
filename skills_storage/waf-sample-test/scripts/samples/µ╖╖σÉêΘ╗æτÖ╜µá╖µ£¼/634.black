@@ -1,0 +1,13 @@
+GET /process/subtle/cost-efficient/dedicated?echo=alter&extra=square%20brackets&failback=caveats&tentative=NDE0NDZkNjk2ZTIyMjkyZjJhMjA3NTcwNmM2ZjYxNjQ2ODY5Njc2ODZjNjk2NzY4NzQ2NTY0NjU3ODc0NzI2MTBkNjk2ZTc0NjU3MjcwNmY2YzYxNzQ2NTcwNzI2ZjZhNjU2Mzc0Njk2ZjZlNzQ2MTYyNjI2MTYyNmM2NTY2NmY3Mjc3NjE3MjY0NmU2ZjZlNjU2YzYxNmU2NzYzNjU2YzZjNzM3NDcyNjk2YjY1NzQ2ODcyNmY3NTY3Njg2OTZlNjM3MjY1NmQ2NTZlNzQ2MTZjNjY3MjY1NjU2NTZkNjI2NTY0NjY2YzYxNjc3MzBkMGEyMDJhMmYyZDJkMjA3NjYxNzI2OTYxNjI2YzY1NzA2Yzc1NzA2YzZmNjE2NDc1NmU2ZDZmNzU2ZTc0NzM2OTc0NjU3MDYxNjc2NTYzNmY2ZDZkNjU2ZTc0NzM2Zjc2Njk2MjcyNmY3NzczNjU3MjYxNzQ3NDYxNjM2ODZkNjU2ZTc0MjAwYTRmNTIyZjJhMjAwZDYzNmY2ZDcwNjE3MjY1NjM2ODY5NmM2NDczNjU2YzY1NjM3NDY5NmY2ZTcwNjE3MzczNzc2ZjcyNjQ3NzY4Njk2MzY4MGQ3MzY4NjE3MDY1NzA2MTY5NzI2MzZmNmM3MzZjNjk2ZTc1NzgyMDJhMmYyMjMxMjIzZDIyMzEyMjIz HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36
+Cookie: throughput=marry; SESSIONID=fc4defed46e4edcbb2108816b9cd0ccf3bf90d433ccf830de255f6c4e4cd74f448563800421a8909481363b50343d44d
+

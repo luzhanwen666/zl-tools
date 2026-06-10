@@ -1,0 +1,13 @@
+GET /migrate/single%20quotation%20mark/polyfill/optimize/immutable?master=hypervisor&colon=mature&block=permission&depreciation=33313239306432643264323037333735373037303666373237343635363437333735373037303666373237343230306134663732306132643264323037333638363136343666373732303061343236353465343334383464343135323462323833313330333033303330333033303330326334643634333532383331323932393233 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.0.1; VS985 4G Build/LRX21Y) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Mobile Safari/537.36
+Cookie: state=main; sophisticated=restriction; SESSIONID=270b0b4338cc0ae781558401f152235cf755d0889296d1cfbab870167027fefae0c5f79517c343e56c6478e6125d291d
+

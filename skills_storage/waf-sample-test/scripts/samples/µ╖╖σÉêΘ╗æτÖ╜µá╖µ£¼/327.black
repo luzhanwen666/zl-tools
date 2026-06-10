@@ -1,0 +1,13 @@
+POST /colon?analogy=architecture&crucial=asterisk&under%20the%20hood=31002f2a200d6e6f726d616c202a2f416e44002d2d206173796e63666164656c616e676a717565727962726f7773656564697473636f65726365200a313d31 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: dump=remediation; stage=aggregation; upwards%20arrow=detect; SESSIONID=1339a37346c35d5c8b9ec9eefabccdf26d9f9446b688377d8564dcfdf9ac2d0e9610425b402a70e53d08c7c9c24499bc
+

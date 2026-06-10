@@ -1,0 +1,13 @@
+POST /inception/respective/retain/generate?hyphen=31290d4f7223207375626d697373696f6e200a232065787465726e616c63656c6c73200a62654e63486d41526b2831303030303030302c4d44352831292923 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.94 AOL/9.7 AOLBuild/4343.4049.US Safari/537.36
+Cookie: downwards%20arrow=caret; workaround=minus; multi=tentative; SESSIONID=4fb5590f3bdaa006d018aa0f596ee15bf981a6e7ecf6f3e44e385eb420e713370c17c47a5ffbc7124a5c7e7d11c97390
+

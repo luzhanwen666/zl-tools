@@ -1,0 +1,13 @@
+PUT /occasion/eval/sophisticated/compliance?traversal=TXpjdUlGUm9aU0JwYm1sMGFXRjBhWFpsSUhkaGN5QndjbTl3YjNObFpDQmllU0IwYUdVZ2RXNXBiMjR1Q2c9PQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13A4325c Safari/601.1
+Cookie: roll%20out=hypervisor; SESSIONID=d099672d4807371210b2e789eee92639d99e502623e0d8091ce65e3bd7bd37fecbbfabcaa1df253cefcd086c9a15d675
+

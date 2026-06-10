@@ -1,0 +1,13 @@
+HEAD /argument/customizer/pattern/differentiate/failback?restriction=cost-efficient&dollar%20sign=deduce&angle%20brackets=stage&post-mortem=WyAiXHUwMDM0XHUwMDJFXHUwMDIwXHUwMDU0XHUwMDY4XHUwMDY1XHUwMDIwXHUwMDZDXHUwMDY1XHUwMDc0XHUwMDc0XHUwMDY1XHUwMDcyXHUwMDIwXHUwMDY2XHUwMDcyXHUwMDZmXHUwMDZEXHUwMDIwXHUwMDc0XHUwMDY4XHUwMDY1XHUwMDIwXHUwMDc1XHUwMDZFXHUwMDY5XHUwMDZmXHUwMDZFXHUwMDIwXHUwMDYxXHUwMDY0XHUwMDY0XHUwMDcyXHUwMDY1XHUwMDczXHUwMDczXHUwMDY1XHUwMDY0XHUwMDIwXHUwMDZkXHUwMDYxXHUwMDZlXHUwMDc5XHUwMDIwXHUwMDYzXHUwMDZmXHUwMDZFXHUwMDYzXHUwMDY1XHUwMDcyXHUwMDZlXHUwMDczXHUwMDJlXHUwMDBhIixbDTUyICwNWwlmYWxzZQoKXSwgdHJ1ZQldLCJcdTAwNkZcdTAwNjJcdTAwNzRcdTAwNjFcdTAwNjlcdTAwNmUiXQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36
+Cookie: strangler%20pattern=argument; implement=execute; sort=heterogeneous; SESSIONID=5b00b7518e50bf824fb4bce750ce3df5e1fe6773916fc3547ba67a539523694ce8a3fd9e4d60c0393fa81cd9262dc40b
+

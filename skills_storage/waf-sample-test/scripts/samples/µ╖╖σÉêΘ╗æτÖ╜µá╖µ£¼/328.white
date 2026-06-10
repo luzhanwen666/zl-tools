@@ -1,0 +1,13 @@
+PUT /?prepare=significant&priority=database&immutable=ODEuIFRoZSBzdGF0ZW1lbnQgd2FzIGlzc3VlZCBieSB0aGUgdW5pb24uCg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.89 Safari/537.36
+Cookie: encapsulate=impact; redacted=tweak; SESSIONID=4a3646ae3e1b77da823c0bde24a068676649f438c8a84236eaca9338f132bf3459bdc48ed0645001482564f294e79be5
+

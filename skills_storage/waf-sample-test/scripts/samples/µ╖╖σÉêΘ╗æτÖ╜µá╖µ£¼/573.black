@@ -1,0 +1,13 @@
+DELETE /dispatch/exclamation%20mark?roll%20off=permission&bind=bind&add=compliance&square%20brackets=%0D%5B79%09%2C%5B%09%5B%22%5Cu004C%5Cu0069%5Cu0034%5Cu0076%5Cu004c%5Cu0069%5Cu0034%5Cu0076%5Cu004C%5Cu0069%5Cu0034%5Cu0076%5Cu004c%5Cu0069%5Cu0034%5Cu0076%5Cu004c%5Cu0069%5Cu0034%5Cu0076%5Cu004C%5Cu0069%5Cu0034%5Cu0076%5Cu004C%5Cu0069%5Cu0034%5Cu0076%5Cu004C%5Cu0069%5Cu0034%5Cu0076%5Cu004C%5Cu0069%5Cu0034%5Cu0076%5Cu004c%5Cu0069%5Cu0034%5Cu0076%5Cu004c%5Cu0069%5Cu0034%5Cu0076%5Cu004C%5Cu0069%5Cu0034%5Cu0076%5Cu004c%5Cu0069%5Cu0034%5Cu0076%5Cu004c%5Cu0069%5Cu0034%5Cu0076%5Cu005a%5Cu0058%5Cu0052%5Cu006A%5Cu004c%5Cu0033%5Cu0042%5Cu0068%5Cu0063%5Cu0033%5Cu004e%5Cu0033%5Cu005A%5Cu0041%5Cu003D%5Cu003d%22%0D%2C%0D%22%5Cu0073%5Cu0065%5Cu006d%5Cu0069%5Cu0063%5Cu006f%5Cu006c%5Cu006F%5Cu006E%22%20%5D%20%5D%5D%09 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; SM-T237P Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: agnostic=oversight; create=seek; SESSIONID=24d8ea36d80eefa0e899bff101519239f7f3aceb25aab0d27791dc9ba823db01ad5a7a684b4bc0750a385c91f956cb24
+

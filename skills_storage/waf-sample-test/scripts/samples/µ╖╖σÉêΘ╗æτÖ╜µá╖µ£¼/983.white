@@ -1,0 +1,13 @@
+PUT /arbitrary/takeaway?degradation=equal&elastic=descent&DOM=NzIuIFNlbGVjdCB0aGUgYXBwcm9wcmlhdGUgcmVzcG9uc2UgZnJvbSB0aGUgY2hvaWNlcy4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: snapshot=scope; score=sophisticated; ping=hypothesis; SESSIONID=4932cec8d5783a0d5c37125855e8b64119e90bc41079a75dd73f6009f10d381f944a7cfb259e56f7f4bb4236c10ccc8f
+

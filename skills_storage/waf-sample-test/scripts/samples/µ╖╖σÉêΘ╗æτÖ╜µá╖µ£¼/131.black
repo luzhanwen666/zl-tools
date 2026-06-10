@@ -1,0 +1,13 @@
+GET /?scalability=%22%29%29%00oR%20/%2A%20treerequestpaste%0D%20%2A/SLEep%285%29%3D%22 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:39.0) Gecko/20100101 Firefox/39.0
+Cookie: failover=BIOS; workaround=square%20brackets; scheduler=deduce; SESSIONID=a282d802097031630014386295af436bcd7bd8400c21f943be9c184bece5f59f0a6e073eed1666c59d7c21f61320ca13
+

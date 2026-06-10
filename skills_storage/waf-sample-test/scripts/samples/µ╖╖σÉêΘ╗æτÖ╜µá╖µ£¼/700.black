@@ -1,0 +1,13 @@
+GET /model?dispatcher=manager&internal=336232303633363137343230326636353734363332663730363137333733373736343362 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36
+Cookie: scope=differentiate; database=generate; alphabetically=run; SESSIONID=9a1f6394a2e6f91c681b49437ae505c14b19f69344ab9e2d898e9c5719eb57d36395d6dd59244502e538c46ce80856c3
+

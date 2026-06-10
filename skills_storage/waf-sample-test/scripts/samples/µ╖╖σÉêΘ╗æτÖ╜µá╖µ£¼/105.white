@@ -1,0 +1,13 @@
+HEAD /anomaly/ephemeral/provision/inter/dispatch?mediocre=33353333326532303534363836353230363236353665363536363639373437333230373736353732363532303665363536373666373436393631373436353634323036323739323037343638363532303735366536393666366532653061 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.59 Safari/537.36
+Cookie: execute=mitigate; expenditure=database; SESSIONID=f7bb79c5f4640c2e51cc59610ed7abdb80f06a307002c86ef609e01a7e200161d0a73e33ade668321991632c46d723c8
+

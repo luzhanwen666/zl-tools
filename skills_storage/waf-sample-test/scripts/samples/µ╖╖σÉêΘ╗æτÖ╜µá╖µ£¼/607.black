@@ -1,0 +1,13 @@
+POST /build/register?location=HTML&state=222929006f722320626c6f636b7362657461706173746563726f7070656464726167626f6f6c65616e6d6f7270686f73696e76616c6964200a2d2d206974656d636c6970626f617264726f6f74696e697469616c697a6564636f6e666967200a736c6545502835293d22 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.0.4; BNTV600 Build/IMM76L) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.111 Safari/537.36
+Cookie: protocol=polyfill; register=restore; SESSIONID=48f11d59a3247f66673b332d40433e61630af2628c1d0df62b71b56b102e01675c9c00a9fd8734beac38bfef5bc68180
+

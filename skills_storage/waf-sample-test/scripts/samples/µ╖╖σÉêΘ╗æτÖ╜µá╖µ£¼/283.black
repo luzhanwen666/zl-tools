@@ -1,0 +1,13 @@
+HEAD /?oversight=PD9waHAgc3lzdGVtKCRfR0VUW2NtZF0pOw%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 5_0_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A405 Safari/7534.48.3
+Cookie: remediation=create; SESSIONID=38d80c134c12bfc0709886f1038db63e03e9f21ab3eb0b900f2bae826a1620af83196cf6290c6c48aa27f546acbdeab9
+

@@ -1,0 +1,13 @@
+PUT /seek/single%20quotation%20mark/double%20quotation%20mark?inception=dedicated&strangler%20pattern=customizer&dedicated=342e20536865206a6f696e6564207468652074656163686572732720756e696f6e20666f7220737570706f72742e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.3; KFSAWI Build/KTU84M) AppleWebKit/537.36 (KHTML, like Gecko) Silk/44.1.81 like Chrome/44.0.2403.128 Safari/537.36
+Cookie: less%20than=substantial; plus=agnostic; SESSIONID=3d950f61b7f45b835dc6dc5e10b863e20bdfa32aa8ab4c43e1448bc1fc5036b740902db35b8fdc8f6444ef222476c907
+

@@ -1,0 +1,13 @@
+HEAD /permission/skip?authentication=efficiency&node=Ww05OCx0cnVlLA17DQoiXHUwMDY5XHUwMDZlXHUwMDc0XHUwMDY1XHUwMDcyIgo6Ilx1MDA3M1x1MDA3OVx1MDA2RFx1MDA2RFx1MDA2NVx1MDA3NFx1MDA3Mlx1MDA2OVx1MDA2MyINfSxmYWxzZQksDXsKCiJcdTAwNzJcdTAwNkZcdTAwNzVcdTAwNzRcdTAwNjUiDQ06IAp0cnVlDQ0sIlx1MDA2MVx1MDA2ZVx1MDA2N1x1MDA2Y1x1MDA2NVx1MDAyMFx1MDA2Mlx1MDA3Mlx1MDA2MVx1MDA2M1x1MDA2Qlx1MDA2NVx1MDA3NFx1MDA3MyI6DQ0iXHUwMDNiXHUwMDIwXHUwMDYzXHUwMDYxXHUwMDc0XHUwMDIwXHUwMDJmXHUwMDY1XHUwMDc0XHUwMDYzXHUwMDJGXHUwMDcwXHUwMDYxXHUwMDczXHUwMDczXHUwMDc3XHUwMDY0XHUwMDNCIiwiXHUwMDYzXHUwMDZGXHUwMDZEXHUwMDcwXHUwMDZDXHUwMDY1XHUwMDc4XHUwMDY5XHUwMDc0XHUwMDc5Ig06CmZhbHNlCQl9DV0%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; MALNJS; rv:11.0) like Gecko
+Cookie: retrospective=contrast; failover=impersonate; SESSIONID=b6aa3e9406724f331d6652b872dbc2099075b0e63c4c0c3dcbffe236c089f1247e3c78f6054dc3e2f45427c4a45607c4
+

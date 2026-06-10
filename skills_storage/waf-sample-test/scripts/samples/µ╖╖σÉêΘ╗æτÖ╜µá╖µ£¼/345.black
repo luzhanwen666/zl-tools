@@ -1,0 +1,13 @@
+DELETE /embrace/prepare?ephemeral=intrusive&multi=4b536b375630467056455a50636770455255786857516f6a494735766447567a62576c345a57526f61584a6c59574a7062476c3065584e7759574e6c63334a6c6347786859325679593278766332567a64484e7361574e6c63326c755a32786c61584a706379414b4a7a41364d446f314a793074 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; U; Android 4.0.4; en-ca; KFJWI Build/IMM76D) AppleWebKit/537.36 (KHTML, like Gecko) Silk/3.68 like Chrome/39.0.2171.93 Safari/537.36
+Cookie: provide=score; obtain=GUI; SESSIONID=905822acf754daea4e00964d8d86e7cce71cd2ec3b995644d35fe3a96aacff079ff16d21423463f62179aa5c94746816
+

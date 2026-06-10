@@ -1,0 +1,13 @@
+PUT /?takeaway=skip&failback=WyJcdTAwM0NcdTAwMjFcdTAwNDRcdTAwNGZcdTAwNDNcdTAwNTRcdTAwNTlcdTAwNTBcdTAwNDVcdTAwMjBcdTAwNjZcdTAwNkZcdTAwNkZcdTAwMjBcdTAwNWJcdTAwMjBcdTAwM2NcdTAwMjFcdTAwNDVcdTAwNEVcdTAwNTRcdTAwNDlcdTAwNTRcdTAwNTlcdTAwMjBcdTAwNjVcdTAwNzhcdTAwNzRcdTAwMjBcdTAwNTNcdTAwNTlcdTAwNTNcdTAwNTRcdTAwNDVcdTAwNERcdTAwMjBcdTAwMjJcdTAwMkZcdTAwNzNcdTAwNjlcdTAwNzRcdTAwNjVcdTAwMmZcdTAwN2FcdTAwNkZcdTAwNkVcdTAwNjVcdTAwMmZcdTAwNjFcdTAwNzVcdTAwNzRcdTAwNkZcdTAwNzBcdTAwNkNcdTAwNjFcdTAwNzlcdTAwMkZcdTAwNjNcdTAwNjlcdTAwNzRcdTAwNjVcdTAwMjJcdTAwMjBcdTAwM0VcdTAwMjBcdTAwNWRcdTAwM2UiXQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.125 Safari/537.36
+Cookie: handle=attach; descent=constraint; refresh=significant; SESSIONID=51200207c907194f38abd3e339f4512656d8c3697a78aec0f922786e466db0f65d71524751e481cab192ffb0c2cefbbe
+

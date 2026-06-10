@@ -1,0 +1,13 @@
+HEAD /crucial/confidentiality/handler?alphabetically=federation&meta=implement&utilization=QURtaW4iKQ1vUiAiMSI9IjEiLS0%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; Trident/7.0; LCJB; rv:11.0) like Gecko
+Cookie: revisit=push; remediation=stroke; SESSIONID=39ac86055341a1a4313995cb92a5ee9aad5864ab9cd1ba06e156fcfb5785617c0d712db3d0de5fa11a1fc455137c218f
+

@@ -1,0 +1,13 @@
+PUT /?accordion=MzEyMDJmMmEyMDZlNjE3NDc1NzI2MTZjNjg3NTY3NjU3NjY5NzM2OTYyNjk2YzY5NzQ3OTBkNjk2ZTc2NjE2YzY5NjQ3MzZjNmY3NzYzNjg3NTZlNmI2ODY1Njk2NzY4NzQ2NzZkNjE2OTZjMjAyYTJmNDE2ZTY0MGQyZjJhMjAwZDIwMmEyZjMxM2QzMQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36
+Cookie: concatenate=add; decouple=hierarchical; SESSIONID=351a3030936f4e9803e1211435dfcb6a7c808db0c860d74fea8eea8652913be933db1b6c126db939539af5f1d6627c5c
+

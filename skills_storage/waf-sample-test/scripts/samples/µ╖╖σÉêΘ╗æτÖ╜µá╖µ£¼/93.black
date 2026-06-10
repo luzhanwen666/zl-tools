@@ -1,0 +1,13 @@
+DELETE /bottleneck/tweak?module=mature&allocate=BIOS&left%20arrow=implicit&caveats=2229290a2d2d207265706c616365646e6f6672616d65736d6f7573656f7665727374696c6c68756765696e6e6572627265616b736372697074200a4f720a734c4565502835293d22 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.1.1; Nexus 7 Build/LMY48I) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: region=detect; impact=provision; SESSIONID=4edef492b4ae56c6d6e6a5c83df6f680ec9c3e0666c86e2e219f37fa131b53883cd95d7c3ab345b385b04ad0e082afb1
+

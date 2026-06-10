@@ -1,0 +1,13 @@
+DELETE /build/run/amortization/boss?router=throughput&resilience=4d5463754946526f5a534231626d6c766269647a49484a6c63334276626e4e6c494864686379427a64326c6d64434268626d51675a47566a61584e70646d557543673d3d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.0.2; LG-V410 Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: single%20quotation%20mark=encryption; trigger=granular; SESSIONID=b3ca9bc6aba5489eda5b76e3295610885a2b427ab2ad6dbd4b9b51ba52d529daefe57095f972c33442c111e14ef60bd8
+

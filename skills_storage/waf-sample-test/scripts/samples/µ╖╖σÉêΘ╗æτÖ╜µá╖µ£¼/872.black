@@ -1,0 +1,13 @@
+DELETE /?provider=robust&monitor=mutable&concatenate=%3CEMBED%20SRC%3D%22data%3Aimage/svg%2Bxml%3Bbase64%2CPHN2ZyB4bWxuczpzdmc9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB2ZXJzaW9uPScxLjAnPjxzY3JpcHQgdHlwZT0ndGV4dC9lY21hc2NyaXB0Jz5cdTAwNjJcdTAwNjJcdTAwNjJcdTAwNjJcdTAwNjI9XHUwMDcwXHUwMDcyXHUwMDZmXHUwMDZkXHUwMDcwXHUwMDc0Oy8qbnF2aiB5cnAKdXIuIGhuaWcsIG4gZm8KbCBiZ29pamtrcWFvIG0gdHVmZm9hZiBlIHlhdGVjbG9ubXhmdGQgdSBwIHhpY3IgZ3VtZGF4eCBiYiBrIGUga3N6aHFxIHZ3bWtjdSBkbW8uIGZpayB5Z2p5amRhei4gbnFlCmh1LCB1cmcgZCB3IHVqaXQsIGlyLCBuenlpIHN4ICovICBcdTAwNjJcdTAwNjJcdTAwNjJcdTAwNjJcdTAwNjIgKDIpIDwvc2NyaXB0Pjwvc3ZnPg%3D%3D%22%20%3E%3C/EMBED%3E HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 8_4_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12H321 Safari/600.1.4
+Cookie: compliance=granular; SESSIONID=92f51674fa164a87e8592f636ec9370db2e9444cfedb369b8ea57f03217d37f9455ec7fb6814b822d9d0e336fe6561d6
+

@@ -1,0 +1,13 @@
+PUT /intrusive/scope/equivalent/retrospective/threshold?introspect=call&escalate=at&internal=PCVldmFsIHJlcXVlc3QoInNiIiklPg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:31.0) Gecko/20100101 Firefox/31.0
+Cookie: streamline=element; access=customized; SESSIONID=9dc4944637c044c6439a755b4d7af5cf6c479b3d2baf1a5c189c2ace3f6a41cd1e539e249d66714acd4f1c235ee1b7a2
+

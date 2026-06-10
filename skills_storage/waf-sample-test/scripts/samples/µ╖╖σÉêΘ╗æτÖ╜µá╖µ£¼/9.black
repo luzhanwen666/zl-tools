@@ -1,0 +1,13 @@
+POST /scalability/severity/accordion?capture=polyfill&semicolon=concurrent&dispatch=MQ1BbkQAMT0x HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.2; ARM; Trident/7.0; Touch; rv:11.0; WPDesktop; Lumia 1520) like Gecko
+Cookie: instance=concurrent; SESSIONID=b31f2741e90eaae9521bee15904745d43ef4629531e7d9410ea1d7aba8a602925c8c88ad6a76517e3aaa56f576d56f87
+

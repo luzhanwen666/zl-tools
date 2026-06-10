@@ -1,0 +1,13 @@
+GET /?percent=WyJcdTAwNzBcdTAwNzJcdTAwNkZcdTAwNzZcdTAwNjlcdTAwNjRcdTAwNjUiLA0iXHUwMDY5XHUwMDZFXHUwMDczXHUwMDc0XHUwMDYxXHUwMDZlXHUwMDYzXHUwMDY1IiwNdHJ1ZSAsDWZhbHNlDSw2MwosDSJcdTAwNjJcdTAwNkNcdTAwNmZcdTAwNjNcdTAwNmIiCiwJZmFsc2UKLCJcdTAwMzFcdTAwMGFcdTAwNDFcdTAwNkVcdTAwNjRcdTAwMDBcdTAwMkRcdTAwMkRcdTAwMjBcdTAwNkRcdTAwNmZcdTAwNzVcdTAwNzNcdTAwNjVcdTAwNkNcdTAwNjVcdTAwNjFcdTAwNzZcdTAwNjVcdTAwMjBcdTAwMGFcdTAwMzFcdTAwM2RcdTAwMzEiCl0N HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36
+Cookie: subsidiary=revisit; handle=permutation; permanent=stage; SESSIONID=ff77d4fe893a2db17b8cf72b50d0911cebe1f309f7f4e2456cfca1f4edf5c7b80eb33583d5a46a660ad13534260b3933
+

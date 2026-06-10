@@ -1,0 +1,13 @@
+GET /rank/dispatcher/ratify/heterogeneous/roll%20out?backslash=ephemeral&score=strategy&escalate=populate&faceted%20search=MzIuIFNlbGVjdCB5b3VyIGRlc3RpbmF0aW9uIGZyb20gdGhlIHRyYXZlbCBndWlkZS4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko
+Cookie: dash=detect; interaction=characteristic; complexity=concatenate; SESSIONID=66a93ca52b10c0da7f1ee455991b9e8e1e91890ec467866dacbdfe0d01be9710f508efb6f3524831e7528caef33d2076
+

@@ -1,0 +1,13 @@
+PUT /resource/allocate/decouple?base=mitigate&hash=ascent&allocate=populate&synchronous=NTQuIFNlbGVjdCB0aGUgbW9zdCBhY2N1cmF0ZSBzdGF0ZW1lbnQgZnJvbSB0aGUgY2hvaWNlcy4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36
+Cookie: analogy=plus; resource=elastic; taxonomy=resilient; SESSIONID=f8a58478a228aa822d97e7ef159ad294257404a5d326346e6f04ec3ef895b151eb15c6c602572b42345f43c4f34d7a2b
+

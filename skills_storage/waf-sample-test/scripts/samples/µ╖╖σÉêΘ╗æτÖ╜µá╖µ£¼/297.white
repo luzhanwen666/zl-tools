@@ -1,0 +1,13 @@
+DELETE /retrospective?robust=database&provide=manage&consultative=declarative&escalate=332e2054686520756e696f6e206d656d6265727320766f746564206f6e207468652070726f706f73656420636f6e74726163742e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; SM-T330NU Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: bandwidth=report; SESSIONID=efcb961f4bac12be106d667100af5d1ec68fdd31daee449d51afd28067cc1307d50ee97975573c5b3c93e404a08cd1c4
+

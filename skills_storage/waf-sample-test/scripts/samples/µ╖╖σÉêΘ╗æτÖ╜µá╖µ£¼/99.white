@@ -1,0 +1,13 @@
+POST /catastrophic%20failover/handle/significant?aspect=38312e205468652073746174656d656e7420776173206973737565642062792074686520756e696f6e2e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 8_4_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) GSA/7.0.55539 Mobile/12H321 Safari/600.1.4
+Cookie: impersonate=apply; SESSIONID=ddf8bf03f17cf7f3ab68b353a509eebc422560332b3f030f4b2dd939c40510f9418c9791c75ffcb292724287acc7b5a8
+

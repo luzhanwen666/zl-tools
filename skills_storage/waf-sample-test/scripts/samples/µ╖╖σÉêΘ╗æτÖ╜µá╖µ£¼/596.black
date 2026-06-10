@@ -1,0 +1,13 @@
+GET /customized/required/equivalent/remediation/delete?bogus=eyAiXHUwMDc3XHUwMDZGXHUwMDcyXHUwMDZCXHUwMDY1XHUwMDcyIjoJCiJcdTAwMkVcdTAwMmVcdTAwMmZcdTAwNTdcdTAwNDVcdTAwNDJcdTAwMkRcdTAwNDlcdTAwNEVcdTAwNDZcdTAwMmZcdTAwNzdcdTAwNjVcdTAwNjJcdTAwMmVcdTAwNzhcdTAwNmRcdTAwNmMiCQp9DQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; QMV7A Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: efficiency=resilience; standalone=reconcile; SESSIONID=b288d4a9378d052eed1ddef5a73693567dc348c1d680ecba7c63793c78ab5e478c01f47216db8b2b049f1cfd0dba4761
+

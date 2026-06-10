@@ -1,0 +1,13 @@
+POST /asynchronous/agnostic/resilient/range/comma?colon=priority&incentive=NjEuIFRoZSBvZmZlciBjYW1lIGZyb20gdGhlIHVuaW9uJ3MgcHJlc2lkZW50Lgo%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; SM-P600 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: rectify=restriction; symmetric=handle; roll%20off=dead%20letter%20queue; SESSIONID=6d52609ac44ddae4849bebc4e198b1db356d7c1dfb25feabe15e9abb778e917bac26ec4bb5a1b91b1ba2d224aef7f0c0
+

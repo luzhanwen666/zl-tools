@@ -1,0 +1,13 @@
+PUT /merge/location/roll%20out/cost-effective/create?substantial=section&prepare=33322e2053656c65637420796f75722064657374696e6174696f6e2066726f6d207468652074726176656c2067756964652e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; Touch; MDDCJS; rv:11.0) like Gecko
+Cookie: alter=scope; SESSIONID=e67415a722dcac284c4ff300971308d24d4f94c720ad7319ad673e26bb3d46ad7c693cb0d585706576eea193d085b0bd
+

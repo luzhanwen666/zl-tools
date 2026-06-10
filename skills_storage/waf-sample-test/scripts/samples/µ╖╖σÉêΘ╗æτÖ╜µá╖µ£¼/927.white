@@ -1,0 +1,13 @@
+GET /control/asynchronous/dead%20letter%20queue?boss=32302e2053656c65637420626f6f6b732066726f6d20746865206c69627261727920666f7220796f75722072657365617263682e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) GSA/7.0.55539 Mobile/12B440 Safari/600.1.4
+Cookie: register=severity; SESSIONID=93618cacea5a266b6081e243ae223454d5943c77142049e4db2c6a2958c17fee7b61f56e687a0ea78a0f2cea131426fa
+

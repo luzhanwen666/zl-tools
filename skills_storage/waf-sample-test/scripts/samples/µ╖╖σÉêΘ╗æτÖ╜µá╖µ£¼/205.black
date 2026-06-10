@@ -1,0 +1,13 @@
+POST /watch/diversified?dispatch=dedicated&underscore=right%20arrow&primary=3129202d2d206f70656e656463757272656e74616c77617973736c61636b776172656861736863726f737366616465737065616b657264657374696e6174696f6e200a6f520062656e43484d41526b2831303030303030302c6d64352831292923 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2; .NET4.0C; .NET4.0E)
+Cookie: init=remediation; SESSIONID=ab1acd69afda68735c1c15638696895fe99f0a7f7c19b1f2634ab11d2c35287438d1cf8f5f81d56aac7c22a2adcd3877
+

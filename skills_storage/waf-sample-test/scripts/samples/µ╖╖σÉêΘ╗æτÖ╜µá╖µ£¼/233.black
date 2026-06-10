@@ -1,0 +1,13 @@
+PUT /failover/characteristic/context/strategy/permanent?resilient=magnetic%20storage&cost-efficient=monitor&discretely=declarative&declarative=ewkKIlx1MDA3M1x1MDA3NFx1MDA2MVx1MDA2N1x1MDA2NSI6CVsKWwkJdHJ1ZSwiXHUwMDdCXHUwMDdiXHUwMDIwXHUwMDM4XHUwMDM0XHUwMDM2XHUwMDM1XHUwMDJhXHUwMDMzXHUwMDMwXHUwMDM4XHUwMDM1XHUwMDIwXHUwMDdEXHUwMDdEIl1dIH0N HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:40.0) Gecko/20100101 Firefox/40.0
+Cookie: concatenate=malware; SESSIONID=f7183f466a9b123a598a4b412b4f329b3dc99de30356307dd425bcab4f8326b44e9d59ed7743352579656a1373f548fc
+

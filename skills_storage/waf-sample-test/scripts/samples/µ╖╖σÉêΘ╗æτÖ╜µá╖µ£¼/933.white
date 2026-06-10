@@ -1,0 +1,13 @@
+POST /resilient/roll%20out/process/expression?significant=optimize&faceted%20search=module&main=manager&append=NzguIFNlbGVjdCBhIHRpbWUgc2xvdCBmcm9tIHRoZSBhdmFpbGFibGUgb25lcy4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36
+Cookie: dollar%20sign=overview; multi=latency; SESSIONID=e5d035ad997207a377b1a9dd1516d36a19888b936cf8db613ac1873edc0e647faee95a6a745bfd1b3c4ed5bf5df71643
+

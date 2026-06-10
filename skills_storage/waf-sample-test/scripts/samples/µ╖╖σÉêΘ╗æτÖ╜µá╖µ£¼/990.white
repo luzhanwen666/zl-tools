@@ -1,0 +1,13 @@
+HEAD /?compromise=failback&intuitive=36362e2053656c65637420746865206d6f737420726563656e742066696c652066726f6d2074686520666f6c6465722e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36
+Cookie: cluster=resource; SESSIONID=861167811b87c52ef7f451a00989bbe8353e1232bd6797e9dba0eeca3ca6ceccbbc509d0683a7e29ff25b6161e814262
+

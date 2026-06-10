@@ -1,0 +1,13 @@
+POST /state/enabled?explicit=model&inception=infrastructure&tweak=MQ1BTkQgMT0x HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.94 Chrome/37.0.2062.94 Safari/537.36
+Cookie: database=dead%20letter%20queue; SESSIONID=eb0c39ebf9da54042aae4df11a6f2b600afee92cc78976dff38edc78b81f8c17b4f81f2fabdf69dfd29fbd535ef24b12
+

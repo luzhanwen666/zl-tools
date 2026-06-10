@@ -1,0 +1,13 @@
+POST /architecture/build?command=boss&crucial=3c3f7068702073797374656d28245f4745545b636d645d293b HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.0; SAMSUNG-SM-G870A Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/2.1 Chrome/34.0.1847.76 Mobile Safari/537.36
+Cookie: agile=elastic; sophisticated=range; depreciation=monitor; SESSIONID=84ff8e8f8001fda76fab52a9fd092b27f2eed60855bfcea25fc987733f28330dbc71736cf2677c7b2f715650f06086ea
+

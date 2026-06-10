@@ -1,0 +1,13 @@
+PUT /caveats/block?comma=control&concurrent=score&tentative=MTcuIFRoZSB1bmlvbidzIHJlc3BvbnNlIHdhcyBzd2lmdCBhbmQgZGVjaXNpdmUuCg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36
+Cookie: run=deprecated; hyphen=fill; seamless=authentication; SESSIONID=d722fcb7ab5c75f14d495798b2e20f37bbd0ef07220b73560793e4aee3931272f244f5047bfed3246a4e6a7190e66df5
+

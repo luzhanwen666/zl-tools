@@ -1,0 +1,13 @@
+HEAD /undertake/encapsulate?permutation=polyfill&trigger=score&required=homebrew&hypothesis=NTAuIFNlbGVjdCB0aGUgbWFpbiBpZGVhIGZyb20gdGhlIHBhc3NhZ2UuCg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; LG-V410 Build/KOT49I.V41010d) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: exclamation%20mark=percent; SESSIONID=dc834efc95aeaf1cb9ddfa37d925b5fe1d0a12522a34a81dc4ccab0794bacad6cc94bf5c52b9b530873efce253f2fa34
+

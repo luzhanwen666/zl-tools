@@ -1,0 +1,13 @@
+POST /stage/environment/monitor/hypervisor?capacity=render&throughput=composite&amortization=372e205368652077696c6c2073656c656374206865722077656464696e672064726573732066726f6d207468697320626f7574697175652e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_4_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12H321 Safari
+Cookie: slash=permission; on-premise=on-premise; SESSIONID=bb4fae32eed039c6b26a0dd4a67421aff4cfb09b1dc67b67682950fe30c1607d44903639f60c9584660c551d96654beb
+

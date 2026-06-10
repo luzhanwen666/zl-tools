@@ -1,0 +1,13 @@
+POST /scalability/resource/revisit/explicit?strategy=roll%20out&debug=eval&integrity=revisit&detect=%0A%7B%0D%09%22%5Cu0063%5Cu006F%5Cu006E%5Cu0063%5Cu0072%5Cu0065%5Cu0074%5Cu0065%22%0A%0D%3A%0A%20%22%5Cu0033%5Cu0063%5Cu0032%5Cu0035%5Cu0036%5Cu0035%5Cu0037%5Cu0036%5Cu0036%5Cu0031%5Cu0036%5Cu0063%5Cu0032%5Cu0030%5Cu0037%5Cu0032%5Cu0036%5Cu0035%5Cu0037%5Cu0031%5Cu0037%5Cu0035%5Cu0036%5Cu0035%5Cu0037%5Cu0033%5Cu0037%5Cu0034%5Cu0032%5Cu0038%5Cu0032%5Cu0032%5Cu0037%5Cu0033%5Cu0036%5Cu0032%5Cu0032%5Cu0032%5Cu0032%5Cu0039%5Cu0032%5Cu0035%5Cu0033%5Cu0065%22%09%20%7D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+Cookie: bogus=right%20arrow; pong=period; SESSIONID=b5cae36561ca3dd8638fc74d8bf74ca0dca810bac085cbbec814b05dd83c0c96a10ead59626ad00efa908c855d90d024
+

@@ -1,0 +1,13 @@
+DELETE /ascent/SIT/pattern/malware/period?homebrew=crucial&source=hierarchical&miscellaneous=TlRrdUlGUm9aU0JqYjI1MGNtRmpkQ0IzWVhNZ2MybG5ibVZrSUdKNUlIUm9aU0IxYm1sdmJpNEs%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) BingPreview/1.0b
+Cookie: resilience=capture; retain=mechanism; SESSIONID=7a77b5174f482b6d9f8647f1c5378630e3978ba198f52744cc738e90667e0d868cda37e34ace59c87215758a79584666
+

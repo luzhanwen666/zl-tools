@@ -1,0 +1,13 @@
+POST /model/thrilled/dispatch?manage=discretely&create=false%20positive&mechanism=trigger&disclaimer=TkRFdUlGUm9aU0JtWldWa1ltRmpheUJtY205dElIUm9aU0IxYm1sdmJpQjNZWE1nY0c5emFYUnBkbVV1Q2c9PQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36
+Cookie: scope=pattern; SESSIONID=80d4f25c8bd6cff7b92beb471cbdd7b9e9d6f8797c6469856f39739e00d5ad0f9fb17492e7c6fbaa69574cb73ace5a2e
+

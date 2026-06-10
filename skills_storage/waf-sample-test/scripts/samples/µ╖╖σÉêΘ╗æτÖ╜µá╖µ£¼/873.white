@@ -1,0 +1,13 @@
+GET /impression?dump=display&mature=single%20quotation%20mark&capture=MzguIFNlbGVjdCB5b3VyIGZhdm9yaXRlIHF1b3RlIGZyb20gdGhlIGJvb2suCg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_4 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) GSA/8.0.57838 Mobile/12H143 Safari/600.1.4
+Cookie: strength=BIOS; SESSIONID=cb304ac83d0900056af6e85481759b8ad612cb8a703299720ef892164ce5d77f8489c5b81c85dc7dbc61eae019563fe8
+

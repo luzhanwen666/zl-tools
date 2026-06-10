@@ -1,0 +1,13 @@
+POST /region/HTML/respective/debug?underlying=pong&pop=mediocre&revisit=MwAjIHNjcmlwdGZhbGxiYWNrdW5sb2Fkc3VzcGVuZGVkYWxpZ25yaWdodCAKQU5ELyogCiAqLzItLSBsaW5lYXJkcHB4IAojIHNlcmlhbGl6ZW51bWJlcm11bHRpcGxldHJpZ2dlciAKPSAtLSBzcGFjZWRwcmVzZXR0cnVuY2F0ZWlyaXNzb3J0IAoyIFVOSW9OCnNlbEVDVAojIGRhdGV0aW1lZmV0Y2hvbGRvbmxvYWRzaXBzYW5ub3RhdGlvbnNzdGVwYnV0dG9uc3BvcG92ZXIgCjEAIw%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.124 Safari/537.36
+Cookie: attach=disclaimer; prepare=fill; infrastructure=scenario; SESSIONID=18f5a80e42a9e45cebcb2f2f04c4c2e4397c56ac7fe3420e9ba8d3550bf84829b67d8fb0439cc9178cb9d74a0c57e279
+

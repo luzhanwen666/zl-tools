@@ -1,0 +1,13 @@
+POST /block/tweak/replica/permanent?privilege=amortization&main=diversified&declarative=ellipsis&confidentiality=322e20506c656173652073656c6563742074686520636f727265637420616e737765722066726f6d2074686520676976656e206f7074696f6e732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36 SE 2.X MetaSr 1.0
+Cookie: remediation=disclaimer; BIOS=detect; message=occasion; SESSIONID=888ae79401b2c86da51dbcad1d1696fae2c3c04415aefbdfb9e3d0d8a1e02bdfd6cd0dfeb5fea07c1800bdcda4f5b372
+

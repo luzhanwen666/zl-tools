@@ -1,0 +1,13 @@
+HEAD /agile/polyfill/reliability/extra/impression?tolerance=score&leverage=privilege&resilience=stroke&intervention=MzYzNDJlMjA1MzY1NmM2NTYzNzQyMDYxMjA3MDYxNzI3NDZlNjU3MjIwNjY3MjZmNmQyMDc0Njg2NTIwNjE3NDc0NjU2ZTY0NjU2NTczMmUwYQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:35.0) Gecko/20100101 Firefox/35.0
+Cookie: aggregate=right%20arrow; SESSIONID=c2db3bf754a8b1af1670b947a7aea4ee79fe36720b497f2678e8ca5bbe325376187f67843b6d4e8b41d81ef6881dd265
+

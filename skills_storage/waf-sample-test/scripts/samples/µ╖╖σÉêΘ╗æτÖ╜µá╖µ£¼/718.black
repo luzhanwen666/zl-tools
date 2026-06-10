@@ -1,0 +1,13 @@
+HEAD /?threshold=HTML&composite=instance&expenditure=3320616e440d35203d2320636f6c6c656374696f6e696e736572747061737372636f6c6573200a322320696e6865726974200a556e694f6e23206c616e6775616765656e73757265756e697175657369676e7570696e6e65726970686f6e65200a2f2a20777963697779670a6272696768746e657373202a2f73454c4563540031202d2d20696e6e657268656c706572616c69676e70726570617265666f726d200a23 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: priority=latency; SESSIONID=c0141fd4c62f523bbc229ca9d3620951df891a673ff3e457bb829f5b062883e9c0ee8c5f00b4b49b03d18534ee939175
+

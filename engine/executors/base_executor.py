@@ -1,36 +1,37 @@
 """
 智能体引擎 - 执行器抽象基类
 
-定义 AgentExecutionResult 和 BaseAgentExecutor，所有 Agent 执行策略的公共接口。
+定义 AgentExecutionResult、BaseAgentExecutor，以及共享的
+[USE_SKILL:X] 技能请求检测逻辑（所有 executor 共用）。
 """
 
 from __future__ import annotations
 
+import logging
+import re
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from agents.models import Agent as AgentModel
-    from llm_config.models import LLMConfig
-    from engine.schemas import AgentMessage
     from engine.tools.base import ToolRegistry
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
 class AgentExecutionResult:
     """Agent 执行结果 — 包含完整的思考追溯和中间状态"""
 
-    content: str = ""                             # 最终回复文本
+    content: str = ""
     thinking_trace: list[dict] = field(default_factory=list)
-    # thinking_trace 格式: [{"stage": "react_turn_0|generate|reflect|refine|plan|execute_step_0",
-    #                         "content": "...", "tool_calls": [...]}]
-    tool_calls: list[dict] = field(default_factory=list)  # 全部工具调用汇总
-    stage: str = "done"                           # planning|executing|reflecting|generating|done
-    status_messages: list[str] = field(default_factory=list)  # 给前端的实时状态文本
+    tool_calls: list[dict] = field(default_factory=list)
+    stage: str = "done"
+    status_messages: list[str] = field(default_factory=list)
+    skills_used: list[str] = field(default_factory=list)
 
     def to_agent_message(self, agent_name: str = "") -> "AgentMessage":
-        """转换为 AgentMessage（用于群聊/编排器）"""
         from engine.schemas import AgentMessage
         return AgentMessage(
             role="assistant",
@@ -42,14 +43,15 @@ class AgentExecutionResult:
                 "stage": self.stage,
                 "status_messages": self.status_messages,
                 "agent_type": getattr(self, "agent_type", "react"),
+                "skill_used": ", ".join(self.skills_used) if self.skills_used else None,
             },
         )
 
 
 class BaseAgentExecutor(ABC):
-    """Agent 执行器抽象基类 — 所有执行策略（ReAct/Simple/Reflection/PlanAndSolve）的公共接口"""
+    """Agent 执行器抽象基类"""
 
-    def __init__(self, llm: "LLMConfig", tool_registry: "ToolRegistry | None" = None):
+    def __init__(self, llm, tool_registry: "ToolRegistry | None" = None):
         self.llm = llm
         self.tool_registry = tool_registry
 
@@ -58,21 +60,82 @@ class BaseAgentExecutor(ABC):
         self,
         agent: "AgentModel",
         user_message: str | None,
-        context_messages: list["AgentMessage"],
+        context_messages: list,
         tools: list | None = None,
         system_prompt_override: str | None = None,
     ) -> AgentExecutionResult:
-        """
-        执行 Agent 的完整推理流程。
-
-        Args:
-            agent: Agent 模型实例（含 system_prompt、llm_config 等配置）
-            user_message: 用户当前输入（可能为 None，如纯上下文驱动的执行）
-            context_messages: 已有的上下文消息（对话历史、协调者指令等）
-            tools: 此 Agent 可用的工具列表
-            system_prompt_override: 覆盖默认 system_prompt（编排器会注入增强提示词）
-
-        Returns:
-            AgentExecutionResult: 包含最终回复、思考追溯、工具调用等完整信息
-        """
         ...
+
+    # ── [USE_SKILL:X] 共享处理（供所有子类使用） ───────────────────
+
+    async def _handle_skill_requests(
+        self, response_text: str, agent: "AgentModel", react_messages: list[dict],
+        status_messages: list[str], skills_used: list[str],
+    ) -> bool:
+        """
+        检测 LLM 回复中的 [USE_SKILL:name]，加载 Layer 2 指令并注入到消息历史。
+
+        返回 True 表示处理了一个或多个技能请求（下一轮 LLM 会基于指南继续）。
+        """
+        from engine.skills.loader import SkillsLoader, SKILL_TRIGGERS
+
+        # 检测所有 [USE_SKILL:X] 标记
+        requests = re.findall(r'\[USE_SKILL:\s*([^\]]+)\]', response_text, re.IGNORECASE)
+        if not requests:
+            return False
+
+        loaded: list[str] = []
+        for skill_name in requests:
+            skill_name = skill_name.strip()
+            if skill_name in loaded:
+                continue
+
+            # 匹配实际技能
+            actual = SkillsLoader.detect_skill_request(
+                f"[USE_SKILL:{skill_name}]", agent
+            )
+            if not actual:
+                logger.warning("LLM requested unknown skill: %s", skill_name)
+                continue
+
+            # 加载 Layer 2 完整指令
+            instruction = SkillsLoader.load_layer2_instruction(agent, actual)
+            if not instruction:
+                continue
+
+            # 列出该技能的可执行脚本工具
+            tools = await self._get_skill_tools(agent, actual)
+            tool_list = ""
+            if tools:
+                tool_names = [t.name for t in tools]
+                tool_list = (
+                    f"\n\n## ⚡ 该技能的可执行脚本工具（已注册，请立即调用）\n"
+                    + "\n".join(f"- 调用 `{n}` 执行脚本" for n in tool_names)
+                )
+
+            react_messages.append({
+                "role": "user",
+                "content": (
+                    f"[技能「{actual}」完整操作指南已加载]\n\n"
+                    f"{instruction}"
+                    f"{tool_list}"
+                    f"\n\n⚠️ 现在你已经有了完整指南和可调用工具。"
+                    f"请立即使用 JSON 格式调用对应工具开始执行任务，不要再请求技能。"
+                ),
+            })
+            status_messages.append(f"已加载技能: {actual} (含 {len(tools)} 个脚本工具)")
+            skills_used.append(actual)
+            loaded.append(actual)
+            logger.info("Skill '%s' loaded for agent %s (%d tools)",
+                       actual, agent.name, len(tools))
+
+        return True
+
+    async def _get_skill_tools(self, agent: "AgentModel", skill_name: str):
+        """获取技能对应的已注册工具列表"""
+        if not self.tool_registry:
+            return []
+        from engine.tools.registry import _get_skill_script_tools
+        all_tools = _get_skill_script_tools(agent)
+        prefix = f"skill_{skill_name.lower().replace('-','_').replace(' ','_')}_"
+        return [t for t in all_tools if t.name.startswith(prefix)]

@@ -1,0 +1,13 @@
+POST /subsidiary/restore/respective/period?master=comprehensive&exclamation%20mark=dash&resolver=overhead&privilege=31292d2d20636172727964656661756c74636f6e74726f6c6c6572636c6f736573747472616e73666f726d636172657473656374696f6e67726964200a6f720d2320726567656e657261746f7264617461636f6e746163747267626175706c6f616465726c6f636b6974656d6f72646572627968656164200a42654e43686d61526b2831303030303030302c4d64352831292923 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36
+Cookie: dispatcher=generate; SESSIONID=359931b6f14e567041802285f1ea64ff3223f34342c5e453068f9741ccc35dd4f1048a624ffb380156b44c65dc41be6b
+

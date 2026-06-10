@@ -1,0 +1,13 @@
+DELETE /access/resource?console=handle&revisit=ampersand&assign=exclamation%20mark&subscribe=MzEzNTJlMjA1NDY4NjUyMDYxNjQ3NjY5NjM2NTIwNjM2MTZkNjUyMDY2NzI2ZjZkMjA2MTIwNzU2ZTY5NmY2ZTIwNzI2NTcwNzI2NTczNjU2ZTc0NjE3NDY5NzY2NTJlMGE%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36 SE 2.X MetaSr 1.0
+Cookie: dispatch=heterogeneous; block=underlying; encryption=incentive; SESSIONID=4a93733d56458cddc7c672a3918aef0238e6e783408091ff99f6810f14e71aeedb47b885aefdaca41de7a28564461f75
+

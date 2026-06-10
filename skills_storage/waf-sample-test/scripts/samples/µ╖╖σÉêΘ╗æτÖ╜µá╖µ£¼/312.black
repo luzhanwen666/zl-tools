@@ -1,0 +1,13 @@
+PUT /adapter/cost-effective/resolver/overhead/polyfill?overhead=33633632363137333635323036383732363536363364323236613631373636313733363337323639373037343361323233653363326636323631373336353365 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.2.2; GT-P5113 Build/JDQ39) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: colon=dump; SESSIONID=f5a62dbf15c1895c3bfbe7e68f0691e2122c2a01af43759b252bfdfc41767e002f3aad9fd91904d2801d8731f144481e
+

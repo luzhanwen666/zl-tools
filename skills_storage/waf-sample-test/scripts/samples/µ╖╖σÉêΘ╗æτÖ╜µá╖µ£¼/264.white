@@ -1,0 +1,13 @@
+GET /thrilled?customizer=architecture&offer=route&publish=4d5334675757393149474e686269427a5a57786c59335167655739316369426d59585a76636d6c305a53426b5a584e7a5a584a3049475a79623230676447686c4947316c626e557543673d3d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:37.0) Gecko/20100101 Firefox/37.0
+Cookie: traversal=right%20arrow; SESSIONID=c9bf01b5297c99f15f46cbb64d7e627e097634885312ef4feae247dd29563b2f555e1a66a7e6fba6223c520b422df6c2
+

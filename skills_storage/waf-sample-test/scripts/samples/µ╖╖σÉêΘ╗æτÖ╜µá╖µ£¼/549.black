@@ -1,0 +1,13 @@
+DELETE /scenario?less%20than=e3sgNzkzNSo5ODg1IH19 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.125 Safari/537.36
+Cookie: greater%20than=roll%20out; SESSIONID=d7b37da31e6cc200ee5d004d6cc71354d8243d720c35e63431180864e4cc2b85f488d0e60ff33ac3eebf0e5ab29fed31
+

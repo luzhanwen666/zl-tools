@@ -1,0 +1,13 @@
+POST /module?incident=aspect&redacted=seamless&composite=MjYuIFNlbGVjdCB0aGUgcmlnaHQgdG9vbCBmcm9tIHRoZSB0b29sYm94Lgo%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; RCT6203W46 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: disclaimer=base; priority=on-premise; SESSIONID=11696ee0a695a34da59f4392ab60d71d8ecc5cc0ea26bda0e31f60588612e7d9deab27c15055820ddac6f992be06cea7
+

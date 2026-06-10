@@ -1,0 +1,13 @@
+POST /cluster?impression=manage&periodically=5043566c646d467349484a6c6358566c6333516f496e4e6949696b6c50673d3d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36
+Cookie: dollar%20sign=catastrophic%20failover; adapt=main; dead%20letter%20queue=evaluation; SESSIONID=8026b86cfa46aad31829af52f1087ca363dd144ce2a77cc84a323103f1fcce59294d52bb71c890cfb6300eb14260a276
+

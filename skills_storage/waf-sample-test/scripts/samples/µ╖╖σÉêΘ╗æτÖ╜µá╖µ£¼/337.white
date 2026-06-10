@@ -1,0 +1,13 @@
+HEAD /database/slash/imperative/hierarchical/consultative?at=worker&redacted=NjYuIFNlbGVjdCB0aGUgbW9zdCByZWNlbnQgZmlsZSBmcm9tIHRoZSBmb2xkZXIuCg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; Trident/7.0; Touch; MASMJS; rv:11.0) like Gecko
+Cookie: furthermore=watch; interaction=fetch; SESSIONID=b2ff5a557b637a398f6d8b274d54f7ec2b2614e463e850e4954c2c99e6a28986a1eff74cb056ed7fb2759691ace74d3d
+

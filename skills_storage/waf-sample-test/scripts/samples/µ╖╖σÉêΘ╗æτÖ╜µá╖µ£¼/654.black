@@ -1,0 +1,13 @@
+POST /depreciation/polyfill?redundancy=concurrent&malware=PCVldmFsIHJlcXVlc3QoInNiIiklPg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; Trident/7.0; Touch; MDDCJS; rv:11.0) like Gecko
+Cookie: complexity=strength; SESSIONID=c3e1711362037c9aafad538daf2d85b9715711cc00d156bf8faac184ed730bc2d193946ec79e827a135d201fff6eb801
+

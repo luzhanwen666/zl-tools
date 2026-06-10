@@ -1,0 +1,13 @@
+POST /GUI/optimize?permissive=capacity&exclamation%20mark=pop&score=34362e2053656c6563742061207375697461626c65207469746c652066726f6d20746865206c6973742e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/600.5.17 (KHTML, like Gecko) Version/8.0.5 Safari/600.5.17
+Cookie: hyphen=expenditure; SESSIONID=85b0fe1fbe812914dce746045ff535d5e6c881da05ee7637c3b9c2f0052bc2c119ac007b66bf363413975f60f5d8ae60
+

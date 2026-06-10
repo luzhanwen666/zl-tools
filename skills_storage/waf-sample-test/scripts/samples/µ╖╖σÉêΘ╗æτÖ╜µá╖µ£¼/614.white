@@ -1,0 +1,13 @@
+HEAD /double%20quotation%20mark/cost-effective/workaround?interaction=attach&consumption=evaluation&registry=34302e2053656c6563742061206d6f7669652066726f6d207468652073747265616d696e6720736572766963652e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.0.1; SM-N910V Build/LRX22C) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Mobile Safari/537.36
+Cookie: evolution=resolver; failback=inherit; obtain=mapping; SESSIONID=8d920ac255d5c09be89a3d781b284637fa94e0196b35368f00e15e6fb52db7066939c6c3d94841f436f19b36ce12fc13
+

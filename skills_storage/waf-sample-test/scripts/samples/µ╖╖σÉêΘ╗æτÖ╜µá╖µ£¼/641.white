@@ -1,0 +1,13 @@
+HEAD /hypothesis/immutable/severity/pong?multi=remediation&location=section&takeaway=MTEuIFNlbGVjdCB5b3VyIG1lYWwgZnJvbSB0aGUgbWVudSBwcm92aWRlZC4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36
+Cookie: latency=encapsulate; SESSIONID=d9acb7576cf01408f375c4d57b6a173bf41e7cd4f0d1339922d41a30f0909eb192a63b1d80e4287298bf46b3199659fd
+

@@ -1,0 +1,13 @@
+HEAD /introspect/bandwidth/depreciation/oversight?dispatch=333232653230353436383635323037353665363936663665323737333230373036663737363537323230363336663664363537333230363637323666366432303639373437333230366436353664363236353732373332653061 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+Cookie: impact=miscellaneous; caveats=inception; debug=permanent; SESSIONID=60bf056a34a3b56255f2b50084999105d019393e265a9ef4e7d9c22c75da43de54e3286fffc79c3741623d438a8a753c
+

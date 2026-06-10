@@ -1,0 +1,13 @@
+POST /efficiency/explicit/bind/fill/run?call=IFsiXHUwMDY1XHUwMDZDXHUwMDYxXHUwMDczXHUwMDc0XHUwMDY5XHUwMDYzXHUwMDY5XHUwMDc0XHUwMDc5Ig0sDSJcdTAwM0NcdTAwNjJcdTAwNjFcdTAwNzNcdTAwNjVcdTAwMjBcdTAwNjhcdTAwNzJcdTAwNjVcdTAwNjZcdTAwM0RcdTAwMjJcdTAwNmFcdTAwNjFcdTAwNzZcdTAwNjFcdTAwNzNcdTAwNjNcdTAwNzJcdTAwNjlcdTAwNzBcdTAwNzRcdTAwM2FcdTAwMjJcdTAwM2VcdTAwM0NcdTAwMmZcdTAwNjJcdTAwNjFcdTAwNzNcdTAwNjVcdTAwM0UiDSwKIlx1MDA3NFx1MDA3N1x1MDA2NVx1MDA2MVx1MDA2YiINXQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36
+Cookie: efficiency=impersonate; policy=worker; database=worker; SESSIONID=1e03ed0844a86456af6ed68fd8d9baa9d3f13dcdb9d6842b49b8bdd193e221946a5118f6432074c9d517ffb75f2ea182
+

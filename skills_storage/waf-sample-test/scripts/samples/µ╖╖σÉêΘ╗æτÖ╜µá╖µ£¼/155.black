@@ -1,0 +1,13 @@
+PUT /sustainable/ping/ampersand/enabled/base?push=refresh&sort=underscore&apply=context&suffix=PHNjcmlwdD4oXHUwMDYxXHUwMDZjXHUwMDY1XHUwMDcyXHUwMDc0KSgxKTwvc2NyaXB0Pg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; CrOS x86_64 6946.70.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.132 Safari/537.36
+Cookie: enabled=inner; elasticity=extra; explicit=render; SESSIONID=2249777c709abbf561656c6ea08d6a0e1e540124f6fc254ef9b8dce58bad4a6cd2b598b7dda27895edb3110104287cef
+

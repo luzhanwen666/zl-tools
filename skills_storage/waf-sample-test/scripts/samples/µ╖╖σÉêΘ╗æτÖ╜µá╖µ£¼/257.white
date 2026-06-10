@@ -1,0 +1,13 @@
+HEAD /vice%20versa/bind/monitor?concrete=resource&scenario=TVRVdUlGUm9aU0JoWkhacFkyVWdZMkZ0WlNCbWNtOXRJR0VnZFc1cGIyNGdjbVZ3Y21WelpXNTBZWFJwZG1VdUNnPT0%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36
+Cookie: aggregation=plus; meta=analogy; SESSIONID=14042d061c5effe15ceb0e49c4c765997994dabde0ba8f04aaa2cf64317da8c9e65ea363831cc7d7cc58ff4dc10ff98a
+

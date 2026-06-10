@@ -1,0 +1,13 @@
+DELETE /state/consultative/immutable?strength=incentive&mode=%3C%21DOCTYPE%20foo%20%5B%20%3C%21ENTITY%20ext%20SYSTEM%20%22/library/properties/next%22%20%3E%20%5D%3E HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko
+Cookie: asterisk=asynchronous; dash=impact; handler=fault%20tolerance; SESSIONID=5c48fb46ffbc8c5bf5258ed6c0d7577b4aee6aad176796b7342bc5c21db1143848a58cf67efed3c6c08445368f3de159
+

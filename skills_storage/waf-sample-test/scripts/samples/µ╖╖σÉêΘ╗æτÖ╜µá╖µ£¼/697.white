@@ -1,0 +1,13 @@
+POST /sort/marry/evolution/amortization?glossary=delete&section=master&refresh=36322e2053656c656374206120636f6e76656e69656e742074696d652066726f6d20746865207363686564756c652e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36
+Cookie: source=eval; SESSIONID=8674e1e786c668d5ad3c8e2d2002a0371f931d0155a663e79bcb6a3775a45d5d40443c0a30ac85638416eebd4df48c00
+

@@ -1,0 +1,13 @@
+POST /extra/authorization/sophisticated/resilience/assign?database=constraint&evolution=permutation&detect=deduce&dump=%0A%5B%09%0D%22%5Cu004d%5Cu007A%5Cu0049%5Cu0075%5Cu0049%5Cu0046%5Cu004E%5Cu006c%5Cu0062%5Cu0047%5Cu0056%5Cu006A%5Cu0064%5Cu0043%5Cu0042%5Cu0035%5Cu0062%5Cu0033%5Cu0056%5Cu0079%5Cu0049%5Cu0047%5Cu0052%5Cu006c%5Cu0063%5Cu0033%5Cu0052%5Cu0070%5Cu0062%5Cu006D%5Cu0046%5Cu0030%5Cu0061%5Cu0057%5Cu0039%5Cu0075%5Cu0049%5Cu0047%5Cu005A%5Cu0079%5Cu0062%5Cu0032%5Cu0030%5Cu0067%5Cu0064%5Cu0047%5Cu0068%5Cu006c%5Cu0049%5Cu0048%5Cu0052%5Cu0079%5Cu0059%5Cu0058%5Cu005A%5Cu006c%5Cu0062%5Cu0043%5Cu0042%5Cu006E%5Cu0064%5Cu0057%5Cu006C%5Cu006b%5Cu005a%5Cu0053%5Cu0034%5Cu004B%22%5D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.125 Safari/537.36
+Cookie: impersonate=throughput; heterogeneous=dollar%20sign; internal=init; SESSIONID=40e18bea8388eb01c1f1ea27fa142bb9d4a4b62fe61d89237f0df0c12f4086aa1107f8aba0c8808830dedb374c359c71
+

@@ -1,0 +1,13 @@
+GET /?dollar%20sign=GUI&analyze=4e7934675647686c6553426d62334a745a57516759534231626d6c76626942306279426d6157646f6443426d623349676447686c61584967636d6c6e6148527a4c676f3d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: DOM=greater%20than; rectify=exclamation%20mark; SESSIONID=97bb23323d10e8b26cb35acdaea2095f279f3bd725a3294e440a06f12faa20a8600f20588cfbda18fe7ea911d5de55b9
+

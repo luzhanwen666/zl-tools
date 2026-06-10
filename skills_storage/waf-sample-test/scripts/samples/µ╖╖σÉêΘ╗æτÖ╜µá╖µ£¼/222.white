@@ -1,0 +1,13 @@
+DELETE /section/call/resource/glossary?pong=declarative&ascent=eyAiXHUwMDY0XHUwMDY1XHUwMDY2XHUwMDYxXHUwMDc1XHUwMDZjXHUwMDc0IjoNCWZhbHNlDSwiXHUwMDYyXHUwMDYxXHUwMDczXHUwMDY1Ig0gOgkyMAkJLCJcdTAwNzNcdTAwNzVcdTAwNjJcdTAwNzNcdTAwNjNcdTAwNzJcdTAwNjlcdTAwNjJcdTAwNjUiCjoKDSJcdTAwNGRcdTAwNTNcdTAwMzRcdTAwNjdcdTAwNTVcdTAwMzJcdTAwNTZcdTAwNzNcdTAwNUFcdTAwNTdcdTAwNEVcdTAwMzBcdTAwNDlcdTAwNDhcdTAwNkNcdTAwNzZcdTAwNjRcdTAwNThcdTAwNDlcdTAwNjdcdTAwNTlcdTAwMzJcdTAwMzlcdTAwMzFcdTAwNjNcdTAwNmVcdTAwNGVcdTAwNkNcdTAwNjNcdTAwNzlcdTAwNDJcdTAwNkRcdTAwNjNcdTAwNkRcdTAwMzlcdTAwNzRcdTAwNDlcdTAwNDhcdTAwNTJcdTAwNkZcdTAwNWFcdTAwNTNcdTAwNDJcdTAwNjhcdTAwNjRcdTAwNkRcdTAwNDZcdTAwNzBcdTAwNjJcdTAwNDdcdTAwNDZcdTAwNjlcdTAwNjJcdTAwNDdcdTAwNTVcdTAwNjdcdTAwNjJcdTAwMzNcdTAwNDJcdTAwMzBcdTAwNjFcdTAwNTdcdTAwMzlcdTAwNzVcdTAwNjNcdTAwNzlcdTAwMzRcdTAwNEIiIH0K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; U; Android 4.0.3; en-us; KFOT Build/IML74K) AppleWebKit/537.36 (KHTML, like Gecko) Silk/3.68 like Chrome/39.0.2171.93 Safari/537.36
+Cookie: call=restore; strategy=alphabetically; SESSIONID=cdae45e7ea9b07ab76abf175c3837ac43d35eb575e3e221c693bbee60cba07235cadd24d099c15677810e0fa4cf3ea95
+

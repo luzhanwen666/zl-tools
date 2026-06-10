@@ -1,0 +1,13 @@
+GET /mutable/double%20quotation%20mark?replica=under%20the%20hood&control=DVsiXHUwMDMxXHUwMDJFXHUwMDIwXHUwMDUzXHUwMDY1XHUwMDZjXHUwMDY1XHUwMDYzXHUwMDc0XHUwMDIwXHUwMDc5XHUwMDZGXHUwMDc1XHUwMDcyXHUwMDIwXHUwMDYzXHUwMDZmXHUwMDc1XHUwMDcyXHUwMDczXHUwMDY1XHUwMDczXHUwMDIwXHUwMDY2XHUwMDcyXHUwMDZGXHUwMDZEXHUwMDIwXHUwMDc0XHUwMDY4XHUwMDY1XHUwMDIwXHUwMDYxXHUwMDc2XHUwMDYxXHUwMDY5XHUwMDZDXHUwMDYxXHUwMDYyXHUwMDZjXHUwMDY1XHUwMDIwXHUwMDZmXHUwMDcwXHUwMDc0XHUwMDY5XHUwMDZmXHUwMDZlXHUwMDczXHUwMDJlXHUwMDBhIl0%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 7_0_4 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11B554a Safari/9537.53
+Cookie: amortization=position; sort=dump; SESSIONID=a7c4336e032f26a641c75f55be0291a08004660ad3ee1f25b77cf0adb294fac6b268a13060974a7446f7331bdc9b70d3
+

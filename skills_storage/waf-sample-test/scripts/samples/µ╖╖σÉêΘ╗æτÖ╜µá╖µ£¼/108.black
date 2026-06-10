@@ -1,0 +1,13 @@
+DELETE /less%20than/at/meta/escalate/caret?integrity=DVsKIlx1MDA2MVx1MDA0NFx1MDA2ZFx1MDA0OVx1MDA2ZVx1MDAyMlx1MDAyOVx1MDAwQVx1MDA2Rlx1MDA3Mlx1MDAyMFx1MDAyMlx1MDAzMVx1MDAyMlx1MDAzZFx1MDAyMlx1MDAzMVx1MDAyMlx1MDAyMyIsCjk1CSwJeyAiXHUwMDcwXHUwMDcyXHUwMDZGXHUwMDc2XHUwMDY5XHUwMDczXHUwMDY5XHUwMDZGXHUwMDZlIgoJOgk3MQp9LFsKNDQgXQksDWZhbHNlDV0%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36
+Cookie: execute=ephemeral; offer=federation; schema=BIOS; SESSIONID=fbb4c8e521a2b0aea62473da358bcb2335c1a7ad6bbaa12e399bd1251c66dafa6f8dc30ae1355fc920970cbe2a8b4257
+

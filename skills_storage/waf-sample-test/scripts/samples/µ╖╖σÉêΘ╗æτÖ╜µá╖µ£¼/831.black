@@ -1,0 +1,13 @@
+PUT /disclaimer?extra=N2I3YjIwMzYzNzMwMzQyYTMzMzEzNzM5MjA3ZDdk HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0
+Cookie: dead%20letter%20queue=aggregate; monetize=significant; hierarchical=capture; SESSIONID=9f68788242c6d6108e026362bf66cec60120101892a193ab8faf94edc8394a99f85b7699b41a05438e803444a7f616b2
+

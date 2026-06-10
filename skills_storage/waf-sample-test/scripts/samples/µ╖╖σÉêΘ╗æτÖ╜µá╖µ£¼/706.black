@@ -1,0 +1,13 @@
+POST /mechanism?data%20sovereignty=occasion&prepare=compliance&manually=indecisive&instance=29293b77414974466f722f2a206f74686572706f737473657869747772697461626c650a202a2f2f2a200d0d637572736f7264656269616e7765627674746c696e6b6564696e7374616c6c65647a656e77616c6b657363617065646c6f6f70796561727362617463686564202a2f44456c61592d2d20707379636c696e6b70726566657272656473696c6b200a2320666f726d617474656464656c617973636f706564616c69676e726967687470616c6d636c616d70200a27303a303a35272d2d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 5.2; rv:40.0) Gecko/20100101 Firefox/40.0
+Cookie: internal=left%20arrow; scope=merge; retain=constraint; SESSIONID=5680e8c94c739a4057f7bfbe10479366fbc7f765da1a6d42485e92a901eda397bed626b09c293bb027367f3d99509272
+

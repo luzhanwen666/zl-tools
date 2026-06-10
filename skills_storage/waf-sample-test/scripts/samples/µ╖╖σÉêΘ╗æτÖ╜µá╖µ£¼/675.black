@@ -1,0 +1,13 @@
+PUT /registry?region=Li4vV0VCLUlORi93ZWIueG1s HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.125 Safari/537.36
+Cookie: colon=restore; subtle=migrate; SESSIONID=376147f16905b521d75b635c372dc41a6b9eb2f7bdb4e3eae21103446a22bcb417df53aff29c90f8d2238fc11a87a024
+

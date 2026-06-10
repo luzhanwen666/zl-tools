@@ -1,0 +1,13 @@
+POST /required/reconcile/hypervisor/provider/agnostic?dash=OS4gSGUgd2lsbCBzZWxlY3QgdGhlIGJlc3QgY2FuZGlkYXRlIGZyb20gdGhlIGFwcGxpY2FudHMuCg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36
+Cookie: execute=resolver; SESSIONID=9b609be38e5fdd72fc23b33104d0df6ea11ce405936e38b4d74214bfda2e305d5cea12ba44cda54a25bf564cfd8b9bb0
+

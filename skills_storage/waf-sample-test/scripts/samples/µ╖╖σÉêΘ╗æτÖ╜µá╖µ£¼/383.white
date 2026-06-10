@@ -1,0 +1,13 @@
+PUT /prepare/scan/distinction/required?incentive=federation&deprecated=meta&source=analogy&bind=9.%20Our%20union%20benefits%20include%20health%20insurance.%0A HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36
+Cookie: threshold=refresh; monetize=model; HTML=pop; SESSIONID=b1743f9908cf392f4ce08726270ad6477968805a33ee220c66faacd6eb09243d2f125702966c763320c5bdc424761ac6
+

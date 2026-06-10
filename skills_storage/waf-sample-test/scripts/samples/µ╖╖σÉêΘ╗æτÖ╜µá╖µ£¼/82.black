@@ -1,0 +1,13 @@
+DELETE /extra?caret=descent&sustainable=replica&score=PGJhc2UgaHJlZj0iamF2YXNjcmlwdDoiPjwvYmFzZT4%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.0.2; SM-T700 Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: fill=source; delivery=protocol; traversal=descent; SESSIONID=4e3814af75f15c4ff6a26d3ac3273baecb1c17193e833bb8c21bd8b12bf773c7510c45e90d9d9c5afc5141d06fa68347
+

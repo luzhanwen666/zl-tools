@@ -1,0 +1,13 @@
+GET /underlying/granular/replica?multi=right%20arrow&worker=takeaway&imperative=36382e2053656c65637420796f7572206661766f726974652064657374696e6174696f6e2066726f6d20746865206f7074696f6e732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71
+Cookie: question%20mark=protocol; explicit=double%20quotation%20mark; SESSIONID=6fc0bc4a3c72a9c1138ce9b0c5b64ee637c20ce29cc620bbf42ab5f45dd045c7bc9f7f9f4cb86384c19dafd4bc0a4b06
+

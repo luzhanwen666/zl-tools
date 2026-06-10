@@ -1,0 +1,13 @@
+GET /intervention/permutation/resilience/inherit?degradation=33353338326532303533363536633635363337343230373436383635323037323635366336353736363136653734323036393665363636663732366436313734363936663665323036363732366636643230373436383635323037323635373036663732373432653061 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:38.0) Gecko/20100101 Firefox/38.0
+Cookie: interaction=analogy; SESSIONID=f522a1df508bab9f8ab11c5046f1df4c25c4ff610643f08918c69715216ad4c2fdbc51f2aa4ea7bb4d145d0a82c16254
+

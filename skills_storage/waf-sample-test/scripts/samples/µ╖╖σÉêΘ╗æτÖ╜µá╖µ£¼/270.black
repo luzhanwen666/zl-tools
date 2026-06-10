@@ -1,0 +1,13 @@
+PUT /impression/initiative/intervention/seek?restore=latency&pong=compliance&incentive=e3sgNjU0OSo3MjE0IH19 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36
+Cookie: exclamation%20mark=stroke; expenditure=resolve; SESSIONID=af5b39a54b9e2497e605fdd4963a67e40bc45daa75c667faa6881f55bc58d3d986f76b183bf25982b3160e3ba67b7a42
+

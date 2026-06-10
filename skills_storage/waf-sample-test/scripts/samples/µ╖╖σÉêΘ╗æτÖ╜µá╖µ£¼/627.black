@@ -1,0 +1,13 @@
+GET /slash/boss/strangler%20pattern/aspect/base?colon=at&strategy=magnetic%20storage&node=tenancy&cluster=WyBbIlx1MDAzMVx1MDAwMFx1MDA0MVx1MDA2RVx1MDA0NFx1MDAwMFx1MDAzMVx1MDAzZFx1MDAzMSIKLFsgIDQzDSxbIlx1MDA2NFx1MDA2NVx1MDA2M1x1MDA2Q1x1MDA2MVx1MDA3Mlx1MDA2MVx1MDA3NFx1MDA2OVx1MDA3Nlx1MDA2NSIKLAp0cnVlXQ1dLDk3CV0sdHJ1ZQkKXQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET4.0C; .NET4.0E; InfoPath.3)
+Cookie: characteristic=BIOS; append=provide; SESSIONID=655d0bcd52002de818c4d0b4278db844c8ef6a91332e5a7f169cfa621d5fed3d604347d1e5ff60cc6130f2be72999dda
+

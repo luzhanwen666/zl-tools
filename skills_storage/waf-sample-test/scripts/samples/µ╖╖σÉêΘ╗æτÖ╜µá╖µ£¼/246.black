@@ -1,0 +1,13 @@
+GET /?module=asterisk&watch=introspect&notation=adapt&cost-effective=TUNNZ1pYaGpiSFZ6YVhabElBcGhia1FBTWcwaklHTnZiWEJoZEhKMGIyc2dDajBLTUNNZ1kyRnNiR0ZpYkdWemQyWnZZbXBsWTNSa2FXMWxibk5wYjI1emJtRnViMmxrWW1Ga1lXNXZabTlzYkc5M1ltVjBZU0FLZFc1SmIwNEFMUzBnZEhsd1pXOW1kVzVwYm5OMFlXeHNaV3hsYldWdWRITmliMnh2YVc1c2FXNWxjM1ZpYldsemMybHZibVJsYkdWbllYUmxkbTlqWVdJZ0NuTkZiR1ZEZENNZ2NtVm1aWEp5WlhKemFYcGxJQW9qSUcxbGJuVnBibk4wY25WamRHbHZibk53Y21Wc2IyRmtZV1JrYVhScGRtVWdDakVnSXc9PQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: hierarchical=adapt; square%20brackets=question%20mark; stage=scope; SESSIONID=e7e85bd7eaba721cac2386acd92df70fefdaec0127eb3eb9053aaa8ff656e021d62b5f5328a799121d6689366200f2e1
+

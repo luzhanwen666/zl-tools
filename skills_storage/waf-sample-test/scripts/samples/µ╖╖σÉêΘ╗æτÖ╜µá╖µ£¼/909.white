@@ -1,0 +1,13 @@
+PUT /characteristic/concurrent?colon=federation&hash=attach&data%20sovereignty=4e6a597549464e6c6247566a64434230614755676257397a644342795a574e6c626e51675a6d6c735a53426d636d39744948526f5a53426d6232786b5a58497543673d3d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.13 Safari/537.36
+Cookie: mutable=symmetric; SESSIONID=647d1f36890cee2ff6cd9a2a7ee8350b0d4dfc3ec40a748f8585faf8ab784458ec3550b1e97617ef5bab1c23f2af5754
+

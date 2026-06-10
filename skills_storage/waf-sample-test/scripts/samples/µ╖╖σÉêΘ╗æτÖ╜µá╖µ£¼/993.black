@@ -1,0 +1,13 @@
+POST /ascent/comma/magnetic%20storage/authentication?merge=manager&mitigate=PCFET0NUWVBFIGZvbyBbIDwhRU5USVRZIGV4dCBTWVNURU0gIi90eXBlcy9wdWJsaWMvc3Ryb2tlL3BsYXlzdGF0aW9uIiA%2BIF0%2B HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MATBJS; rv:11.0) like Gecko
+Cookie: comma=semantic; anomaly=redacted; glossary=policy; SESSIONID=6984af2aa2ab53c3427f5b681c1f7c439684a4cb7a675d97af67b74c4b9ed367b768628f7fd5344ed2703b076f003beb
+

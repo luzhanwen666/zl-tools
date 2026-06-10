@@ -1,0 +1,13 @@
+PUT /DOM/subtle/glossary?suffix=range&heterogeneous=single%20quotation%20mark&impact=range&deprecated=33333333326532303534363836353230366336353734373436353732323037373631373332303733363536653734323036363732366636643230373436383635323037353665363936663665323036663636363636393633363532653061 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; yie8; rv:11.0) like Gecko
+Cookie: furthermore=occasion; resolver=compromise; SESSIONID=ddc84397565a0b3d0cceb88e57be95302cd5cb8618b6bff5ca863f4c3430c5e2a4cf8180ec7c3fd8c9afa4dbfd6f5926
+

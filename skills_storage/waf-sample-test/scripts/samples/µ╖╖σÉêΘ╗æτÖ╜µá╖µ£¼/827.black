@@ -1,0 +1,13 @@
+HEAD /significant?impersonate=ellipsis&intuitive=50474a686332556761484a6c5a6a3069616d463259584e6a636d6c7764446f69506a7776596d467a5a54343d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: substantial=glossary; evaluation=interaction; roll%20off=constant; SESSIONID=61ce8469a536f036984d39d46361371d0120313c706690b07e3f6bccc46da6c677546f51d1b0461350665ab5e47ec759
+

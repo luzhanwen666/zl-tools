@@ -1,0 +1,13 @@
+HEAD /required/failover/allocate?distinction=tenancy&catastrophic%20failover=37392e20546865207265736f6c7574696f6e20776173207061737365642062792074686520756e696f6e2e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.132 Safari/537.36
+Cookie: handler=optimize; SESSIONID=b12973cef597c795f86fc14a3b7f67f96ee3eff7cca3d0577862876da94856660f05300f022c8de87adc78fa22e8d795
+

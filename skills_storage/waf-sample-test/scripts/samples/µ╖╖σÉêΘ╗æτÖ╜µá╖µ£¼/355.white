@@ -1,0 +1,13 @@
+POST /?block=HTML&consultative=multi&suffix=4d6934675547786c59584e6c49484e6c6247566a644342306147556759323979636d566a64434268626e4e335a5849675a6e4a7662534230614755675a326c325a57346762334230615739756379344b HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.1; XT1254 Build/SU3TL-39) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Mobile Safari/537.36
+Cookie: suffix=schema; SESSIONID=e75b4ac2a3b285974ffdc201c9e810cd583b88d739e995334b10cc66ccad9fc2c3a9a1f586567938252cb096713f268d
+

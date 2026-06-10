@@ -1,0 +1,13 @@
+GET /marry/thrilled/delivery?alter=PCFET0NUWVBFIGZvbyBbIDwhRU5USVRZIGV4dCBTWVNURU0gIi9zcGFuL3JlcXVpcmUvc2NoZW1hL3NwcmludC9zaGlmdCIgPiBdPg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36
+Cookie: source=failback; anomaly=assign; SESSIONID=e2b5f05dcaa4c9123e061de682c345b6e9dbd5d54096186ef05ab7082bb1084c76b8a4b710048dfb4f0d98cd635e32aa
+

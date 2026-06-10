@@ -1,0 +1,13 @@
+PUT /overview/impact?debug=permissive&slash=restore&push=4f79426a595851674c3256305979397759584e7a64325137 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.3; .NET4.0C; .NET4.0E)
+Cookie: cost-efficient=respective; SESSIONID=4a3aa2273b2cb913a76b2da723d42a1b8c91197db901b97864eccf6b9e0c0d6ab748996e77b02f56d4a197f4ddf39f46
+

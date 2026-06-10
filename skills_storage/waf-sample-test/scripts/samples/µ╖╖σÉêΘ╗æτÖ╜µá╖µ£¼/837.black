@@ -1,0 +1,13 @@
+POST /scan/on-premise/DOM/authentication?faceted%20search=%7B%7B%205775%2A9350%20%7D%7D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; Trident/7.0; MDDCJS; rv:11.0) like Gecko
+Cookie: elasticity=intuitive; customized=adapt; differentiate=polyfill; SESSIONID=990013cbd6651bd776ee086d01a8f785080c8b255ac68be06f64f8358dc4f283675f4019825712bfc110714bdd7c693d
+

@@ -1,0 +1,13 @@
+POST /impression?agnostic=detect&reconcile=fill&downwards%20arrow=resource&streamline=3b20636174202f6574632f7061737377643b HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.65 Safari/537.36
+Cookie: route=amortization; SESSIONID=270a6bb6cc921eb4df10e07667ea725049297817169bc7938a2deaec2b6491d025068caae06a23ebf8fc4d11244b9a9e
+

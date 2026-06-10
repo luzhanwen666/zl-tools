@@ -1,0 +1,13 @@
+GET /consumption/main/concatenate?region=NDE2NDZkNjk0ZTIyMjkyMDZmNTIyZjJhMjA3NTZlNmM2ZjYzNmI2NzY5NzQ2ODc1NjI2ZjZkNmU2OTc3NjU2MjZiNjk2ZTY0NmM2MTYyNjU2YzZjNjU2NDYyNzk2NTZlNjE2MjZjNjU2MzZmNmQ2ZDZmNmU3MzZlNjE3MDczNjg2Zjc0NzM3NDc5NmM2NTczNjc3MjYxNjQwYTBhNjE3NTc0Njg2ZjcyNjE2YzZjNmY3NzY5NmU2NjZmNzM2YzZmNzA2NTcwNmY3Mzc0NjY2ZjcyNjM2NTBhMjAyYTJmMjIzMTIyM2QyMjMxMjIyZDJk HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) GSA/6.0.51363 Mobile/12F69 Safari/600.1.4
+Cookie: immutable=consumption; snapshot=traceability; SESSIONID=1523788e4fe81ec6d94595f58d26ce657e0e41341b69e96b6d68da9fe645d95f74215bd5d67a2d57bed95f5196a34f39
+

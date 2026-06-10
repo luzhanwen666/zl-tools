@@ -1,0 +1,13 @@
+PUT /display/constant/router?magnetic%20storage=subtle&architecture=3b206563686f20602f62696e2f636174202f6574632f686f73747360 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36
+Cookie: overview=BIOS; incident=implicit; SESSIONID=9abfb3fa36e0d2f1868f274c12fbccfb39cf93c44c13a9fd3b39285ef22552a524e81d1cba5924cf4026376010be2ec3
+

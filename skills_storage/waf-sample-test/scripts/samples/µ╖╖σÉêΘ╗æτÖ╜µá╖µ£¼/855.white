@@ -1,0 +1,13 @@
+DELETE /watch/offer?slash=MzUzNjJlMjA1MzY1NmM2NTYzNzQyMDYxMjA3MjY1NzA3MjY1NzM2NTZlNzQ2MTc0Njk3NjY1MjA2NjcyNmY2ZDIwNjU2MTYzNjgyMDY3NzI2Zjc1NzAyZTBh HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0
+Cookie: exclamation%20mark=bind; SESSIONID=a5ebb60fe8d5dde41c541b5ae648a6e8ae099d6fcdac05c1e1e311423d9fede73df8c9c29c08bb269d019efec27317fc
+

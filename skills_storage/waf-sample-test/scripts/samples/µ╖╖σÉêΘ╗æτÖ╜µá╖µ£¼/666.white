@@ -1,0 +1,13 @@
+HEAD /watch/rectify/route/dedicated/expenditure?detect=message&inter=command&roll%20out=registry&region=MzQzNjJlMjA1MzY1NmM2NTYzNzQyMDYxMjA3Mzc1Njk3NDYxNjI2YzY1MjA3NDY5NzQ2YzY1MjA2NjcyNmY2ZDIwNzQ2ODY1MjA2YzY5NzM3NDJlMGE%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; SM-T230NU Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: evaluation=add; compliance=angle%20brackets; dead%20letter%20queue=delete; SESSIONID=019178bbf7a9e593822e23c1db2abbfeda0ea193f006394af0a29a9b4d320bacb8868e0c1a2a4774c16e270e7631c4d5
+

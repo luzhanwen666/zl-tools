@@ -1,0 +1,13 @@
+DELETE /standalone?analyze=traceability&state=4d6a417549464e6c6247566a64434269623239726379426d636d39744948526f5a53427361574a7959584a3549475a76636942356233567949484a6c63325668636d4e6f4c676f3d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71
+Cookie: sort=alter; SESSIONID=0e311a2ce2299c7f48b7f32f00b955315024943abc2d58ed978e872425cfdc5928a16d15366f3ddc9b5d4b5589ec6447
+

@@ -1,0 +1,13 @@
+DELETE /?introspect=populate&mediocre=29293b57414954666f520d232070726f7065727479626173656c696e6574696d656c616e677363616c656d696772617465200a64456c41590d27303a303a35272d2d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12B440 Safari/600.1.4
+Cookie: revisit=extra; SESSIONID=c6d1c5f94063aff4d5250dfd15f158c939b1fa877fa276f08f5c7dba4484c125cf7b6a92c5eaae29434df9ca2b255e86
+

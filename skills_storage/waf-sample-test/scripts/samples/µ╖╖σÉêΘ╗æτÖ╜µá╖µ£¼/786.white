@@ -1,0 +1,13 @@
+HEAD /notation?registry=permissive&score=MzEyZTIwNTQ2ODY1MjA3NzZmNzI2YjY1NzI3MzI3MjA3NTZlNjk2ZjZlMjA2OTczMjA2ZTY1Njc2Zjc0Njk2MTc0Njk2ZTY3MjA2NjZmNzIyMDYyNjU3NDc0NjU3MjIwNzc2MTY3NjU3MzJlMGE%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; CrOS armv7l 6812.88.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.153 Safari/537.36
+Cookie: immutable=dash; SESSIONID=f03caea97bf260969eeeba4422fb632a46480872fef2e4e68bda146d82bc4d4bbbe2be355096a87e268470cc766e2173
+

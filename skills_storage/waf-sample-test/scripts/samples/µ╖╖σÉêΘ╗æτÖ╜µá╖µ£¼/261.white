@@ -1,0 +1,13 @@
+HEAD /debug/restore/reconcile?utilization=multi&inner=scope&semicolon=module&parse=37392e20546865207265736f6c7574696f6e20776173207061737365642062792074686520756e696f6e2e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.76 Safari/537.36
+Cookie: SIT=mediocre; aspect=UUID%20/%20GUID; inner=DOM; SESSIONID=21f31bc948579f34b602ace64adec33f44b75d693dc415758671c49aa1e9888762489eb6b5e467b21cb0425cef9a6e25
+

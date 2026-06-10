@@ -1,0 +1,13 @@
+POST /?asynchronous=adapt&hierarchical=Ny4gVGhlIGJvb2sgaXMgdHJhbnNsYXRlZCBmcm9tIEZyZW5jaCB0byBFbmdsaXNoLgo%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.0.1; SAMSUNG SM-N910V 4G Build/LRX22C) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/2.1 Chrome/34.0.1847.76 Mobile Safari/537.36
+Cookie: scope=miscellaneous; enabled=occasion; provider=metrics; SESSIONID=3ec8d9ce0ca1e7edfd013927eaf1c1c8730b461f623beb4202f999ce50d8d0f401dd6e27bac30095b6b0347000cb46c0
+

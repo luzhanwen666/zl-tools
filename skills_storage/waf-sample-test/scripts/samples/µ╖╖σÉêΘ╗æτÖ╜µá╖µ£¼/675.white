@@ -1,0 +1,13 @@
+PUT /semicolon/parenthesis/debug?interaction=adapter&optimize=heterogeneous&base=33333265323035333635366336353633373432303639366536373732363536343639363536653734373332303636373236663664323037343638363532303730363136653734373237393230373436663230373337343631373237343230363336663666366236393665363732653061 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36
+Cookie: incentive=append; default=glossary; SESSIONID=48c8998c0df67e625851630b4e25052359f59251bc6fac228214ee5d586811aac81f4714b6bee95e0bc8b83d19a3c578
+

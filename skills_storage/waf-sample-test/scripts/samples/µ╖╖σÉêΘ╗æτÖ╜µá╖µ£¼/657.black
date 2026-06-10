@@ -1,0 +1,13 @@
+HEAD /hierarchical/traversal?question%20mark=S1NrN1YwRkpkRVpQY2dCRVJXeGhlUUF0TFNCdGIyNTBhQ0FLSnpBNk1EbzFKeTB0 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 7_0_6 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11B651 Safari/9537.53
+Cookie: worker=cost-efficient; tolerance=HTML; cost-effective=create; SESSIONID=45a05827bfdafa9980d00a4b4767335c218f98d96dc9fc9dcff3dd778f8aa198a5e21c97259d3108fc012cfe845db533
+

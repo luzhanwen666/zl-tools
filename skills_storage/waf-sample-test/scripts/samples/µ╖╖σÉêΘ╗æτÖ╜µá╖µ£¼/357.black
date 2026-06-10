@@ -1,0 +1,13 @@
+HEAD /?assign=federation&at=consultative&process=overhead&throughput=ewkiXHUwMDY2XHUwMDYxXHUwMDYzXHUwMDY1XHUwMDc0XHUwMDY1XHUwMDY0XHUwMDIwXHUwMDczXHUwMDY1XHUwMDYxXHUwMDcyXHUwMDYzXHUwMDY4Igo6CjE5LCAKIlx1MDA3Mlx1MDA2NVx1MDA3NFx1MDA2MVx1MDA2OVx1MDA2RSIJOiJcdTAwNEZcdTAwNzlcdTAwNDJcdTAwNkFcdTAwNTlcdTAwNThcdTAwNTFcdTAwNjdcdTAwNGNcdTAwMzJcdTAwNTZcdTAwMzBcdTAwNTlcdTAwNzlcdTAwMzlcdTAwNzdcdTAwNTlcdTAwNThcdTAwNEVcdTAwN2FcdTAwNjRcdTAwMzJcdTAwNTFcdTAwMzciLCAiXHUwMDY1XHUwMDcwXHUwMDY4XHUwMDY1XHUwMDZkXHUwMDY1XHUwMDcyXHUwMDYxXHUwMDZjIjogDWZhbHNlfQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0
+Cookie: robust=extra; throughput=failback; SESSIONID=8004a24fd3572c311fa8dd37781140722bcc71e228957f9abb6e7242b37bd33f9319e078afe6ef7bb1ec2974461c4bad
+

@@ -1,0 +1,13 @@
+HEAD /CLI/underlying/permutation?authentication=protocol&double%20quotation%20mark=sort&call=4c693476563056434c556c4f526939335a57497565473173 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 5.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0
+Cookie: retain=sort; SESSIONID=4b5f26f88cd99c1f45fa51e471336fc7970e01344cdfbb6c6ae6ec2b8629ca16c81dfa4fe5a0c9f639cf8e2b4be1ce36
+

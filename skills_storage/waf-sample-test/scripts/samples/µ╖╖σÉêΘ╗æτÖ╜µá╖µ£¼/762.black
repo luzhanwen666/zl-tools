@@ -1,0 +1,13 @@
+PUT /provision/model/durability/consumption?explicit=impact&federation=PCVldmFsIHJlcXVlc3QoInNiIiklPg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; ASU2JS; rv:11.0) like Gecko
+Cookie: mature=encapsulate; customized=strategy; faceted%20search=parse; SESSIONID=9e15cd534e28e76992ba49d45ef7613179f23eb0670f27660849a549a889a01f54505139a8d926deb48790589da37c72
+

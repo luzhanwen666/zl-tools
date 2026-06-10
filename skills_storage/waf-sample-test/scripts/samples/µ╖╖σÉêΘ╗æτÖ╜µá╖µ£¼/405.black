@@ -1,0 +1,13 @@
+HEAD /manager?intrusive=hypothesis&rapid=KSk7d0FpVEZvUg0jIGFwcGVuZGVkYWNxdWlyZXZpc2liaWxpdHlyZWRoYXRtYWpvcmV4aXN0c3BhdGhuYW1lbnR0cCAKREVMYVkjIHNlY29uZGFyeXBoYXNlIAonMDowOjUnLS0%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; SM-T530NU Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: periodically=dedicated; polyfill=caveats; compromise=marry; SESSIONID=95238ad63aab505157b6f2702e6f7b91d102f5d438db077a03026a6473c315a09d816a53f0284a0a3aad92d256b25d84
+

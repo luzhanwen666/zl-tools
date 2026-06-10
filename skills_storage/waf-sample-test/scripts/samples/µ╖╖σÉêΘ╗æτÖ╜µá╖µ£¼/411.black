@@ -1,0 +1,13 @@
+PUT /?delivery=mitigate&expression=BIOS&ratify=angle%20brackets&mapping=%5B%22%5Cu007b%5Cu007b%5Cu0020%5Cu0037%5Cu0034%5Cu0030%5Cu0038%5Cu002A%5Cu0038%5Cu0039%5Cu0033%5Cu0033%5Cu0020%5Cu007d%5Cu007D%22%0D%5D%09 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; Tablet PC 2.0)
+Cookie: underscore=compliance; watch=adapter; enabled=GUI; SESSIONID=772117bf5ffbc414a9af9569977b98bae144141acf3a66995811483de52fa498b96dee314c724882e6e0e95e6ee7c68e
+

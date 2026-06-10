@@ -1,0 +1,13 @@
+DELETE /obtain/offer?cost-effective=period&authorization=populate&subscribe=intuitive&replica=MS4gWW91IGNhbiBzZWxlY3QgeW91ciBmYXZvcml0ZSBkZXNzZXJ0IGZyb20gdGhlIG1lbnUuCg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; CrOS x86_64 7262.52.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.86 Safari/537.36
+Cookie: provide=declarative; delivery=latency; SESSIONID=5231c56dcb753358e0947f5873f7b594f133c59975dff0658a06160ffa0519ac97cfed571e1d36c93d7ed510d446119e
+

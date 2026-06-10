@@ -1,0 +1,13 @@
+GET /false%20positive?adapt=3120616e64002320617070656172616e63656665746368696e64696361746f727373746966666e6573736e6e74707765656b6f746865726a756e65686967686c69676874696e636c7573697665200a313d31 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; MAARJS; rv:11.0) like Gecko
+Cookie: tilde=redacted; encapsulate=intrusive; aspect=restriction; SESSIONID=49c7f4437b68600e7fd3736fe06f450b4ea0dc9d77e73a4fecf2f5e2adad30d2aa61b6e2670f23dc32a7badb517c064a
+

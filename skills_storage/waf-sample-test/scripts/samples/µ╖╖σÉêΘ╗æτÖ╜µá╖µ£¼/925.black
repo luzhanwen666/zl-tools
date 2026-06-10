@@ -1,0 +1,13 @@
+GET /ampersand/attribute/dump?argument=41446d494e22292d2d206c656164696e6770726f66696c65737769746368636170747572696e67616476616e636564626573686172657369646562617273200a232064626c636c69636b64657465637461746f6d6665646f7261696d706f727473200a4f52002d2d2074666f6f74706c617973696e676c656d6f757365646f776e706c6163656d656e746d6f757365646f776e200a2231223d22312223 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36
+Cookie: merge=redundancy; SESSIONID=ec6670354de71f3e0e1b0990e6f942e61faa5fd86f9293d81e8e9b6766c17ffcf70b517e4fe6bb7b8647e0a703d13d48
+

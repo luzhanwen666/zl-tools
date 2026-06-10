@@ -1,0 +1,13 @@
+GET /intrusive/bind?caret=37342e2053656c656374206120636f757273652066726f6d2074686520756e697665727369747920636174616c6f672e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0
+Cookie: snapshot=confidentiality; SESSIONID=287fa865902e64aac1117fdfd0c9beda4a21a35b0f595e2bd2ecb45e26553cecd7008ad39fa00f78474611130ed03db1
+

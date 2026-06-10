@@ -1,0 +1,13 @@
+GET /handle/permission/GUI/subtle/call?provider=instance&pop=adapter&reliability=overview&metrics=TVM0Z1NTQnlaV05sYVhabFpDQmhJR3hsZEhSbGNpQm1jbTl0SUcxNUlHOXNaQ0JtY21sbGJtUXVDZz09 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; BOIE9;ENUSMSNIP; rv:11.0) like Gecko
+Cookie: false%20positive=efficiency; SESSIONID=530de47ac06b0eaed2dc04cf4391e0cbf92016aae6c42f2be223f9616687cec39e25af223184467d1561733f4040bb42
+

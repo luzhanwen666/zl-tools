@@ -1,0 +1,13 @@
+DELETE /inner/trigger/granular/ratify?apply=console&at=39312e205468652070726f706f73616c207761732070757420666f72776172642062792074686520756e696f6e2e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12F69
+Cookie: pattern=metrics; SESSIONID=295b50a1ac771e7e63030608136163b47be149fc87a35f65566669b0cb3c3eb65947b5e98111a4df36fdd801dea1b181
+

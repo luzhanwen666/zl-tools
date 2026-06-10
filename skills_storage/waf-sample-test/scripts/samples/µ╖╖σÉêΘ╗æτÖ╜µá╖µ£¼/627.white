@@ -1,0 +1,13 @@
+GET /catastrophic%20failover/ascent?message=underlying&restore=W1sKCSJcdTAwNEZcdTAwNDRcdTAwNTlcdTAwNzVcdTAwNDlcdTAwNDZcdTAwNGVcdTAwNmNcdTAwNjJcdTAwNDdcdTAwNTZcdTAwNkFcdTAwNjRcdTAwNDNcdTAwNDJcdTAwNjhcdTAwNDlcdTAwNDhcdTAwNTJcdTAwNzZcdTAwNjJcdTAwMzJcdTAwNzdcdTAwNjdcdTAwNWFcdTAwNkVcdTAwNGFcdTAwNzZcdTAwNjJcdTAwNTNcdTAwNDJcdTAwMzBcdTAwNjFcdTAwNDdcdTAwNTVcdTAwNjdcdTAwNjFcdTAwMzJcdTAwNkNcdTAwMzBcdTAwNDlcdTAwNDdcdTAwNWFcdTAwNzZcdTAwNjNcdTAwNjlcdTAwNDJcdTAwMzBcdTAwNjFcdTAwNDdcdTAwNTVcdTAwNjdcdTAwNjNcdTAwNmRcdTAwNTZcdTAwNzdcdTAwNTlcdTAwNTdcdTAwNkNcdTAwNzlcdTAwNGNcdTAwNjdcdTAwNmZcdTAwM0QiXQld HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.13 Safari/537.36
+Cookie: call=throughput; scalability=right%20arrow; asynchronous=traversal; SESSIONID=93c882d65be727b073a617844d76682e1a1a8b15b5ef9d0bf3c42476e2b0465e59de0682c82f3749a695ef585baf4e62
+

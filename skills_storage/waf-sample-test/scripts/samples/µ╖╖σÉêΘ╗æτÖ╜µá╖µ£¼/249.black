@@ -1,0 +1,13 @@
+DELETE /module/provide?parse=ClsJIlx1MDAyZVx1MDAyRVx1MDAyZlx1MDA1N1x1MDA0NVx1MDA0Mlx1MDAyZFx1MDA0OVx1MDA0ZVx1MDA0Nlx1MDAyZlx1MDA3N1x1MDA2NVx1MDA2Mlx1MDAyZVx1MDA3OFx1MDA2ZFx1MDA2YyIKLA10cnVlDSwgNDgsCnRydWUJLGZhbHNlLAo4OSAsDTcxCl0K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; U; en-us) AppleWebKit/537.36 (KHTML, like Gecko) Silk/3.68 like Chrome/39.0.2171.93 Safari/537.36
+Cookie: mediocre=message; provision=route; SESSIONID=7a57d0e1ae1b73abda5006a7fbd71aab5e1e55c1c86c389c73c50e722d48986fb25ed6cc3346ee297439243c78298adf
+

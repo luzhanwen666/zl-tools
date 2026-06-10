@@ -1,0 +1,13 @@
+HEAD /semantic/main/link?traceability=aggregation&overhead=resilience&mature=required&on-premise=%20%5B%0D%2073%20%2C%22%5Cu0072%5Cu0065%5Cu0073%5Cu006f%5Cu006c%5Cu0076%5Cu0065%5Cu0072%22%2C%09%22%5Cu0033%5Cu0063%5Cu0036%5Cu0032%5Cu0036%5Cu0031%5Cu0037%5Cu0033%5Cu0036%5Cu0035%5Cu0032%5Cu0030%5Cu0036%5Cu0038%5Cu0037%5Cu0032%5Cu0036%5Cu0035%5Cu0036%5Cu0036%5Cu0033%5Cu0064%5Cu0032%5Cu0032%5Cu0036%5Cu0061%5Cu0036%5Cu0031%5Cu0037%5Cu0036%5Cu0036%5Cu0031%5Cu0037%5Cu0033%5Cu0036%5Cu0033%5Cu0037%5Cu0032%5Cu0036%5Cu0039%5Cu0037%5Cu0030%5Cu0037%5Cu0034%5Cu0033%5Cu0061%5Cu0032%5Cu0032%5Cu0033%5Cu0065%5Cu0033%5Cu0063%5Cu0032%5Cu0066%5Cu0036%5Cu0032%5Cu0036%5Cu0031%5Cu0037%5Cu0033%5Cu0036%5Cu0035%5Cu0033%5Cu0065%22%0A%5D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; Trident/7.0; Touch; LCJB; rv:11.0) like Gecko
+Cookie: escalate=manage; SESSIONID=6c48729f2024929856ccfcdd04954bd640e708736f0968bcde0a1c42abcdc2b1bde58556da73ba5610882ad194c69543
+

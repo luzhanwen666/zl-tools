@@ -1,0 +1,13 @@
+POST /exclamation%20mark?elastic=QURNaU4iKS0tIGJsYWNrbGlzdGJyaWdodG5lc3Nib29sZWFubWF0aGVtYXRpY2FsdGltaW5nY2VudGVyZWRjb2xsZWN0aW9uc3RpZmZuZXNzdW5pY29kZSAKLS0gcmF3c3Jhbmdlc2Nyb3BjYXB0aW9uc2Vuc2l0aXZpdHlwYXJlbnRzYXV0b3VwZGF0ZSAKT1INIjEiPSIxIiM%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/600.5.17 (KHTML, like Gecko) Version/7.1.5 Safari/537.85.14
+Cookie: symmetric=reconcile; model=complexity; SESSIONID=a287e3578ca83011fa8902474dc6ed4fe03bb17c5a980aecdc0ad352c45998ad3d6847e324e25ed552eac9d3705a7aba
+

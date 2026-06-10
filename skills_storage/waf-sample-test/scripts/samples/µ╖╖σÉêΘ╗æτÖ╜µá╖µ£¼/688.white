@@ -1,0 +1,13 @@
+PUT /score/policy?master=agnostic&on-premise=latency&mechanism=37382e2053656c65637420612074696d6520736c6f742066726f6d2074686520617661696c61626c65206f6e65732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; rv:31.0) Gecko/20100101 Firefox/31.0
+Cookie: takeaway=aspect; explicit=under%20the%20hood; SESSIONID=5a61643995ee6ce1507decbfab13182fdca71826ed6d52017a23ded7aad55e4f0406384ff8fcf64100a65de0f1a75b90
+

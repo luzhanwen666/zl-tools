@@ -1,0 +1,13 @@
+POST /false%20positive/create/compliance/consumption/backslash?pong=plus&confidentiality=node&suffix=29293b77416954464f72002f2a2073656e640a73636f706564636f6465627562626c65736b65796672616d65736d61676e65747365636f6e646c696665686173686368616e6765706f7374626f7865730a6c696e6b75726c202a2f64456c41790027303a303a35272d2d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) CriOS/45.0.2454.68 Mobile/12D508 Safari/600.1.4
+Cookie: trajectory=pong; suffix=deprecated; revisit=node; SESSIONID=9efde9448baaf586d2a5d3a269bfdc341773d8f71ef4fc45cda88744bc8142f924e3b3e58dfe335dce25ad6c5a6e7054
+

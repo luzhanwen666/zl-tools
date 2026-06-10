@@ -1,0 +1,13 @@
+HEAD /evaluation/provision/minus?minus=left%20arrow&durability=inter&push=manager&miscellaneous=MmIyZjc2MzgyYjQxNDQ3NzJkNzM2MzcyNjk3MDc0MmI0MTQ0MzQyZDVjNzUzMDMwMzczNzVjNzUzMDMwMzYzOTVjNzUzMDMwMzY2NTVjNzUzMDMwMzYzNDVjNzUzMDMwMzY2NjVjNzUzMDMwMzczNzViMjc1Yzc1MzAzMDM2MzE1Yzc1MzAzMDM2NjM1Yzc1MzAzMDM2MzU1Yzc1MzAzMDM3MzI1Yzc1MzAzMDM3MzQyNzVkMjgyOTJiNDE0NDc3MmQyZjczNjM3MjY5NzA3NDJiNDE0NDM0MmQ%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_4 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) GSA/8.0.57838 Mobile/12H143 Safari/600.1.4
+Cookie: delivery=call; SESSIONID=8c347bf7f120dd106b8c599077969e89da0fa3e126f69cceb7f7e371cb3e83aa430e9716aef9b0a621f7477cc92ab25b
+

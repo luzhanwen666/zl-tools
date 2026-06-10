@@ -1,0 +1,13 @@
+HEAD /immutable/populate/caveats/register/allocate?cost-efficient=suffix&context=332e2057652073686f756c64206c6561726e2066726f6d206f7572206d697374616b65732e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: concrete=immutable; node=populate; concurrent=customizer; SESSIONID=1a8a655344019f78b28e78ca17f393cce258ffead64914dc55e583e72f628ab03b36070c3d1675cf9301d3a15d3d3285
+

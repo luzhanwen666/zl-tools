@@ -1,0 +1,13 @@
+POST /permissive/homebrew/traceability/respective?master=catastrophic%20failover&mitigate=critical&push=module&integration=352e2054686520766965772066726f6d2074686520746f70206f6620746865206d6f756e7461696e206973207374756e6e696e672e0a HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 8_4_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) CriOS/45.0.2454.68 Mobile/12H321 Safari/600.1.4
+Cookie: resolve=authorization; generate=comma; SESSIONID=317c2000b9119d34f06f10fe79cff99b7885ad3d7c897ece192d27af6b7c7a709c410e241b351972f8b1f5f5e84e4551
+

@@ -1,0 +1,13 @@
+PUT /takeaway/granular/stage/concatenate/exclamation%20mark?ping=WyJcdTAwNEVcdTAwNkFcdTAwNTVcdTAwNzVcdTAwNDlcdTAwNDZcdTAwNTJcdTAwNkZcdTAwNWFcdTAwNTNcdTAwNDJcdTAwNzRcdTAwNWFcdTAwNTdcdTAwNTZcdTAwMzBcdTAwNjFcdTAwNTdcdTAwMzVcdTAwNkVcdTAwNDlcdTAwNDhcdTAwNjRcdTAwNjhcdTAwNjNcdTAwNzlcdTAwNDJcdTAwNkZcdTAwNWFcdTAwNTdcdTAwNzhcdTAwNkJcdTAwNDlcdTAwNDdcdTAwNDZcdTAwMzBcdTAwNDlcdTAwNDhcdTAwNTJcdTAwNkZcdTAwNWFcdTAwNTNcdTAwNDJcdTAwMzFcdTAwNjJcdTAwNkRcdTAwNmNcdTAwNzZcdTAwNjJcdTAwNjlcdTAwNDJcdTAwNkZcdTAwNTlcdTAwNTdcdTAwNzhcdTAwNzNcdTAwNENcdTAwNjdcdTAwNkZcdTAwM2QiLAoiXHUwMDY0XHUwMDY1XHUwMDYzXHUwMDZmXHUwMDc1XHUwMDcwXHUwMDZjXHUwMDY1Igld HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36
+Cookie: range=tolerance; SESSIONID=01fb695b0c7c0d3035157865d45949b740642d79f1dfea45e52da5e853af7f948a083ba75a93d0bfc3377de4968f0103
+

@@ -1,0 +1,13 @@
+DELETE /manually/asterisk/encryption/dump/equal?scan=retain&simultaneously=standalone&intermittent=UAT&router=I3JlcT0jY29udGV4dC5nZXQoJ1x4NjMnKydceDZmJysnXHg2ZCcrJ1x4MmUnKydceDZmJysnXHg3MCcrJ1x4NjUnKydceDZlJysnXHg3MycrJ1x4NzknKydceDZkJysnXHg3MCcrJ1x4NjgnKydceDZmJysnXHg2ZScrJ1x4NzknKydceDJlJysnXHg3OCcrJ1x4NzcnKydceDZmJysnXHg3MicrJ1x4NmInKydceDMyJysnXHgyZScrJ1x4NjQnKydceDY5JysnXHg3MycrJ1x4NzAnKydceDYxJysnXHg3NCcrJ1x4NjMnKydceDY4JysnXHg2NScrJ1x4NzInKydceDJlJysnXHg0OCcrJ1x4NzQnKydceDc0JysnXHg3MCcrJ1x4NTMnKydceDY1JysnXHg3MicrJ1x4NzYnKydceDZjJysnXHg2NScrJ1x4NzQnKydceDUyJysnXHg2NScrJ1x4NzEnKydceDc1JysnXHg2NScrJ1x4NzMnKydceDc0JyAp HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36
+Cookie: SIT=register; SESSIONID=3ab223197e2b28bb6687ce56d119afd403f3492aadad384e3b52f3d98218f5aa009b9b896a7530d3376d156806acca24
+

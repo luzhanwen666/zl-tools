@@ -1,0 +1,13 @@
+PUT /explicit/backslash/mature?aggregate=replica&initiative=attach&descent=IFt0cnVlLCJcdTAwMzhcdTAwMmVcdTAwMjBcdTAwNTRcdTAwNjhcdTAwNjVcdTAwMjBcdTAwNzVcdTAwNkVcdTAwNjlcdTAwNkZcdTAwNkVcdTAwMjBcdTAwNjNcdTAwNjFcdTAwNmNcdTAwNmNcdTAwNjVcdTAwNjRcdTAwMjBcdTAwNjZcdTAwNkZcdTAwNzJcdTAwMjBcdTAwNjFcdTAwMjBcdTAwNmVcdTAwNjFcdTAwNzRcdTAwNjlcdTAwNmZcdTAwNmVcdTAwNzdcdTAwNjlcdTAwNjRcdTAwNjVcdTAwMjBcdTAwNzNcdTAwNzRcdTAwNzJcdTAwNjlcdTAwNkJcdTAwNjVcdTAwMkVcdTAwMEEiCQld HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: delivery=dump; SESSIONID=5ff50e911434a99eff7b7c55929b2cace1c2c088a821f4af545e03291adfb260f94dfecd34844c7e7765f8abd06a4457
+

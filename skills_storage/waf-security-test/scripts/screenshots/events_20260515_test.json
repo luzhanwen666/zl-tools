@@ -1,0 +1,140 @@
+[
+  {
+    "name": "SQL 注入",
+    "status": "✅ 拦截",
+    "event_id": "4de860670deb428f8fae6506ac50a0a3",
+    "msg": "SQL注入测试请求正常，拦截成功，event_id: 4de860670deb428f8fae6506ac50a0a3"
+  },
+  {
+    "name": "XSS 攻击",
+    "status": "✅ 拦截",
+    "event_id": "e6613b05161b4e428efc88e98ec20f5c",
+    "msg": "XSS攻击测试请求正常，拦截成功，event_id: e6613b05161b4e428efc88e98ec20f5c"
+  },
+  {
+    "name": "Java 反序列化",
+    "status": "✅ 拦截",
+    "event_id": "72be8577472341f0b4933e607da07f83",
+    "msg": "Java反序列化测试请求正常，拦截成功，event_id: 72be8577472341f0b4933e607da07f83"
+  },
+  {
+    "name": "文件上传",
+    "status": "❌ 未拦截",
+    "event_id": "-",
+    "msg": "文件上传测试请求正常，未被拦截"
+  },
+  {
+    "name": "文件包含",
+    "status": "❌ 未拦截",
+    "event_id": "-",
+    "msg": "文件包含测试请求正常，未被拦截"
+  },
+  {
+    "name": "PHP 代码注入",
+    "status": "✅ 拦截",
+    "event_id": "5451da52eb0642069df3c9f4665abaf4",
+    "msg": "PHP代码注入测试请求正常，拦截成功，event_id: 5451da52eb0642069df3c9f4665abaf4"
+  },
+  {
+    "name": "CSRF 攻击",
+    "status": "❌ 未拦截",
+    "event_id": "-",
+    "msg": "CSRF攻击测试请求正常，未被拦截"
+  },
+  {
+    "name": "SSRF 攻击",
+    "status": "✅ 拦截",
+    "event_id": "af41f2f040ba4799a2ce01ccdba9b68b",
+    "msg": "SSRF攻击测试请求正常，拦截成功，event_id: af41f2f040ba4799a2ce01ccdba9b68b"
+  },
+  {
+    "name": "PHP 反序列化",
+    "status": "❌ 未拦截",
+    "event_id": "-",
+    "msg": "PHP反序列化测试请求正常，未被拦截"
+  },
+  {
+    "name": "ASP 攻击",
+    "status": "✅ 拦截",
+    "event_id": "82ca8c9cd3144a1b82487bd78235c15a",
+    "msg": "ASP攻击测试请求正常，拦截成功，event_id: 82ca8c9cd3144a1b82487bd78235c15a"
+  },
+  {
+    "name": "Java 代码注入",
+    "status": "✅ 拦截",
+    "event_id": "54a5acf0c1f247748bbc0594126d8c0c",
+    "msg": "Java代码执行测试请求正常，拦截成功，event_id: 54a5acf0c1f247748bbc0594126d8c0c"
+  },
+  {
+    "name": "命令注入",
+    "status": "✅ 拦截",
+    "event_id": "bea6d4d399be437dbf6da0243273b6f6",
+    "msg": "命令注入测试请求正常，拦截成功，event_id: bea6d4d399be437dbf6da0243273b6f6"
+  },
+  {
+    "name": "情报模块",
+    "status": "✅ 拦截",
+    "event_id": "32a5c58dfcf84e42867e9d6d8d4dae8c",
+    "msg": "情报模块测试请求正常，拦截成功，event_id: 32a5c58dfcf84e42867e9d6d8d4dae8c"
+  },
+  {
+    "name": "服务器响应",
+    "status": "❌ 未拦截",
+    "event_id": "-",
+    "msg": "服务器响应检测模块测试请求正常，未被拦截"
+  },
+  {
+    "name": "机器人检测",
+    "status": "✅ 拦截",
+    "event_id": "8b96af7eb2fd4c8f8f472e1e565f0b6e",
+    "msg": "机器人检测模块测试请求正常，拦截成功，event_id: 8b96af7eb2fd4c8f8f472e1e565f0b6e"
+  },
+  {
+    "name": "Base64 编码绕过",
+    "status": "✅ 拦截",
+    "event_id": "62bc5c52ee9b45d98b127f871bd4a556",
+    "msg": "Base64编码测试请求正常，拦截成功，event_id: 62bc5c52ee9b45d98b127f871bd4a556"
+  },
+  {
+    "name": "URL 编码绕过",
+    "status": "✅ 拦截",
+    "event_id": "8194f6a501184daca88711fc5beef436",
+    "msg": "URL编码攻击测试请求正常，拦截成功，event_id: 8194f6a501184daca88711fc5beef436"
+  },
+  {
+    "name": "JSON 解析攻击",
+    "status": "✅ 拦截",
+    "event_id": "62717116e9204d19a6a3285ce3d3fce6",
+    "msg": "JSON解析测试请求正常，拦截成功，event_id: 62717116e9204d19a6a3285ce3d3fce6"
+  },
+  {
+    "name": "16 进制编码",
+    "status": "✅ 拦截",
+    "event_id": "854d8640e56f41738b527f1eabcb2c80",
+    "msg": "16进制编码测试请求正常，拦截成功，event_id: 854d8640e56f41738b527f1eabcb2c80"
+  },
+  {
+    "name": "反斜杠转义",
+    "status": "✅ 拦截",
+    "event_id": "26d798b68b0046a5b6dfd2a6f89b2b95",
+    "msg": "斜杠反转译测试请求正常，拦截成功，event_id: 26d798b68b0046a5b6dfd2a6f89b2b95"
+  },
+  {
+    "name": "XML 编码",
+    "status": "✅ 拦截",
+    "event_id": "ebac878b164b447fa1ca08552774a085",
+    "msg": "XML实体注入测试请求正常，拦截成功，event_id: ebac878b164b447fa1ca08552774a085"
+  },
+  {
+    "name": "UTF-7 编码",
+    "status": "✅ 拦截",
+    "event_id": "13e3e8e92caf4f05862695e850639a50",
+    "msg": "UTF-7编码测试请求正常，拦截成功，event_id: 13e3e8e92caf4f05862695e850639a50"
+  },
+  {
+    "name": "多层编码解析",
+    "status": "✅ 拦截",
+    "event_id": "c9128876ad244e4eb123e0a15bf55b32",
+    "msg": "多层编码解析测试请求正常，拦截成功，event_id: c9128876ad244e4eb123e0a15bf55b32"
+  }
+]

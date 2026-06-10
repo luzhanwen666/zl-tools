@@ -1,0 +1,13 @@
+POST /composite/introspect?equivalent=pop&question%20mark=environment&initiative=ascent&ampersand=Mg0jIG1vdXNlZG93biAKQU5EIDUjIHNjb3BlZG1ldGVycG9zdHNwbHVyaWJ1c2lnbm9yZWRnbWFpbG1ldGhvZG1odG1sZGV0YWlsIAotLSBhbGxvd2VkbGlzdGZlYXR1cmVwYW5vc2VlZGl0YWJsZXdhaXQgCj0gLyogDWVyYXNjbGlja3Byb3h5cGFja2FnZXNpbnN0cnVjdGlvbnNub3RpZmljYXRpb25zZXhhbXBsZXVwbG9hZGluZ2tpbmQKYXV0b3VwZGF0ZWFxdWFhdHRyICovMg0tLSB3ZWxjb21lY2l0YXRpb25ub3JtYWxjb2VyY2VtZXRlcmxpbnB1cyAKVU5pb24ALS0gc2Z0cHJlZ2V4YmFkYWJvbG8gCnNlbEVjVAAjIGh0bWxmZWRvcmFvdmVycm90YXRlZHJhd3NzdWdnZXN0ZWRsaWdodGluZ2NvZXJjZWR2bWluIAoxDSM%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36
+Cookie: module=asterisk; impersonate=concrete; call=strangler%20pattern; SESSIONID=c7859334493f256cdae3599ae45915d8dec85ea3a772ec9c96191e7de96229d54cb07a913862de538da4157700b2fae0
+

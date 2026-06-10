@@ -1,0 +1,13 @@
+DELETE /asterisk/authorization/crucial/adapter?redundancy=dollar%20sign&impression=threshold&monitor=manage&hypothesis=TnpZdUlGTmxiR1ZqZENCaElHMXZaR1VnYjJZZ2RISmhibk53YjNKMFlYUnBiMjRnWm5KdmJTQjBhR1VnYjNCMGFXOXVjeTRL HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36
+Cookie: metrics=dispatch; SESSIONID=1df7ea4f53f26f0f69474a93edbe5a81c169a99bcde0f23adbea2f35e05f8f15c89ac4c481ba95e06c3048f89e49bbf9
+

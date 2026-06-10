@@ -1,0 +1,13 @@
+HEAD /vulnerability/undertake/backslash/apply?miscellaneous=workaround&fetch=%0A%7B%22%5Cu0062%5Cu0061%5Cu006E%5Cu0064%5Cu0077%5Cu0069%5Cu0064%5Cu0074%5Cu0068%22%09%3A%0D%7B%0D%22%5Cu0069%5Cu006E%5Cu0069%5Cu0074%5Cu0069%5Cu0061%5Cu0074%5Cu0069%5Cu0076%5Cu0065%22%0D%09%3A%0A%22%5Cu004F%5Cu0079%5Cu0042%5Cu006C%5Cu0059%5Cu0032%5Cu0068%5Cu0076%5Cu0049%5Cu0047%5Cu0041%5Cu0076%5Cu0059%5Cu006d%5Cu006C%5Cu0075%5Cu004C%5Cu0032%5Cu004e%5Cu0068%5Cu0064%5Cu0043%5Cu0041%5Cu0076%5Cu005A%5Cu0058%5Cu0052%5Cu006a%5Cu004C%5Cu0032%5Cu0068%5Cu0076%5Cu0063%5Cu0033%5Cu0052%5Cu007A%5Cu0059%5Cu0041%5Cu003D%5Cu003D%22%0D%2C%20%22%5Cu0069%5Cu006e%5Cu0074%5Cu0065%5Cu0072%5Cu006E%5Cu0061%5Cu006c%22%0D%3A56%20%0D%7D%20%0D%7D%09 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 4.1.2; GT-N8013 Build/JZO54K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.84 Safari/537.36
+Cookie: registry=extra; discretely=failover; SESSIONID=84da8befb2b32b141e8145bae693197174867a0f3bdeaeec146a9c1fd01f219d041d6153b686f000872ba515d7cdcbcf
+

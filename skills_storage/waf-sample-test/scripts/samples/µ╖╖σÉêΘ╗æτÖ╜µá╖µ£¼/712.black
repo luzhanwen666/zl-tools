@@ -1,0 +1,13 @@
+POST /?semicolon=add&agnostic=snapshot&asterisk=ephemeral&router=4c6934764c6934764c6934764c6934764c6934764c6934764c6934764c6934764c6934764c6934764c6934764c6934764c6934764c6934765a58526a4c33426863334e335a413d3d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36
+Cookie: mutable=scan; SESSIONID=c94b079fca3e1b770e1d0238dcf4b747b636cc7953e7eef075dcb7f2d09989a5e2a3473329c6c4c4ee74bf98509b985d
+

@@ -1,0 +1,13 @@
+GET /report?throughput=elastic&replica=monetize&fill=TVM0Z1dXOTFJR05oYmlCelpXeGxZM1FnZVc5MWNpQm1ZWFp2Y21sMFpTQmtaWE56WlhKMElHWnliMjBnZEdobElHMWxiblV1Q2c9PQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:38.0) Gecko/20100101 Firefox/38.0
+Cookie: square%20brackets=handle; SESSIONID=8253437385a718c6ab7df56ccbe3d520347a19cf7cabd0bfe5c3d2b16f5bf9a38df0680f425058e51a02a4951ef1606b
+

@@ -1,0 +1,13 @@
+HEAD /?differentiate=seek&glossary=metrics&build=obtain&initiative=WwoiXHUwMDRlXHUwMDQ0XHUwMDREXHUwMDc1XHUwMDQ5XHUwMDQ2XHUwMDUyXHUwMDZGXHUwMDVhXHUwMDUzXHUwMDQyXHUwMDZCXHUwMDVhXHUwMDU3XHUwMDRlXHUwMDcwXHUwMDYzXHUwMDMyXHUwMDZDXHUwMDc2XHUwMDYyXHUwMDY5XHUwMDQyXHUwMDMzXHUwMDU5XHUwMDU4XHUwMDREXHUwMDY3XHUwMDYyXHUwMDU3XHUwMDQ2XHUwMDZiXHUwMDVhXHUwMDUzXHUwMDQyXHUwMDY5XHUwMDY1XHUwMDUzXHUwMDQyXHUwMDMwXHUwMDYxXHUwMDQ3XHUwMDU1XHUwMDY3XHUwMDY0XHUwMDU3XHUwMDM1XHUwMDcwXHUwMDYyXHUwMDMyXHUwMDM0XHUwMDY3XHUwMDYyXHUwMDU3XHUwMDU2XHUwMDc0XHUwMDU5XHUwMDZEXHUwMDU2XHUwMDc5XHUwMDYzXHUwMDc5XHUwMDM0XHUwMDRCIixbMzcgXSAJXSA%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36
+Cookie: score=roll%20out; comprehensive=push; environment=sophisticated; SESSIONID=8df0d820ba7bb8f81520f6c126d2c552a9616b6fb80ade425962c6b8a05f94eddd75cddfba5096114652f4cedb6534e2
+

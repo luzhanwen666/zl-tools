@@ -1,0 +1,13 @@
+PUT /meta/worker/composite?build=automation&caveats=29293b77416954666f522064456c61590d27303a303a35272d2d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Linux; Android 5.0.2; SM-T800 Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.133 Safari/537.36
+Cookie: execute=dispatcher; ping=overview; adapter=leverage; SESSIONID=2640eacacedf923154fe55902ad672139a4a4ea7810f0769d48a715b85128bd16de33d6e7919848f9e0afb0ca0211b79
+

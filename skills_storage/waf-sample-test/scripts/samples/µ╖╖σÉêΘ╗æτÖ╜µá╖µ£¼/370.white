@@ -1,0 +1,13 @@
+POST /?complexity=create&apply=NTcuIFRoZSBzdHJpa2Ugd2FzIGxlZCBieSB0aGUgdW5pb24uCg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; Trident/7.0; ASU2JS; rv:11.0) like Gecko
+Cookie: ampersand=caveats; BIOS=discretely; stage=sophisticated; SESSIONID=d95e99ac29ee011845b91288fd3b1ef4d4a470bd11968d3aedce5301b6a8c79dd31baaf33a4b1957fc5ed307d7492de4
+

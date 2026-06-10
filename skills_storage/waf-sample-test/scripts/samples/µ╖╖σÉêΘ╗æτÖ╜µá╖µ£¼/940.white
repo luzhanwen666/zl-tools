@@ -1,0 +1,13 @@
+PUT /?compromise=snapshot&parse=master&migrate=slash&command=TVM0Z1dXOTFJR05oYmlCelpXeGxZM1FnZVc5MWNpQm1ZWFp2Y21sMFpTQmtaWE56WlhKMElHWnliMjBnZEdobElHMWxiblV1Q2c9PQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; CrOS x86_64 6680.78.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.102 Safari/537.36
+Cookie: attribute=argument; SESSIONID=290213577e19aa2cf3814e7e1e6f46060ef7f0f9b4d843b02e8d550369ba6d5ab42f69fef072c09dfb8dfbb2a9f3c166
+

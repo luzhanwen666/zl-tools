@@ -1,0 +1,13 @@
+GET /argument/overhead/argument/semantic/aspect?imperative=31290d2d2d2072657374726963746d696d6564657461696c6a756d706d6f7573656c656176656f70617175656c6f636b746f6b656e7465726d6d756c74697061727469736d617073746f72616765200a6f720a42454e63484d41726b2831303030303030302c4d44352831292923 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; EIE11;ENUSMSN; rv:11.0) like Gecko
+Cookie: database=create; single%20quotation%20mark=substantial; SESSIONID=76d3094e2ac55139ab574a4a88c570715be13e73d0d588c470799aea9b0d6e20739c5fa58652ebcb89e3ea3aad20a845
+

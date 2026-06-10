@@ -1,0 +1,13 @@
+PUT /push/tolerance/mode?hierarchical=manually&glossary=optional&mediocre=MzcyZTIwNTQ2ODY1MjA2MjZmNmY2YjIwNjk3MzIwNzQ3MjYxNmU3MzZjNjE3NDY1NjQyMDY2NzI2ZjZkMjA0NjcyNjU2ZTYzNjgyMDc0NmYyMDQ1NmU2NzZjNjk3MzY4MmUwYQ%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36 TheWorld 6
+Cookie: rectify=subscribe; SESSIONID=a8a21b17f2a6033c88d649fb1e3313b102a5c6ecec5afb3a85c492ffb7036ef6af12ba59eb1244fde9f7e1cda1e84d82
+

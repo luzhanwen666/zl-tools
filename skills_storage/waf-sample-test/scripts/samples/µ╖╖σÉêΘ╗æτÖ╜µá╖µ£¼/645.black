@@ -1,0 +1,13 @@
+PUT /?amortization=bogus&at=aggregation&parenthesis=TGk0dlYwVkNMVWxPUmk5M1pXSXVlRzFz HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/7.0; 1ButtonTaskbar)
+Cookie: generate=diversified; prefix=database; SESSIONID=2c93128dfe94aa8bde825931d47dd51f770a3ccc6cdb10cdcdbd30256eb2871be73b70648f07bd5a53679a009dc43a70
+

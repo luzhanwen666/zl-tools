@@ -1,0 +1,13 @@
+GET /asynchronous/incentive/dispatch/oversight/rectify?immutable=manually&right%20arrow=policy&mediocre=4e6934675657357062323467636d5677636d567a5a57353059585270646d567a494746795a5342745a5756306157356e49486470644767676447686c49473168626d466e5a57316c626e51676447396b59586b7543673d3d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:40.0) Gecko/20100101 Firefox/40.0
+Cookie: publish=prepare; scan=parenthesis; agility=default; SESSIONID=2f03c343cd3fa11a56e18076bd936537f0c15e060fc1c33db1b8027477949dbf16eaa88c45ac767a7714d078822a091b
+

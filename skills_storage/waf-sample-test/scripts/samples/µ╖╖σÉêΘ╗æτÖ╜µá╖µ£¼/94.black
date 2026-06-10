@@ -1,0 +1,13 @@
+HEAD /SIT/roll%20out/publish?differentiate=capacity&severity=%5B%5B%0A%09false%2Ctrue%09%2Cfalse%20%5D%0A%2C%09%22%5Cu0065%5Cu006C%5Cu0061%5Cu0073%5Cu0074%5Cu0069%5Cu0063%5Cu0069%5Cu0074%5Cu0079%22%2C%0D%22%5Cu0022%5Cu0029%5Cu0029%5Cu000D%5Cu002D%5Cu002D%5Cu0020%5Cu0066%5Cu006c%5Cu006f%5Cu006F%5Cu0064%5Cu0073%5Cu006E%5Cu006d%5Cu0070%5Cu0073%5Cu0068%5Cu006f%5Cu0072%5Cu0074%5Cu0063%5Cu006F%5Cu0064%5Cu0065%5Cu0072%5Cu0065%5Cu0064%5Cu006F%5Cu0063%5Cu0061%5Cu0074%5Cu0065%5Cu0067%5Cu006f%5Cu0072%5Cu0069%5Cu0065%5Cu0073%5Cu006d%5Cu0069%5Cu006e%5Cu0069%5Cu0078%5Cu0020%5Cu000a%5Cu006f%5Cu0052%5Cu000d%5Cu0073%5Cu004C%5Cu0065%5Cu0065%5Cu0070%5Cu0028%5Cu0035%5Cu0029%5Cu003d%5Cu0022%22%2C94%2C%22%5Cu0048%5Cu0054%5Cu004D%5Cu004c%22%20%2Cfalse%0A%5D%20 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/537.75.14
+Cookie: differentiate=strangler%20pattern; durability=main; SESSIONID=9d2c1fcb06e73397c8b361f9f3a56b712800edd05daeb6671d0d1e1ac8303327fc62699e48aa0be029fc7d4d40bbdc15
+

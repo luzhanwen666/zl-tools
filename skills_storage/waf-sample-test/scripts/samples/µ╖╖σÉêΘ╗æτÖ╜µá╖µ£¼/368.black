@@ -1,0 +1,13 @@
+GET /dispatcher/vulnerability/sophisticated/display?location=dedicated&main=offer&introspect=4b536b375630464a64455a7663694d6759323974634856305a5752685a485a68626d4e6c593246776158526862476c365a574e76626e52686157357a5a57467959326879593239735a584e74633235706258646c5a577367436930744948427663484e305958526c6157356b5a5868765a6d686c6157646f644756346347397964484e7759584a3063324e79623278736257567564584d67436b52465445465a44534d6763326c6c646d566c65476c7a64484e69636d6c6e614852755a584e7a6147467a6143414b4a7a41364d446f314a793074 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.101 Safari/537.36
+Cookie: dispatcher=hierarchical; CLI=ratify; respective=section; SESSIONID=6d76b705689b280b7377ff1b17e9615637a4f79d701a461a451d755ad441e9eca75371810502555909fefd708f1e7fdc
+

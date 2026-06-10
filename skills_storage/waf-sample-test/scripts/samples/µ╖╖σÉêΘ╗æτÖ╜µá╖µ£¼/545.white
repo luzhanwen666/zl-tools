@@ -1,0 +1,13 @@
+PUT /oversight/policy/inception/suffix?parenthesis=message&composite=replica&analogy=efficiency&DOM=MTkuIFRoZSBwcm9wb3NhbCBjYW1lIGZyb20gdGhlIHVuaW9uIG1lbWJlcnMuCg%3D%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.3; WOW64; Trident/6.0)
+Cookie: throughput=roll%20out; SESSIONID=bccf2cc69d079ba651a189b6f7ae5b427e054c67cb312a25a146e51b0240de5420ae837a841cadbb4d89c3fe4af3d942
+

@@ -1,0 +1,13 @@
+POST /?display=ampersand&evolution=malware&required=DVsJCiJcdTAwM2JcdTAwMjBcdTAwNjNcdTAwNjFcdTAwNzRcdTAwMjBcdTAwMkZcdTAwNjVcdTAwNzRcdTAwNjNcdTAwMmZcdTAwNzBcdTAwNjFcdTAwNzNcdTAwNzNcdTAwNzdcdTAwNjRcdTAwM2IiCSwNNDkgLFtbCQ17DQ0iXHUwMDY2XHUwMDYxXHUwMDY5XHUwMDZjXHUwMDYyXHUwMDYxXHUwMDYzXHUwMDZiIgkKOgkyMyAgCX0sdHJ1ZQpdCiw5NSx7CgoiXHUwMDY0XHUwMDY1XHUwMDZDXHUwMDY5XHUwMDc2XHUwMDY1XHUwMDcyXHUwMDc5Igk6CSJcdTAwNjFcdTAwNjdcdTAwNjdcdTAwNzJcdTAwNjVcdTAwNjdcdTAwNjFcdTAwNzRcdTAwNjUiCSAgfV0gLAp0cnVlCl0%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+Cookie: bandwidth=boss; fill=permutation; SESSIONID=9442102cc6747750cde7690bb7e82e60a38fa7e62cf35eec0d560f12a6152c3d7c9cde2cb4df197e90007a5ec3d55979
+

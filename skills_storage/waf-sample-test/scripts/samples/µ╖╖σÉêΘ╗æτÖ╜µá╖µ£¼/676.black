@@ -1,0 +1,13 @@
+HEAD /decouple/elastic?link=intervention&underscore=WwoiXHUwMDY5XHUwMDZkXHUwMDcwXHUwMDYxXHUwMDYzXHUwMDc0IiwJIlx1MDA2OVx1MDA2RVx1MDA3NFx1MDA2NVx1MDA2N1x1MDA3Mlx1MDA2OVx1MDA3NFx1MDA3OSINLAkiXHUwMDZGXHUwMDYyXHUwMDc0XHUwMDYxXHUwMDY5XHUwMDZlIiwiXHUwMDYzXHUwMDZmXHUwMDZEXHUwMDZkXHUwMDYxIiwJWw0KIlx1MDA3MFx1MDA3Mlx1MDA2Rlx1MDA3NFx1MDA2Rlx1MDA2M1x1MDA2Rlx1MDA2YyIsCWZhbHNlLHsiXHUwMDY4XHUwMDYxXHUwMDZlXHUwMDY0XHUwMDZjXHUwMDY1XHUwMDcyIjoNIlx1MDA0ZFx1MDA1MVx1MDA3MFx1MDA2OFx1MDA2Mlx1MDA2Qlx1MDA1MVx1MDA0RVx1MDA0RFx1MDA1NFx1MDAzMFx1MDA3OCIgfSBdLCJcdTAwNzBcdTAwNzJcdTAwNjlcdTAwNmRcdTAwNjFcdTAwNzJcdTAwNzkiDV0J HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET4.0C; .NET4.0E; 360SE)
+Cookie: authentication=handle; permissive=federation; SESSIONID=ca3c2adb939794888624ad3031e86740bd02bd293dc15baddf5358fbfbc0efb4d758cc9316670a80c53bea5e825e4586
+

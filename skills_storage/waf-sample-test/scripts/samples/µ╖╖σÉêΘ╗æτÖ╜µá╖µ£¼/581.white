@@ -1,0 +1,13 @@
+GET /plus/strategy/throughput/push?report=OTAuIFNlbGVjdCB0aGUgbW9zdCBzdWl0YWJsZSBhbnN3ZXIgZnJvbSB0aGUgb3B0aW9ucy4K HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (iPad; CPU OS 7_1_1 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) GSA/7.0.55539 Mobile/11D201 Safari/9537.53
+Cookie: period=concrete; semantic=obtain; SESSIONID=e7cdb55341f401811e41cd67e2ffa28cea6b3d879acc99a3089594743d7a33f627eb97b485da9e1e557a4d802725af75
+

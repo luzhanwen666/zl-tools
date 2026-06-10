@@ -1,0 +1,13 @@
+HEAD /?mature=2e2e2f5745422d494e462f7765622e786d6c HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (PlayStation 4 2.57) AppleWebKit/537.73 (KHTML, like Gecko)
+Cookie: process=bogus; SESSIONID=733862a5035ac6415a46b7b6ea5dcfc1f17e23d8872406508d796fa71780d04d1ce847301d4fff5377d2d771fff0120e
+

@@ -1,0 +1,13 @@
+PUT /?roll%20out=section&reconcile=impersonate&echo=Ny4gVGhleSBmb3JtZWQgYSB1bmlvbiB0byBmaWdodCBmb3IgdGhlaXIgcmlnaHRzLgo%3D HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)
+Cookie: mutable=push; granular=asterisk; SESSIONID=b930ba60f5e8e829f4c27bc7b123ba28b8f09509aa3ca1f661e4ad87db13ca15d5570d399f6d4e07ab04a9d140514791
+

@@ -1,0 +1,13 @@
+PUT /ascent?exclamation%20mark=expression&tilde=agnostic&durability=49696b70436b397943694d67636d46755a325632615756336347397964484e31636d646c636d466b615739695a5735755a585277633256315a47393059584e72634756755a476c755a334273645842736232466b5a47566a5a57786c636d46305a574e7662573168626d5167436c4e4d525556514b4455705053493d HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Android; Tablet; rv:34.0) Gecko/34.0 Firefox/34.0
+Cookie: monetize=execute; SESSIONID=87444df2872ea86cd74cc82c42d0f1e6d2b43284b7fd88049b17e71982e32f4913d0ecee5d7a0683d4cbbea226f9d071
+

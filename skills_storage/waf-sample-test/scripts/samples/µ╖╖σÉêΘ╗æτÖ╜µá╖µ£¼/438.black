@@ -1,0 +1,13 @@
+PUT /?resilience=OyBjYXQgL2V0Yy9wYXNzd2Q7 HTTP/1.1
+Host: waf-ce.chaitin.cn
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+Cookie: taxonomy=slash; disclaimer=introspect; SESSIONID=80df5551ac03720285db1f912e67094a723d599bbac185717bcac3ff42c117253a83309fe0d41209aec7f5670e846f23
+
