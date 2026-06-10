@@ -175,16 +175,16 @@ class GlobalRouter:
 
         # 3. 路由 + 执行
         if route_result.is_general_question or not route_result.recommended_agents:
-            # 无匹配专家 → 关键词兜底强制匹配
-            logger.info("No expert matched — forcing keyword fallback")
-            fallback = prompts.keyword_fallback_match(user_message, await _build_agents_catalog(global_agent))
-            if fallback:
-                route_result.recommended_agents = fallback
+            # LLM没匹配到 → 直接用全部可用专家
+            all_names = re.findall(r'\*\*(.+?)\*\*', await _build_agents_catalog(global_agent))
+            if all_names:
+                logger.info("LLM had no match, using all %d experts", len(all_names))
+                route_result.recommended_agents = all_names
                 route_result.is_general_question = False
             else:
                 return [AgentMessage(
                     role="assistant",
-                    content="⚠️ 未找到匹配的专家，请手动选择专家或创建群组配置自动路由。",
+                    content="⚠️ 暂无可用专家，请先创建智能体。",
                     name="全局智能体",
                 )]
 
@@ -248,27 +248,21 @@ class GlobalRouter:
         route_result = await self.classify(user_message, global_agent)
 
         if route_result.is_general_question or not route_result.recommended_agents:
-            # 无匹配专家 → 关键词兜底强制匹配
-            fallback = prompts.keyword_fallback_match(user_message, await _build_agents_catalog(global_agent))
-            if fallback:
-                route_result.recommended_agents = [a.name for a in await _resolve_agents(fallback)]
+            # LLM没匹配到 → 直接用全部可用专家
+            all_names = re.findall(r'\*\*(.+?)\*\*', await _build_agents_catalog(global_agent))
+            if all_names:
+                route_result.recommended_agents = [a.name for a in await _resolve_agents(all_names)]
                 route_result.is_general_question = False
                 yield {
                     "type": "routing", "status": "matched",
-                    "content": f"已匹配专家：{', '.join(route_result.recommended_agents)}（关键词匹配）",
+                    "content": f"已激活全部专家：{', '.join(route_result.recommended_agents)}",
                     "agents": route_result.recommended_agents,
                 }
             else:
-                yield {
-                    "type": "routing", "status": "unmatched",
-                    "content": "未找到匹配的专家",
-                }
-                yield {
-                    "type": "assistant",
-                    "content": "⚠️ 未找到匹配的专家，请手动选择专家或创建群组配置自动路由。",
-                    "agent_name": "全局智能体",
-                }
+                yield {"type": "routing", "status": "unmatched", "content": "暂无可用专家"}
+                yield {"type": "assistant", "content": "⚠️ 暂无可用专家，请先创建智能体。", "agent_name": "全局智能体"}
                 yield {"type": "done"}
+                return
                 return
 
         if not route_result.is_general_question and route_result.recommended_agents:
@@ -327,15 +321,10 @@ class GlobalRouter:
             )
         except Exception as e:
             logger.exception("Classification LLM call failed")
-            # LLM 调用失败 → 直接走关键词兜底
-            fallback = prompts.keyword_fallback_match(user_message, agents_catalog)
-            logger.info("LLM classification failed, keyword fallback: %s", fallback)
+            # LLM 调用失败 → 标记通用问题，run() 会启用全部专家
             return RouteResult(
-                intent="关键词匹配（LLM不可用）",
-                recommended_agents=fallback,
-                is_general_question=not bool(fallback),
-                reasoning=f"LLM调用失败，自动关键词匹配",
-                raw_response=str(e),
+                intent="LLM调用失败", is_general_question=True,
+                reasoning=f"LLM调用失败: {e}", raw_response=str(e),
             )
 
         # ── 步骤 2: 解析 LLM 输出 ──
@@ -388,15 +377,12 @@ class GlobalRouter:
             except (json.JSONDecodeError, TypeError):
                 continue
 
-        # JSON 解析失败 → 关键词兜底
+        # JSON 解析失败 → 标记通用问题，run() 会启用全部专家
         logger.warning("Failed to parse classification JSON from: %s", response[:300])
-        fallback = prompts.keyword_fallback_match(user_message, agents_catalog)
-        logger.info("JSON parse failed, keyword fallback: %s", fallback)
         return RouteResult(
-            intent="关键词匹配（LLM格式异常）",
-            recommended_agents=fallback,
-            is_general_question=not bool(fallback),
-            reasoning="LLM输出格式异常，自动使用关键词匹配",
+            intent="LLM格式异常",
+            is_general_question=True,
+            reasoning="LLM输出格式异常",
             raw_response=response,
         )
 
