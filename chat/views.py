@@ -336,26 +336,22 @@ def global_chat_send_message_stream(request):
             )
 
     # ── 决定使用哪个群组 ──
-    # 优先级: 手动选中群组 > 手动选中专家 > 自动匹配群组
+    # 优先级: 手动选中群组 > 手动选中专家 > LLM自动匹配群组
     matched_group = None
     if group_id:
         matched_group = get_object_or_404(AgentGroup, pk=group_id, is_active=True)
-    elif not manual_agents:
-        available_groups = list(AgentGroup.objects.filter(is_active=True).exclude(trigger_prompt=""))
-        if available_groups:
-            loop = asyncio.new_event_loop()
-            matched_id = loop.run_until_complete(
-                _match_group_by_trigger(content, available_groups)
-            )
-            loop.close()
-            if matched_id:
-                matched_group = AgentGroup.objects.filter(pk=matched_id, is_active=True).first()
-                if not matched_group:
-                    matched_group = AgentGroup.objects.filter(pk=int(matched_id), is_active=True).first()
 
-    # 无匹配且无人为选择 → 降级到原来的自动路由（GlobalOrchestrator）
+    # 同步预加载：待匹配的群组候选 + 全局智能体 llm_config
+    _candidate_groups = []
+    _match_llm_config = None
     if not matched_group and not manual_agents:
-        logger.info("No group matched, falling back to GlobalOrchestrator auto-routing")
+        _candidate_groups = list(AgentGroup.objects.filter(is_active=True).exclude(trigger_prompt=""))
+        if not _candidate_groups:
+            # 取所有活跃群组作为候选
+            _candidate_groups = list(AgentGroup.objects.filter(is_active=True))
+        global_agent = Agent.objects.filter(is_global=True, is_active=True).select_related("llm_config").first()
+        if global_agent and global_agent.llm_config:
+            _match_llm_config = global_agent.llm_config
 
     # 保存用户消息
     ChatMessage.objects.create(session=session, role="user", content=content)
@@ -363,7 +359,6 @@ def global_chat_send_message_stream(request):
     if matched_group:
         session.group = matched_group
         session.save(update_fields=["group"])
-        # 同步预加载拓扑数据，避免 async 上下文触发懒查询
         _preloaded_nodes = list(matched_group.nodes.all().select_related(
             "agent", "agent__llm_config"
         ).prefetch_related("agent__skills", "agent__mcp_tools"))
@@ -380,7 +375,6 @@ def global_chat_send_message_stream(request):
             first_event['session_id'] = created_session_id
         yield f"data: {json.dumps(first_event, ensure_ascii=False)}\n\n"
 
-        # 提前告知前端当前执行模式
         if matched_group:
             yield f"data: {json.dumps({'type': 'routing', 'status': 'group', 'content': f'🔗 已匹配群组「{matched_group.name}」— 按拓扑顺序执行', 'group_name': matched_group.name}, ensure_ascii=False)}\n\n"
 
@@ -391,33 +385,62 @@ def global_chat_send_message_stream(request):
             asyncio.set_event_loop(loop)
             try:
                 registry = _create_tool_registry()
-                if matched_group:
-                    group = matched_group
-                    nodes = _preloaded_nodes
-                    edges = _preloaded_edges
-                    executor = GroupExecutor(tool_registry=registry)
-                    async def _stream():
+
+                async def _stream():
+                    actual_group = matched_group
+
+                    # ── LLM群组匹配(与引擎同一个event loop，不额外创建loop) ──
+                    if not actual_group and not manual_agents and _candidate_groups and _match_llm_config:
                         try:
-                            async for event in executor.run_stream(session, content, group, nodes, edges):
-                                q.put(("event", event))
+                            matched_id = await _match_group_by_trigger(
+                                content, _candidate_groups, _match_llm_config
+                            )
+                            if matched_id:
+                                from agents.models import AgentGroup as AG
+                                # sync_to_async the ORM lookup
+                                from asgiref.sync import sync_to_async
+                                @sync_to_async
+                                def _get_group():
+                                    return AG.objects.filter(pk=matched_id, is_active=True).first()
+                                actual_group = await _get_group()
+                                if actual_group:
+                                    q.put(("event", {
+                                        "type": "routing", "status": "group",
+                                        "content": f"🔗 已匹配群组「{actual_group.name}」— 按拓扑顺序执行",
+                                        "group_name": actual_group.name,
+                                    }))
                         except Exception as e:
-                            logger.exception("GroupExecutor error")
-                            q.put(("error", str(e)))
-                        finally:
-                            q.put(("done", None))
-                else:
-                    router = GlobalRouter(tool_registry=registry)
-                    async def _stream():
-                        try:
-                            async for event in router.run_stream(session, content, manual_agents=manual_agents):
-                                q.put(("event", event))
-                        except Exception as e:
-                            logger.exception("Engine stream error")
-                            q.put(("error", str(e)))
-                        finally:
-                            q.put(("done", None))
+                            logger.exception("Group matching in engine thread failed")
+
+                    if actual_group:
+                        # 预加载拓扑(如果之前没加载)
+                        if actual_group == matched_group and _preloaded_nodes:
+                            pnodes, pedges = _preloaded_nodes, _preloaded_edges
+                        else:
+                            from asgiref.sync import sync_to_async
+                            @sync_to_async
+                            def _preload():
+                                return (
+                                    list(actual_group.nodes.all().select_related("agent", "agent__llm_config")
+                                         .prefetch_related("agent__skills", "agent__mcp_tools")),
+                                    list(actual_group.edges.all()),
+                                )
+                            pnodes, pedges = await _preload()
+
+                        executor = GroupExecutor(tool_registry=registry)
+                        async for event in executor.run_stream(session, content, actual_group, pnodes, pedges):
+                            q.put(("event", event))
+                    else:
+                        router = GlobalRouter(tool_registry=registry)
+                        async for event in router.run_stream(session, content, manual_agents=manual_agents):
+                            q.put(("event", event))
 
                 loop.run_until_complete(_stream())
+                q.put(("done", None))
+            except Exception as e:
+                logger.exception("Engine error")
+                q.put(("error", str(e)))
+                q.put(("done", None))
             finally:
                 loop.close()
 
@@ -461,63 +484,54 @@ def global_chat_send_message_stream(request):
 # 群组匹配辅助
 # ------------------------------------------------------------------
 
-async def _match_group_by_trigger(user_message: str, available_groups) -> str | None:
+async def _match_group_by_trigger(user_message: str, available_groups, llm_config) -> str | None:
     """
-    用关键词重叠匹配群组触发描述。确定性匹配，不依赖 LLM。
-    策略：
-    1. 对每个群组的 trigger_prompt + description 做关键词重叠打分
-    2. 最高分且 > 阈值 → 匹配成功
-    3. 所有群组都不匹配 → 如有兜底群组(描述含'兜底/日常/通用')则匹配第一个兜底群组
-    4. 都失败 → 返回 None，降级到 GlobalOrchestrator
+    LLM 匹配用户输入与群组触发描述。
+    传入 llm_config 避免在 async 上下文做 Django 懒查询。
+    LLM 返回 NONE 时自动选第一个群组作为兜底。
     """
-    import re
-    msg_lower = user_message.lower()
-    best_score = 0
-    best_id = None
-    fallback_id = None
+    if not llm_config or not available_groups:
+        return None
 
-    for g in available_groups:
-        text = ((g.trigger_prompt or "") + " " + (g.description or "")).lower()
-        # 简单关键词重叠打分
-        score = 0
-        for word in re.findall(r'[\w一-鿿]{2,}', msg_lower):
-            if word in text:
-                score += 3
-        # 兜底群组检测
-        if any(kw in text for kw in ['兜底', '日常', '通用', '非特定', '日常对话', '日常处理']):
-            if fallback_id is None:
-                fallback_id = str(g.pk)
-            # 兜底群组自带基础分，确保其他群组都不匹配时会被选中
-            if best_score == 0:
-                best_score = 0.5  # 微弱分数，仅在其他群组0分时胜出
+    groups_desc = "\n".join(
+        f"- **{g.name}** (ID:{g.pk}): {g.trigger_prompt or g.description}"
+        for g in available_groups
+    )
 
-        # 精确场景关键词（高分）
-        precise_kw = {
-            '安全': ['攻击', '威胁', '漏洞', 'waf', '入侵', 'xss', 'sql', '扫描', '渗透', '拦截'],
-            '日志': ['日志', 'log', 'access', 'error', 'nginx', '请求'],
-            '计算': ['计算', '算式', '等于', '数学', '加', '减', '乘', '除', 'sqrt'],
-            '代码': ['代码', '编程', 'python', 'java', '写一个', '函数', 'bug', '调试'],
-            '知识': ['什么是', '为什么', '如何', '怎么', '介绍一下', '解释', '说明'],
-        }
-        for domain, keywords in precise_kw.items():
-            if any(kw in msg_lower for kw in keywords) and domain in text:
-                score += 8
+    system_prompt = (
+        "你是严格的路由匹配器。根据用户输入，你必须从可用群组中选出一个最匹配的。\n"
+        "比较每个群组的触发场景描述与用户输入，选出相关度最高的群组。\n"
+        "即使是通用日常问题(聊天/编程/计算/问答)，也要选描述最接近的那个。\n"
+        "输出格式: 只输出群组ID数字，不要输出其他任何内容。"
+    )
 
-        if score > best_score:
-            best_score = score
-            best_id = str(g.pk)
+    user_prompt = f"## 可用群组\n{groups_desc}\n\n## 用户输入\n{user_message}\n\n输出最匹配的群组ID:"
 
-    if best_id and best_score >= 2:
-        logger.info("Group keyword-match: pk=%s score=%d", best_id, best_score)
-        return best_id
+    from engine import llm_client as llm_module
+    try:
+        response = await llm_module.llm_client.chat(
+            provider=llm_config.provider,
+            model_id=llm_config.model_id,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            api_base=llm_config.api_base,
+            api_key=llm_config.api_key,
+            max_tokens=20,
+            temperature=0.0,
+        )
+    except Exception as e:
+        logger.exception("Group matching LLM failed, fallback to first group")
+        return str(available_groups[0].pk)
 
-    # 无匹配 → 使用兜底群组
-    if fallback_id:
-        logger.info("No precise match, using fallback group pk=%s", fallback_id)
-        return fallback_id
+    resp = response.strip().upper()
+    if resp.isdigit():
+        return str(int(resp))
 
-    logger.info("No group matched at all")
-    return None
+    # LLM 没给数字 → 兜底第一个群组
+    logger.info("LLM returned '%s' (not digit), fallback to first group pk=%s", resp[:20], available_groups[0].pk)
+    return str(available_groups[0].pk)
 
 
 # ------------------------------------------------------------------
