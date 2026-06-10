@@ -52,9 +52,12 @@ class GroupExecutor:
         preloaded_nodes: list | None = None, preloaded_edges: list | None = None,
     ) -> AsyncGenerator[dict, None]:
         # 使用预加载数据（在同步上下文中已 select_related），避免 async 懒查询
-        if preloaded_nodes is not None:
+        if preloaded_nodes is not None and preloaded_edges is not None:
             nodes = preloaded_nodes
-            edges = preloaded_edges or list(group.edges.all())
+            edges = preloaded_edges
+        elif preloaded_nodes is not None:
+            nodes = preloaded_nodes
+            edges = list(group.edges.all())
         else:
             nodes = list(group.nodes.all())
             edges = list(group.edges.all())
@@ -124,7 +127,16 @@ class GroupExecutor:
                 # 注入上游节点输出
                 upstream = self._collect_upstream(current, edges, node_map, results)
                 if upstream:
-                    system_prompt += f"\n\n## 上游输出（请基于此继续分析）\n{upstream}"
+                    system_prompt += f"\n\n## 上游节点输出（你必须基于此继续分析）\n{upstream}"
+                    yield {"type": "status", "agent_name": current.label,
+                           "content": f"📥 已接收上游 {len(upstream.split('###'))-1} 个节点输出，注入上下文"}
+                    logger.info("Node %s: injected upstream from %d nodes (%d chars)",
+                              current.label, len(upstream.split("###"))-1, len(upstream))
+                else:
+                    logger.warning("Node %s: no upstream found (edges=%d, node.pk=%d)",
+                                 current.label, len(edges), current.pk)
+                    yield {"type": "status", "agent_name": current.label,
+                           "content": "⚠️ 未接收到上游输出，独立分析"}
 
                 executor = get_executor(current.agent, tool_registry=self.tool_registry)
                 try:
