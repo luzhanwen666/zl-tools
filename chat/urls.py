@@ -11,6 +11,11 @@ urlpatterns = [
     path("global/stream/", views.global_chat_send_message_stream, name="global_chat_stream"),
     path("global/send/", views.global_chat_send_message, name="global_chat_send"),
 
+    # 工作流配置
+    path("workflow/save/", views.save_workflow, name="save_workflow"),
+    path("workflow/load/<int:pk>/", views.load_workflow, name="load_workflow"),
+    path("workflow/delete/<int:pk>/", views.delete_workflow, name="delete_workflow"),
+
     # 标准会话管理
     path("", views.ChatSessionListView.as_view(), name="session_list"),
     path("create/", views.ChatSessionCreateView.as_view(), name="session_create"),

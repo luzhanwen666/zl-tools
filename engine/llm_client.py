@@ -26,6 +26,24 @@ DEFAULT_BASE_URLS = {
 }
 
 
+def _build_anthropic_url(base_url: str) -> str:
+    """
+    构建 Anthropic API 的完整 URL。
+
+    处理三种情况：
+    1. 未配置 api_base → https://api.anthropic.com/v1/messages
+    2. 已配置但不含 /v1 → 补上 /v1/messages（如 https://my-proxy.com  → .../v1/messages）
+    3. 已配置且尾部有 /v1 → 直接拼 /messages（如 .../api/anthropic/v1 → .../v1/messages）
+       （避免出现 .../v1/v1/messages）
+    """
+    if not base_url:
+        return "https://api.anthropic.com/v1/messages"
+    base = base_url.rstrip("/")
+    if base.endswith("/v1"):
+        return f"{base}/messages"
+    return f"{base}/v1/messages"
+
+
 class LLMClient:
     """统一 LLM 调用客户端"""
 
@@ -192,7 +210,7 @@ class LLMClient:
             "anthropic-version": "2023-06-01",
         }
 
-        url = f"{base_url}/v1/messages" if base_url else "https://api.anthropic.com/v1/messages"
+        url = _build_anthropic_url(base_url)
         async with httpx.AsyncClient(timeout=self.timeout) as client:
             resp = await client.post(url, json=payload, headers=headers)
             resp.raise_for_status()

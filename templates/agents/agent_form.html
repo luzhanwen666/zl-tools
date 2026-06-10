@@ -30,6 +30,12 @@
                     {{ form.role }}
                     {% if form.role.errors %}<p class="field-err">{{ form.role.errors.0 }}</p>{% endif %}
                 </div>
+                <div class="field-group" style="flex:0 0 220px;">
+                    <label for="{{ form.agent_type.id_for_label }}">执行类型 *</label>
+                    {{ form.agent_type }}
+                    <p class="field-hint" id="agentTypeHint">ReAct循环：思考→行动→观察</p>
+                    {% if form.agent_type.errors %}<p class="field-err">{{ form.agent_type.errors.0 }}</p>{% endif %}
+                </div>
             </div>
             <div class="field-group">
                 <label for="{{ form.description.id_for_label }}">描述</label>
@@ -179,4 +185,26 @@
     .cancel-link { color: var(--text-muted); text-decoration: none; font-size: 14px; margin-left: 16px; }
     .cancel-link:hover { color: var(--text); }
 </style>
+
+<!-- agent_type 动态提示 -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const typeSelect = document.querySelector('#id_agent_type');
+    const hint = document.querySelector('#agentTypeHint');
+    if (!typeSelect || !hint) return;
+    const hints = {
+        'react': 'ReAct循环：思考→行动→观察，适合需要工具调用的复杂任务',
+        'simple': '直接问答：单次LLM调用，适合基础对话和常识问答',
+        'reflection': '反思改进：生成→批判审视→改进，三阶段输出高质量答案',
+        'plan_and_solve': '先规划后执行：先分解任务为步骤，再逐步执行，适合复杂多步骤任务',
+    };
+    typeSelect.addEventListener('change', function() {
+        hint.textContent = hints[this.value] || '';
+    });
+    // 初始值
+    if (typeSelect.value && hints[typeSelect.value]) {
+        hint.textContent = hints[typeSelect.value];
+    }
+});
+</script>
 {% endblock %}

@@ -15,411 +15,650 @@
 {% endblock %}
 
 {% block content %}
-<div class="chat-layout" style="height:calc(100vh - 56px);margin:-24px -32px;">
+<div style="height:calc(100vh - 56px);margin:-24px -32px;display:flex;">
 
-    <!-- 左侧：历史列表（最小化） -->
-    <div class="chat-sidebar">
-        <a href="{% url 'chat:global_chat' %}" class="btn-primary" style="display:block;text-align:center;margin-bottom:14px;padding:9px 0;border-radius:var(--radius-sm);font-size:13px;text-decoration:none;">
-            ✨ 新对话
-        </a>
-        <h3>对话历史</h3>
+    <!-- 左侧栏 -->
+    <div style="width:210px;min-width:210px;background:var(--bg);border-right:1px solid var(--border-light);padding:16px 14px;overflow-y:auto;">
+        <a href="{% url 'chat:global_chat' %}" style="display:block;text-align:center;margin-bottom:14px;padding:9px 0;border-radius:8px;font-size:13px;text-decoration:none;background:var(--primary);color:#fff;">✨ 新对话</a>
+        <h3 style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;">对话历史</h3>
         <div style="font-size:13px;color:var(--text-muted);padding:12px;">
-            <a href="{% url 'chat:session_list' %}" style="color:var(--primary);text-decoration:none;">查看全部对话 →</a>
+            <a href="{% url 'chat:session_list' %}" style="color:var(--primary);text-decoration:none;">查看全部对话 &rarr;</a>
         </div>
     </div>
 
-    <!-- 右侧：对话区域 -->
-    <div class="chat-main">
-        <!-- 顶栏：全局Agent信息 + 可选专家 -->
-        <div class="chat-header" style="padding:12px 24px;border-bottom:1px solid var(--border-light);">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px;">
-                <div style="display:flex;align-items:center;gap:10px;">
-                    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#a855f7);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;">🤖</div>
-                    <span style="font-weight:700;font-size:15px;color:var(--text);">{{ global_agent.name }}</span>
-                    <span class="badge badge-blue">全局入口</span>
+    <!-- 右侧主区域 -->
+    <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+
+        <!-- 顶栏：Agent信息 + 专家标签 + 流程开关 -->
+        <div style="padding:12px 24px;border-bottom:1px solid var(--border-light);background:var(--bg-card);">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#a855f7);display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;">🤖</div>
+                    <span style="font-weight:700;font-size:14px;color:var(--text);">{{ global_agent.name }}</span>
+                    <span style="display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;background:#eef2ff;color:#4f46e5;">全局入口</span>
                 </div>
-                <span id="selectionHint" style="font-size:12px;color:var(--text-muted);">
-                    💡 点击下方专家可选择/取消，不选则自动匹配
-                </span>
+                <span id="selectionHint" style="font-size:11px;color:var(--text-muted);margin-left:auto;">💡 点击专家选择，不选则自动匹配</span>
             </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;" id="expertChips">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;" id="expertChips">
                 {% for ag in all_agents %}
                 {% if ag.name != global_agent.name %}
-                <button type="button" class="chat-agent-chip toggle-chip {% if ag.role == 'coordinator' %}coordinator{% elif ag.role == 'expert' %}expert{% else %}member{% endif %}"
+                <button type="button" class="expert-chip {% if ag.role == 'coordinator' %}chip-coord{% elif ag.role == 'expert' %}chip-expert{% else %}chip-member{% endif %}"
                         data-agent="{{ ag.name }}"
-                        title="{{ ag.description|default:'通用智能体' }}&#10;点击选择此专家参与对话">
+                        title="{{ ag.description|default:'通用' }}&#10;类型: {{ ag.get_agent_type_display|default:'ReAct' }}">
+                    <span class="chip-icon">{% if ag.agent_type == 'simple' %}⚡{% elif ag.agent_type == 'reflection' %}🪞{% elif ag.agent_type == 'plan_and_solve' %}📋{% else %}🔄{% endif %}</span>
                     {{ ag.name }}
                 </button>
                 {% endif %}
                 {% endfor %}
                 {% if all_agents|length <= 1 %}
-                <span style="font-size:12px;color:var(--text-muted);">暂无其他专家，可前往「智能体管理」创建</span>
+                <span style="font-size:12px;color:var(--text-muted);">暂无专家，去<a href="{% url 'agents:list' %}" style="color:var(--primary);">创建</a></span>
                 {% endif %}
+                <!-- 流程配置入口（当选中≥2个专家时显示） -->
+                <span id="flowToggle" style="font-size:11px;color:var(--text-muted);cursor:pointer;margin-left:8px;user-select:none;display:none;" onclick="toggleFlowPanel()" title="配置专家执行顺序">
+                    ⚙️ <span style="text-decoration:underline;text-decoration-style:dotted;">执行流程</span>
+                </span>
             </div>
         </div>
 
         <!-- 消息区域 -->
-        <div class="chat-messages" id="chatMessages">
-            <div class="empty-state" style="padding:80px 0;" id="emptyState">
-                <div class="empty-icon">🤖</div>
+        <div style="flex:1;overflow-y:auto;padding:12px 0;" id="chatMessages">
+            <div style="text-align:center;padding:80px 0;" id="emptyState">
+                <div style="font-size:48px;margin-bottom:12px;">🤖</div>
                 <p style="font-size:15px;font-weight:600;color:var(--text);">全局智能体为你服务</p>
-                <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">
-                    输入任何问题，我会自动分析并匹配最合适的专家团队
-                </p>
+                <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">输入任何问题，自动匹配合适的专家团队</p>
             </div>
         </div>
 
         <!-- 输入区域 -->
-        <form class="chat-input-bar" id="chatForm" style="border-top:1px solid var(--border-light);padding:16px 24px;display:flex;gap:10px;align-items:center;background:var(--bg-card);">
+        <form id="chatForm" data-session-id="{{ session.pk }}" style="border-top:1px solid var(--border-light);padding:14px 24px;display:flex;gap:8px;align-items:center;background:var(--bg-card);">
             {% csrf_token %}
             <input type="text" id="chatInput" placeholder="输入消息，我会自动匹配专家..." autocomplete="off"
-                   style="flex:1;padding:12px 18px;border:1.5px solid var(--border);border-radius:24px;font-size:14px;background:var(--bg);color:var(--text);transition:border-color .2s, box-shadow .2s;">
+                   style="flex:1;padding:11px 18px;border:1.5px solid var(--border);border-radius:22px;font-size:14px;background:var(--bg);color:var(--text);outline:none;font-family:inherit;">
             <button type="submit" id="sendBtn" title="发送"
-                    style="width:42px;height:42px;background:var(--primary);color:#fff;border:none;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px var(--primary-glow);transition:all .2s;flex-shrink:0;">➤</button>
-            <button type="button" id="stopBtn" title="打断" onclick="stopStream()"
-                    style="display:none;width:42px;height:42px;background:#ef4444;color:#fff;border:none;border-radius:50%;font-size:16px;cursor:pointer;box-shadow:0 2px 8px rgba(239,68,68,.25);flex-shrink:0;">⏹</button>
+                    style="width:40px;height:40px;background:var(--primary);color:#fff;border:none;border-radius:50%;font-size:15px;cursor:pointer;flex-shrink:0;box-shadow:0 2px 8px var(--primary-glow);">➤</button>
+            <button type="button" id="stopBtn" title="打断"
+                    style="display:none;width:40px;height:40px;background:#ef4444;color:#fff;border:none;border-radius:50%;font-size:14px;cursor:pointer;flex-shrink:0;">⏹</button>
         </form>
     </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 工作流面板遮罩 + 滑出面板 -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<div id="flowOverlay" style="position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:99;display:none;" onclick="closeFlowPanel()"></div>
+
+<div id="flowPanel" style="position:fixed;right:-390px;top:0;bottom:0;width:390px;background:#fff;z-index:100;box-shadow:-4px 0 30px rgba(0,0,0,.12);transition:right .3s ease;display:flex;flex-direction:column;">
+    <div style="padding:18px 22px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between;">
+        <div>
+            <h3 style="font-size:15px;font-weight:700;color:#1e293b;margin:0;">⚙️ 执行流程配置</h3>
+            <p style="font-size:11px;color:#94a3b8;margin:3px 0 0;">拖拽排序 · 串/并行切换 · 点击应用生效</p>
+        </div>
+        <button onclick="closeFlowPanel()" style="background:none;border:none;font-size:22px;color:#94a3b8;cursor:pointer;padding:0 4px;line-height:1;">&times;</button>
+    </div>
+
+    <div id="flowSteps" style="flex:1;overflow-y:auto;padding:16px;">
+        <div style="text-align:center;color:#cbd5e1;padding:40px 20px;">
+            <div style="font-size:40px;margin-bottom:10px;">📋</div>
+            <p style="font-size:13px;color:#94a3b8;">尚未添加专家到流程中</p>
+            <p style="font-size:11px;color:#cbd5e1;">从下方下拉列表选择专家并点击添加</p>
+        </div>
+    </div>
+
+    <div style="padding:14px 22px;border-top:1px solid #f0f0f0;display:flex;gap:8px;align-items:center;">
+        <select id="flowAgentSelect" style="flex:1;padding:8px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:13px;background:#fff;color:#1e293b;font-family:inherit;">
+            <option value="">-- 添加专家到流程 --</option>
+            {% for ag in all_agents %}
+            {% if ag.name != global_agent.name %}
+            <option value="{{ ag.name }}">{{ ag.name }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        <button id="addToFlowBtn" style="padding:8px 14px;background:#6366f1;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;">+ 添加</button>
+        <button id="applyFlowBtn" style="padding:8px 18px;background:#10b981;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;">&check; 应用</button>
+    </div>
+</div>
+
 <style>
-    .chat-agent-chip {
-        display: inline-flex; align-items: center; gap: 4px;
-        padding: 4px 12px; border-radius: 14px; font-size: 12px; font-weight: 500;
-        border: 1.5px solid transparent; cursor: pointer; transition: all .2s;
-        font-family: inherit;
+    /* ── 专家芯片 ── */
+    .expert-chip {
+        display:inline-flex;align-items:center;gap:4px;
+        padding:5px 14px;border-radius:16px;font-size:12px;font-weight:500;
+        border:1.5px solid transparent;cursor:pointer;
+        transition:all .2s;font-family:inherit;
     }
-    .chat-agent-chip.coordinator { background: #eef2ff; color: #4f46e5; border-color: #e0e7ff; }
-    .chat-agent-chip.expert { background: #f5f3ff; color: #7c3aed; border-color: #ede9fe; }
-    .chat-agent-chip.member { background: #f1f5f9; color: #64748b; border-color: #e2e8f0; }
-    .chat-agent-chip:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,.08); }
-    .chat-agent-chip.active {
-        outline: none;
-        border-color: var(--primary) !important;
-        box-shadow: 0 0 0 2px var(--primary-glow);
-        transform: translateY(-1px);
+    .expert-chip .chip-icon { font-size:13px; }
+    .chip-coord { background:#eef2ff;color:#4f46e5;border-color:#e0e7ff; }
+    .chip-expert { background:#f5f3ff;color:#7c3aed;border-color:#ede9fe; }
+    .chip-member { background:#f1f5f9;color:#64748b;border-color:#e2e8f0; }
+    .expert-chip:hover { transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,.06); }
+    .expert-chip.selected {
+        border-color:#6366f1 !important;
+        box-shadow:0 0 0 2px rgba(99,102,241,.25);
+        transform:translateY(-1px);
     }
-    .chat-agent-chip.active::after {
-        content: ' ✓'; font-size: 10px; font-weight: 700;
+    .expert-chip.selected::after { content:' \2713';font-size:10px;font-weight:700; }
+    .expert-chip.mentioned {
+        animation:mentionGlow .6s ease 2;
+        border-color:#f59e0b !important;background:#fffbeb !important;
     }
-
-    .msg-agent-name {
-        font-size: 12px; font-weight: 700; margin-bottom: 4px;
-        display: flex; align-items: center; gap: 6px;
-    }
-    .msg-agent-name::before {
-        content: '';
-        width: 8px; height: 8px; border-radius: 50%;
-        background: var(--primary); flex-shrink: 0;
-    }
-    /* 协调者的消息 */
-    .msg-coordinator .msg-agent-name { color: #4f46e5; }
-    .msg-coordinator .msg-agent-name::before { background: #4f46e5; }
-    .msg-coordinator .bubble { border-left: 3px solid #4f46e5; }
-    /* 专家的消息 */
-    .msg-expert .msg-agent-name { color: #7c3aed; }
-    .msg-expert .msg-agent-name::before { background: #7c3aed; }
-    .msg-expert .bubble { border-left: 3px solid #7c3aed; }
-    /* 系统的消息 */
-    .msg-system .msg-agent-name { color: #6366f1; }
-    .msg-system .msg-agent-name::before { background: #6366f1; }
-    .msg-system .bubble {
-        background: linear-gradient(135deg, #eef2ff, #f5f3ff) !important;
-        border: 1px solid rgba(99,102,241,.15) !important;
-        color: #4f46e5 !important;
-        font-size: 13px !important;
+    @keyframes mentionGlow {
+        0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.4)}
+        50%{box-shadow:0 0 0 8px rgba(245,158,11,0)}
     }
 
-    /* 工具调用标签 */
-    .msg-tools {
-        display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 4px;
+    /* ── 消息气泡 ── */
+    .chat-msg { padding:6px 20px;animation:msgIn .25s ease; }
+    .chat-msg.msg-user { display:flex;justify-content:flex-end; }
+    .chat-msg.msg-user .bubble {
+        background:var(--primary);color:#fff;padding:10px 16px;
+        border-radius:16px 16px 4px 16px;max-width:65%;line-height:1.55;
     }
-    .msg-tool-chip {
-        display: inline-flex; align-items: center; gap: 3px;
-        padding: 2px 8px; border-radius: 10px;
-        font-size: 11px; font-weight: 500;
-        background: #fffbeb; color: #b45309;
-        border: 1px solid #fde68a;
-        cursor: default;
+    .chat-msg.msg-bot { }
+    .chat-msg.msg-bot .msg-meta {
+        display:flex;align-items:center;gap:6px;margin-bottom:4px;font-size:11px;
+    }
+    .chat-msg.msg-bot .msg-author { font-weight:700;color:var(--text); }
+    .chat-msg.msg-bot .msg-time { color:var(--text-muted);font-size:10px;margin-left:auto; }
+    /* 专家/协调者/系统 回复全部用暗色终端风格 */
+    .chat-msg.msg-bot .bubble {
+        background:#0f172a;color:#e2e8f0;padding:12px 16px;
+        border-radius:6px;max-width:88%;line-height:1.6;
+        border:1px solid #334155;
+        font-family:'SF Mono','Cascadia Code','Consolas',monospace;
+        font-size:12px;white-space:pre-wrap;
+        overflow-x:auto;max-height:1200px;overflow-y:auto;
+    }
+    .chat-msg.msg-bot .bubble strong { color:#fbbf24;font-weight:700; }
+    .chat-msg.msg-bot .bubble code { background:#1e293b;color:#86efac;padding:2px 5px;border-radius:3px;font-size:11px; }
+    .chat-msg.msg-bot .bubble pre { background:#1e293b;padding:10px 14px;border-radius:6px;margin:6px 0;overflow-x:auto;font-size:11px;color:#cbd5e1;border:1px solid #334155; }
+    .chat-msg.msg-system .bubble {
+        background:linear-gradient(135deg,#eef2ff,#f5f3ff) !important;
+        border:1px solid rgba(99,102,241,.12) !important;
+        color:#4f46e5 !important;font-size:13px !important;
+        font-family:inherit !important;
+    }
+    .chat-msg.msg-coord .bubble { border-left:3px solid #6366f1; }
+    .chat-msg.msg-expert .bubble { border-left:3px solid #8b5cf6; }
+    @keyframes msgIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── 思考/计划/工具/状态 ── */
+    .think-fold { margin:6px 0 8px;border:1px solid #d1d5db;border-radius:8px;background:#1e293b;overflow:hidden; }
+    .think-fold summary { padding:7px 14px;cursor:pointer;font-size:11px;font-weight:700;color:#93c5fd;user-select:none;background:#1e293b;letter-spacing:.3px; }
+    .think-fold .think-body { padding:12px 14px;font-size:12px;color:#e2e8f0;line-height:1.6;white-space:pre-wrap;max-height:600px;overflow-y:auto;background:#0f172a;border-top:1px solid #334155;font-family:'SF Mono','Cascadia Code','Consolas',monospace; }
+    /* JSON 语法高亮 */
+    .think-body .json-key   { color:#93c5fd; }
+    .think-body .json-str   { color:#86efac; }
+    .think-body .json-num   { color:#fde68a; }
+    .think-body .json-bool  { color:#c084fc; }
+    .think-body .json-null  { color:#94a3b8; }
+    .think-body .json-punct { color:#cbd5e1; }
+    .think-body .json-section { color:#fca5a5;font-weight:600;margin-top:8px;display:inline-block;border-bottom:1px dashed #fca5a5;padding-bottom:2px; }
+    .plan-fold { margin:4px 0 6px;border:1px solid #fed7aa;border-radius:8px;background:#fff7ed;overflow:hidden; }
+    .plan-fold summary { padding:7px 12px;cursor:pointer;font-size:11px;font-weight:600;color:#c2410c;user-select:none; }
+    .plan-fold ol { margin:8px 0 0 20px;padding:0 12px 10px;font-size:11px;color:#64748b; }
+
+    .tool-chip { display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:500;background:#fffbeb;color:#b45309;border:1px solid #fde68a;margin-right:4px;margin-bottom:4px; }
+
+    .status-line { display:flex;align-items:center;gap:8px;padding:3px 20px;font-size:11px;color:var(--text-muted); }
+    .status-dot { width:6px;height:6px;border-radius:50%;background:var(--primary);animation:dotPulse 1.5s infinite; }
+    @keyframes dotPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(1.4)} }
+
+    /* ── 技能标签 ── */
+    .skill-badge {
+        display:inline-flex;align-items:center;gap:3px;
+        padding:2px 8px;border-radius:8px;font-size:10px;font-weight:600;
+        background:#dbeafe;color:#1d4ed8;border:1px solid #bfdbfe;
+        margin-left:4px;
     }
 
-    /* 思考动画 */
-    .thinking-dots { display: inline-flex; gap: 4px; padding: 4px 0; }
-    .thinking-dots .dot {
-        width: 7px; height: 7px; border-radius: 50%;
-        background: var(--primary);
-        animation: thinkBounce 1s infinite;
+    /* ── 流程面板卡片 ── */
+    .flow-step-card {
+        display:flex;align-items:center;gap:10px;padding:12px 14px;
+        margin-bottom:8px;background:#fff;border:1.5px solid #e2e8f0;
+        border-radius:10px;transition:all .2s;
     }
-    .thinking-dots .dot:nth-child(2) { animation-delay: 0.15s; }
-    .thinking-dots .dot:nth-child(3) { animation-delay: 0.3s; }
-    @keyframes thinkBounce {
-        0%, 60%, 100% { opacity: 0.3; transform: scale(0.7); }
-        30% { opacity: 1; transform: scale(1.2); }
+    .flow-step-card:hover { border-color:#6366f1;box-shadow:0 2px 8px rgba(99,102,241,.08); }
+    .flow-step-card .step-num {
+        width:26px;height:26px;border-radius:50%;background:#eef2ff;
+        color:#6366f1;font-weight:700;font-size:12px;
+        display:flex;align-items:center;justify-content:center;flex-shrink:0;
     }
+    .flow-step-card .step-info { flex:1;min-width:0; }
+    .flow-step-card .step-name { font-weight:600;font-size:13px;color:#1e293b; }
+    .flow-step-card .step-mode { font-size:10px;color:#94a3b8;margin-top:1px; }
+    .flow-step-card .step-remove { background:none;border:none;color:#ef4444;cursor:pointer;font-size:16px;padding:2px 6px;opacity:.5;transition:opacity .2s; }
+    .flow-step-card .step-remove:hover { opacity:1; }
+    .flow-step-card .step-toggle { font-size:10px;padding:3px 8px;border-radius:4px;border:1px solid #e2e8f0;background:#fff;color:#64748b;cursor:pointer;font-family:inherit;margin-right:4px; }
+    .flow-step-card .step-toggle.parallel { background:#fef3c7;color:#b45309;border-color:#fde68a; }
 
-    /* 动画 */
-    .msg {
-        animation: msgIn .25s ease-out;
-    }
-    @keyframes msgIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* 输入框聚焦 */
-    #chatInput:focus {
-        outline: none; border-color: var(--primary);
-        box-shadow: 0 0 0 3px var(--primary-glow);
-    }
-    #sendBtn:hover { background: var(--primary-hover); transform: scale(1.08); }
-    #sendBtn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    /* ── 输入框 ── */
+    #chatInput:focus { border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-glow); }
+    #sendBtn:hover { background:var(--primary-hover);transform:scale(1.08); }
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('chatForm');
-    const input = document.getElementById('chatInput');
-    const sendBtn = document.getElementById('sendBtn');
-    const stopBtn = document.getElementById('stopBtn');
-    const messagesDiv = document.getElementById('chatMessages');
-    const emptyState = document.getElementById('emptyState');
+(function(){
+    'use strict';
+    var form = document.getElementById('chatForm');
+    var input = document.getElementById('chatInput');
+    var sendBtn = document.getElementById('sendBtn');
+    var stopBtn = document.getElementById('stopBtn');
+    var msgDiv = document.getElementById('chatMessages');
+    var emptyState = document.getElementById('emptyState');
+    var hint = document.getElementById('selectionHint');
+    var flowToggle = document.getElementById('flowToggle');
+    var flowPanel = document.getElementById('flowPanel');
+    var flowOverlay = document.getElementById('flowOverlay');
+    var flowSteps = document.getElementById('flowSteps');
+    var sessionId = form ? form.getAttribute('data-session-id') : '';
 
-    let currentAbortController = null;
-    let isStreaming = false;
+    var currentAbort = null;
+    var flowStepList = [];
 
-    // Agent 名称 → 角色映射
-    const agentRoles = {};
-    agentRoles['{{ global_agent.name }}'] = 'coordinator';  // 全局智能体
-    document.querySelectorAll('.toggle-chip').forEach(chip => {
-        const cls = chip.className;
-        if (cls.includes('coordinator')) agentRoles[chip.dataset.agent] = 'coordinator';
-        else if (cls.includes('expert')) agentRoles[chip.dataset.agent] = 'expert';
-        else agentRoles[chip.dataset.agent] = 'member';
+    // ── 专家芯片角色映射 ──
+    var agentRoles = {};
+    agentRoles['{{ global_agent.name|escapejs }}'] = 'coordinator';
+    document.querySelectorAll('.expert-chip').forEach(function(c){
+        if (c.classList.contains('chip-coord')) agentRoles[c.dataset.agent] = 'coordinator';
+        else if (c.classList.contains('chip-expert')) agentRoles[c.dataset.agent] = 'expert';
+        else agentRoles[c.dataset.agent] = 'member';
     });
 
-    function setStreaming(active) {
-        isStreaming = active;
-        stopBtn.style.display = active ? '' : 'none';
-        sendBtn.textContent = active ? '▶' : '➤';
-        sendBtn.style.background = active ? '#ef4444' : 'var(--primary)';
-    }
-
-    function stopStream() {
-        if (currentAbortController) {
-            currentAbortController.abort();
-            currentAbortController = null;
-        }
-        setStreaming(false);
-    }
-
-    // ── 专家芯片切换 ──
-    const toggleChips = document.querySelectorAll('.toggle-chip');
-    toggleChips.forEach(chip => {
-        chip.addEventListener('click', function() {
-            this.classList.toggle('active');
+    // ── 专家芯片点击 ──
+    document.querySelectorAll('.expert-chip').forEach(function(c){
+        c.addEventListener('click', function(){
+            this.classList.toggle('selected');
             updateHint();
         });
     });
 
-    function getSelectedAgents() {
-        const selected = [];
-        document.querySelectorAll('.toggle-chip.active').forEach(c => {
-            selected.push(c.dataset.agent);
-        });
-        return selected;
+    function getSelectedAgents(){
+        var sel = [];
+        document.querySelectorAll('.expert-chip.selected').forEach(function(c){ sel.push(c.dataset.agent); });
+        return sel;
     }
 
-    function updateHint() {
-        const selected = getSelectedAgents();
-        const hint = document.getElementById('selectionHint');
-        if (selected.length > 0) {
-            hint.textContent = '✅ 已选: ' + selected.join(', ');
+    function updateHint(){
+        var sel = getSelectedAgents();
+        if (sel.length > 0){
+            hint.textContent = '✅ 已选: ' + sel.join(', ');
             hint.style.color = 'var(--primary)';
             input.placeholder = '已指定专家，输入消息...';
         } else {
-            hint.textContent = '💡 点击上方专家可选择/取消，不选则自动匹配';
+            hint.textContent = '💡 点击专家选择，不选则自动匹配';
             hint.style.color = 'var(--text-muted)';
             input.placeholder = '输入消息，我会自动匹配专家...';
         }
+        if (flowToggle) flowToggle.style.display = sel.length >= 2 ? 'inline' : 'none';
     }
 
-    // ── 发送消息 ──
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const content = input.value.trim();
-        if (!content) return;
-
-        // 如果正在流式输出，先打断
-        if (isStreaming) {
-            stopStream();
+    // ── 流程面板 ──
+    window.toggleFlowPanel = function(){
+        if (flowPanel.style.right === '0px') closeFlowPanel(); else openFlowPanel();
+    };
+    window.closeFlowPanel = function(){
+        flowPanel.style.right = '-390px';
+        flowOverlay.style.display = 'none';
+    };
+    function openFlowPanel(){
+        var sel = getSelectedAgents();
+        sel.forEach(function(name){
+            if (!flowStepList.find(function(s){ return s.agent_name === name; }))
+                flowStepList.push({agent_name:name, mode:'sequential', depends_on:[]});
+        });
+        flowStepList = flowStepList.filter(function(s){ return sel.indexOf(s.agent_name) >= 0; });
+        flowPanel.style.right = '0px';
+        flowOverlay.style.display = 'block';
+        renderFlowSteps();
+    }
+    function renderFlowSteps(){
+        if (!flowSteps) return;
+        if (flowStepList.length === 0){
+            flowSteps.innerHTML =
+                '<div style="text-align:center;color:#cbd5e1;padding:40px 20px;">'+
+                '<div style="font-size:40px;margin-bottom:10px;">📋</div>'+
+                '<p style="font-size:13px;color:#94a3b8;">尚未添加专家到流程中</p>'+
+                '<p style="font-size:11px;color:#cbd5e1;">从下方下拉列表选择专家并点击添加</p></div>';
+            return;
         }
-
-        if (emptyState) emptyState.style.display = 'none';
-
-        appendMessage('user', content, '');
-        input.value = '';
-        setStreaming(true);
-
-        // 构建 URL
-        const selectedAgents = getSelectedAgents();
-        let url = '{% url "chat:global_chat_stream" %}?session_id={{ session.pk }}&content=' + encodeURIComponent(content);
-        if (selectedAgents.length > 0) {
-            url += '&agents=' + encodeURIComponent(selectedAgents.join(','));
+        var html = '';
+        flowStepList.forEach(function(step, idx){
+            var modeLabel = step.mode === 'parallel' ? '∥ 并行' : '→ 串行';
+            var modeClass = step.mode === 'parallel' ? 'parallel' : '';
+            html += '<div class="flow-step-card">'+
+                '<div class="step-num">'+(idx+1)+'</div>'+
+                '<div class="step-info">'+
+                '<div class="step-name">'+escHtml(step.agent_name)+'</div>'+
+                '<div class="step-mode">'+
+                '<button class="step-toggle '+modeClass+'" onclick="toggleFlowMode('+idx+')">'+modeLabel+'</button>'+
+                '</div></div>'+
+                '<button class="step-remove" onclick="removeFlowStep('+idx+')" title="移除">&times;</button>'+
+                '</div>';
+        });
+        flowSteps.innerHTML = html;
+    }
+    window.toggleFlowMode = function(idx){
+        if (idx>=0 && idx<flowStepList.length){
+            flowStepList[idx].mode = flowStepList[idx].mode === 'parallel' ? 'sequential' : 'parallel';
+            renderFlowSteps();
         }
+    };
+    window.removeFlowStep = function(idx){
+        flowStepList.splice(idx,1);
+        renderFlowSteps();
+    };
 
-        const controller = new AbortController();
-        currentAbortController = controller;
+    // ── 流程面板按钮 ──
+    var flowAgentSelect = document.getElementById('flowAgentSelect');
+    var addToFlowBtn = document.getElementById('addToFlowBtn');
+    var applyFlowBtn = document.getElementById('applyFlowBtn');
 
-        try {
-            const resp = await fetch(url, { signal: controller.signal });
-            const reader = resp.body.getReader();
-            const decoder = new TextDecoder();
-            let buffer = '';
-
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-                buffer += decoder.decode(value, { stream: true });
-
-                const lines = buffer.split('\n');
-                buffer = lines.pop() || '';
-
-                for (const line of lines) {
-                    if (!line.startsWith('data: ')) continue;
-                    try {
-                        const data = JSON.parse(line.slice(6));
-                        if (data.type === 'routing') {
-                            appendSystemMessage(data.content, data.status, data);
-                        } else if (data.type === 'assistant') {
-                            appendMessage('assistant', data.content, data.agent_name || '', '', data.tool_calls, data.role);
-                        } else if (data.type === 'done') {
-                            // 完成
-                        } else if (data.type === 'error') {
-                            appendMessage('assistant', data.content, '系统',
-                                'background:#fef2f2;color:#dc2626;border:1px solid #fecaca;');
-                        }
-                    } catch (e) { /* skip */ }
-                }
+    if (addToFlowBtn && flowAgentSelect){
+        addToFlowBtn.addEventListener('click', function(){
+            var name = flowAgentSelect.value;
+            if (!name) return;
+            if (flowStepList.find(function(s){ return s.agent_name === name; })){
+                alert('该专家已在流程中');
+                return;
             }
-        } catch (err) {
-            if (err.name === 'AbortError') {
-                appendSystemMessage('⏹ 已打断，等待你的补充信息...', 'manual', {});
-            } else {
-                console.error('SSE error:', err);
-                appendMessage('assistant', '[连接错误] 请检查网络后重试', '系统',
-                    'background:#fef2f2;color:#dc2626;border:1px solid #fecaca;');
-            }
-        }
-
-        currentAbortController = null;
-        setStreaming(false);
-        input.focus();
-    });
-
-    function appendMessage(role, content, agentName, extraStyle, toolCalls) {
-        const div = document.createElement('div');
-        const agentRole = agentRoles[agentName] || '';
-        const roleClass = agentRole === 'coordinator' ? ' msg-coordinator' :
-                          agentRole === 'expert' ? ' msg-expert' : '';
-        div.className = role === 'user' ? 'msg msg-user' : ('msg msg-assistant' + roleClass);
-
-        let nameHtml = '';
-        if (agentName && role !== 'user') {
-            nameHtml = '<div class="msg-agent-name">' + escapeHtml(agentName) + '</div>';
-        }
-
-        // 工具调用展示
-        let toolsHtml = '';
-        if (toolCalls && toolCalls.length > 0) {
-            toolsHtml = '<div class="msg-tools">';
-            toolCalls.forEach(tc => {
-                toolsHtml += '<span class="msg-tool-chip" title="' + escapeHtml(tc.args || '') + '">🔧 ' + escapeHtml(tc.tool) + '</span>';
+            flowStepList.push({agent_name:name, mode:'sequential', depends_on:[]});
+            flowAgentSelect.value = '';
+            renderFlowSteps();
+        });
+    }
+    if (applyFlowBtn){
+        applyFlowBtn.addEventListener('click', function(){
+            document.querySelectorAll('.expert-chip').forEach(function(c){ c.classList.remove('selected'); });
+            flowStepList.forEach(function(s){
+                document.querySelectorAll('.expert-chip').forEach(function(c){
+                    if (c.dataset.agent === s.agent_name) c.classList.add('selected');
+                });
             });
-            toolsHtml += '</div>';
-        }
-
-        const bubbleStyle = extraStyle || '';
-        div.innerHTML = nameHtml + toolsHtml + '<div class="bubble" style="' + bubbleStyle + '">' + formatContent(content) + '</div>';
-        messagesDiv.appendChild(div);
-        scrollToBottom();
-    }
-
-    function appendSystemMessage(content, status, data) {
-        const div = document.createElement('div');
-        div.className = 'msg msg-assistant msg-system';
-
-        let icon = '🔍';
-        if (status === 'classifying') icon = '⏳';
-        else if (status === 'matched') icon = '✅';
-
-        // 如果已匹配专家，高亮对应 chips
-        if (status === 'matched' && data.agents) {
-            highlightExpertChips(data.agents);
-        }
-
-        const bubbleContent = icon + ' ' + escapeHtml(content)
-            + (data.reasoning ? '\n💡 ' + escapeHtml(data.reasoning) : '');
-
-        div.innerHTML = '<div class="msg-agent-name">全局智能体</div>'
-            + '<div class="bubble" style="font-size:13px;">' + formatContent(bubbleContent) + '</div>';
-        messagesDiv.appendChild(div);
-        scrollToBottom();
-    }
-
-    function highlightExpertChips(agentNames) {
-        document.querySelectorAll('.chat-agent-chip').forEach(chip => {
-            const name = chip.textContent.trim();
-            if (agentNames.includes(name)) {
-                chip.classList.add('active');
+            updateHint();
+            if (sessionId){
+                fetch('/chat/workflow/save/', {
+                    method:'POST',
+                    headers:{'Content-Type':'application/json','X-CSRFToken':document.querySelector('[name=csrfmiddlewaretoken]').value},
+                    body:JSON.stringify({session_id:sessionId, steps:flowStepList, name:'用户流程'}),
+                }).catch(function(){});
             }
+            closeFlowPanel();
         });
     }
 
-    function formatContent(text) {
-        // 简单 Markdown：代码块、粗体、换行
-        return escapeHtml(text)
-            .replace(/```(\w*)\n?([\s\S]*?)```/g, '<pre style="background:rgba(0,0,0,.03);padding:10px;border-radius:6px;margin:6px 0;overflow-x:auto;"><code>$2</code></pre>')
-            .replace(/`([^`]+)`/g, '<code style="background:rgba(0,0,0,.05);padding:2px 6px;border-radius:4px;">$1</code>')
-            .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-            .replace(/\n/g, '<br>');
-    }
+    // ── 发送消息 SSE ──
+    form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        var content = input.value.trim();
+        if (!content) return;
+        if (emptyState) emptyState.style.display = 'none';
+        appendMsgUser(content);
+        input.value = '';
+        sendBtn.style.display = 'none';
+        stopBtn.style.display = '';
+        input.disabled = true;
 
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
+        var selected = getSelectedAgents();
+        var url = '{% url "chat:global_chat_stream" %}?session_id={{ session.pk }}&content=' + encodeURIComponent(content);
+        if (selected.length > 0) url += '&agents=' + encodeURIComponent(selected.join(','));
 
-    function scrollToBottom() {
-        messagesDiv.scrollTop = messagesDiv.scrollHeight;
-    }
+        var controller = new AbortController();
+        currentAbort = controller;
 
-    // 聚焦输入框
-    input.focus();
-});
-
-function newConversation() {
-    if (confirm('确定要开始新对话吗？当前对话内容将保留在历史中。')) {
-        location.href = location.pathname + '?_=' + Date.now();
-    }
-}
-
-async function clearContext() {
-    if (!confirm('确定要清空当前会话的上下文吗？这会删除当前会话的所有消息记录。')) return;
-    try {
-        const resp = await fetch('{% url "chat:clear_context" session.pk %}', { method: 'POST', headers: {'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value} });
-        if (resp.ok) {
-            document.getElementById('chatMessages').innerHTML = '';
-            const emptyDiv = document.createElement('div');
-            emptyDiv.className = 'empty-state';
-            emptyDiv.style.padding = '80px 0';
-            emptyDiv.id = 'emptyState';
-            emptyDiv.innerHTML = '<div class="empty-icon">🤖</div><p style="font-size:15px;font-weight:600;color:var(--text);">上下文已清空</p><p style="font-size:13px;color:var(--text-muted);margin-top:4px;">可以开始新的讨论了</p>';
-            document.getElementById('chatMessages').appendChild(emptyDiv);
+        try {
+            var resp = await fetch(url, {signal: controller.signal});
+            var reader = resp.body.getReader();
+            var decoder = new TextDecoder();
+            var buf = '';
+            while (true){
+                var r = await reader.read();
+                if (r.done) break;
+                buf += decoder.decode(r.value, {stream:true});
+                var lines = buf.split('\n');
+                buf = lines.pop() || '';
+                for (var i=0; i<lines.length; i++){
+                    var line = lines[i];
+                    if (!line.startsWith('data: ')) continue;
+                    try { handleEvent(JSON.parse(line.slice(6))); } catch(ex){}
+                }
+            }
+        } catch(err){
+            if (err.name !== 'AbortError'){
+                console.error('SSE:', err);
+                appendMsgSystem('❌ 连接错误，请重试', '系统');
+            }
         }
-    } catch(e) {
-        alert('清空失败: ' + e.message);
+        currentAbort = null;
+        sendBtn.style.display = '';
+        stopBtn.style.display = 'none';
+        input.disabled = false;
+        input.focus();
+    });
+
+    // ── 停止 & 回车 ──
+    stopBtn.addEventListener('click', function(){
+        if (currentAbort){ currentAbort.abort(); currentAbort = null; }
+        sendBtn.style.display = '';
+        stopBtn.style.display = 'none';
+        input.disabled = false;
+        input.focus();
+    });
+    input.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); form.dispatchEvent(new Event('submit')); }
+    });
+
+    // ── SSE 事件 ──
+    function handleEvent(d){
+        switch(d.type){
+            case 'user': break;
+            case 'routing': appendMsgSystem((d.status==='classifying'?'⏳ ':'✅ ')+d.content, '全局智能体'); break;
+            case 'status': appendStatus(d.agent_name, d.content); break;
+            case 'thinking': appendThinking(d.agent_name, d.stage, d.content); break;
+            case 'plan': appendPlan(d.agent_name, d.steps||[]); break;
+            case 'tool_call': appendTool(d.agent_name, d.tool, d.args); break;
+            case 'assistant': appendMsgBot(d.content, d.agent_name, d.role, d.metadata); handleMentions(d.content); break;
+            case 'error': appendMsgSystem('❌ '+d.content, '系统'); break;
+            case 'done': break;
+        }
+        msgDiv.scrollTop = msgDiv.scrollHeight;
     }
+
+    // ── 渲染函数 ──
+    function appendMsgUser(content){
+        var d = document.createElement('div');
+        d.className = 'chat-msg msg-user';
+        d.innerHTML = '<div class="bubble">'+fmtMsgContent(content)+'</div>';
+        msgDiv.appendChild(d);
+    }
+    function appendMsgBot(content, agentName, role, meta){
+        var d = document.createElement('div');
+        var roleCls = role==='coordinator'?' msg-coord':(role==='expert'?' msg-expert':'');
+        d.className = 'chat-msg msg-bot' + roleCls;
+
+        var icon = '';
+        if (meta && meta.agent_type){
+            var icons = {react:'🔄',simple:'⚡',reflection:'🪞',plan_and_solve:'📋'};
+            icon = ' <span title="'+escHtml(meta.agent_type)+'" style="font-size:10px;">'+(icons[meta.agent_type]||'')+'</span>';
+        }
+        var thinkHtml = '';
+        if (meta && meta.thinking && meta.thinking.length>0){
+            thinkHtml = '<details class="think-fold"><summary>💭 思考过程（'+meta.thinking.length+'步）</summary><div class="think-body">';
+            meta.thinking.forEach(function(t){
+                var body = fmtJsonContent(t.content||'', 800);
+                thinkHtml += '<div style="margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #334155;">'+
+                    '<b class="json-section">'+escHtml(t.stage||'...')+'</b><br><br>'+body+'</div>';
+            });
+            thinkHtml += '</div></details>';
+        }
+        var toolsHtml = '';
+        if (meta && meta.tool_calls && meta.tool_calls.length>0){
+            toolsHtml = '<div style="display:flex;gap:4px;flex-wrap:wrap;padding:4px 0 6px;">';
+            meta.tool_calls.forEach(function(tc){
+                toolsHtml += '<span class="tool-chip">🔧 '+escHtml(tc.tool||tc.name||'')+'</span>';
+            });
+            toolsHtml += '</div>';
+        }
+        // 技能标签
+        var skillBadge = '';
+        if (meta && meta.skill_used){
+            skillBadge = ' <span class="skill-badge">📋 '+escHtml(meta.skill_used)+'</span>';
+        }
+        d.innerHTML =
+            '<div class="msg-meta">'+
+            '<span class="msg-author">'+escHtml(agentName||'Agent')+'</span>'+icon+skillBadge+
+            '<span class="msg-time">'+(new Date()).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})+'</span>'+
+            '</div>'+thinkHtml+toolsHtml+'<div class="bubble">'+fmtMsgContent(content)+'</div>';
+        msgDiv.appendChild(d);
+    }
+    function appendMsgSystem(content, name){
+        var d = document.createElement('div');
+        d.className = 'chat-msg msg-bot msg-system';
+        d.innerHTML = '<div class="msg-meta"><span class="msg-author">'+(name||'全局智能体')+'</span></div><div class="bubble">'+fmtMsgContent(content)+'</div>';
+        msgDiv.appendChild(d);
+    }
+    function appendThinking(name, stage, content){
+        var labels = {generate:'生成初稿',reflect:'批判审视',refine:'改进答案',plan:'制定计划',react_turn_0:'第1轮思考',react_turn_1:'第2轮',execute_step_0:'步骤1',execute_step_1:'步骤2'};
+        var d = document.createElement('div');
+        d.className = 'chat-msg msg-bot';
+        // 全部内容展示，JSON 自动格式化
+        var body = fmtJsonContent(content||'', 800);
+        d.innerHTML = '<details class="think-fold" open><summary>💭 '+escHtml(name)+' · '+(labels[stage]||stage)+'</summary><div class="think-body">'+body+'</div></details>';
+        msgDiv.appendChild(d);
+    }
+    function appendPlan(name, steps){
+        var lis = steps.map(function(s){ return '<li>'+escHtml(s)+'</li>'; }).join('');
+        var d = document.createElement('div');
+        d.className = 'chat-msg msg-bot';
+        d.innerHTML = '<details class="plan-fold" open><summary>📋 '+escHtml(name)+' · 计划（'+steps.length+'步）</summary><ol>'+lis+'</ol></details>';
+        msgDiv.appendChild(d);
+    }
+    function appendTool(name, tool, args){
+        var d = document.createElement('div');
+        d.style.cssText = 'padding:4px 20px;font-size:11px;';
+        var argsHtml = '';
+        if (args){
+            try {
+                var p = typeof args === 'string' ? JSON.parse(args) : args;
+                var pretty = JSON.stringify(p, null, 2);
+                argsHtml = '<pre style="margin:4px 0 0;padding:8px 12px;background:#0f172a;color:#e2e8f0;border-radius:6px;font-size:11px;overflow-x:auto;max-height:200px;white-space:pre;font-family:monospace;">'+colorizeJsonLine(escHtml(pretty))+'</pre>';
+            } catch(e){ argsHtml = ' <code style="font-size:10px;">'+escHtml(String(args||'').substring(0,150))+'</code>'; }
+        }
+        d.innerHTML = '🔧 <b>'+escHtml(name)+'</b> 调用工具: <code style="background:#fffbeb;color:#b45309;padding:2px 7px;border-radius:4px;font-size:11px;">'+escHtml(tool||'')+'</code>'+argsHtml;
+        msgDiv.appendChild(d);
+    }
+    function appendStatus(name, content){
+        var d = document.createElement('div');
+        d.className = 'status-line';
+        d.innerHTML = '<span class="status-dot"></span><b>'+escHtml(name)+'</b>: '+escHtml(content);
+        msgDiv.appendChild(d);
+    }
+    function handleMentions(content){
+        var m = content.match(/@(\w[\w一-鿿]*)/g);
+        if (!m) return;
+        m.forEach(function(at){
+            var name = at.substring(1);
+            document.querySelectorAll('.expert-chip').forEach(function(c){
+                if (c.dataset.agent===name){ c.classList.add('selected','mentioned'); setTimeout(function(){c.classList.remove('mentioned');},2000); }
+            });
+        });
+        updateHint();
+    }
+
+    // ── 工具函数 ──
+    function escHtml(t){ var d=document.createElement('div');d.textContent=t||'';return d.innerHTML; }
+    function fmtContent(t){
+        if (!t) return '';
+        return escHtml(t)
+            .replace(/```(\w*)\n?([\s\S]*?)```/g,'<pre style="background:rgba(0,0,0,.03);padding:10px;border-radius:6px;margin:6px 0;overflow-x:auto;font-size:12px;"><code>$2</code></pre>')
+            .replace(/`([^`]+)`/g,'<code style="background:rgba(0,0,0,.05);padding:2px 6px;border-radius:3px;font-size:12px;">$1</code>')
+            .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+            .replace(/@(\w[\w一-鿿]*)/g,'<span style="color:#6366f1;font-weight:600;">@$1</span>')
+            .replace(/\n/g,'<br>');
+    }
+    // 消息气泡用的格式化：先检测 JSON 块，有则用暗色代码块展示，无则走普通文本
+    function fmtMsgContent(t){
+        if (!t) return '';
+        // 先检测是否有 JSON 块
+        var jsonParts = extractAndColorJson(t);
+        if (jsonParts) return jsonParts;
+        return fmtContent(t);
+    }
+    // JSON 自动检测 + 语法高亮格式化。maxLen 限制输出长度，0=不限制
+    function fmtJsonContent(raw, maxLen){
+        maxLen = maxLen || 0;
+        var text = raw || '';
+        // 尝试提取并美化 JSON
+        var parts = extractAndColorJson(text);
+        if (parts) return parts;
+        // 无 JSON → 纯文本展示
+        if (maxLen && text.length > maxLen) text = text.substring(0, maxLen) + '\n...(truncated)';
+        return escHtml(text);
+    }
+    // 检测 "{ ... }" 包围的 JSON，提取并注入语法高亮
+    function extractAndColorJson(text){
+        // 找到第一个顶层 { 和匹配的 }
+        var start = text.indexOf('{');
+        if (start < 0) return null;
+        var depth = 0, end = -1;
+        for (var i = start; i < text.length; i++){
+            if (text[i] === '{') depth++;
+            else if (text[i] === '}') { depth--; if (depth === 0){ end = i+1; break; } }
+        }
+        if (end < 0 || end - start < 4) return null;
+        var prefix = text.substring(0, start);
+        var jsonStr = text.substring(start, end);
+        var suffix = text.substring(end);
+        try {
+            var parsed = JSON.parse(jsonStr);
+            var pretty = JSON.stringify(parsed, null, 2);
+            var colored = colorizeJsonLine(pretty);
+            // JSON 块用 <pre> 包裹，暗色背景 + 等宽字体
+            return escHtml(prefix).replace(/\n/g,'<br>')
+                + '<pre style="display:block;margin:8px 0;padding:10px 14px;background:#1e293b;color:#e2e8f0;border-radius:6px;font-size:11px;line-height:1.6;overflow-x:auto;max-height:400px;border:1px solid #334155;">'+colored+'</pre>'
+                + escHtml(suffix).replace(/\n/g,'<br>');
+        } catch(e){ return null; }
+    }
+    // JSON 语法高亮（行级）
+    function colorizeJsonLine(jsonText){
+        // 把 JSON 行逐行染色
+        var lines = jsonText.split('\n');
+        var out = [];
+        for (var i = 0; i < lines.length; i++){
+            var line = lines[i];
+            // key: "xxx" → <span class="json-key">"xxx"</span>
+            line = line.replace(/^(\s*)"([^"]+)":/g, '$1<span class="json-key">"$2"</span>:');
+            // string values
+            line = line.replace(/: "([^"]*?)"/g, ': <span class="json-str">"$1"</span>');
+            // numbers
+            line = line.replace(/: (-?\d+\.?\d*)/g, ': <span class="json-num">$1</span>');
+            // booleans
+            line = line.replace(/: (true|false)/g, ': <span class="json-bool">$1</span>');
+            // null
+            line = line.replace(/: (null)/g, ': <span class="json-null">$1</span>');
+            out.push(line);
+        }
+        return out.join('\n');
+    }
+
+    input.focus();
+})();
+
+// ── 全局函数 ──
+function clearContext(){
+    if (!confirm('确定清空当前会话上下文？')) return;
+    fetch('{% url "chat:clear_context" session.pk %}', {
+        method:'POST',
+        headers:{'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value},
+    }).then(function(r){
+        if (r.ok){
+            var m = document.getElementById('chatMessages');
+            m.innerHTML = '<div style="text-align:center;padding:80px 0;" id="emptyState"><div style="font-size:48px;margin-bottom:12px;">🤖</div><p style="font-size:15px;font-weight:600;color:var(--text);">上下文已清空</p></div>';
+        }
+    }).catch(function(e){ alert('清空失败: '+e.message); });
 }
+function newConversation(){
+    if (confirm('开始新对话？')) location.href = location.pathname + '?_=' + Date.now();
+}
+function stopStream(){}
 </script>
 {% endblock %}

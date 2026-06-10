@@ -17,7 +17,12 @@
 
 {% block content %}
 <div class="detail-card">
-    <h2>{{ agent.name }} <span class="badge {% if agent.is_active %}badge-green{% else %}badge-gray{% endif %}">{{ agent.is_active|yesno:"启用,禁用" }}</span></h2>
+    <h2>{{ agent.name }}
+        <span class="badge {% if agent.is_active %}badge-green{% else %}badge-gray{% endif %}">{{ agent.is_active|yesno:"启用,禁用" }}</span>
+        {% with agent_type_labels='{"react":"🔄 ReAct","simple":"⚡ Simple","reflection":"🪞 Reflection","plan_and_solve":"📋 Plan&Solve"}' %}
+        <span class="badge badge-blue" title="执行策略">{{ agent.get_agent_type_display|default:agent.agent_type }}</span>
+        {% endwith %}
+    </h2>
     <div class="field"><span class="field-label">描述</span><p>{{ agent.description|default:"暂无描述" }}</p></div>
     <div class="field"><span class="field-label">系统提示词</span><p>{{ agent.system_prompt|default:"未设置" }}</p></div>
     {% if agent.llm_config %}

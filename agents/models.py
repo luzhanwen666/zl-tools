@@ -11,12 +11,24 @@ class Agent(models.Model):
         ("member", "成员"),
     ]
 
+    AGENT_TYPE_CHOICES = [
+        ("react", "ReActAgent - 思考行动观察循环"),
+        ("simple", "SimpleAgent - 直接问答"),
+        ("reflection", "ReflectionAgent - 生成反思改进"),
+        ("plan_and_solve", "PlanAndSolveAgent - 先规划后执行"),
+    ]
+
     name = models.CharField("名称", max_length=200)
     description = models.TextField("描述", blank=True, default="")
     avatar = models.ImageField("头像", upload_to="avatars/", blank=True, null=True)
     system_prompt = models.TextField("系统提示词", blank=True, default="")
     group = models.CharField("协作组", max_length=100, blank=True, default="default")
     role = models.CharField("角色", max_length=50, choices=ROLE_CHOICES, default="member")
+    agent_type = models.CharField(
+        "智能体类型", max_length=30,
+        choices=AGENT_TYPE_CHOICES, default="react",
+        help_text="决定Agent的执行策略：ReAct循环/直接问答/反思改进/先规划后执行",
+    )
     llm_config = models.ForeignKey(
         "llm_config.LLMConfig",
         on_delete=models.SET_NULL,

@@ -42,32 +42,76 @@ class SkillTool(BaseTool):
 
 
 class MCPToolWrapper(BaseTool):
-    """将 MCPToolConfig 包装为工具（预留，后续实现实际 MCP 调用）"""
+    """将 MCPToolConfig 包装为工具 — 真实 MCP 协议调用"""
 
     def __init__(self, mcp_config):
         self.name = f"mcp_{mcp_config.name.lower().replace(' ', '_')}"
         self.description = mcp_config.description or f"MCP工具: {mcp_config.name}"
         self.mcp_config = mcp_config
+        self._remote_tools: list[dict] = []  # 从 MCP 服务器获取的工具定义
+        self._connected = False
+        # 参数 schema 将在首次连接时从远程工具动态构建
         self.parameters = {
             "type": "object",
             "properties": {
-                "action": {
-                    "type": "string",
-                    "description": "要执行的操作",
-                },
-                "params": {
-                    "type": "object",
-                    "description": "操作参数",
-                },
+                "action": {"type": "string", "description": "要执行的操作"},
+                "params": {"type": "object", "description": "操作参数"},
             },
             "required": ["action"],
         }
 
-    async def execute(self, action: str, params: dict | None = None, **kwargs) -> str:
-        """MCP 工具执行（预留实现）"""
-        # TODO: 实际调用 MCP 服务
-        logger.info("MCP tool call: %s, action: %s, params: %s", self.mcp_config.name, action, params)
-        return f"[MCP: {self.mcp_config.name}] Action: {action}. (MCP 调用尚未实现)"
+    async def _ensure_connected(self) -> list[dict]:
+        """确保已连接到 MCP 服务器并获取工具列表"""
+        if not self._connected:
+            try:
+                from .mcp_pool import MCPConnectionPool
+                pool = MCPConnectionPool.get_instance()
+                client = await pool.get_client(self.mcp_config)
+                self._remote_tools = pool.get_cached_tools(self.mcp_config)
+                self._connected = True
+                logger.info("MCP tool wrapper connected: %s → %d remote tools",
+                           self.mcp_config.name, len(self._remote_tools))
+            except Exception as e:
+                logger.error("Failed to connect MCP tool '%s': %s", self.mcp_config.name, e)
+                self._remote_tools = []
+                self._connected = True  # 避免无限重试
+
+        return self._remote_tools
+
+    async def execute(self, action: str = "", params: dict | None = None, **kwargs) -> str:
+        """执行 MCP 工具调用"""
+        remote_tools = await self._ensure_connected()
+
+        if not remote_tools:
+            return f"[MCP: {self.mcp_config.name}] 未连接到远程 MCP 服务，无法执行工具调用。"
+
+        try:
+            from .mcp_pool import MCPConnectionPool
+            pool = MCPConnectionPool.get_instance()
+            client = await pool.get_client(self.mcp_config)
+
+            # 如果 action 匹配某个远程工具名，调用它
+            if action:
+                matching = [t for t in remote_tools if t.get("name") == action]
+                if matching:
+                    tool_name = action
+                else:
+                    tool_name = remote_tools[0].get("name", action)
+                    params = {"query": action, **(params or {})}
+            else:
+                tool_name = remote_tools[0].get("name", "unknown")
+                params = params or {}
+
+            result = await client.call_tool(tool_name, params)
+            return result
+
+        except Exception as e:
+            logger.exception("MCP tool execution failed")
+            return f"[MCP错误: {self.mcp_config.name}] {str(e)}"
+
+    def get_remote_tool_definitions(self) -> list[dict]:
+        """返回远程工具定义（用于注入 system prompt）"""
+        return self._remote_tools
 
 
 def get_tools_for_agent(agent: "AgentModel", builtin_registry: ToolRegistry | None = None) -> list[BaseTool]:

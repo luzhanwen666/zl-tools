@@ -44,18 +44,43 @@ def _build_agents_catalog(global_agent: "AgentModel") -> str:
 
     other_agents = Agent.objects.filter(is_active=True).exclude(
         pk=global_agent.pk
-    ).values("name", "role", "description")
+    ).prefetch_related("skills", "mcp_tools")
 
     if not other_agents:
-        return "（暂无其他可用专家，请由你直接回答所有问题）"
+        return "（暂无其他可用专家）"
 
     lines = []
     for ag in other_agents:
-        desc = ag["description"] or "通用智能体"
+        desc = ag.description or "通用智能体"
         role_label = {"coordinator": "协调者", "expert": "专家", "member": "成员"}.get(
-            ag["role"], ag["role"]
+            ag.role, ag.role
         )
-        lines.append(f"- **{ag['name']}**（{role_label}）：{desc}")
+        type_label = {
+            "react": "ReAct", "simple": "Simple",
+            "reflection": "Reflection", "plan_and_solve": "Plan&Solve",
+        }.get(ag.agent_type or "react", "ReAct")
+
+        # 附加技能信息
+        skills_str = ""
+        skills = [s for s in ag.skills.all() if s.is_active]
+        if skills:
+            skill_names = ", ".join(s.name for s in skills[:3])
+            if len(skills) > 3:
+                skill_names += f" 等{len(skills)}项"
+            skills_str = f" · 技能: {skill_names}"
+
+        # 附加 MCP 工具信息
+        mcp_str = ""
+        mcp_tools = [m for m in ag.mcp_tools.all() if m.is_active]
+        if mcp_tools:
+            mcp_names = ", ".join(m.name for m in mcp_tools[:2])
+            if len(mcp_tools) > 2:
+                mcp_names += f" 等{len(mcp_tools)}项"
+            mcp_str = f" · 外部工具: {mcp_names}"
+
+        lines.append(
+            f"- **{ag.name}**（{role_label}·{type_label}{skills_str}{mcp_str}）：{desc}"
+        )
 
     return "\n".join(lines)
 
@@ -179,13 +204,13 @@ class GlobalRouter:
             )
             all_messages.append(routing_msg)
 
-            # 执行群聊（群聊内已用 sync_to_async 处理 ORM）
-            from .group_chat import GroupChatManager
-            manager = GroupChatManager(tool_registry=self.tool_registry)
-            chat_messages = await manager.run_with_agents(
-                session, user_message, agent_list, global_agent.name
+            # 使用 GlobalOrchestrator（独立分析 + 总结）替代 GroupChatManager（轮询群聊）
+            from .orchestrator import GlobalOrchestrator
+            orchestrator = GlobalOrchestrator(tool_registry=self.tool_registry)
+            orc_messages = await orchestrator.run(
+                session, user_message, agent_list, global_agent,
             )
-            all_messages.extend(chat_messages)
+            all_messages.extend(orc_messages)
 
         return all_messages
 
@@ -195,23 +220,24 @@ class GlobalRouter:
         user_message: str,
         manual_agents: list["AgentModel"] | None = None,
     ) -> AsyncGenerator[dict, None]:
+        """流式执行 — 使用 GlobalOrchestrator 的独立分析+总结模式"""
         global_agent = await _get_global_agent()
         if not global_agent or not global_agent.llm_config:
             yield {"type": "error", "content": "全局智能体未配置大模型，请联系管理员。"}
             return
 
-        # 手动指定专家 → 跳过分类，直接路由
+        # 手动指定专家 → 跳过分类，直接编排
         if manual_agents:
             expert_names = [a.name for a in manual_agents]
-            yield {"type": "routing", "status": "manual", "content": f"已手动选择专家：{', '.join(expert_names)}"}
+            yield {"type": "routing", "status": "manual",
+                   "content": f"已手动选择专家：{', '.join(expert_names)}"}
             agent_list = [global_agent] + manual_agents
-            from .group_chat import GroupChatManager
-            manager = GroupChatManager(tool_registry=self.tool_registry)
-            async for msg in manager.run_stream_with_agents(
-                session, user_message, agent_list, global_agent.name
+            from .orchestrator import GlobalOrchestrator
+            orchestrator = GlobalOrchestrator(tool_registry=self.tool_registry)
+            async for event in orchestrator.run_stream(
+                session, user_message, agent_list, global_agent
             ):
-                yield {"type": "assistant", "content": msg.content, "agent_name": msg.name, "tool_calls": msg.tool_calls}
-            yield {"type": "done"}
+                yield event
             return
 
         # 自动分类模式
@@ -220,7 +246,6 @@ class GlobalRouter:
         route_result = await self.classify(user_message, global_agent)
 
         if route_result.is_general_question or not route_result.recommended_agents:
-            # 协调型Agent不直接回答
             yield {
                 "type": "routing", "status": "direct",
                 "content": "该问题没有匹配的专家，协调型智能体不直接回答",
@@ -236,36 +261,41 @@ class GlobalRouter:
                 ),
                 "agent_name": "全局智能体",
             }
-        else:
-            expert_agents = await _resolve_agents(route_result.recommended_agents)
-            agent_names = [a.name for a in expert_agents]
+            yield {"type": "done"}
+            return
 
-            yield {
-                "type": "routing", "status": "matched",
-                "content": f"已激活专家：{', '.join(agent_names)}",
-                "intent": route_result.intent,
-                "reasoning": route_result.reasoning[:60],  # 截断理由
-                "agents": agent_names,
-            }
+        # 匹配到专家 → 使用 GlobalOrchestrator 流式执行
+        expert_agents = await _resolve_agents(route_result.recommended_agents)
+        agent_names = [a.name for a in expert_agents]
 
-            agent_list = [global_agent] + expert_agents
-            from .group_chat import GroupChatManager
-            manager = GroupChatManager(tool_registry=self.tool_registry)
+        yield {
+            "type": "routing", "status": "matched",
+            "content": f"已激活专家：{', '.join(agent_names)}",
+            "intent": route_result.intent,
+            "reasoning": route_result.reasoning[:60],
+            "agents": agent_names,
+        }
 
-            async for msg in manager.run_stream_with_agents(
-                session, user_message, agent_list, global_agent.name
-            ):
-                yield {"type": "assistant", "content": msg.content, "agent_name": msg.name, "tool_calls": msg.tool_calls}
+        agent_list = [global_agent] + expert_agents
+        from .orchestrator import GlobalOrchestrator
+        orchestrator = GlobalOrchestrator(tool_registry=self.tool_registry)
 
-        yield {"type": "done"}
+        async for event in orchestrator.run_stream(
+            session, user_message, agent_list, global_agent
+        ):
+            yield event
 
     # ------------------------------------------------------------------
     # 分类
     # ------------------------------------------------------------------
 
     async def classify(self, user_message: str, global_agent: "AgentModel") -> RouteResult:
-        """让全局 Agent 分析用户意图并做出路由决策。"""
-        # 构建可用 Agent 目录（sync_to_async 包装）
+        """让全局 Agent 分析用户意图并做出路由决策。
+
+        分类流程：
+        1. LLM 分类（system prompt 强约束）
+        2. 如果 LLM 返回 is_general_question=true 或解析失败 → 关键词兜底匹配
+        """
         agents_catalog = await _build_agents_catalog(global_agent)
 
         messages = prompts.build_classifier_messages(
@@ -274,6 +304,7 @@ class GlobalRouter:
             user_message=user_message,
         )
 
+        # ── 步骤 1: LLM 分类 ──
         try:
             from . import llm_client as llm_module
             llm_config = global_agent.llm_config
@@ -283,39 +314,85 @@ class GlobalRouter:
                 messages=messages,
                 api_base=llm_config.api_base,
                 api_key=llm_config.api_key,
-                max_tokens=min(llm_config.max_tokens, 1024),
-                temperature=0.3,
+                max_tokens=min(llm_config.max_tokens, 512),
+                temperature=0.0,  # 零温度 = 最高确定性
             )
         except Exception as e:
             logger.exception("Classification LLM call failed")
+            # LLM 调用失败 → 直接走关键词兜底
+            fallback = prompts.keyword_fallback_match(user_message, agents_catalog)
+            logger.info("LLM classification failed, keyword fallback: %s", fallback)
             return RouteResult(
-                intent="分类失败", is_general_question=True,
-                reasoning=f"LLM调用失败: {e}", raw_response="",
+                intent="关键词匹配（LLM不可用）",
+                recommended_agents=fallback,
+                is_general_question=not bool(fallback),
+                reasoning=f"LLM调用失败，自动关键词匹配",
+                raw_response=str(e),
             )
 
-        return self._parse_classification(response)
+        # ── 步骤 2: 解析 LLM 输出 ──
+        result = self._parse_classification_with_fallback(
+            response, user_message, agents_catalog
+        )
+        return result
 
-    def _parse_classification(self, response: str) -> RouteResult:
-        """解析 LLM 返回的分类 JSON"""
+    def _parse_classification_with_fallback(
+        self, response: str, user_message: str, agents_catalog: str
+    ) -> RouteResult:
+        """解析 LLM 分类 JSON。
+
+        如果 LLM 返回 is_general_question=true，但用户消息明显包含专业内容，
+        则自动触发关键词兜底匹配。
+        """
         json_objects = _extract_json_objects(response)
+
         for obj_str in json_objects:
             try:
                 data = json.loads(obj_str)
                 if "is_general_question" in data or "intent" in data:
+                    is_general = data.get("is_general_question", True)
+                    recommended = data.get("recommended_agents", [])
+                    intent = data.get("intent", "")
+                    reasoning = data.get("reasoning", "")
+
+                    # 如果 LLM 判定为通用问题，但用户消息明显有专业内容 → 强制兜底
+                    if is_general or not recommended:
+                        fallback = prompts.keyword_fallback_match(user_message, agents_catalog)
+                        if fallback:
+                            logger.info(
+                                "LLM returned is_general_question=true, "
+                                "but keyword fallback found agents: %s", fallback
+                            )
+                            return RouteResult(
+                                intent=f"关键词匹配（LLM误判为通用）",
+                                recommended_agents=fallback,
+                                is_general_question=False,
+                                reasoning=f"LLM判定: {reasoning} → 自动修正为关键词匹配",
+                                raw_response=response,
+                            )
+
+                    # LLM 正确分类
+                    logger.info("LLM classified: intent=%s agents=%s", intent, recommended)
                     return RouteResult(
-                        intent=data.get("intent", ""),
-                        recommended_agents=data.get("recommended_agents", []),
-                        is_general_question=data.get("is_general_question", True),
-                        reasoning=data.get("reasoning", ""),
+                        intent=intent,
+                        recommended_agents=recommended,
+                        is_general_question=is_general,
+                        reasoning=reasoning,
                         raw_response=response,
                     )
             except (json.JSONDecodeError, TypeError):
                 continue
 
-        logger.warning("Failed to parse classification from: %s", response[:200])
+        # JSON 解析失败 → 关键词兜底
+        logger.warning("Failed to parse classification JSON from: %s", response[:300])
+        fallback = prompts.keyword_fallback_match(user_message, agents_catalog)
+        logger.info("JSON parse failed, keyword fallback: %s", fallback)
         return RouteResult(
-            intent="未分类", is_general_question=True,
-            reasoning="无法解析分类结果，降级为直接回复", raw_response=response,
+            intent="关键词匹配（LLM格式异常）",
+            recommended_agents=fallback,
+            is_general_question=not bool(fallback),
+            reasoning="LLM输出格式异常，自动使用关键词匹配",
+            raw_response=response,
         )
 
     async def _run_direct(self, global_agent: "AgentModel", user_message: str) -> AgentMessage:

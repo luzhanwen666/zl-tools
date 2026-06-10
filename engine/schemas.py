@@ -17,6 +17,8 @@ class AgentMessage:
     tool_calls: list[dict] = field(default_factory=list)
     tool_call_id: str = ""  # 对应的 tool call ID（用于 tool response）
     token_count: int | None = None
+    metadata: dict = field(default_factory=dict)
+    # metadata 可包含：thinking（思考追溯）、stage（执行阶段）、status_messages（状态）、agent_type
 
     def to_openai_message(self) -> dict:
         """转换为 OpenAI API 消息格式。不包含内部 tool_calls（格式不兼容）。"""

@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
 
-from .models import ChatSession, ChatMessage
+from .models import ChatSession, ChatMessage, AgentPipeline
 
 logger = logging.getLogger(__name__)
 
@@ -369,3 +369,57 @@ def global_chat_send_message_stream(request):
     response["Cache-Control"] = "no-cache"
     response["X-Accel-Buffering"] = "no"
     return response
+
+
+# ------------------------------------------------------------------
+# 工作流配置视图
+# ------------------------------------------------------------------
+
+def save_workflow(request):
+    """保存流水线配置"""
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    try:
+        import json
+        data = json.loads(request.body)
+        session_id = data.get("session_id")
+        steps = data.get("steps", [])
+        name = data.get("name", "默认流程")
+    except (json.JSONDecodeError, KeyError):
+        return JsonResponse({"error": "无效的请求数据"}, status=400)
+
+    session = get_object_or_404(ChatSession, pk=session_id)
+
+    pipeline, created = AgentPipeline.objects.update_or_create(
+        session=session, is_active=True,
+        defaults={"name": name, "steps": steps},
+    )
+
+    return JsonResponse({
+        "ok": True,
+        "id": pipeline.pk,
+        "created": created,
+        "name": pipeline.name,
+    })
+
+
+def load_workflow(request, pk):
+    """加载流水线配置"""
+    pipeline = get_object_or_404(AgentPipeline, pk=pk, is_active=True)
+    return JsonResponse({
+        "id": pipeline.pk,
+        "name": pipeline.name,
+        "steps": pipeline.steps,
+        "session_id": pipeline.session_id,
+    })
+
+
+def delete_workflow(request, pk):
+    """删除流水线配置"""
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+    pipeline = get_object_or_404(AgentPipeline, pk=pk)
+    pipeline.is_active = False
+    pipeline.save(update_fields=["is_active"])
+    return JsonResponse({"ok": True})

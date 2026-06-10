@@ -10,7 +10,7 @@ class AgentForm(forms.ModelForm):
     """自定义 Agent 表单 — 用 CheckboxSelectMultiple 渲染 M2M"""
     class Meta:
         model = Agent
-        fields = ["name", "description", "system_prompt", "role", "group",
+        fields = ["name", "description", "system_prompt", "role", "agent_type", "group",
                   "llm_config", "skills", "mcp_tools", "is_active", "is_global"]
         widgets = {
             "skills": forms.CheckboxSelectMultiple,
