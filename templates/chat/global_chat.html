@@ -654,19 +654,23 @@
         msgDiv.appendChild(d);
     }
     function appendThinking(name, stage, content){
-        var labels = {generate:'生成初稿',reflect:'批判审视',refine:'改进答案',plan:'制定计划',react_turn_0:'第1轮思考',react_turn_1:'第2轮',execute_step_0:'步骤1',execute_step_1:'步骤2'};
+        var labels = {generate:'生成初稿',reflect:'批判审视',refine:'改进答案',plan:'制定计划',
+            react_turn_0:'第1轮',react_turn_1:'第2轮',react_turn_2:'第3轮',react_turn_3:'第4轮',
+            turn_0:'第1轮',turn_1:'第2轮',turn_2:'第3轮',turn_3:'第4轮',
+            execute_step_0:'步骤1',execute_step_1:'步骤2',execute_step_2:'步骤3',
+            'start':'开始','agent':'智能体','condition':'条件','parallel':'并行','merge':'合并','end':'结束'};
         var d = document.createElement('div');
         d.className = 'chat-msg msg-bot';
         // 全部内容展示，JSON 自动格式化
         var body = fmtJsonContent(content||'', 800);
-        d.innerHTML = '<details class="think-fold" open><summary>💭 '+escHtml(name)+' · '+(labels[stage]||stage)+'</summary><div class="think-body">'+body+'</div></details>';
+        d.innerHTML = '<details class="think-fold"><summary>💭 '+escHtml(name)+' · '+(labels[stage]||stage)+'</summary><div class="think-body">'+body+'</div></details>';
         msgDiv.appendChild(d);
     }
     function appendPlan(name, steps){
         var lis = steps.map(function(s){ return '<li>'+escHtml(s)+'</li>'; }).join('');
         var d = document.createElement('div');
         d.className = 'chat-msg msg-bot';
-        d.innerHTML = '<details class="plan-fold" open><summary>📋 '+escHtml(name)+' · 计划（'+steps.length+'步）</summary><ol>'+lis+'</ol></details>';
+        d.innerHTML = '<details class="plan-fold"><summary>📋 '+escHtml(name)+' · 计划（'+steps.length+'步）</summary><ol>'+lis+'</ol></details>';
         msgDiv.appendChild(d);
     }
     function appendTool(name, tool, args){
