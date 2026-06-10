@@ -366,7 +366,7 @@ function saveTopology() {
         headers:{'Content-Type':'application/json','X-CSRFToken':document.querySelector('[name=csrfmiddlewaretoken]').value},
         body: JSON.stringify({nodes:nodes, edges:edges, trigger_prompt:trigger})
     }).then(function(r){ return r.json(); }).then(function(d){
-        if (d.ok) alert('✅ 已保存 ('+d.nodes.length+'节点, '+d.edges.length+'连线)');
+        if (d.ok) { window.location.href = '{% url "agents:group_list" %}'; }
         else alert('保存失败: '+(d.error||''));
     });
 }

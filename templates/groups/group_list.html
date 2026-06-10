@@ -28,7 +28,9 @@
             <a href="{% url 'agents:group_editor' g.pk %}" style="font-size:13px;font-weight:600;color:var(--text);text-decoration:none;">{{ g.name }}</a>
         </td>
         <td style="padding:10px 16px;vertical-align:middle;">
-            <span style="font-size:12px;color:var(--text-secondary);">{{ g.description|truncatewords:25|default:"—" }}</span>
+            <span style="font-size:12px;color:var(--text-secondary);line-height:1.5;">
+                {% if g.trigger_prompt %}{{ g.trigger_prompt|truncatewords:30 }}{% else %}{{ g.description|truncatewords:25|default:"—" }}{% endif %}
+            </span>
         </td>
         <td style="padding:10px 16px;vertical-align:middle;">
             <span style="font-size:12px;color:var(--text-muted);">{{ g.nodes.count }}</span>

@@ -380,6 +380,10 @@ def global_chat_send_message_stream(request):
             first_event['session_id'] = created_session_id
         yield f"data: {json.dumps(first_event, ensure_ascii=False)}\n\n"
 
+        # 提前告知前端当前执行模式
+        if matched_group:
+            yield f"data: {json.dumps({'type': 'routing', 'status': 'group', 'content': f'🔗 已匹配群组「{matched_group.name}」— 按拓扑顺序执行', 'group_name': matched_group.name}, ensure_ascii=False)}\n\n"
+
         q: queue.Queue = queue.Queue()
 
         def _run_engine():

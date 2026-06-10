@@ -581,7 +581,10 @@
                     form.setAttribute('data-session-id', String(d.session_id));
                 }
                 break;
-            case 'routing': appendMsgSystem((d.status==='classifying'?'⏳ ':'✅ ')+d.content, '全局智能体'); break;
+            case 'routing':
+                var icon = d.status==='classifying' ? '⏳ ' : d.status==='group' ? '🔗 ' : '✅ ';
+                appendMsgSystem(icon + d.content, '全局智能体', d.status);
+                break;
             case 'status': appendStatus(d.agent_name, d.content); break;
             case 'thinking': appendThinking(d.agent_name, d.stage, d.content); break;
             case 'plan': appendPlan(d.agent_name, d.steps||[]); break;
@@ -640,10 +643,14 @@
             '</div>'+thinkHtml+toolsHtml+'<div class="bubble">'+fmtMsgContent(content)+'</div>';
         msgDiv.appendChild(d);
     }
-    function appendMsgSystem(content, name){
+    function appendMsgSystem(content, name, status){
         var d = document.createElement('div');
         d.className = 'chat-msg msg-bot msg-system';
-        d.innerHTML = '<div class="msg-meta"><span class="msg-author">'+(name||'全局智能体')+'</span></div><div class="bubble">'+fmtMsgContent(content)+'</div>';
+        if (status === 'group') {
+            d.innerHTML = '<div class="msg-meta"><span class="msg-author">'+(name||'全局智能体')+'</span></div><div class="bubble" style="background:linear-gradient(135deg,#fef3c7,#fffbeb)!important;border:1px solid rgba(245,158,11,.15)!important;color:#92400e!important;">'+fmtMsgContent(content)+'</div>';
+        } else {
+            d.innerHTML = '<div class="msg-meta"><span class="msg-author">'+(name||'全局智能体')+'</span></div><div class="bubble">'+fmtMsgContent(content)+'</div>';
+        }
         msgDiv.appendChild(d);
     }
     function appendThinking(name, stage, content){
