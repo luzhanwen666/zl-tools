@@ -200,7 +200,7 @@ def global_chat(request):
     不带 session_id → 暂不创建会话（首次发消息时惰性创建）
     带 session_id  → 加载已有会话继续对话
     """
-    from agents.models import Agent
+    from agents.models import Agent, AgentGroup
 
     global_agent = get_object_or_404(Agent, is_global=True, is_active=True)
     user = request.user if request.user.is_authenticated else None
