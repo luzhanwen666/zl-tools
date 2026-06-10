@@ -51,16 +51,9 @@ class GroupExecutor:
         self, session: "ChatSession", user_message: str, group: "AgentGroup",
         preloaded_nodes: list | None = None, preloaded_edges: list | None = None,
     ) -> AsyncGenerator[dict, None]:
-        # 使用预加载数据（在同步上下文中已 select_related），避免 async 懒查询
-        if preloaded_nodes is not None and preloaded_edges is not None:
-            nodes = preloaded_nodes
-            edges = preloaded_edges
-        elif preloaded_nodes is not None:
-            nodes = preloaded_nodes
-            edges = list(group.edges.all())
-        else:
-            nodes = list(group.nodes.all())
-            edges = list(group.edges.all())
+        # 使用预加载数据 — 不做任何 sync DB 回退
+        nodes = list(preloaded_nodes) if preloaded_nodes else list(group.nodes.all())
+        edges = list(preloaded_edges) if preloaded_edges else []
 
         if not nodes:
             yield {"type": "error", "content": "该群组尚未配置拓扑节点"}
@@ -178,6 +171,12 @@ class GroupExecutor:
                     },
                 }
                 results[current.label] = result.content
+
+                # 将下游节点加入队列
+                for _, target in outgoing.get(current.pk, []):
+                    if target and target.pk not in visited:
+                        queue.append(target)
+                        logger.info("  %s → enqueued %s", current.label, target.label)
 
             elif current.node_type == "condition":
                 # 评估条件 → 选分支边
