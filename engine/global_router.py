@@ -174,18 +174,10 @@ class GlobalRouter:
 
         # 3. 路由 + 执行
         if route_result.is_general_question or not route_result.recommended_agents:
-            # 协调型Agent不直接回答，提示用户选择专家
-            logger.info("No expert matched — coordinator refuses to answer directly")
-            all_messages.append(AgentMessage(
-                role="assistant",
-                content=(
-                    "⚠️ 我是协调型智能体，不直接回答问题。\n\n"
-                    "你可以：\n"
-                    "1. 点击上方的专家标签手动选择专家来协助你\n"
-                    "2. 或者尝试更具体地描述你的问题，我会自动匹配合适的专家"
-                ),
-                name="全局智能体",
-            ))
+            # 无匹配专家 → 全局智能体直接回答
+            logger.info("No expert matched — coordinator answers directly")
+            direct_msg = await self._run_direct(global_agent, user_message)
+            all_messages.append(direct_msg)
         else:
             logger.info("Routing to expert agents: %s", route_result.recommended_agents)
             # 手动模式下 expert_agents 已在上面设置好（Agent对象），自动模式需要 ORM 解析
@@ -246,20 +238,17 @@ class GlobalRouter:
         route_result = await self.classify(user_message, global_agent)
 
         if route_result.is_general_question or not route_result.recommended_agents:
+            # 无匹配专家 → 全局智能体直接回答
             yield {
                 "type": "routing", "status": "direct",
-                "content": "该问题没有匹配的专家，协调型智能体不直接回答",
+                "content": "无匹配专家，全局智能体直接回答",
                 "intent": route_result.intent,
             }
+            direct_msg = await self._run_direct(global_agent, user_message)
             yield {
                 "type": "assistant",
-                "content": (
-                    "⚠️ 我是协调型智能体，不直接回答问题。\n\n"
-                    "你可以：\n"
-                    "1. 点击上方的专家标签手动选择专家来协助你\n"
-                    "2. 或者尝试更具体地描述你的问题，我会自动匹配合适的专家"
-                ),
-                "agent_name": "全局智能体",
+                "content": direct_msg.content,
+                "agent_name": global_agent.name,
             }
             yield {"type": "done"}
             return

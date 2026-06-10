@@ -411,15 +411,8 @@ def global_chat_send_message_stream(request):
                         except Exception as e:
                             logger.exception("Group matching in engine thread failed")
 
-                    # LLM匹配失败或没有候选时，用第一个候选群组兜底（不再降级到旧路由）
-                    if not actual_group and not manual_agents and _candidate_groups:
-                        actual_group = _candidate_groups[0]
-                        q.put(("event", {
-                            "type": "routing", "status": "group",
-                            "content": f"🔗 使用兜底群组「{actual_group.name}」",
-                            "group_name": actual_group.name,
-                        }))
-                        logger.info("Falling back to first group: %s", actual_group.name)
+                    # 无群组且无manual_agents → 让GlobalRouter正常分类路由
+                    # GlobalRouter会自动匹配专家或回退到协调者直接回答
 
                     if actual_group:
                         # 预加载拓扑(如果之前没加载)
