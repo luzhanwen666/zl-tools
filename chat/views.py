@@ -463,54 +463,61 @@ def global_chat_send_message_stream(request):
 
 async def _match_group_by_trigger(user_message: str, available_groups) -> str | None:
     """
-    使用全局智能体匹配用户输入与群组触发描述。
-    返回匹配到的 group_id，或 None。
+    用关键词重叠匹配群组触发描述。确定性匹配，不依赖 LLM。
+    策略：
+    1. 对每个群组的 trigger_prompt + description 做关键词重叠打分
+    2. 最高分且 > 阈值 → 匹配成功
+    3. 所有群组都不匹配 → 如有兜底群组(描述含'兜底/日常/通用')则匹配第一个兜底群组
+    4. 都失败 → 返回 None，降级到 GlobalOrchestrator
     """
-    from agents.models import Agent
-    global_agent = await Agent.objects.filter(is_global=True, is_active=True).select_related("llm_config").afirst()
-    if not global_agent or not global_agent.llm_config:
-        return None
+    import re
+    msg_lower = user_message.lower()
+    best_score = 0
+    best_id = None
+    fallback_id = None
 
-    # 构建群组描述目录
-    groups_desc = "\n".join(
-        f"- **{g.name}** (ID:{g.pk}): {g.trigger_prompt or g.description}"
-        for g in available_groups
-    )
+    for g in available_groups:
+        text = ((g.trigger_prompt or "") + " " + (g.description or "")).lower()
+        # 简单关键词重叠打分
+        score = 0
+        for word in re.findall(r'[\w一-鿿]{2,}', msg_lower):
+            if word in text:
+                score += 3
+        # 兜底群组检测
+        if any(kw in text for kw in ['兜底', '日常', '通用', '非特定', '日常对话', '日常处理']):
+            if fallback_id is None:
+                fallback_id = str(g.pk)
+            # 兜底群组自带基础分，确保其他群组都不匹配时会被选中
+            if best_score == 0:
+                best_score = 0.5  # 微弱分数，仅在其他群组0分时胜出
 
-    prompt = (
-        f"你是路由匹配器，根据用户输入选择最合适的群组。\n\n"
-        f"## 可用群组及其触发场景\n{groups_desc}\n\n"
-        f"## 用户输入\n{user_message}\n\n"
-        f"## 匹配规则\n"
-        f"1. 阅读每个群组的触发描述，判断用户需求与哪个群组最接近\n"
-        f"2. **即使不完全匹配，也要选出描述最接近的一个群组**\n"
-        f"3. 只输出最匹配的群组ID数字，不要输出任何其他内容\n"
-        f"4. 示例：用户问'写一个Python程序'→如果某个群组描述为'处理日常问答和编程任务'则输出该群组ID"
-    )
+        # 精确场景关键词（高分）
+        precise_kw = {
+            '安全': ['攻击', '威胁', '漏洞', 'waf', '入侵', 'xss', 'sql', '扫描', '渗透', '拦截'],
+            '日志': ['日志', 'log', 'access', 'error', 'nginx', '请求'],
+            '计算': ['计算', '算式', '等于', '数学', '加', '减', '乘', '除', 'sqrt'],
+            '代码': ['代码', '编程', 'python', 'java', '写一个', '函数', 'bug', '调试'],
+            '知识': ['什么是', '为什么', '如何', '怎么', '介绍一下', '解释', '说明'],
+        }
+        for domain, keywords in precise_kw.items():
+            if any(kw in msg_lower for kw in keywords) and domain in text:
+                score += 8
 
-    from engine import llm_client as llm_module
-    try:
-        response = await llm_module.llm_client.chat(
-            provider=global_agent.llm_config.provider,
-            model_id=global_agent.llm_config.model_id,
-            messages=[{"role": "user", "content": prompt}],
-            api_base=global_agent.llm_config.api_base,
-            api_key=global_agent.llm_config.api_key,
-            max_tokens=50,
-            temperature=0.0,
-        )
-    except Exception as e:
-        logger.exception("Group trigger matching failed")
-        return None
+        if score > best_score:
+            best_score = score
+            best_id = str(g.pk)
 
-    response = response.strip().upper()
-    if response == "NONE" or not response.isdigit():
-        logger.info("No group matched: %s — will fallback to auto-routing", response[:50])
-        return None
+    if best_id and best_score >= 2:
+        logger.info("Group keyword-match: pk=%s score=%d", best_id, best_score)
+        return best_id
 
-    matched_id = int(response)
-    logger.info("Group matched: %d", matched_id)
-    return str(matched_id)
+    # 无匹配 → 使用兜底群组
+    if fallback_id:
+        logger.info("No precise match, using fallback group pk=%s", fallback_id)
+        return fallback_id
+
+    logger.info("No group matched at all")
+    return None
 
 
 # ------------------------------------------------------------------
