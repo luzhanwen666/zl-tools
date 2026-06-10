@@ -1,11 +1,8 @@
 """
-路由提示词 — 意图分类
+路由提示词 — 意图分类（通用，不依赖任何具体技能名）
 
-采用 system + user 双层结构：
-- system prompt = 强约束的分类规则（角色、规则、严禁事项）
-- user prompt = 当前任务上下文（专家目录 + 用户消息）
-
-同时提供关键词兜底匹配器，当 LLM 无法正确分类时自动降级匹配。
+classifier: system + user 双层结构，LLM 根据专家描述自主匹配
+keyword_fallback: 通用领域→名称匹配，任何新导入技能都自动覆盖
 """
 
 import logging
@@ -14,74 +11,42 @@ import re
 logger = logging.getLogger(__name__)
 
 # ═══════════════════════════════════════════════════════════════════
-# System Prompt（强约束）
+# 分类提示词（通用 — 不列出任何具体技能名）
 # ═══════════════════════════════════════════════════════════════════
 
-CLASSIFIER_SYSTEM = """你是一个**严格的路由分类器**。你的唯一工作是：分析用户输入，从专家列表中选出最适合处理的专家。
+CLASSIFIER_SYSTEM = """你是路由分类器。分析用户输入，从专家列表中选出最适合的专家。
 
-## 🚨 铁律
+## 铁律
+1. 输入含任何实质性内容 → 必须匹配至少 1 位专家
+2. 宁可多匹配，不能漏匹配
+3. 专家名必须从列表中逐字复制
 
-1. 只要用户输入包含任何实质性内容，必须匹配至少 1 位专家。
-2. 宁可多匹配几位专家，绝不能漏匹配。
-3. 专家名称必须从"可用专家"列表中逐字复制。
+## 匹配策略
+- **技能优先**：查看每位专家的技能标注（"技能: xxx"），用户需求匹配某技能 → 路由到有该技能的专家
+- **描述匹配**：阅读专家描述，判断与用户意图的相关性
+- **内容信号**：输入中的关键词（安全/日志/计算/测试/查询/加白/编程/设计等）→ 匹配描述中包含对应词的专家
 
-## 匹配策略（按优先级高低）
+## 输出格式（纯 JSON）
+{"intent":"类别","recommended_agents":["专家1"],"is_general_question":false,"reasoning":"原因"}"""
 
-### 第一优先：技能匹配
-每个专家的技能标注在括号中（格式："· 技能: xxx"）。如果用户的需求明显属于某个技能范畴，**必须优先路由到拥有该技能的专家**。
-
-技能 → 专家路由示例：
-- 数学计算/算式/数值运算 → 拥有 calculator 技能的专家
-- WAF加白/误报消除/event_id → 拥有 waf-whitelist 技能的专家
-- 网页抓取/内容提取/Firecrawl → 拥有 Firecrawl 技能的专家
-- 自动研究/报告生成/调研分析 → 拥有 AutoResearch 技能的专家
-- 前端设计/界面美化/UI优化 → 拥有 Frontend Design 技能的专家
-- 系统调试/bug排查/错误定位 → 拥有 Systematic Debugging 技能的专家
-- 复杂任务规划/多步骤执行 → 拥有 Superpowers 技能的专家
-
-### 第二优先：名称匹配
-- 名称含"日志" → 日志类问题
-- 名称含"威胁""安全" → 安全类问题
-- 名称含"情报""查询" → 查询类问题
-- 名称含"总结""报告" → 报告类问题
-
-### 第三优先：内容信号
-- HTTP请求/路径遍历/IP地址/端口扫描/SQL注入/XSS → 安全威胁 + 日志
-- 数学表达式/数字运算 → 计算
-- 加白/误报/event_id/WAF → 加白专家
-
-## 输出格式（严格 JSON）
-{"intent":"问题类别","recommended_agents":["专家1","专家2"],"is_general_question":false,"reasoning":"原因"}"""
-
-
-# ═══════════════════════════════════════════════════════════════════
-# User Prompt（当前任务）
-# ═══════════════════════════════════════════════════════════════════
-
-CLASSIFIER_USER = """## 可用专家列表
+CLASSIFIER_USER = """## 专家列表
 {agents_catalog}
 
 ## 用户输入
 {user_message}
 
-请严格按照 system prompt 中的规则，输出分类 JSON："""
-
+输出分类 JSON："""
 
 # ═══════════════════════════════════════════════════════════════════
-# 直接回复 / 结果合成（保持不变）
+# 直接回复 / 结果合成
 # ═══════════════════════════════════════════════════════════════════
 
-GLOBAL_DIRECT_PROMPT = """你是「{agent_name}」，本平台的全局智能体。请你友好、专业地直接回答用户的问题。
-
-## 回答要求
-- 语言简洁清晰
-- 如果有可用专家能更好地回答，请告知用户
-- 保持友好的语气
+GLOBAL_DIRECT_PROMPT = """你是「{agent_name}」。友好专业地回答用户问题。
+如有专家能更好地回答，请告知用户。
 
 用户问题：{user_message}"""
 
-
-GLOBAL_SYNTHESIS_PROMPT = """你是「{agent_name}」，以下是各位专家对用户问题的独立分析：
+GLOBAL_SYNTHESIS_PROMPT = """你是「{agent_name}」，以下是专家对用户问题的独立分析：
 
 ## 用户问题
 {user_question}
@@ -90,177 +55,116 @@ GLOBAL_SYNTHESIS_PROMPT = """你是「{agent_name}」，以下是各位专家对
 {expert_analyses}
 
 ## 你的任务
-请综合所有专家的分析，向用户提供清晰、完整的最终答案：
-1. **核心结论**：一两句话概括最重要的发现
-2. **要点汇总**：整理各专家的关键分析和建议
-3. **分歧说明**：如果专家意见有分歧，客观说明
-4. **行动建议**：基于综合分析的下一步建议"""
+综合所有专家分析，提供清晰完整的最终答案：
+1. 核心结论
+2. 要点汇总
+3. 分歧说明（如有）
+4. 行动建议"""
 
-
-# ═══════════════════════════════════════════════════════════════════
-# 消息构建
-# ═══════════════════════════════════════════════════════════════════
 
 def build_classifier_messages(agent_name: str, agents_catalog: str, user_message: str) -> list[dict]:
-    """构建分类阶段的消息列表 — system + user 双层结构"""
     return [
         {"role": "system", "content": CLASSIFIER_SYSTEM},
         {"role": "user", "content": CLASSIFIER_USER.format(
-            agents_catalog=agents_catalog,
-            user_message=user_message,
+            agents_catalog=agents_catalog, user_message=user_message,
         )},
     ]
 
 
 def build_direct_messages(agent_name: str, system_prompt: str, user_message: str) -> list[dict]:
-    """构建直接回复的消息列表"""
     return [
-        {"role": "system", "content": system_prompt or f"你是{agent_name}，一个专业的智能助手。"},
+        {"role": "system", "content": system_prompt or f"你是{agent_name}，一个智能助手。"},
         {"role": "user", "content": user_message},
     ]
 
 
 def build_synthesis_messages(agent_name: str, chat_history: str) -> list[dict]:
-    """构建结果合成的消息列表"""
     prompt = GLOBAL_SYNTHESIS_PROMPT.format(
-        agent_name=agent_name,
-        chat_history=chat_history,
+        agent_name=agent_name, chat_history=chat_history,
     )
     return [{"role": "user", "content": prompt}]
 
 
 # ═══════════════════════════════════════════════════════════════════
-# 关键词兜底匹配器
+# 通用关键词兜底匹配（领域→名称关联，不依赖任何具体技能名）
 # ═══════════════════════════════════════════════════════════════════
+
+_DOMAIN_PATTERNS: dict[str, str] = {
+    "安全威胁": (
+        r'攻击|威胁|入侵|漏洞|恶意|黑客|cve|exploit|payload|后门|webshell|'
+        r'渗透|提权|反弹|木马|病毒|钓鱼|ddos|扫描|暴力|'
+        r'/etc/passwd|\.\./|cmd=|exec\(|system\(|whoami\b|'
+        r'sql注入|xss|csrf|ssrf|命令执行|文件包含|反序列化|信息泄露|'
+        r'sqli\b|xss\b|rce\b|lfi\b|ssrf\b|idor\b|'
+        r'waf|ips|ids|防火墙|安全组|acl|态势|soar|soc|siem'
+    ),
+    "日志分析": (
+        r'日志|log|access|error|nginx|apache|tomcat|请求|响应|http|'
+        r'状态码|status|404|500|403|302|ua\b|user.agent|referer|'
+        r'时间戳|timestamp|来源|源\s*ip|目的|目标|端口|协议'
+    ),
+    "加白误报": (
+        r'加白|加报|whitelist|白名单|误报|消除|event.?id|eventid|'
+        r'拦截|block|误拦|误判|放行|pass|allow'
+    ),
+    "计算数学": r'[\d\+\-\*/\(\)]{3,}|计算|等于|多少|加|减|乘|除|平方|开方|sqrt|算式|运算|数学',
+    "情报查询": r'查询|搜索|情报|百科|知识|了解|介绍|什么是|cve|漏洞',
+    "代码编程": r'代码|编程|写一个|实现|函数|class|def |import |python|java|js|html|css|组件|api|重构|优化|review|审查',
+    "前端设计": r'前端|界面|ui\b|设计|美化|样式|布局|css|组件|配色|排版|交互',
+    "网页抓取": r'抓取|爬虫|crawl|scrape|网页|提取|markdown|结构化',
+    "研究调研": r'研究|调研|分析报告|research|综合|归纳|综述|概览|汇总|调查|竞品',
+    "调试排查": r'调试|debug|bug|错误|异常|报错|排查|定位|修复|fix|traceback|堆栈',
+    "总结报告": r'总结|汇总|报告|归纳|整理|综述|概览',
+    "WAF测试": r'waf.*测试|安全测试|security.*test|探测.*waf|扫描.*waf|绕过.*测试|fuzz|模糊测试|攻击测试',
+}
+
+_DOMAIN_NAME_KEYWORDS: dict[str, list[str]] = {
+    "安全威胁": ["威胁", "安全", "sec", "hack", "攻击", "test", "测试"],
+    "日志分析": ["日志", "log", "分析"],
+    "加白误报": ["加白", "加报", "白名单", "whitelist", "waf"],
+    "计算数学": ["计算", "数学", "calc", "math"],
+    "情报查询": ["情报", "查询", "搜索", "intel", "search"],
+    "代码编程": ["代码", "编程", "code", "程序", "开发"],
+    "前端设计": ["前端", "frontend", "设计", "design", "界面", "ui"],
+    "网页抓取": ["抓取", "爬虫", "crawl", "提取"],
+    "研究调研": ["研究", "research", "分析", "调研", "auto"],
+    "调试排查": ["调试", "debug", "排查", "fix"],
+    "总结报告": ["总结", "报告", "汇总", "归纳"],
+    "WAF测试": ["waf", "测试", "test", "security", "安全"],
+}
+
 
 def keyword_fallback_match(user_message: str, agents_catalog: str) -> list[str]:
     """
-    当 LLM 分类失败时，使用关键词进行兜底匹配。
-
-    这会直接分析用户消息中的关键词，与专家名称/描述进行匹配。
-    永远不会返回空列表（除非 agents_catalog 本身就是空的）。
+    通用兜底匹配：领域正则 → 专家名称关联。
+    不依赖任何具体技能名 — 新导入的技能只要专家名称含对应关键词就能匹配。
     """
     msg_lower = user_message.lower()
-    scored: list[tuple[str, int]] = []
+    scored: dict[str, int] = {}
 
-    # 从 agents_catalog 中解析出专家名称和描述
-    # 格式: "- **专家名**（角色·类型）：描述"
-    agent_entries = re.findall(r'\*\*(.+?)\*\*（(.+?)）：(.+?)$', agents_catalog, re.MULTILINE)
-
-    if not agent_entries:
-        # 回退：只提取名称
-        names = re.findall(r'\*\*(.+?)\*\*', agents_catalog)
-        if names:
-            return names[:3]
+    names = re.findall(r'\*\*(.+?)\*\*', agents_catalog)
+    if not names:
         return []
 
-    for name, role_type, desc in agent_entries:
-        score = 0
-        combined = f"{name} {desc}".lower()
+    # 1. 检测命中领域
+    for domain, pattern in _DOMAIN_PATTERNS.items():
+        if re.search(pattern, msg_lower):
+            for kw in _DOMAIN_NAME_KEYWORDS.get(domain, []):
+                for name in names:
+                    if kw.lower() in name.lower():
+                        scored[name] = scored.get(name, 0) + 8
 
-        # ── 加白/误报处理类 ──
-        whitelist_pattern = (
-            r'加白|加报|whitelist|白名单|误报|消除|event.?id|eventid|'
-            r'拦截|block|误拦|误判|放行|pass|allow'
-        )
-        if re.search(whitelist_pattern, msg_lower):
-            if '加白' in name or '加报' in name:
-                score += 15
-            if '白名单' in name or 'whitelist' in name.lower():
-                score += 15
-            if 'waf' in name.lower() or 'waf' in desc.lower():
-                score += 8
+    # 2. 专家名中的词直接命中用户消息
+    for name in names:
+        for w in re.findall(r'[\w一-鿿]{2,}', name):
+            if w.lower() in msg_lower:
+                scored[name] = scored.get(name, 0) + 5
 
-        # ── 安全/威胁/攻击类 ──
-        security_pattern = (
-            r'攻击|威胁|入侵|漏洞|恶意|黑客|cve|exploit|payload|后门|webshell|'
-            r'渗透|提权|反弹|shell|木马|病毒|钓鱼|ddos|扫描|暴力|'
-            r'/etc/passwd|\.\./|cmd=|exec\(|system\(|whoami\b|id\b|uname|ls\b|'
-            r'sql注入|xss|csrf|ssrf|命令执行|文件包含|反序列化|信息泄露|'
-            r'sqli\b|xss\b|rce\b|lfi\b|ssrf\b|idor\b|ssi\b|'
-            r'waf|ips|ids|防火墙|安全组|acl|态势|soar|soc|siem'
-        )
-        if re.search(security_pattern, msg_lower):
-            if '威胁研判' in name:
-                score += 10
-            if '威胁' in name and '情报' not in name:
-                score += 8
-            if '安全' in name or '加白' in name:
-                score += 5
-            if '日志' in name:
-                score += 4
+    sorted_names = sorted(scored.items(), key=lambda x: -x[1])
 
-        # ── 日志分析类 ──
-        log_pattern = (
-            r'日志|log|access|error|nginx|apache|tomcat|请求|响应|http|'
-            r'状态码|status|404|500|403|200|302|ua\b|user.agent|referer|'
-            r'时间戳|timestamp|来源|源\s*ip|目的|目标|端口|协议'
-        )
-        if re.search(log_pattern, msg_lower):
-            if '日志整理' in name or '日志' in name:
-                score += 8
-            if '日志研判' in name:
-                score += 6
+    if sorted_names:
+        logger.info("Fallback matched: %s", [(n, s) for n, s in sorted_names[:5]])
+        return [n for n, _ in sorted_names[:5]]
 
-        # ── 情报查询类 ──
-        if re.search(r'查询|搜索|情报|百科|知识|谁|什么|哪里|了解|介绍|什么是', msg_lower):
-            if '情报' in name or '查询' in name:
-                score += 7
-
-        # ── 计算类 ──
-        if re.search(r'[\d\+\-\*/\(\)]{3,}|计算|等于|多少|加|减|乘|除|平方|开方|sqrt|算式|运算', msg_lower):
-            if '计算' in name or '数学' in desc:
-                score += 15
-            # 技能匹配: calculator
-            if 'calculator' in desc.lower() or 'calculator' in name.lower():
-                score += 10
-
-        # ── 代码/编程类 ──
-        if re.search(r'代码|编程|写一个|实现|函数|class|def |import |python|java|js|html|css|组件|接口|api', msg_lower):
-            if '代码' in name or '编程' in desc or '审查' in name:
-                score += 12
-
-        # ── 前端/设计类 ──
-        if re.search(r'前端|界面|ui\b|设计|美化|样式|布局|css|组件|配色|排版|交互', msg_lower):
-            if '前端' in name or 'frontend' in name.lower() or '设计' in desc:
-                score += 15
-
-        # ── 网页抓取/爬虫类 ──
-        if re.search(r'抓取|爬虫|crawl|scrape|网页|提取|firecrawl|markdown|结构化', msg_lower):
-            if 'firecrawl' in name.lower() or '抓取' in desc or '爬虫' in desc:
-                score += 15
-
-        # ── 研究/自动研究类 ──
-        if re.search(r'研究|调研|分析报告|research|综合|归纳|综述|概览|汇总|调查', msg_lower):
-            if 'research' in name.lower() or '研究' in desc:
-                score += 15
-
-        # ── 调试类 ──
-        if re.search(r'调试|debug|bug|错误|异常|报错|排查|定位|修复|fix|traceback|堆栈', msg_lower):
-            if 'debug' in name.lower() or '调试' in desc:
-                score += 15
-
-        # ── 总结/报告类 ──
-        if re.search(r'总结|汇总|报告|归纳|整理|综述|概览', msg_lower):
-            if '总结' in name or '报告' in name:
-                score += 8
-
-        # ── 通用：专家名中的词在用户消息中出现 ──
-        name_words = re.findall(r'[一-鿿\w]+', name)
-        for w in name_words:
-            if len(w) >= 2 and w.lower() in msg_lower:
-                score += 3
-
-        if score > 0:
-            scored.append((name, score))
-
-    # 按分数降序排列
-    scored.sort(key=lambda x: -x[1])
-
-    if scored:
-        logger.info("Keyword fallback matched: %s", [(n, s) for n, s in scored[:5]])
-        return [name for name, _ in scored[:5]]
-
-    # 真的没有任何匹配 → 返回空列表，交由 LLM 判定为通用问题
-    logger.info("Keyword fallback found no matches — treating as general question")
+    logger.info("Fallback: no match")
     return []
