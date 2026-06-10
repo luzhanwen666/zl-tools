@@ -497,18 +497,15 @@ async def _match_group_by_trigger(user_message: str, available_groups, llm_confi
     )
 
     system_prompt = (
-        "你是群组匹配器。根据用户输入从群组列表中选择最匹配的一个。\n\n"
-        "规则:\n"
-        "1. 阅读每个群组的触发场景描述，判断是否与用户输入相关\n"
-        "2. 如果某个群组的描述覆盖了用户需求 → 输出该群组ID\n"
-        "3. 如果所有群组都不匹配 → 输出 NONE\n\n"
-        "输出格式: 只输出群组ID数字或NONE，不要其他内容"
+        "你是群组匹配器。用户输入必须选出一个群组，不能选NONE。\n"
+        "聊天、计算、问答、编程都是合法场景。选描述最接近的群组。\n"
+        "只输出群组ID数字。"
     )
 
     user_prompt = (
-        f"## 可用群组\n{groups_desc}\n\n"
+        f"## 可选群组\n{groups_desc}\n\n"
         f"## 用户输入\n{user_message}\n\n"
-        f"最匹配的群组ID(或NONE):"
+        f"最匹配的群组ID:"
     )
 
     try:
