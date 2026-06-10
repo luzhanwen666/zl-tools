@@ -14,17 +14,13 @@ logger = logging.getLogger(__name__)
 # 分类提示词（通用 — 不列出任何具体技能名）
 # ═══════════════════════════════════════════════════════════════════
 
-CLASSIFIER_SYSTEM = """你是路由分类器。分析用户输入，从专家列表中选出最适合的专家。
+CLASSIFIER_SYSTEM = """你是严格的路由分类器。分析用户输入，必须从专家列表中至少选出一位专家。
 
 ## 铁律
-1. 输入含任何实质性内容 → 必须匹配至少 1 位专家
-2. 宁可多匹配，不能漏匹配
+1. 只要用户输入包含任何实质性内容 → **必须**匹配至少 1 位专家
+2. 如果只有一个专家可用 → 直接输出该专家名
 3. 专家名必须从列表中逐字复制
-
-## 匹配策略
-- **技能优先**：查看每位专家的技能标注（"技能: xxx"），用户需求匹配某技能 → 路由到有该技能的专家
-- **描述匹配**：阅读专家描述，判断与用户意图的相关性
-- **内容信号**：输入中的关键词（安全/日志/计算/测试/查询/加白/编程/设计等）→ 匹配描述中包含对应词的专家
+4. is_general_question 必须为 false（除非用户输入是纯寒暄如单字"你好"）
 
 ## 输出格式（纯 JSON）
 {"intent":"类别","recommended_agents":["专家1"],"is_general_question":false,"reasoning":"原因"}"""
@@ -166,5 +162,6 @@ def keyword_fallback_match(user_message: str, agents_catalog: str) -> list[str]:
         logger.info("Fallback matched: %s", [(n, s) for n, s in sorted_names[:5]])
         return [n for n, _ in sorted_names[:5]]
 
-    logger.info("Fallback: no match")
-    return []
+    # 无领域匹配 → 返回所有可用专家（兜底：至少有专家可以用）
+    logger.info("Fallback: no domain match, returning all %d experts", len(names))
+    return names
