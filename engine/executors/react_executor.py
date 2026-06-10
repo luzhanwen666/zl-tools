@@ -146,20 +146,44 @@ class ReactExecutor(BaseAgentExecutor):
             tool_calls = _extract_tool_calls(response)
             clean_content = _strip_tool_calls(response)
 
-            # 记录本轮的思考
+            # ── 检测 [USE_SKILL:X] 标记（LLM 主动请求技能） ──
+            skill_request = None
+            try:
+                from engine.skills.loader import SkillsLoader
+                skill_request = SkillsLoader.detect_skill_request(response, agent)
+            except Exception:
+                pass
+
+            # 记录本轮思考
             thinking_trace.append({
                 "stage": f"react_turn_{turn}",
-                "content": response[:1000],  # 截断以防过大
+                "content": response[:1000],
                 "tool_calls": [{"tool": tc.name, "args": tc.arguments} for tc in tool_calls],
+                "skill_request": skill_request,
             })
 
-            if not tool_calls:
-                # 无工具调用 → 发言完成
+            # 无工具调用且无技能请求 → 发言完成
+            if not tool_calls and not skill_request:
                 final_content = clean_content or response
                 status_messages.append("分析完成")
                 break
 
             react_messages.append({"role": "assistant", "content": response})
+
+            # ── 处理 [USE_SKILL:X] ──
+            if skill_request:
+                status_messages.append(f"加载技能: {skill_request}")
+                skill_inst = SkillsLoader.load_layer2_instruction(agent, skill_request)
+                react_messages.append({
+                    "role": "user",
+                    "content": (
+                        f"[技能已加载: {skill_request}]\n"
+                        f"以下是该技能的完整操作指南，请根据指南继续执行任务：\n\n"
+                        f"{skill_inst}\n\n"
+                        f"（技能指南已注入上下文，现在你可以调用相关脚本工具了）"
+                    ),
+                })
+                continue  # 下一轮 LLM 会基于技能指南继续执行
 
             for tc in tool_calls:
                 tool_result = "工具未找到"

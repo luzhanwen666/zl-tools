@@ -243,18 +243,11 @@ class GlobalOrchestrator:
 
         # 匹配到技能 → 加载 Layer 2 完整指令
         # 未匹配到但专家有技能 → 加载所有技能的 Layer 2 作为后备
-        active_skills = [s for s in expert.skills.all() if s.is_active]
         skill_instruction = ""
         if skill_name:
             skill_instruction = SkillsLoader.load_layer2_instruction(expert, skill_name)
-            logger.info("Expert %s matched skill: %s (%d字)",
+            logger.info("Expert %s: pre-loaded skill %s (%d chars)",
                        expert.name, skill_name, len(skill_instruction))
-        elif active_skills:
-            # 无精确匹配 → 加载所有技能指令作为后备
-            skill_instruction = SkillsLoader.load_all_layer2(expert)
-            if skill_instruction:
-                logger.info("Expert %s: no exact match, loaded all %d skills (%d字)",
-                           expert.name, len(active_skills), len(skill_instruction))
 
         # 构建增强 system prompt
         system_prompt = self._build_expert_prompt(expert, user_message, tools)
@@ -282,7 +275,11 @@ class GlobalOrchestrator:
         msg = result.to_agent_message(expert.name)
         if not msg.metadata:
             msg.metadata = {}
-        msg.metadata["skill_used"] = skill_name or (active_skills[0].name if active_skills else None)
+        used: set = set()
+        if skill_name: used.add(skill_name)
+        for t in result.thinking_trace:
+            if t.get("skill_request"): used.add(t["skill_request"])
+        msg.metadata["skill_used"] = ", ".join(used) if used else None
         return msg
 
     async def _run_experts_stream(
@@ -309,19 +306,12 @@ class GlobalOrchestrator:
             # ── 技能匹配 ──
             from engine.skills.loader import SkillsLoader
             skill_name = SkillsLoader.match_skill(user_message, expert)
-            active_skills = [s for s in expert.skills.all() if s.is_active]
             skill_instruction = ""
             if skill_name:
                 skill_instruction = SkillsLoader.load_layer2_instruction(expert, skill_name)
                 yield {
                     "type": "status", "agent_name": expert.name,
                     "content": f"已匹配技能: {skill_name}，加载详细操作指令",
-                }
-            elif active_skills:
-                skill_instruction = SkillsLoader.load_all_layer2(expert)
-                yield {
-                    "type": "status", "agent_name": expert.name,
-                    "content": f"加载了 {len(active_skills)} 个技能指令（无精确匹配，全部加载）",
                 }
 
             # 执行并 yield 思考过程
