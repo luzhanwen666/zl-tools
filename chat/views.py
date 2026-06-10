@@ -471,6 +471,7 @@ def session_bulk_delete(request):
         return JsonResponse({"error": "无效的请求数据"}, status=400)
     if not ids:
         return JsonResponse({"error": "未提供会话ID"}, status=400)
-    user = request.user if request.user.is_authenticated else None
-    deleted, _ = ChatSession.objects.filter(pk__in=ids, created_by=user).delete()
+
+    deleted, _ = ChatSession.objects.filter(pk__in=ids).delete()
+    logger.info("Bulk deleted %d sessions: %s", deleted, ids)
     return JsonResponse({"ok": True, "deleted": deleted})

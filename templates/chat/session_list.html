@@ -15,6 +15,7 @@
 
 {% block content %}
 <div style="max-width:1000px;margin:0 auto;">
+{% csrf_token %}
 
 {% if page_obj %}
 <table style="width:100%;border-collapse:collapse;table-layout:fixed;" id="sessionsTable">
@@ -97,7 +98,7 @@
 function getSelectedIds() {
     var cbs = document.querySelectorAll('.session-cb:checked');
     var ids = [];
-    cbs.forEach(function(cb){ ids.push(cb.value); });
+    cbs.forEach(function(cb){ ids.push(parseInt(cb.value)); });
     return ids;
 }
 function updateSelectAll() {
@@ -111,7 +112,8 @@ function updateSelectAll() {
 function toggleSelectAll() {
     var sa = document.getElementById('selectAll');
     document.querySelectorAll('.session-cb').forEach(function(cb){ cb.checked = sa.checked; });
-    updateBulkBar(getSelectedIds());
+    var cbCount = document.querySelectorAll('.session-cb').length;
+    updateBulkBar(sa.checked ? Array.from({length:cbCount},function(_,i){return parseInt(document.querySelectorAll('.session-cb')[i].value);}) : []);
 }
 function updateBulkBar(ids) {
     var btn = document.getElementById('bulkDeleteBtn');
@@ -129,16 +131,26 @@ function bulkDelete() {
     var ids = getSelectedIds();
     if (ids.length === 0) return;
     if (!confirm('确定删除选中的 ' + ids.length + ' 个对话？此操作不可撤销。')) return;
-    fetch('{% url "chat:session_bulk_delete" %}', {
+    var tokenEl = document.querySelector('[name=csrfmiddlewaretoken]');
+    var csrfToken = tokenEl ? tokenEl.value : '';
+    console.log('bulk delete ids:', ids, 'csrf:', csrfToken ? 'OK' : 'MISSING');
+    fetch('/chat/bulk-delete/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            'X-CSRFToken': csrfToken,
         },
         body: JSON.stringify({ids: ids}),
-    }).then(function(r){ return r.json(); }).then(function(data){
+    }).then(function(r){
+        console.log('response status:', r.status);
+        return r.json();
+    }).then(function(data){
+        console.log('response data:', data);
         if (data.ok) { location.reload(); }
         else { alert('删除失败: ' + (data.error || '未知错误')); }
+    }).catch(function(err){
+        console.error('fetch error:', err);
+        alert('请求失败，请打开浏览器控制台查看详情');
     });
 }
 </script>
