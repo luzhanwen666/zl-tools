@@ -144,7 +144,21 @@ class GroupExecutor:
                             queue.append(target)
                     continue
 
+                # 过滤掉与最终回复重复的 thinking trace
+                # (SimpleExecutor 的 done/generate 阶段 trace 就是最终答案的副本)
+                filtered_traces = []
+                final_stripped = (result.content or "").strip()[:200]  # 取前200字做指纹
                 for trace in result.thinking_trace:
+                    content = (trace.get("content", "") or "").strip()[:200]
+                    # 最后一轮的 trace 如果内容和最终答案相同 → 跳过
+                    stage = trace.get("stage", "")
+                    if stage in ("done", "generate", "turn_0") and final_stripped and content == final_stripped:
+                        continue
+                    if content and final_stripped and content in final_stripped and len(content) > 100:
+                        continue
+                    filtered_traces.append(trace)
+
+                for trace in filtered_traces:
                     yield {"type": "thinking", "agent_name": current.label,
                            "stage": trace.get("stage", ""),
                            "content": trace.get("content", "")[:500]}
