@@ -501,20 +501,15 @@ async def _match_group_by_trigger(user_message: str, available_groups, llm_confi
     if not llm_config or not available_groups:
         return None
 
+    # 每个群组描述截断到 150 字，避免 LLM 在长文本中迷失
     groups_desc = "\n".join(
-        f"- **{g.name}** (ID:{g.pk}): {g.trigger_prompt or g.description}"
+        f"- **{g.name}** (ID:{g.pk}): {(g.trigger_prompt or g.description)[:150]}"
         for g in available_groups
     )
 
-    # 检查是否有群组自定义了 match_prompt，有就用，没有用通用版
-    custom_prompt = None
-    for g in available_groups:
-        if g.match_prompt and g.match_prompt.strip():
-            custom_prompt = g.match_prompt.strip()
-            break
-
-    if custom_prompt:
-        system_prompt = custom_prompt.replace("{group_name}", available_groups[0].name).replace("{groups_list}", groups_desc)
+    # 多个群组时用通用默认提示词，单个群组时用该群组自定义的 match_prompt
+    if len(available_groups) == 1 and available_groups[0].match_prompt and available_groups[0].match_prompt.strip():
+        system_prompt = available_groups[0].match_prompt.strip()
     else:
         system_prompt = (
             "你是群组匹配器。必须选一个群组ID。\n"
